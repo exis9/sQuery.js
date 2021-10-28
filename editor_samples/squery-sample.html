@@ -1,0 +1,19 @@
+<style>
+.selected { 
+    color:red; 
+}
+.highlight { 
+    background:yellow; 
+}
+</style>
+
+<em title="Bold and Brave">This is first paragraph.</em>
+<p id="myid">This is second paragraph.</p>
+
+<script src="https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js"></script>
+<script>
+sq(function(){
+	sq("em").addClass("selected");
+	sq("#myid").addClass("highlight");
+});
+</script>
