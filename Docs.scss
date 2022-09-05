@@ -84,6 +84,68 @@ main {
 	margin: 0 auto;
 }
 
+hr {
+	border: 1px dashed #0089ff;
+	margin: 30px 12px;
+}
+
+doc {
+	.cSh {
+		padding: 14px 18px;
+		color: rgb(191, 199, 213);
+		background-color: rgb(41, 45, 62);
+		border-radius: 6.8px;
+		max-width: 700px;
+		margin:2px 0 14px 0;
+	}
+
+	.cPreDesc {
+		margin-bottom:20px;
+	}
+	.cDesc {
+		position: relative;
+		padding: 2px 8px;
+		border-radius: 8px;
+		background-color: #218eff;
+		background: linear-gradient(#44f, #218eff);
+		color: #fff;
+
+		a {
+			color: #9be6ff;
+		}
+
+		.cBack {
+			pointer-events: none;
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			padding: 2px 8px;
+			border-radius: 8px;
+			left: 0px;
+			bottom: 0px;
+			box-shadow: 1px 6px 8px rgba(0,0,0,.5);
+		}
+	}
+}
+
+.cAccr {
+	padding: 8px;
+	background-color: #0089ff;
+	color: #fff;
+	border-radius: 8px;
+	margin: 4px 4px 14px 4px;
+	a {
+		color: #9be6ff;
+		font-weight: bold;
+	}
+	b {
+		color: #fff;
+	}
+	p {
+		margin:10px;
+	}
+}
 
 #idHead {
 	z-index:2;
@@ -116,6 +178,7 @@ main {
 	font-size:.9rem;
 	line-height: 1.45;
 	border-right: 2px solid #fff;
+
 
 	.cScrollable {
 		overflow:auto;
@@ -154,6 +217,7 @@ main {
 	
 	#idLeftTop {
 		display: fixed;
+		margin-bottom: 4px;
 		#idLeftLogo {
 			font-size: .9rem;
 			letter-spacing: 4px;
@@ -166,6 +230,14 @@ main {
 			margin: 0;
 			padding: 0;
 			line-height:1;
+			
+			hr {
+				display:none;
+				margin-top:0px;
+				margin-bottom:20px;
+				border-color: #fff;
+			}
+			
 			#idDS {
 				margin: 0;
 				line-height:1;
@@ -178,7 +250,7 @@ main {
 				display: none;
 				font-family: sans-serif;
 				position: absolute;
-				top: 17.5px;
+				top: 5.5px;
 				right: 2.5px;
 				width: 24px;
 				height: 24px;
@@ -220,7 +292,7 @@ main {
 		font-weight: 200;
 		display: block;
 		width: 95%;
-		margin: 20px;
+		margin: 20px 20px 40px 20px;
 		padding: 12px 20px;
 		font-size: .95rem;
 		border-radius: 6px;
@@ -312,6 +384,7 @@ main {
 		doc {
 			width: 100%;
 			margin: 20px auto;
+			padding: 0px 8px;
 		}
 	}
 }

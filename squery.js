@@ -1,10 +1,32 @@
+/*eslint-disable*/
 'use strict';
 
 if ( typeof _JQ === 'undefined' )
 {
 	class _JQ {
 		constructor(){this.ac=[];this.wa=[]}
-		isW(v){return v instanceof Window}
+		isW(v){
+			const wStr = Object.prototype.toString.call(window)
+			function isWindow(arg){
+				let e,str,self,hasSelf
+				str = Object.prototype.toString.call(arg)
+				switch (wStr){case '[object DOMWindow]':case '[object Window]':case '[object global]': return str === wStr}
+				if ('self' in arg)
+				{
+					hasSelf = arg.hasOwnProperty('self')
+					try {
+						if (hasSelf)
+							self = arg.self
+						
+						delete arg.self
+						if (hasSelf)
+							arg.self = self
+					}catch (e){return true}
+				}
+				return false
+			}
+			return isWindow(v)
+		}
 		remove(el){if (el) el.remove()}
 		before( el, h ){if (el) el.insertAdjacentHTML('beforebegin', h)}
 		after( el, h ){if (el) el.insertAdjacentHTML('afterend', h)}
@@ -38,14 +60,37 @@ if ( typeof _JQ === 'undefined' )
 			//if (!op.fill) op.fill = 'both'
 			el.animate( kf, op ).onfinish = ()=>{
 				if ( cb ) cb.bind( el )()
-				if ( cb2 ) cb2.bind( el )(), console.log('aaa')
+				if ( cb2 ) cb2.bind( el )()
 			}
+		}
+		isVisible(el){
+			if (!(el instanceof Element)) return false
+			const style = getComputedStyle(el)
+			if (style.display === 'none') return false
+			if (style.visibility !== 'visible') return false
+			if (style.opacity < 0.1) return false
+			if (el.offsetWidth + el.offsetHeight + el.getBoundingClientRect().height + el.getBoundingClientRect().width === 0)
+				return false
+
+			const elemCenter = {
+				x: el.getBoundingClientRect().left + el.offsetWidth/2,
+				y: el.getBoundingClientRect().top + el.offsetHeight/2
+			}
+			if (elemCenter.x < 0) return false
+			if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false
+			if (elemCenter.y < 0) return false
+			if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false
+			let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y)
+			do {
+				if (pointContainer === el) return true
+			} while (pointContainer = pointContainer.parentNode)
+			return false
 		}
 		fadeIn( el, ms, cb, d='inline-block' ){
 			let o = parseFloat(el.style.opacity)
 			if ( isNaN(o) )
-				o = 1
-			
+				this.isVisible(el) ? o=1 : o=0
+
 			this.animate( el, [{'opacity': o}, {'opacity': 1}], {
 				easing: 'ease-in'
 			}, ms, ()=>{
@@ -66,18 +111,19 @@ if ( typeof _JQ === 'undefined' )
 		}
 		each(el, f, i){return f.apply(el, [i])}
 	}
-	
+
 	class _SF {
 		constructor(){
 			this.b = 0
-			this.el0 = []
 			this.el = []
 			this.disp = []
 			this.fOb = {}
+			this.v = undefined
 		}
 		_setEl(el){
 			this.el = []
 			if ( el ){
+				this.v = el?.value
 				let n = el.length
 				if ( n || el instanceof NodeList )
 					this.el = Array.from(el)
@@ -88,16 +134,11 @@ if ( typeof _JQ === 'undefined' )
 			}
 			this.length = this.el.length
 			if ( !this.b )
-			{
 				this.b = 1
-				this.el0 = this.el
-			}
+			
 			this._saveDisp()
 		}
-		reset(){
-			this.el = this.el0
-			return this
-		}
+		_th(){return this}
 		_saveDisp(){
 			this.disp = []
 			let cnt = 0
@@ -109,7 +150,7 @@ if ( typeof _JQ === 'undefined' )
 					let d = 'block'
 					if ( !_jq.isW(el) && el !== document )
 						d = window.getComputedStyle(el).display
-					
+
 					if ( d && d !== 'none' )
 						this.disp[cnt] = d
 				}
@@ -161,6 +202,7 @@ if ( typeof _JQ === 'undefined' )
 		}
 		show(){return this._fd('show')}
 		fadeIn( ms=500, cb ){return this._fd('fadeIn', ms, cb)}
+		isVisible(){return _jq.isVisible(this.el)}
 		_vs(n,v){
 			if( !this.el || !this.el[0] ) return undefined;
 			if (v !== undefined){this.el?.forEach(el=>el[n] = v);return this}
@@ -191,7 +233,7 @@ if ( typeof _JQ === 'undefined' )
 			this.el?.forEach(el => {_jq.animate( el, kf, op, sp, cb, f)})
 			return this
 		}
-		
+
 		each( f ){
 			let i = 0
 			this.el?.every(el => {
@@ -205,7 +247,7 @@ if ( typeof _JQ === 'undefined' )
 			if( !this.el || !this.el[0] ) return undefined;
 			if ( v === undefined )
 				return this.el[0].getAttribute(a)
-			
+
 			this.el.forEach(el => el.setAttribute(a,v))
 			return this
 		}
@@ -213,7 +255,7 @@ if ( typeof _JQ === 'undefined' )
 			if( !this.el || !this.el[0] ) return undefined;
 			if ( v === undefined )
 				return this.el[0][p]
-			
+
 			this.el.forEach(el => el[p]=v)
 			return this
 		}
@@ -239,7 +281,11 @@ if ( typeof _JQ === 'undefined' )
 			return this._fv( 'innerHTML', v )
 		}
 		text(v=null){return this._fv( 'innerText', v )}
-		val(v=null){return this._fv( 'value', v )}
+		val(v=null){
+			if ( v===null && typeof this.v !== 'undefined' )
+				return this.v
+			return this._fv( 'value', v )
+		}
 		css(c, v=null){
 			if( !this.el || !this.el[0] ) return undefined;
 			if ( c )
@@ -264,17 +310,15 @@ if ( typeof _JQ === 'undefined' )
 		eq(i){
 			if (i<0)i = this.el.length+i
 			if ( this.el && this.el[i] )
-				this._setEl(this.el[i])
-			else
-				this._setEl(0)
-			return this
+				return sq(this.el[i])._th()
+			return sq(0)._th()
 		}
 		not(s){
 			if ( this.el )
 			{
 				let a=[]
 				this.el.forEach(el=>{if ( !el.matches(s) )a.push(el)})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -287,7 +331,7 @@ if ( typeof _JQ === 'undefined' )
 					this.el.forEach(el => {if ( Array.prototype.filter.call( el, f ) )a.push(el)})
 				else
 					this.el.forEach(el => {if ( el.matches(f) )a.push(el)})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -305,7 +349,7 @@ if ( typeof _JQ === 'undefined' )
 					if ( q.length )
 						a = a.concat( Array.from(q) )
 				})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -314,7 +358,7 @@ if ( typeof _JQ === 'undefined' )
 			{
 				let a = []
 				this.el.forEach(el=>{if (el.querySelector(s))a.push( el )})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -326,12 +370,12 @@ if ( typeof _JQ === 'undefined' )
 					if ( (b && el?.innerHTML.includes(t)) || (!b && el?.innerText.includes(t)) )
 						a.push( el )
 				})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
-		first(){if ( this.el )this._setEl(this.el[0]);return this}
-		last(){if ( this.el )this._setEl(this.el[this.el.length-1]);return this}
+		first(){if ( this.el )return sq(this.el[0])._th();return this}
+		last(){if ( this.el )return sq(this.el[this.el.length-1])._th();return this}
 		index(){
 			if (!this.el) return -1
 			let i = 0
@@ -349,8 +393,7 @@ if ( typeof _JQ === 'undefined' )
 				for ( let i=s; i < e; i++ )
 					a.push(this.el[i])
 			}
-			this._setEl(a)
-			return this
+			return sq(a)._th()
 		}
 		parent(){
 			if ( this.el )
@@ -360,7 +403,7 @@ if ( typeof _JQ === 'undefined' )
 					if ( el?.parentNode)
 						a.push( el.parentNode )
 				})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -377,7 +420,7 @@ if ( typeof _JQ === 'undefined' )
 					}
 				})
 				a = [...new Set(a)]
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -391,7 +434,7 @@ if ( typeof _JQ === 'undefined' )
 						a.push(c)
 				})
 				a = [...new Set(a)]
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -400,7 +443,7 @@ if ( typeof _JQ === 'undefined' )
 			{
 				let a = []
 				this.el.forEach(el=>{if ( el.children?.length )a = a.concat( Array.from(el.children) )})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -409,7 +452,7 @@ if ( typeof _JQ === 'undefined' )
 			{
 				let a = []
 				this.el.forEach(el=>{if ( el.previousElementSibling )a.push( el.previousElementSibling )})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -421,7 +464,7 @@ if ( typeof _JQ === 'undefined' )
 					if ( el.nextElementSibling )
 						a.push( el.nextElementSibling )
 				})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
@@ -432,7 +475,7 @@ if ( typeof _JQ === 'undefined' )
 				this.el.forEach(el=>{
 					if ( el.parentNode )
 					{
-						let s  = el.parentNode.firstChild
+						let s = el.parentNode.firstChild
 						while(s){
 							if (s.nodeType === 1 && s !== el)
 								a.push(s)
@@ -440,18 +483,19 @@ if ( typeof _JQ === 'undefined' )
 						}
 					}
 				})
-				this._setEl(a)
+				return sq(a)._th()
 			}
 			return this
 		}
-		
-		
+
+
 		_setAC(ev,f){
 			let i = _jq.ac.length
 			_jq.ac[i] = {'ev':ev, 'f':f}
 			return i
 		}
 		_setSQA(el,ev,i){
+			if (!el.getAttribute)return
 			let v = el.getAttribute('sq-'+ev)
 			if (!v)v = ''
 			v += ',' + i
@@ -469,7 +513,7 @@ if ( typeof _JQ === 'undefined' )
 					let tg = e.target
 					while (tg) {
 						if (tg.matches(s)){
-							if ( f.bind( e.target/*el.querySelectorAll(s)*/ )(e) === false )
+							if ( f.bind( /*e.target*/el.querySelectorAll(s) )(e) === false )
 							{
 								e.preventDefault()
 								e.stopImmediatePropagation()
@@ -487,7 +531,8 @@ if ( typeof _JQ === 'undefined' )
 		}
 		on(ev, f){
 			let u=(e)=>{
-				if ( f.bind( e.target/*this.el*/ )(e) === false )
+				//console.log('u: ', e.path, e.target)
+				if ( f.bind( e.currentTarget/*this.e.target or this.el*/ )(e) === false )
 				{
 					e.preventDefault()
 					e.stopImmediatePropagation()
@@ -520,9 +565,9 @@ if ( typeof _JQ === 'undefined' )
 				})
 			return this
 		}
-		trg(ev){this.el?.forEach(el=>el.dispatchEvent(new Event(ev)));return this}
-		trigger(ev){this.trg(ev)}
-		
+		trg(ev,b=1,c=0){this.el?.forEach(el=>{let v = new Event(ev, {bubbles:b,composed:c});el.dispatchEvent(v)});return this}
+		trigger(ev,b=1,c=0){this.trg(ev,b,c)}
+
 		_f( funcName, ...args ){this.el?.forEach(el => {_jq[funcName]( el, ...args )});return this}
 		remove(){return this._f('remove')}
 		before( h ){return this._f('before', h)}
@@ -534,7 +579,7 @@ if ( typeof _JQ === 'undefined' )
 		hasClass( n ){return this.el[0]?.classList.contains(n)?true:false}
 		removeClass( n ){return this._f('removeClass', n)}
 		toggleClass( n ){return this._f('toggleClass', n)}
-		
+
 
 		_fsd( funcName, ...args ){
 			if( !this.el ) return this
@@ -572,3 +617,5 @@ if ( typeof _JQ === 'undefined' )
 		}
 	}, sQuery = sq, _SQ = _SF.prototype;
 }
+
+//export {sQuery, sq, _SQ}
