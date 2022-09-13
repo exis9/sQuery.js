@@ -17,6 +17,14 @@
   margin-left: 2px;
 }
 
+.cFloatLeft {
+  width: 100%;
+}
+
+.cFloatLeft .cCodeSpace {
+  width: 100% !important;
+}
+
 .cCodeSpace {
   position: relative;
   display: inline-block;

@@ -16,6 +16,14 @@
 	margin-left: 2px;
 }
 
+.cFloatLeft {
+	width: 100%;
+
+	.cCodeSpace {
+		width: 100%!important;
+	}
+}
+
 .cCodeSpace {
 	$bg: #1e1e1e;
 	$bg2: transparent;
