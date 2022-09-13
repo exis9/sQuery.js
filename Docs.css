@@ -23,7 +23,7 @@ a {
 a:hover {
   text-decoration: none;
   border-bottom-width: 1px;
-  border-bottom-style: dotted;
+  border-bottom-style: dashed;
   padding-bottom: 2px;
 }
 
@@ -165,6 +165,63 @@ doc .cNote {
   max-width: 800px;
   border-radius: 3px;
   padding: 4px 8px;
+}
+
+.cFWLogo {
+  display: block;
+  margin: 12px 4px 4px 4px;
+  max-height: 100px;
+  max-width: 90%;
+}
+
+.cFWLinkCont {
+  padding: 8px 0 12px 8px;
+}
+
+.cFWLink {
+  color: #0050a0 !important;
+  padding-bottom: 2px;
+  border-bottom: 2px dashed #0050a0 !important;
+  transition: opacity .2s;
+}
+
+.cFWLink.cBlueBack {
+  color: #85f4ff !important;
+  border-bottom: 2px dashed #85f4ff !important;
+}
+
+.cFWLink:hover {
+  opacity: .84;
+}
+
+.cFWDesc {
+  font-size: 16px;
+  margin: 14px;
+  max-width: 900px;
+  line-height: 2;
+  padding: 8px 16px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #2196f3;
+}
+
+.cJQVer {
+  margin: 0 10px 0 4px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.cReload {
+  display: none;
+  font-size: 11px;
+  color: #fff;
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  padding-bottom: 1px;
+  border-bottom: 1px dashed #fff;
+  cursor: pointer;
 }
 
 .cAccr {
