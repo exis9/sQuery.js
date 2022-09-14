@@ -1,2 +1,12955 @@
-var app=function(){"use strict";if("undefined"==typeof _JQ){class n{constructor(){this.ac=[],this.wa=[]}isW(t){const e=Object.prototype.toString.call(window);return function(t){let n,s,i;switch(n=Object.prototype.toString.call(t),e){case"[object DOMWindow]":case"[object Window]":case"[object global]":return n===e}if("self"in t){i=t.hasOwnProperty("self");try{i&&(s=t.self),delete t.self,i&&(t.self=s)}catch(t){return!0}}return!1}(t)}remove(t){t&&t.remove()}before(t,e){t&&t.insertAdjacentHTML("beforebegin",e)}after(t,e){t&&t.insertAdjacentHTML("afterend",e)}prepend(t,e){t&&t.insertAdjacentHTML("afterbegin",e)}append(t,e){t&&t.insertAdjacentHTML("beforeend",e)}prop(t,e,n){t&&t.style.setProperty(e,n)}addClass(t,e){t&&t.classList.add(e)}removeClass(t,e){t&&t.classList.remove(e)}toggleClass(t,e){t&&t.classList.toggle(e)}show(t,e="block"){t&&("none"===e&&(e="block"),t.style.visibility="visible",t.style.display=e,t.style.opacity=1)}hide(t){t&&(t.style.visibility="hidden",t.style.display="none",t.style.opacity=0)}animate(t,e,n,s,i,a){t&&("number"==typeof n&&(a=i,i=s,s=n,n=null),void 0===s&&(s=500),n||(n={}),n.duration||(n.duration=s),t.animate(e,n).onfinish=()=>{i&&i.bind(t)(),a&&a.bind(t)()})}isVisible(t){if(!(t instanceof Element))return!1;const e=getComputedStyle(t);if("none"===e.display)return!1;if("visible"!==e.visibility)return!1;if(e.opacity<.1)return!1;if(t.offsetWidth+t.offsetHeight+t.getBoundingClientRect().height+t.getBoundingClientRect().width===0)return!1;const n={x:t.getBoundingClientRect().left+t.offsetWidth/2,y:t.getBoundingClientRect().top+t.offsetHeight/2};if(n.x<0)return!1;if(n.x>(document.documentElement.clientWidth||window.innerWidth))return!1;if(n.y<0)return!1;if(n.y>(document.documentElement.clientHeight||window.innerHeight))return!1;let s=document.elementFromPoint(n.x,n.y);do{if(s===t)return!0}while(s=s.parentNode);return!1}fadeIn(t,e,n,s="inline-block"){let i=parseFloat(t.style.opacity);isNaN(i)&&(i=this.isVisible(t)?1:0),this.animate(t,[{opacity:i},{opacity:1}],{easing:"ease-in"},e,(()=>{t.style.opacity=1}),n),this.show(t,s)}fadeOut(t,e,n){let s=parseFloat(t.style.opacity);isNaN(s)&&(s=1),this.animate(t,[{opacity:s},{opacity:0}],{easing:"ease-out"},e,(()=>{this.hide(t)}),n)}each(t,e,n){return e.apply(t,[n])}}class s{constructor(){this.b=0,this.el=[],this.disp=[],this.fOb={},this.v=void 0}_setEl(t){if(this.el=[],t){this.v=t?.value;let e=t.length;e||t instanceof NodeList?this.el=Array.from(t):0!==e?this.el=[t]:i.isW(t)&&(this.el=t)}this.length=this.el.length,this.b||(this.b=1),this._saveDisp()}_th(){return this}_saveDisp(){this.disp=[];let t=0;i.isW(this.el)||this.el?.forEach((e=>{if(this.disp[t]="none",e){let n="block";i.isW(e)||e===document||(n=window.getComputedStyle(e).display),n&&"none"!==n&&(this.disp[t]=n)}t++}))}setEl(t){return this._setEl(t),this}doc(){return this.setEl(document)}win(){return this.setEl(window)}ob(t){return this.setEl(t)}q(t){return this.setEl(document.querySelector(t))}qa(t){return this.setEl(document.querySelectorAll(t))}id(t){return this.setEl(document.getElementById(t))}cl(t){return this.setEl(document.getElementsByClassName(t))}tg(t){return this.setEl(document.getElementsByTagName(t))}get(t=null){return null!==t?this.el[t]:this.el}_wh(t,e){return i.isW(this.el)?"width"==t?window.innerWidth:window.innerHeight:void 0!==e?(this.el?.forEach((n=>{"function"==typeof e&&(e=e()),n.style[t]="string"==typeof e?e:e+"px"})),this):parseFloat(getComputedStyle(this.el[0],null)[t].replace("px",""))}width(t){return this._wh("width",t)}height(t){return this._wh("height",t)}innerWidth(){return this.el[0].clientWidth}innerHeight(){return this.el[0].clientHeight}outerWidth(){return this.el[0].offsetWidth}outerHeight(){return this.el[0].offsetHeight}offset(){return this.el[0].getBoundingClientRect()}pos(){return{left:this.el[0].offsetLeft,top:this.el[0].offsetTop}}position(){return this.pos()}_fd(t,...e){let n=0;return this.el?.forEach((s=>{i[t](s,...e,this.disp[n++])})),this}show(){return this._fd("show")}fadeIn(t=500,e){return this._fd("fadeIn",t,e)}isVisible(){return i.isVisible(this.el)}_vs(t,e){if(this.el&&this.el[0])return void 0!==e?(this.el?.forEach((n=>n[t]=e)),this):this.el[0][t]}prop(t,e){return this._vs(t,e)}scrollTop(t){return this._vs("scrollTop",t)}scrollLeft(t){return this._vs("scrollLeft",t)}scroll(t,e){return e=e?"instant":"smooth",i.isW(this.el)?window.scroll({top:t,behavior:e}):(this.el?.forEach((n=>n.scroll({top:t,behavior:e}))),this)}scrollToElement(t=50,e){if(!this.el||!this.el[0])return this;e=e?"instant":"smooth";const n=document.body.getBoundingClientRect().top,s=this.el[0].getBoundingClientRect().top-n;return window.scrollTo({top:s-t,behavior:e}),this}animate(t,e,n,s){let a=()=>{this.css(t[1])};return"number"==typeof e&&(s=a),this.el?.forEach((r=>{i.animate(r,t,e,n,s,a)})),this}each(t){let e=0;return this.el?.every((n=>!1!==i.each(n,t,e++))),this}attr(t,e){if(this.el&&this.el[0])return void 0===e?this.el[0].getAttribute(t):(this.el.forEach((n=>n.setAttribute(t,e))),this)}prop(t,e){if(this.el&&this.el[0])return void 0===e?this.el[0][t]:(this.el.forEach((n=>n[t]=e)),this)}removeAttr(t){return this.el.forEach((e=>e.removeAttribute(t))),this}removeProp(t){return this.removeAttr(t)}_fv(t,e){let n=this.el&&this.el[0];return null!==e?n?(this.el.forEach((n=>n[t]=e)),this):this:n?this.el[0][t]:void 0}html(t=null){return"object"!=typeof t||Array.isArray(t)||null===t?this._fv("innerHTML",t):(this._fv("innerHTML","").get(0).append(t),this)}text(t=null){return this._fv("innerText",t)}val(t=null){return null===t&&void 0!==this.v?this.v:this._fv("value",t)}css(t,e=null){if(this.el&&this.el[0]){if(t){let n=(t,e)=>(t=t.replace(/-([a-z])/g,(function(t){return t[1].toUpperCase()})),null!==e?(this.el.forEach((n=>n.style[t]=e)),this):this.el[0].style[t]);return"object"==typeof t?(Object.keys(t).forEach((e=>n(e,t[e]))),this):n(t,e)}return this.el[0].style}}eq(e){return e<0&&(e=this.el.length+e),this.el&&this.el[e]?t(this.el[e])._th():t(0)._th()}not(e){if(this.el){let n=[];return this.el.forEach((t=>{t.matches(e)||n.push(t)})),t(n)._th()}return this}filter(e){if(this.el){let n=[];return"function"==typeof e?this.el.forEach((t=>{Array.prototype.filter.call(t,e)&&n.push(t)})):this.el.forEach((t=>{t.matches(e)&&n.push(t)})),t(n)._th()}return this}is(t){let e=!1;return this.el?.forEach((n=>{n.matches(t)&&(e=!0)})),e}find(e){if(this.el){let n=[];return this.el.forEach((t=>{let s=t.querySelectorAll(e);s.length&&(n=n.concat(Array.from(s)))})),t(n)._th()}return this}has(e){if(this.el){let n=[];return this.el.forEach((t=>{t.querySelector(e)&&n.push(t)})),t(n)._th()}return this}contains(e,n){if(this.el){let s=[];return this.el.forEach((t=>{(n&&t?.innerHTML.includes(e)||!n&&t?.innerText.includes(e))&&s.push(t)})),t(s)._th()}return this}first(){return this.el?t(this.el[0])._th():this}last(){return this.el?t(this.el[this.el.length-1])._th():this}index(){if(!this.el)return-1;let t=0;for(;this.el[0]=this.el[0].previousElementSibling;)t++;return t}slice(e,n){let s=[];if(this.el){let t=this.el.length;n||(n=t),e<0&&(e=t+e),n<0&&(n=t+n);for(let t=e;t<n;t++)s.push(this.el[t])}return t(s)._th()}parent(){if(this.el){let e=[];return this.el.forEach((t=>{t?.parentNode&&e.push(t.parentNode)})),t(e)._th()}return this}parents(){if(this.el){let e=[];return this.el.forEach((t=>{let n=t.parentNode;for(;n!==document;){let t=n;e.push(t),n=t?.parentNode}})),e=[...new Set(e)],t(e)._th()}return this}closest(e){if(this.el){let n=[];return this.el.forEach((t=>{let s=t.closest(e);s&&n.push(s)})),n=[...new Set(n)],t(n)._th()}return this}children(){if(this.el){let e=[];return this.el.forEach((t=>{t.children?.length&&(e=e.concat(Array.from(t.children)))})),t(e)._th()}return this}prev(){if(this.el){let e=[];return this.el.forEach((t=>{t.previousElementSibling&&e.push(t.previousElementSibling)})),t(e)._th()}return this}next(){if(this.el){let e=[];return this.el.forEach((t=>{t.nextElementSibling&&e.push(t.nextElementSibling)})),t(e)._th()}return this}siblings(){if(this.el){let e=[];return this.el.forEach((t=>{if(t.parentNode){let n=t.parentNode.firstChild;for(;n;)1===n.nodeType&&n!==t&&e.push(n),n=n.nextSibling}})),t(e)._th()}return this}_setAC(t,e){let n=i.ac.length;return i.ac[n]={ev:t,f:e},n}_setSQA(t,e,n){if(!t.getAttribute)return;let s=t.getAttribute("sq-"+e);s||(s=""),s+=","+n,t.setAttribute("sq-"+e,s)}_setSQW(t,e){let n=i.wa[t];n||(n=""),n+=","+e,i.wa[t]=n}onf(t,e,n){return this.el?.forEach((s=>{let i=t=>{let i=t.target;for(;i;){if(i.matches(e)&&!1===n.bind(s.querySelectorAll(e))(t))return t.preventDefault(),void t.stopImmediatePropagation();i=i.parentElement}},a=this._setAC(t,i);s.querySelectorAll(e)?.forEach((e=>this._setSQA(e,t,a))),s.addEventListener(t,i)})),this}on(t,e){let n=t=>{!1===e.bind(t.currentTarget)(t)&&(t.preventDefault(),t.stopImmediatePropagation())},s=this._setAC(t,n);return i.isW(this.el)?(this._setSQW(t,s),window.addEventListener(t,n)):this.el?.forEach((e=>{this._setSQA(e,t,s),e.addEventListener(t,n)})),this}off(t){if(i.isW(this.el)){let e=i.wa[t]?.split(",");e?.forEach((e=>{i.ac[e]?.f&&window.removeEventListener(t,i.ac[e].f)}))}else this.el?.forEach((e=>{let n=e.getAttribute("sq-"+t)?.split(",");n?.forEach((n=>{i.ac[n]?.f&&(e.removeEventListener(t,i.ac[n].f),document.removeEventListener(t,i.ac[n].f))}))}));return this}trg(t,e=1,n=0){return this.el?.forEach((s=>{let i=new Event(t,{bubbles:e,composed:n});s.dispatchEvent(i)})),this}trigger(t,e=1,n=0){this.trg(t,e,n)}_f(t,...e){return this.el?.forEach((n=>{i[t](n,...e)})),this}remove(){return this._f("remove")}before(t){return this._f("before",t)}after(t){return this._f("after",t)}prepend(t){return this._f("prepend",t)}append(t){return this._f("append",t)}replaceWith(t){return this.el?.forEach((e=>e.outerHTML=t)),this}addClass(t){return this._f("addClass",t)}hasClass(t){return!!this.el[0]?.classList.contains(t)}removeClass(t){return this._f("removeClass",t)}toggleClass(t){return this._f("toggleClass",t)}_fsd(t,...e){return this.el?(this._saveDisp(),this.el.forEach((n=>{i[t](n,...e)})),this):this}fadeOut(t=500,e){return this._fsd("fadeOut",t,e)}hide(){return this._fsd("hide")}isPageLoaded(){let t=document.readyState;return"complete"===t||"loaded"===t}}let i=new n;var t=function(t,e){let n=new s,i=typeof t;if("string"!==i){if("function"===i)return void document.addEventListener("DOMContentLoaded",(e=>t(e)));switch(t){case document:return n.doc(t);case window:return n.win(t);default:return n.ob(t)}}switch(e){case"id":return n.id(t.replace("#",""));case"class":case"cl":return n.cl(t.replace(".",""));case"tag":case"tg":return n.tg(t);case"q":return n.q(t);default:return n.qa(t)}},e=t}function n(){}function s(t,e){for(const n in e)t[n]=e[n];return t}function i(t){return t()}function a(){return Object.create(null)}function r(t){t.forEach(i)}function l(t){return"function"==typeof t}function o(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}let c,d;function u(t,e){return c||(c=document.createElement("a")),c.href=e,t===c.href}function h(t,e,n,i){return t[1]&&i?s(n.ctx.slice(),t[1](i(e))):n.ctx}function p(t,e){t.appendChild(e)}function m(t,e,n){t.insertBefore(e,n||null)}function f(t){t.parentNode.removeChild(t)}function v(t){return document.createElement(t)}function g(t){return document.createTextNode(t)}function b(){return g(" ")}function y(){return g("")}function $(t,e,n){null==n?t.removeAttribute(e):t.getAttribute(e)!==n&&t.setAttribute(e,n)}function w(t,e,n,s){t.style.setProperty(e,n,s?"important":"")}function x(t){d=t}function k(){if(!d)throw new Error("Function called outside component initialization");return d}function S(){const t=k();return(e,n)=>{const s=t.$$.callbacks[e];if(s){const i=function(t,e,n=!1){const s=document.createEvent("CustomEvent");return s.initCustomEvent(t,n,!1,e),s}(e,n);s.slice().forEach((e=>{e.call(t,i)}))}}}function _(t,e){const n=t.$$.callbacks[e.type];n&&n.slice().forEach((t=>t.call(this,e)))}const T=[],q=[],j=[],L=[],F=Promise.resolve();let C=!1;function D(){C||(C=!0,F.then(E))}function H(t){j.push(t)}let M=!1;const Q=new Set;function E(){if(!M){M=!0;do{for(let t=0;t<T.length;t+=1){const e=T[t];x(e),A(e.$$)}for(x(null),T.length=0;q.length;)q.pop()();for(let t=0;t<j.length;t+=1){const e=j[t];Q.has(e)||(Q.add(e),e())}j.length=0}while(T.length);for(;L.length;)L.pop()();C=!1,M=!1,Q.clear()}}function A(t){if(null!==t.fragment){t.update(),r(t.before_update);const e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach(H)}}const I=new Set;let B;function P(){B={r:0,c:[],p:B}}function W(){B.r||r(B.c),B=B.p}function R(t,e){t&&t.i&&(I.delete(t),t.i(e))}function O(t,e,n,s){if(t&&t.o){if(I.has(t))return;I.add(t),B.c.push((()=>{I.delete(t),s&&(n&&t.d(1),s())})),t.o(e)}}function J(t,e){const n={},s={},i={$$scope:1};let a=t.length;for(;a--;){const r=t[a],l=e[a];if(l){for(const t in r)t in l||(s[t]=1);for(const t in l)i[t]||(n[t]=l[t],i[t]=1);t[a]=l}else for(const t in r)i[t]=1}for(const t in s)t in n||(n[t]=void 0);return n}function V(t){return"object"==typeof t&&null!==t?t:{}}function N(t){t&&t.c()}function z(t,e,n,s){const{fragment:a,on_mount:o,on_destroy:c,after_update:d}=t.$$;a&&a.m(e,n),s||H((()=>{const e=o.map(i).filter(l);c?c.push(...e):r(e),t.$$.on_mount=[]})),d.forEach(H)}function U(t,e){const n=t.$$;null!==n.fragment&&(r(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}function G(t,e,s,i,l,o,c,u=[-1]){const h=d;x(t);const p=t.$$={fragment:null,ctx:null,props:o,update:n,not_equal:l,bound:a(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(e.context||(h?h.$$.context:[])),callbacks:a(),dirty:u,skip_bound:!1,root:e.target||h.$$.root};c&&c(p.root);let m=!1;if(p.ctx=s?s(t,e.props||{},((e,n,...s)=>{const i=s.length?s[0]:n;return p.ctx&&l(p.ctx[e],p.ctx[e]=i)&&(!p.skip_bound&&p.bound[e]&&p.bound[e](i),m&&function(t,e){-1===t.$$.dirty[0]&&(T.push(t),D(),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}(t,e)),n})):[],p.update(),m=!0,r(p.before_update),p.fragment=!!i&&i(p.ctx),e.target){if(e.hydrate){const t=function(t){return Array.from(t.childNodes)}(e.target);p.fragment&&p.fragment.l(t),t.forEach(f)}else p.fragment&&p.fragment.c();e.intro&&R(t.$$.fragment),z(t,e.target,e.anchor,e.customElement),E()}x(h)}class K{$destroy(){U(this,1),this.$destroy=n}$on(t,e){const n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{const t=n.indexOf(e);-1!==t&&n.splice(t,1)}}$set(t){var e;this.$$set&&(e=t,0!==Object.keys(e).length)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}}const Y=[];function Z(t,e){return{subscribe:X(t,e).subscribe}}function X(t,e=n){let s;const i=new Set;function a(e){if(o(t,e)&&(t=e,s)){const e=!Y.length;for(const e of i)e[1](),Y.push(e,t);if(e){for(let t=0;t<Y.length;t+=2)Y[t][0](Y[t+1]);Y.length=0}}}return{set:a,update:function(e){a(e(t))},subscribe:function(r,l=n){const o=[r,l];return i.add(o),1===i.size&&(s=e(a)||n),r(t),()=>{i.delete(o),0===i.size&&(s(),s=null)}}}}function tt(t,e,s){const i=!Array.isArray(t),a=i?[t]:t,o=e.length<2;return Z(s,(t=>{let s=!1;const c=[];let d=0,u=n;const h=()=>{if(d)return;u();const s=e(i?c[0]:c,t);o?t(s):u=l(s)?s:n},p=a.map(((t,e)=>function(t,...e){if(null==t)return n;const s=t.subscribe(...e);return s.unsubscribe?()=>s.unsubscribe():s}(t,(t=>{c[e]=t,d&=~(1<<e),s&&h()}),(()=>{d|=1<<e}))));return s=!0,h(),function(){r(p),u()}}))}function et(t){let e,n,i;const a=[t[2]];var r=t[0];function l(t){let e={};for(let t=0;t<a.length;t+=1)e=s(e,a[t]);return{props:e}}return r&&(e=new r(l()),e.$on("routeEvent",t[7])),{c(){e&&N(e.$$.fragment),n=y()},m(t,s){e&&z(e,t,s),m(t,n,s),i=!0},p(t,s){const i=4&s?J(a,[V(t[2])]):{};if(r!==(r=t[0])){if(e){P();const t=e;O(t.$$.fragment,1,0,(()=>{U(t,1)})),W()}r?(e=new r(l()),e.$on("routeEvent",t[7]),N(e.$$.fragment),R(e.$$.fragment,1),z(e,n.parentNode,n)):e=null}else r&&e.$set(i)},i(t){i||(e&&R(e.$$.fragment,t),i=!0)},o(t){e&&O(e.$$.fragment,t),i=!1},d(t){t&&f(n),e&&U(e,t)}}}function nt(t){let e,n,i;const a=[{params:t[1]},t[2]];var r=t[0];function l(t){let e={};for(let t=0;t<a.length;t+=1)e=s(e,a[t]);return{props:e}}return r&&(e=new r(l()),e.$on("routeEvent",t[6])),{c(){e&&N(e.$$.fragment),n=y()},m(t,s){e&&z(e,t,s),m(t,n,s),i=!0},p(t,s){const i=6&s?J(a,[2&s&&{params:t[1]},4&s&&V(t[2])]):{};if(r!==(r=t[0])){if(e){P();const t=e;O(t.$$.fragment,1,0,(()=>{U(t,1)})),W()}r?(e=new r(l()),e.$on("routeEvent",t[6]),N(e.$$.fragment),R(e.$$.fragment,1),z(e,n.parentNode,n)):e=null}else r&&e.$set(i)},i(t){i||(e&&R(e.$$.fragment,t),i=!0)},o(t){e&&O(e.$$.fragment,t),i=!1},d(t){t&&f(n),e&&U(e,t)}}}function st(t){let e,n,s,i;const a=[nt,et],r=[];function l(t,e){return t[1]?0:1}return e=l(t),n=r[e]=a[e](t),{c(){n.c(),s=y()},m(t,n){r[e].m(t,n),m(t,s,n),i=!0},p(t,[i]){let o=e;e=l(t),e===o?r[e].p(t,i):(P(),O(r[o],1,1,(()=>{r[o]=null})),W(),n=r[e],n?n.p(t,i):(n=r[e]=a[e](t),n.c()),R(n,1),n.m(s.parentNode,s))},i(t){i||(R(n),i=!0)},o(t){O(n),i=!1},d(t){r[e].d(t),t&&f(s)}}}function it(){const t=window.location.href.indexOf("#/");let e=t>-1?window.location.href.substr(t+1):"/";const n=e.indexOf("?");let s="";return n>-1&&(s=e.substr(n+1),e=e.substr(0,n)),{location:e,querystring:s}}const at=Z(null,(function(t){t(it());const e=()=>{t(it())};return window.addEventListener("hashchange",e,!1),function(){window.removeEventListener("hashchange",e,!1)}}));tt(at,(t=>t.location)),tt(at,(t=>t.querystring));const rt=X(void 0);function lt(t,e,n){let{routes:s={}}=e,{prefix:i=""}=e,{restoreScrollState:a=!1}=e;class r{constructor(t,e){if(!e||"function"!=typeof e&&("object"!=typeof e||!0!==e._sveltesparouter))throw Error("Invalid component object");if(!t||"string"==typeof t&&(t.length<1||"/"!=t.charAt(0)&&"*"!=t.charAt(0))||"object"==typeof t&&!(t instanceof RegExp))throw Error('Invalid value for "path" argument - strings must start with / or *');const{pattern:n,keys:s}=function(t,e){if(t instanceof RegExp)return{keys:!1,pattern:t};var n,s,i,a,r=[],l="",o=t.split("/");for(o[0]||o.shift();i=o.shift();)"*"===(n=i[0])?(r.push("wild"),l+="/(.*)"):":"===n?(s=i.indexOf("?",1),a=i.indexOf(".",1),r.push(i.substring(1,~s?s:~a?a:i.length)),l+=~s&&!~a?"(?:/([^/]+?))?":"/([^/]+?)",~a&&(l+=(~s?"?":"")+"\\"+i.substring(a))):l+="/"+i;return{keys:r,pattern:new RegExp("^"+l+(e?"(?=$|/)":"/?$"),"i")}}(t);this.path=t,"object"==typeof e&&!0===e._sveltesparouter?(this.component=e.component,this.conditions=e.conditions||[],this.userData=e.userData,this.props=e.props||{}):(this.component=()=>Promise.resolve(e),this.conditions=[],this.props={}),this._pattern=n,this._keys=s}match(t){if(i)if("string"==typeof i){if(!t.startsWith(i))return null;t=t.substr(i.length)||"/"}else if(i instanceof RegExp){const e=t.match(i);if(!e||!e[0])return null;t=t.substr(e[0].length)||"/"}const e=this._pattern.exec(t);if(null===e)return null;if(!1===this._keys)return e;const n={};let s=0;for(;s<this._keys.length;){try{n[this._keys[s]]=decodeURIComponent(e[s+1]||"")||null}catch(t){n[this._keys[s]]=null}s++}return n}async checkConditions(t){for(let e=0;e<this.conditions.length;e++)if(!await this.conditions[e](t))return!1;return!0}}const l=[];s instanceof Map?s.forEach(((t,e)=>{l.push(new r(e,t))})):Object.keys(s).forEach((t=>{l.push(new r(t,s[t]))}));let o=null,c=null,d={};const u=S();async function h(t,e){await(D(),F),u(t,e)}let p=null,m=null;var f;a&&(m=t=>{p=t.state&&t.state.__svelte_spa_router_scrollY?t.state:null},window.addEventListener("popstate",m),f=()=>{p?window.scrollTo(p.__svelte_spa_router_scrollX,p.__svelte_spa_router_scrollY):window.scrollTo(0,0)},k().$$.after_update.push(f));let v=null,g=null;const b=at.subscribe((async t=>{v=t;let e=0;for(;e<l.length;){const s=l[e].match(t.location);if(!s){e++;continue}const i={route:l[e].path,location:t.location,querystring:t.querystring,userData:l[e].userData,params:s&&"object"==typeof s&&Object.keys(s).length?s:null};if(!await l[e].checkConditions(i))return n(0,o=null),g=null,void h("conditionsFailed",i);h("routeLoading",Object.assign({},i));const a=l[e].component;if(g!=a){a.loading?(n(0,o=a.loading),g=a,n(1,c=a.loadingParams),n(2,d={}),h("routeLoaded",Object.assign({},i,{component:o,name:o.name,params:c}))):(n(0,o=null),g=null);const e=await a();if(t!=v)return;n(0,o=e&&e.default||e),g=a}return s&&"object"==typeof s&&Object.keys(s).length?n(1,c=s):n(1,c=null),n(2,d=l[e].props),void h("routeLoaded",Object.assign({},i,{component:o,name:o.name,params:c})).then((()=>{rt.set(c)}))}n(0,o=null),g=null,rt.set(void 0)}));return function(t){k().$$.on_destroy.push(t)}((()=>{b(),m&&window.removeEventListener("popstate",m)})),t.$$set=t=>{"routes"in t&&n(3,s=t.routes),"prefix"in t&&n(4,i=t.prefix),"restoreScrollState"in t&&n(5,a=t.restoreScrollState)},t.$$.update=()=>{32&t.$$.dirty&&(history.scrollRestoration=a?"manual":"auto")},[o,c,d,s,i,a,function(e){_.call(this,t,e)},function(e){_.call(this,t,e)}]}class ot extends K{constructor(t){super(),G(this,t,lt,st,o,{routes:3,prefix:4,restoreScrollState:5})}}function ct(t){let e,n,s,i,a,r,l,o,c,d,u,g,y,w;const x=t[1].default,k=function(t,e,n,s){if(t){const i=h(t,e,n,s);return t[0](i)}}(x,t,t[0],null);return{c(){e=v("main"),n=v("link"),s=b(),i=v("section"),i.innerHTML='<span id="idDocNav"></span> \n\t\t<div style="float:right;margin-right:20px"><a href="https://squery-vercel-app.translate.goog/?&amp;_x_tr_sl=auto&amp;_x_tr_tl=ja&amp;_x_tr_hl=en&amp;_x_tr_pto=wapp" style="color:#fff!important;">日本語に翻訳</a></div>',a=b(),r=v("section"),r.innerHTML='<section id="idLeftTop"><div id="idLeftLogo" class="notranslate"><a href="./" style="color:#fff">sQuery v1.03</a></div></section> \n\t\t<section class="cScrollable"><div style="font-weight:300"><div name="" class="cSub">Learn</div> \n\t\t\t\t<div name="" class="cF"><a href="./#/docs/">documentation</a></div> \n\t\t\t\t<div name="" class="cF"><a href="./#/examples/">examples</a></div> \n\t\t\t\t<div name="" class="cF"><a href="./#/sq/">online editor</a></div></div> \n\t\n\t\t\t<div name="" class="cSub">Community</div> \n\t\t\t<div name="" class="cF"><a href="https://beacons.ai/exis" target="_blank">About me</a></div> \n\t\t\t<div name="" class="cF"><a href="https://github.com/exis9/sQuery" target="_blank">github</a></div> \n\t\t\t<div name="" class="cF"><a href="https://twitter.com/ExisVR" target="_blank" class="notranslate">twitter</a></div> \n\t\t\t<div name="" class="cF"><a href="https://stackoverflow.com/questions/tagged/squery" target="_blank">questions</a></div> \n\t\t\t<div name="" class="cF"><a href="#a" onclick="alert(&#39;Sorry! Please contact me using twitter DM for now..!&#39;);return false">e-mail</a></div></section>',l=b(),o=v("div"),o.innerHTML="<span></span>",c=b(),d=v("section"),k&&k.c(),u=b(),g=v("br"),y=v("br"),$(n,"rel","stylesheet"),$(n,"href","./Docs.css"),$(i,"id","idHead"),$(r,"id","idLeft"),$(o,"class","menu__toggler"),$(d,"id","idDoc")},m(t,h){m(t,e,h),p(e,n),p(e,s),p(e,i),p(e,a),p(e,r),p(e,l),p(e,o),p(e,c),p(e,d),k&&k.m(d,null),p(d,u),p(d,g),p(d,y),w=!0},p(t,[e]){k&&k.p&&(!w||1&e)&&function(t,e,n,s,i,a){if(i){const r=h(e,n,s,a);t.p(r,i)}}(k,x,t,t[0],w?function(t,e,n,s){if(t[2]&&s){const i=t[2](s(n));if(void 0===e.dirty)return i;if("object"==typeof i){const t=[],n=Math.max(e.dirty.length,i.length);for(let s=0;s<n;s+=1)t[s]=e.dirty[s]|i[s];return t}return e.dirty|i}return e.dirty}(x,t[0],e,null):function(t){if(t.ctx.length>32){const e=[],n=t.ctx.length/32;for(let t=0;t<n;t++)e[t]=-1;return e}return-1}(t[0]),null)},i(t){w||(R(k,t),w=!0)},o(t){O(k,t),w=!1},d(t){t&&f(e),k&&k.d(t)}}}function dt(t,n,s){let{$$slots:i={},$$scope:a}=n;return document.getElementsByTagName("body")[0].style.display="none",window.loadProc=function(){e("body").hide().fadeIn(400),e(document).onf("click",".menu__toggler",(function(){return e(".menu__toggler").toggleClass("active"),e(".menu__toggler").hasClass("active")?e("#idLeft").fadeIn(500).animate([{left:"-200px"},{left:"0px"}],300):e("#idLeft").fadeOut(500).animate([{left:"0px"},{left:"-200px"}],300),!1}))},e().isPageLoaded()&&(console.log("spa loaded"),window.loadProc()),e((()=>{console.log("loaded"),window.loadProc()})),t.$$set=t=>{"$$scope"in t&&s(0,a=t.$$scope)},[a,i]}class ut extends K{constructor(t){super(),G(this,t,dt,ct,o,{})}}function ht(t){let e,s,i,a,r,l,o;return{c(){e=v("h1"),s=g("sQuery.js"),i=v("div"),i.textContent=`${mt}`,a=b(),r=v("doc"),r.innerHTML='<h2>What is sQuery?</h2> \n\t\t<div><b>sQuery</b> is like a <red>super minified ES6 modern jQuery</red>(less than <b>9.5KB</b>) that works great with modern JS frameworks such as <b>Svelte/SolidJS/React/Preact/Vue.js/Angular</b> without any special settings.\n\t\t\t<br/><br/>\n\t\t\tsQuery is probably something you&#39;re looking for especially if you&#39;re a modern js framework user but still love jQuery.\n\t\t\t<br/><br/> \n\t\t\t<i>Have you ever thought the React/Vue virtual DOM is great but you still want a minimum DOM wrapper like jQuery?</i> \n\t\t\t<br/><br/> \n\t\t\t<i>Have you ever thought repeating <b>document.getElementById</b> or <b>document.querySelectorAll</b> is a stupid idea?</i> \n\t\t\t<br/><br/>\n\t\t\tI know what you want. You want good old-fashioned simple DOM manipulation methods just like jQuery offers but you don&#39;t want to add a <red>300KB+ jQuery file</red> in your project. And you want <blue>native JavaScript speed</blue>, too.\n\t\t\t<br/><br/>\n\t\t\tWell, sQuery is just 9.5KB, and with Nginx/Apache http Gzipped compression, it would be <red>2.5KB</red>!!\n\t\t\tIt offers core jQuery-like functionality such as selector, method chain, dom/css operations, events, fadeIn, fadeOut, animation, each loop, and so on!\n\t\t\t<br/><br/> \n\t\t\t<div class="cTable"><table><thead><tr><th>Size</th> \n\t\t\t\t\t<th>sQuery</th> \n\t\t\t\t\t<th>Cash</th> \n\t\t\t\t\t<th>Zepto 1.2.0</th> \n\t\t\t\t\t<th>jQuery Slim 3.4.1</th></tr></thead> \n\t\t\t\t\t<tbody><tr><td>Unminified</td> \n\t\t\t\t\t<td><strong>13 KB</strong></td> \n\t\t\t\t\t<td>36.5 KB</td> \n\t\t\t\t\t<td>58.7 KB</td> \n\t\t\t\t\t<td><strong>227 KB</strong></td></tr> \n\t\t\t\t\t<tr><td>Minified</td> \n\t\t\t\t\t<td><strong>9.5KB</strong></td> \n\t\t\t\t\t<td>16 KB</td> \n\t\t\t\t\t<td>26 KB</td> \n\t\t\t\t\t<td><strong>71 KB</strong></td></tr> \n\t\t\t\t\t<tr><td>Minified &amp; Gzipped</td> \n\t\t\t\t\t<td><strong>2.9 KB</strong></td> \n\t\t\t\t\t<td>6 KB</td> \n\t\t\t\t\t<td>9.8 KB</td> \n\t\t\t\t\t<td><strong>24.4 KB</strong></td></tr></tbody></table></div> \n\t\t\t<br/><br/>\n\n\t\t\tActually, the size of your whole project could be even smaller with sQuery than without it, since you don&#39;t have to write lengthy native DOM codes over and over again. (Also, more good news: sQuery is basically the same speed as native codes!)\n\t\t\t<br/><br/>\n\t\t\tsQuery is NOT exactly like jQuery but rather a super simple esential DOM library with near-native speed that takes your development experience to the next level.\n\t\t\t<br/><br/> \n\t\t\t<h3><i>sQuery&#39;s &#39;S&#39; is for Simple, Small, Speed, and Solid</i></h3></div>',l=b(),o=v("doc"),o.innerHTML='<h2>Read the documentation and start!</h2> \n\t\t<div>There are CDN/zip/module/npm options for sQuery.<br/>\n\t\t\tIf you already know jQuery, you basically don&#39;t need any additional knowledge.\n\t\t\tLet&#39;s go to the <a href="./#/docs">documentation</a> page and start!</div>',$(e,"class","notranslate"),$(r,"name","What_is_sQuery"),$(o,"name","Installation")},m(t,n){m(t,e,n),p(e,s),p(e,i),m(t,a,n),m(t,r,n),m(t,l,n),m(t,o,n)},p:n,d(t){t&&f(e),t&&f(a),t&&f(r),t&&f(l),t&&f(o)}}}function pt(t){let e,n;return e=new ut({props:{$$slots:{default:[ht]},$$scope:{ctx:t}}}),{c(){N(e.$$.fragment)},m(t,s){z(e,t,s),n=!0},p(t,[n]){const s={};1&n&&(s.$$scope={dirty:n,ctx:t}),e.$set(s)},i(t){n||(R(e.$$.fragment,t),n=!0)},o(t){O(e.$$.fragment,t),n=!1},d(t){U(e,t)}}}let mt="sQuery - Native Speed jQuery for Svelte/SolidJS";class ft extends K{constructor(t){super(),G(this,t,null,pt,o,{})}}let vt="sQuery - Native Speed jQuery for Svelte/SolidJS",gt=function(t=!0){e("body").hide().fadeIn(400),window.setDocTitle=t?(t,n)=>{let s=e('.cF[name="'+t+'"]').siblings().filter(".cSub").text();if(!s)return;let i=n+" - sQuery Docs";window.history.replaceState&&window.history.replaceState({n:t},i,"./?n="+t+"#/docs"),document.title=i;let a='<a class="cWhite" href="./#/docs">sQuery Docs</a> -> <a class="cWhite" href="./?n='+s.replace(/ /g,"")+'#/docs">'+s+'</a> -> <a class="cWhite" href="./?p&n='+t+'#/docs">'+e(".cF[name="+t+"]").text().replace("・","")+"</a>";e("#idDocNav").html(a),e(".cF").removeClass("active"),e('.cF[name="'+t+'"]').addClass("active")}:(t,n)=>{let s=e('.cF[name="'+t+'"]').siblings().filter(".cSub").text();if(!s)return;let i=n+" - sQuery Install";window.history.replaceState&&window.history.replaceState({n:t},i,"./?n="+t+"#/install"),document.title=i;let a='<a class="cWhite" href="./#/install">sQuery Install</a> -> <a class="cWhite" href="./?n='+s.replace(/ /g,"")+'#/install">'+s+'</a> -> <a class="cWhite" href="./?p&n='+t+'#/install">'+e(".cF[name="+t+"]").text().replace("・","")+"</a>";e("#idDocNav").html(a),e(".cF").removeClass("active"),e('.cF[name="'+t+'"]').addClass("active")},e(document).onf("click",".menu__toggler",(function(){return e(".menu__toggler").toggleClass("active"),e(".menu__toggler").hasClass("active")?e("#idLeft").fadeIn(500).animate([{left:"-200px"},{left:"0px"}],300):e("#idLeft").fadeOut(500).animate([{left:"0px"},{left:"-200px"}],300),!1})),e(".cF").on("click",(function(){let t=e(this).attr("name");e('doc[name="'+t+'"]').scrollToElement()})),setTimeout((()=>{e(document).on("scroll",(function(){let t;if(e("doc").each((function(){(function(t){return!(t.offset().top-e("body").scrollTop()>e("body").height())})(e(this))&&(t=e(this))})),t){let n=e('.cF[name="'+t.attr("name")+'"]').text();window.setDocTitle(t.attr("name"),n)}}))}),2500),window.clearDS=()=>{e("#idDS").val(""),e("#idDSC").fadeOut(),e(".cF").fadeIn(),e(".cF").each((function(){e(this).html(e(this).text())}))},e("#idDS").on("keyup",(function(){let t=e(this).val().trim();e(".cF").show(),e(".cF").each((function(){let n=e(this).text(),s=n.toLowerCase(),i=t.toLowerCase();s.toLowerCase().includes(i)?e(this).html(n.replace(new RegExp(t,"i"),"<b>$&</b>")):e(this).hide()})),""!=e(this).val()&&e("#idDSC").show()})).on("blur",(function(){""==e(this).val()&&window.clearDS()})),e("#idDSC").on("click",(function(){window.clearDS()})),setTimeout((function(){const t=function(t){t=t.replace(/[*+?^$.\[\]{}()|\\\/]/g,"\\$&");let e=location.search.match(new RegExp("[?&]"+t+"=([^&]+)(&|$)"));return e&&decodeURIComponent(e[1].replace(/\+/g," "))}("n");t&&document.querySelector(`doc[name="${t}"]`).scrollIntoView()}),1e3)};var bt=function(t){var e=/\blang(?:uage)?-([\w-]+)\b/i,n=0,s={},i={manual:t.Prism&&t.Prism.manual,disableWorkerMessageHandler:t.Prism&&t.Prism.disableWorkerMessageHandler,util:{encode:function t(e){return e instanceof a?new a(e.type,t(e.content),e.alias):Array.isArray(e)?e.map(t):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(t){return Object.prototype.toString.call(t).slice(8,-1)},objId:function(t){return t.__id||Object.defineProperty(t,"__id",{value:++n}),t.__id},clone:function t(e,n){var s,a;switch(n=n||{},i.util.type(e)){case"Object":if(a=i.util.objId(e),n[a])return n[a];for(var r in s={},n[a]=s,e)e.hasOwnProperty(r)&&(s[r]=t(e[r],n));return s;case"Array":return a=i.util.objId(e),n[a]?n[a]:(s=[],n[a]=s,e.forEach((function(e,i){s[i]=t(e,n)})),s);default:return e}},getLanguage:function(t){for(;t&&!e.test(t.className);)t=t.parentElement;return t?(t.className.match(e)||[,"none"])[1].toLowerCase():"none"},currentScript:function(){if("undefined"==typeof document)return null;if("currentScript"in document)return document.currentScript;try{throw new Error}catch(s){var t=(/at [^(\r\n]*\((.*):[^:]+:[^:]+\)$/i.exec(s.stack)||[])[1];if(t){var e=document.getElementsByTagName("script");for(var n in e)if(e[n].src==t)return e[n]}return null}},isActive:function(t,e,n){for(var s="no-"+e;t;){var i=t.classList;if(i.contains(e))return!0;if(i.contains(s))return!1;t=t.parentElement}return!!n}},languages:{plain:s,plaintext:s,text:s,txt:s,extend:function(t,e){var n=i.util.clone(i.languages[t]);for(var s in e)n[s]=e[s];return n},insertBefore:function(t,e,n,s){var a=(s=s||i.languages)[t],r={};for(var l in a)if(a.hasOwnProperty(l)){if(l==e)for(var o in n)n.hasOwnProperty(o)&&(r[o]=n[o]);n.hasOwnProperty(l)||(r[l]=a[l])}var c=s[t];return s[t]=r,i.languages.DFS(i.languages,(function(e,n){n===c&&e!=t&&(this[e]=r)})),r},DFS:function t(e,n,s,a){a=a||{};var r=i.util.objId;for(var l in e)if(e.hasOwnProperty(l)){n.call(e,l,e[l],s||l);var o=e[l],c=i.util.type(o);"Object"!==c||a[r(o)]?"Array"!==c||a[r(o)]||(a[r(o)]=!0,t(o,n,l,a)):(a[r(o)]=!0,t(o,n,null,a))}}},plugins:{},highlightAll:function(t,e){i.highlightAllUnder(document,t,e)},highlightAllUnder:function(t,e,n){var s={callback:n,container:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};i.hooks.run("before-highlightall",s),s.elements=Array.prototype.slice.apply(s.container.querySelectorAll(s.selector)),i.hooks.run("before-all-elements-highlight",s);for(var a,r=0;a=s.elements[r++];)i.highlightElement(a,!0===e,s.callback)},highlightElement:function(n,s,a){var r=i.util.getLanguage(n),l=i.languages[r];n.className=n.className.replace(e,"").replace(/\s+/g," ")+" language-"+r;var o=n.parentElement;o&&"pre"===o.nodeName.toLowerCase()&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+r);var c={element:n,language:r,grammar:l,code:n.textContent};function d(t){c.highlightedCode=t,i.hooks.run("before-insert",c),c.element.innerHTML=c.highlightedCode,i.hooks.run("after-highlight",c),i.hooks.run("complete",c),a&&a.call(c.element)}if(i.hooks.run("before-sanity-check",c),(o=c.element.parentElement)&&"pre"===o.nodeName.toLowerCase()&&!o.hasAttribute("tabindex")&&o.setAttribute("tabindex","0"),!c.code)return i.hooks.run("complete",c),void(a&&a.call(c.element));if(i.hooks.run("before-highlight",c),c.grammar)if(s&&t.Worker){var u=new Worker(i.filename);u.onmessage=function(t){d(t.data)},u.postMessage(JSON.stringify({language:c.language,code:c.code,immediateClose:!0}))}else d(i.highlight(c.code,c.grammar,c.language));else d(i.util.encode(c.code))},highlight:function(t,e,n){var s={code:t,grammar:e,language:n};return i.hooks.run("before-tokenize",s),s.tokens=i.tokenize(s.code,s.grammar),i.hooks.run("after-tokenize",s),a.stringify(i.util.encode(s.tokens),s.language)},tokenize:function(t,e){var n=e.rest;if(n){for(var s in n)e[s]=n[s];delete e.rest}var d=new l;return o(d,d.head,t),function t(e,n,s,l,d,u){for(var h in s)if(s.hasOwnProperty(h)&&s[h]){var p=s[h];p=Array.isArray(p)?p:[p];for(var m=0;m<p.length;++m){if(u&&u.cause==h+","+m)return;var f=p[m],v=f.inside,g=!!f.lookbehind,b=!!f.greedy,y=f.alias;if(b&&!f.pattern.global){var $=f.pattern.toString().match(/[imsuy]*$/)[0];f.pattern=RegExp(f.pattern.source,$+"g")}for(var w=f.pattern||f,x=l.next,k=d;x!==n.tail&&!(u&&k>=u.reach);k+=x.value.length,x=x.next){var S=x.value;if(n.length>e.length)return;if(!(S instanceof a)){var _,T=1;if(b){if(!(_=r(w,k,e,g))||_.index>=e.length)break;var q=_.index,j=_.index+_[0].length,L=k;for(L+=x.value.length;L<=q;)L+=(x=x.next).value.length;if(k=L-=x.value.length,x.value instanceof a)continue;for(var F=x;F!==n.tail&&(L<j||"string"==typeof F.value);F=F.next)T++,L+=F.value.length;T--,S=e.slice(k,L),_.index-=k}else if(!(_=r(w,0,S,g)))continue;q=_.index;var C=_[0],D=S.slice(0,q),H=S.slice(q+C.length),M=k+S.length;u&&M>u.reach&&(u.reach=M);var Q=x.prev;if(D&&(Q=o(n,Q,D),k+=D.length),c(n,Q,T),x=o(n,Q,new a(h,v?i.tokenize(C,v):C,y,C)),H&&o(n,x,H),1<T){var E={cause:h+","+m,reach:M};t(e,n,s,x.prev,k,E),u&&E.reach>u.reach&&(u.reach=E.reach)}}}}}}(t,d,e,d.head,0),function(t){for(var e=[],n=t.head.next;n!==t.tail;)e.push(n.value),n=n.next;return e}(d)},hooks:{all:{},add:function(t,e){var n=i.hooks.all;n[t]=n[t]||[],n[t].push(e)},run:function(t,e){var n=i.hooks.all[t];if(n&&n.length)for(var s,a=0;s=n[a++];)s(e)}},Token:a};function a(t,e,n,s){this.type=t,this.content=e,this.alias=n,this.length=0|(s||"").length}function r(t,e,n,s){t.lastIndex=e;var i=t.exec(n);if(i&&s&&i[1]){var a=i[1].length;i.index+=a,i[0]=i[0].slice(a)}return i}function l(){var t={value:null,prev:null,next:null},e={value:null,prev:t,next:null};t.next=e,this.head=t,this.tail=e,this.length=0}function o(t,e,n){var s=e.next,i={value:n,prev:e,next:s};return e.next=i,s.prev=i,t.length++,i}function c(t,e,n){for(var s=e.next,i=0;i<n&&s!==t.tail;i++)s=s.next;(e.next=s).prev=e,t.length-=i}if(t.Prism=i,a.stringify=function t(e,n){if("string"==typeof e)return e;if(Array.isArray(e)){var s="";return e.forEach((function(e){s+=t(e,n)})),s}var a={type:e.type,content:t(e.content,n),tag:"span",classes:["token",e.type],attributes:{},language:n},r=e.alias;r&&(Array.isArray(r)?Array.prototype.push.apply(a.classes,r):a.classes.push(r)),i.hooks.run("wrap",a);var l="";for(var o in a.attributes)l+=" "+o+'="'+(a.attributes[o]||"").replace(/"/g,"&quot;")+'"';return"<"+a.tag+' class="'+a.classes.join(" ")+'"'+l+">"+a.content+"</"+a.tag+">"},!t.document)return t.addEventListener&&(i.disableWorkerMessageHandler||t.addEventListener("message",(function(e){var n=JSON.parse(e.data),s=n.language,a=n.code,r=n.immediateClose;t.postMessage(i.highlight(a,i.languages[s],s)),r&&t.close()}),!1)),i;var d=i.util.currentScript();function u(){i.manual||i.highlightAll()}if(d&&(i.filename=d.src,d.hasAttribute("data-manual")&&(i.manual=!0)),!i.manual){var h=document.readyState;"loading"===h||"interactive"===h&&d&&d.defer?document.addEventListener("DOMContentLoaded",u):window.requestAnimationFrame?window.requestAnimationFrame(u):window.setTimeout(u,16)}return i}("undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{});function yt(e,n=t(".cCodeCont")){let s=n.find("#highlighting-content").get(0);"\n"==e[e.length-1]&&(e+=" "),s.innerHTML=e.replace(new RegExp("&","g"),"&amp;").replace(new RegExp("<","g"),"&lt;"),bt.highlightElement(s)}function $t(e,n=t(".cCodeCont")){let s=n.find("#highlighting").get(0);s.scrollTop=e.scrollTop,s.scrollLeft=e.scrollLeft}function wt(e,n,s=t(".cCodeCont")){let i=e.value;if("Tab"==n.key)if(n.preventDefault(),window.bShift){let t=e.selectionStart,n=e.selectionEnd,a=i.slice(0,e.selectionStart),r=i.slice(e.selectionEnd,e.value.length),l=i.substring(e.selectionStart,e.selectionEnd);l=l.replace(/\n\t/g,"\n").replace(/\n  /g,"\n"),e.selectionStart,e.value=a.replace(/\t$/,"")+l+r,e.setSelectionRange(t,n),yt(e.value,s)}else{let t=i.slice(0,e.selectionStart),n=i.slice(e.selectionEnd,e.value.length),a=i.substring(e.selectionStart,e.selectionEnd);a=a.replace(/\n/g,"\n\t");let r=e.selectionStart+1;e.value=t+"\t"+a+n,e.selectionStart=r,e.selectionEnd=r,yt(e.value,s)}}"undefined"!=typeof module&&module.exports&&(module.exports=bt),"undefined"!=typeof global&&(global.Prism=bt),bt.languages.markup={comment:{pattern:/<!--(?:(?!<!--)[\s\S])*?-->/,greedy:!0},prolog:{pattern:/<\?[\s\S]+?\?>/,greedy:!0},doctype:{pattern:/<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,greedy:!0,inside:{"internal-subset":{pattern:/(^[^\[]*\[)[\s\S]+(?=\]>$)/,lookbehind:!0,greedy:!0,inside:null},string:{pattern:/"[^"]*"|'[^']*'/,greedy:!0},punctuation:/^<!|>$|[[\]]/,"doctype-tag":/^DOCTYPE/i,name:/[^\s<>'"]+/}},cdata:{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,greedy:!0},tag:{pattern:/<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,greedy:!0,inside:{tag:{pattern:/^<\/?[^\s>\/]+/,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"special-attr":[],"attr-value":{pattern:/=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,inside:{punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:[{pattern:/&[\da-z]{1,8};/i,alias:"named-entity"},/&#x?[\da-f]{1,8};/i]},bt.languages.markup.tag.inside["attr-value"].inside.entity=bt.languages.markup.entity,bt.languages.markup.doctype.inside["internal-subset"].inside=bt.languages.markup,bt.hooks.add("wrap",(function(t){"entity"===t.type&&(t.attributes.title=t.content.replace(/&amp;/,"&"))})),Object.defineProperty(bt.languages.markup.tag,"addInlined",{value:function(t,e){var n={};n["language-"+e]={pattern:/(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,lookbehind:!0,inside:bt.languages[e]},n.cdata=/^<!\[CDATA\[|\]\]>$/i;var s={"included-cdata":{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,inside:n}};s["language-"+e]={pattern:/[\s\S]+/,inside:bt.languages[e]};var i={};i[t]={pattern:RegExp("(<__[^>]*>)(?:<!\\[CDATA\\[(?:[^\\]]|\\](?!\\]>))*\\]\\]>|(?!<!\\[CDATA\\[)[^])*?(?=</__>)".replace(/__/g,(function(){return t})),"i"),lookbehind:!0,greedy:!0,inside:s},bt.languages.insertBefore("markup","cdata",i)}}),Object.defineProperty(bt.languages.markup.tag,"addAttribute",{value:function(t,e){bt.languages.markup.tag.inside["special-attr"].push({pattern:RegExp("(^|[\"'\\s])(?:"+t+")\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^\\s'\">=]+(?=[\\s>]))","i"),lookbehind:!0,inside:{"attr-name":/^[^\s=]+/,"attr-value":{pattern:/=[\s\S]+/,inside:{value:{pattern:/(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,lookbehind:!0,alias:[e,"language-"+e],inside:bt.languages[e]},punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}}}})}}),bt.languages.html=bt.languages.markup,bt.languages.mathml=bt.languages.markup,bt.languages.svg=bt.languages.markup,bt.languages.xml=bt.languages.extend("markup",{}),bt.languages.ssml=bt.languages.xml,bt.languages.atom=bt.languages.xml,bt.languages.rss=bt.languages.xml,function(t){var e=/(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;t.languages.css={comment:/\/\*[\s\S]*?\*\//,atrule:{pattern:/@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,inside:{rule:/^@[\w-]+/,"selector-function-argument":{pattern:/(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,lookbehind:!0,alias:"selector"},keyword:{pattern:/(^|[^\w-])(?:and|not|only|or)(?![\w-])/,lookbehind:!0}}},url:{pattern:RegExp("\\burl\\((?:"+e.source+"|(?:[^\\\\\r\n()\"']|\\\\[^])*)\\)","i"),greedy:!0,inside:{function:/^url/i,punctuation:/^\(|\)$/,string:{pattern:RegExp("^"+e.source+"$"),alias:"url"}}},selector:{pattern:RegExp("(^|[{}\\s])[^{}\\s](?:[^{};\"'\\s]|\\s+(?![\\s{])|"+e.source+")*(?=\\s*\\{)"),lookbehind:!0},string:{pattern:e,greedy:!0},property:{pattern:/(^|[^-\w\xA0-\uFFFF])(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,lookbehind:!0},important:/!important\b/i,function:{pattern:/(^|[^-a-z0-9])[-a-z0-9]+(?=\()/i,lookbehind:!0},punctuation:/[(){};:,]/},t.languages.css.atrule.inside.rest=t.languages.css;var n=t.languages.markup;n&&(n.tag.addInlined("style","css"),n.tag.addAttribute("style","css"))}(bt),bt.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,lookbehind:!0,greedy:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0,greedy:!0}],string:{pattern:/(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/(\b(?:class|extends|implements|instanceof|interface|new|trait)\s+|\bcatch\s+\()[\w.\\]+/i,lookbehind:!0,inside:{punctuation:/[.\\]/}},keyword:/\b(?:break|catch|continue|do|else|finally|for|function|if|in|instanceof|new|null|return|throw|try|while)\b/,boolean:/\b(?:false|true)\b/,function:/\b\w+(?=\()/,number:/\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,operator:/[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,punctuation:/[{}[\];(),.:]/},bt.languages.javascript=bt.languages.extend("clike",{"class-name":[bt.languages.clike["class-name"],{pattern:/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,lookbehind:!0}],keyword:[{pattern:/((?:^|\})\s*)catch\b/,lookbehind:!0},{pattern:/(^|[^.]|\.\.\.\s*)\b(?:as|assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally(?=\s*(?:\{|$))|for|from(?=\s*(?:['"]|$))|function|(?:get|set)(?=\s*(?:[#\[$\w\xA0-\uFFFF]|$))|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,lookbehind:!0}],function:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,number:{pattern:RegExp("(^|[^\\w$])(?:NaN|Infinity|0[bB][01]+(?:_[01]+)*n?|0[oO][0-7]+(?:_[0-7]+)*n?|0[xX][\\dA-Fa-f]+(?:_[\\dA-Fa-f]+)*n?|\\d+(?:_\\d+)*n|(?:\\d+(?:_\\d+)*(?:\\.(?:\\d+(?:_\\d+)*)?)?|\\.\\d+(?:_\\d+)*)(?:[Ee][+-]?\\d+(?:_\\d+)*)?)(?![\\w$])"),lookbehind:!0},operator:/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/}),bt.languages.javascript["class-name"][0].pattern=/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/,bt.languages.insertBefore("javascript","keyword",{regex:{pattern:/((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,lookbehind:!0,greedy:!0,inside:{"regex-source":{pattern:/^(\/)[\s\S]+(?=\/[a-z]*$)/,lookbehind:!0,alias:"language-regex",inside:bt.languages.regex},"regex-delimiter":/^\/|\/$/,"regex-flags":/^[a-z]+$/}},"function-variable":{pattern:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/,alias:"function"},parameter:[{pattern:/(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,lookbehind:!0,inside:bt.languages.javascript},{pattern:/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,lookbehind:!0,inside:bt.languages.javascript},{pattern:/(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,lookbehind:!0,inside:bt.languages.javascript},{pattern:/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,lookbehind:!0,inside:bt.languages.javascript}],constant:/\b[A-Z](?:[A-Z_]|\dx?)*\b/}),bt.languages.insertBefore("javascript","string",{hashbang:{pattern:/^#!.*/,greedy:!0,alias:"comment"},"template-string":{pattern:/`(?:\\[\s\S]|\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}|(?!\$\{)[^\\`])*`/,greedy:!0,inside:{"template-punctuation":{pattern:/^`|`$/,alias:"string"},interpolation:{pattern:/((?:^|[^\\])(?:\\{2})*)\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}/,lookbehind:!0,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:bt.languages.javascript}},string:/[\s\S]+/}},"string-property":{pattern:/((?:^|[,{])[ \t]*)(["'])(?:\\(?:\r\n|[\s\S])|(?!\2)[^\\\r\n])*\2(?=\s*:)/m,lookbehind:!0,greedy:!0,alias:"property"}}),bt.languages.insertBefore("javascript","operator",{"literal-property":{pattern:/((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,lookbehind:!0,alias:"property"}}),bt.languages.markup&&(bt.languages.markup.tag.addInlined("script","javascript"),bt.languages.markup.tag.addAttribute("on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)","javascript")),bt.languages.js=bt.languages.javascript;let xt={custom:"\n<script src=\"squery.min.js\"><\/script>\n<script>\nconst $ = sq\n$(function(){\n\t$('body')\n\t\t.html('<div class=\"str\">Am I jQuery?</div>')\n\t\t.css('background', 'rgb(230,30,100)')\n\t\n\t$('.str').css({\n\t\tcolor: '#fff',\n\t\tfontSize: '20px',\n\t})\n})\n<\/script>\n\t",custom_module:"\n<script type=\"module\">\nimport {sq as $} from './sq.min.js'\n$(function(){\n\t$('body').css('background', 'rgb(230,30,100)')\n\t$('body').html('Am I jQuery?')\n})\n<\/script>\n\t",c1:"\n<script src=\"squery.min.js\"><\/script>\n<script>\nsq(function(){\n\tsq('body').css('background', 'skyblue')\n\tsq('body').html('<h1>Hello sQuery!</h1>')\n})\n<\/script>",c1_cdn:"\n<script src=\"https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js\"><\/script>\n<script>\nsq(function(){\n\tsq('body').css('background', 'skyblue')\n\tsq('body').html('<h1>Hello sQuery CDN!</h1>')\n})\n<\/script>",c2:"\n<script type=\"module\">\nimport {sq} from './sq.min.js'\nsq(()=>{\n\tsq('body').css('background', 'rgb(230,30,100)')\n\tsq('body').html('<h1>Hi, sQuery module!</h1>')\n})\n<\/script>",c2_cdn:"\n<script type=\"module\">\nimport {sq} from 'https://cdn.jsdelivr.net/gh/exis9/squery@latest/sq.min.js'\nsq(()=>{\n\tsq('body').css('background', 'rgb(230,30,100)')\n\tsq('body').html('<h1>Hi, sQuery CDN module!</h1>')\n})\n<\/script>",customMethods:"\n<span>click me!</span>\n\n<script>\n\t_SQ.NewMethod = function(){ //_SQ.MethodName creates a new method!\n\t\talert(\"hello\")\n\t\treturn this //if you need the method chain, don't forget this\n\t}\n\n\t_SQ.BgChange = function( color ){\n\t\tlet el = this.el[0] //the first element chosen by the selector\n\t\tel.style.background = color //css styling\n\t\treturn this\n\t}\n\n\tsq('span').on( 'click', ()=>{\n\t\tsq('body').BgChange('red') //changes the background\n\t\tsetTimeout(()=>{\n\t\t\tsq('body').NewMethod().BgChange('skyblue') //alerts hello and then changes the background\n\t\t}, 1000)\n\t})\n<\/script>\n",dom1:"\n<script src=\"https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js\"><\/script>\n<script>\nsq(()=>{\n\tsq('body').css('background', 'skyblue')\n\tsq('body').prepend('<h1>Hello sQuery CDN!</h1>')\n})\n<\/script>\n",dom2:"\n<script type=\"module\">\nimport {sq} from 'https://cdn.jsdelivr.net/gh/exis9/squery@latest/sq.min.js'\nsq(()=>{\n\tsq('body').css('background', 'rgb(230,30,100)')\n\tsq('body').html('<h1>Hi, sQuery CDN module!</h1>')\n})\n<\/script>\n",filter:"\n<div>a</div>\n<div class=\"middle\">b</div>\n<div class=\"middle2\">c</div>\n<div class=\"middle\">d</div>\n<div class=\"middle\">e</div>\n<div>f</div>\n\n<script>\nsq(()=>{\n\tsq('div')\n\t\t.css('background', '#c8ebcc')\n\t\t.filter('.middle' )\n\t\t.css('color', 'red');\n})\n<\/script>",not:'\n<div> a </div>\n<div id="pokemon"> b </div>\n<div> c </div>\n<div class="pikachu"> d </div>\n<div class="mew"> e </div>\n<div class="mewtwo"> f </div>\n<div> g </div>\n \n<script>\n\tsq("div")\n\t\t.not("#pokemon, .mewtwo")\n\t\t.css("color", "red");\n<\/script>\n',eq:'\n<style>\ndiv {\n\tborder: 1px solid blue;\n\tmargin: 10px;\n\tpadding: 10px;\n}\n.blue {\n\tcolor: white;\n\tbackground: blue;\n}\n</style>\n\n<div>0</div>\n<div>1</div>\n<div>2</div>\n<div>3</div>\n<div>4</div>\n<div>5</div>\n\n<script>\n\tsq( "body" ).find( "div" ).eq( 2 ).addClass( "blue" );\n<\/script>\n',eq2:'\n<style>\ndiv {\n\tborder: 1px solid red;\n\tmargin: 10px;\n\tpadding: 10px;\n}\n.red {\n\tcolor: white;\n\tbackground: red;\n}\n</style>\n\n<div>0</div>\n<div>1</div>\n<div>2</div>\n<div>3</div>\n<div>4</div>\n<div>5</div>\n \n<script>\n\tsq( "body" ).find( "div" ).eq( -2 ).addClass( "red" );\n<\/script>\n',first:"\n<ul>\n  <li>first</li>\n  <li>second</li>\n  <li>third</li>\n  <li>forth(last)</li>\n</ul>\n\n<script>\n\tsq('ul li').first().css('color', 'red')\n<\/script>\n",last:"\n<ul>\n\t<li>first</li>\n\t<li>second</li>\n\t<li>third</li>\n\t<li>forth(last)</li>\n</ul>\n\n<script>\n\tsq('ul li').last().css('color', 'red')\n<\/script>\n",has:'\n<ul>\n  <li>list item 1</li>\n  <li>list item 2\n    <ul>\n      <li>list item 2-a</li>\n      <li>list item 2-b</li>\n    </ul>\n  </li>\n  <li>list item 3</li>\n  <li>list item 4</li>\n</ul>\n\n<script>\n\tsq( "li" ).has( "ul" ).css( "background-color", "red" );\n<\/script>\n',contains:'\n<div>RX78-2 GUNDAM</div>\n<div>C3PO</div>\n<div>Megaman X</div>\n<div>Evangelion Unit-01</div>\n \n<script>\n\tsq( "div" ).contains( "Megaman" ).css( "text-decoration", "underline" );\n<\/script>\n',slice:'\n<ul>\n  <li>list item 1</li>\n  <li>list item 2</li>\n  <li>list item 3</li>\n  <li>list item 4</li>\n  <li>list item 5</li>\n</ul>\n\n<script>\n\tsq( "li" ).slice( 1 ).css( "background-color", "red" );\n\t//sq( "li" ).slice( 2, 4 ).css( "background-color", "yellow" );\n<\/script>\n',index:'\n<ul>\n\t<li id="jojo">JoJo\'s Bizarre Adventure</li>\n\t<li id="dbz">Dragon Ball Z</li>\n\t<li id="naruto">Naruto</li>\n</ul>\n<div id="msg"></div>\n<script>\n\tsq(\'#msg\').text( "Index of Dragn Ball Z: " + sq( "#dbz" ).index() )\n<\/script>\n',is:'\n<ul>\n\t<li>list <strong>item 1</strong></li>\n\t<li><span>list item 2</span></li>\n\t<li>list item 3</li>\n</ul>\n<script>\n\tsq( "ul" ).on(\'click\', function( event ) {\n\t\tvar target = sq( event.target );\n\t\tif ( target.is( "li" ) ) {\n\t\t\ttarget.css( "background-color", "red" );\n\t\t}\n\t});\n<\/script>\n',find:'\n<ul class="level-1">\n\t<li class="item-i">I</li>\n\t<li class="item-ii">\n\t\tII\n\t\t<ul class="level-2">\n\t\t\t<li class="item-a">A</li>\n\t\t\t<li class="item-b">B\n\t\t\t<ul class="level-3">\n\t\t\t\t<li class="item-1">1</li>\n\t\t\t\t<li class="item-2">2</li>\n\t\t\t\t<li class="item-3">3</li>\n\t\t\t</ul>\n\t\t\t</li>\n\t\t\t<li class="item-c">C</li>\n\t\t</ul>\n\t</li>\n\t<li class="item-iii">III</li>\n</ul>\n<script>\n\tsq( "li.item-ii" ).find( "li" ).css( "background-color", "red" );\n<\/script>\n',children:'\n<ul class="level-1">\n  <li class="item-i">I</li>\n  <li class="item-ii">II\n    <ul class="level-2">\n      <li class="item-a">A</li>\n      <li class="item-b">B\n        <ul class="level-3">\n          <li class="item-1">1</li>\n          <li class="item-2">2</li>\n          <li class="item-3">3</li>\n        </ul>\n      </li>\n      <li class="item-c">C</li>\n    </ul>\n  </li>\n  <li class="item-iii">III</li>\n</ul>\n\n<script>\n\tsq( "ul.level-3" ).children().css( "background-color", "red" );\n<\/script>\n',next:'\n<ul>\n  <li>list item 1</li>\n  <li>list item 2</li>\n  <li class="third-item">list item 3</li>\n  <li>list item 4</li>\n  <li>list item 5</li>\n</ul>\n\n<script>\n\tsq( "li.third-item" ).next().css( "background-color", "red" );\n<\/script>\n',prev:'\n<ul>\n  <li>list item 1</li>\n  <li>list item 2</li>\n  <li class="third-item">list item 3</li>\n  <li>list item 4</li>\n  <li>list item 5</li>\n</ul>\n\n<script>\n\tsq( "li.third-item" ).prev().css( "background-color", "red" );\n<\/script>\n',siblings:'\n<ul>\n\t<li>list item 1</li>\n\t<li>list item 2</li>\n\t<li class="third-item">list item 3</li>\n\t<li>list item 4</li>\n\t<li>list item 5</li>\n</ul>\n\n<script>\n\tsq( "li.third-item" ).siblings().css( "background-color", "red" );\n<\/script>\n',parent:'\n<ul class="level-1">\n  <li class="item-i">I</li>\n  <li class="item-ii">II\n    <ul class="level-2">\n      <li class="item-a">A</li>\n      <li class="item-b">B\n        <ul class="level-3">\n          <li class="item-1">1</li>\n          <li class="item-2">2</li>\n          <li class="item-3">3</li>\n        </ul>\n      </li>\n      <li class="item-c">C</li>\n    </ul>\n  </li>\n  <li class="item-iii">III</li>\n</ul>\n\n<script>\n\tsq( "li.item-a" ).parent().css( "background-color", "red" );\n<\/script>\n',parents:'\n<ul class="level-1">\n  <li class="item-i">I</li>\n  <li class="item-ii">II\n    <ul class="level-2">\n      <li class="item-a">A</li>\n      <li class="item-b">B\n        <ul class="level-3">\n          <li class="item-1">1</li>\n          <li class="item-2">2</li>\n          <li class="item-3">3</li>\n        </ul>\n      </li>\n      <li class="item-c">C</li>\n    </ul>\n  </li>\n  <li class="item-iii">III</li>\n</ul>\n\n<script>\n\tsq( "li" ).css( "background-color", "pink" )\n\tsq( "li.item-a" ).parents().css( "background-color", "red" );\n<\/script>\n',closest:'\n<ul id="one" class="level-1">\n  <li class="item-i">I</li>\n  <li id="ii" class="item-ii">II\n    <ul class="level-2">\n      <li class="item-a">A</li>\n      <li class="item-b">B\n        <ul class="level-3">\n          <li class="item-1">1</li>\n          <li class="item-2">2</li>\n          <li class="item-3">3</li>\n        </ul>\n      </li>\n      <li class="item-c">C</li>\n    </ul>\n  </li>\n  <li class="item-iii">III</li>\n</ul>\n\n<script>\n\tsq( "li.item-a" )\n\t\t.closest( "ul" )\n\t\t.css( "background-color", "red" );\n<\/script>\n',hasClass:'\n<style>\n\t.selected {\n\t\tcolor: red;\n\t}\n</style>\n\n<p>This paragraph is black and is the first paragraph.</p>\n<p class="selected">This paragraph is red and is the second paragraph.</p>\n\n<br><br>\n\n<div id="result1">First paragraph has selected class: </div>\n<div id="result2">Second paragraph has selected class: </div>\n<div id="result3">At least one paragraph has selected class: </div>\n\n<script>\n\tsq( "#result1" ).append( sq( "p" ).first().hasClass( "selected" ).toString() );\n\tsq( "#result2" ).append( sq( "p" ).last().hasClass( "selected" ).toString() );\n\tsq( "#result3" ).append( sq( "p" ).hasClass( "selected" ).toString() ) ;\n<\/script>\n',isVisible:"\n<div id=\"a\">a</div>\n<div id=\"b\">b</div>\n<div id=\"c\" style=\"display:none\">c</div>\n<div id=\"d\">d</div>\n\n<div id=\"console\"></div>\n\n<script>\n\tsetTimeout(()=>{\n\t\tconst a = sq('#a').isVisible().toString()\n\t\tconst b = sq('#b').isVisible().toString()\n\t\tconst c = sq('#c').isVisible().toString()\n\t\tconst d = sq('#d').isVisible().toString()\n\t\n\t\tsq('#console').html( 'a:'+a+', ' + 'b:'+b+', ' + 'c:'+c+', ' + 'd:'+d)\n\t}, 1000)\n<\/script>\n",html:"\n<div>\n\t<div>Hello! I'm PS5!!</div>\n\t<div>Hello! I'm Xbox Series X!!</div>\n\t<div class=\"alexa\">Hello! I'm Alexa!!</div>\n\t<div>Konichiwa! I'm Shinzo Abe!!</div>\n\t<div>Hi! I'm Yamagami!!</div>\n\t<div>Ha! I'm Donald Trump!!</div>\n\t<div>Ha! I'm Merkel!!</div>\n\t<div>WRYYY! I'm Shi Jinping!! Fuck Taiwan!</div>\n\t<div>I'm TSMC! Taiwan #1!</div>\n</div>\n<br><br>\nOutput: <div id=\"console\"></div>\n\n<script>\n\tlet h = '<b>' + sq('.alexa').html() + '</b>'\n\tsq('#console').html( h )\n<\/script>\n",text:"\n<div>\n\t<div>Hello! I'm PlayStation 5!!</div>\n\t<div>Hello! I'm Xbox Series S!!</div>\n\t<div class=\"alexa\">Hello! I'm <span style=\"color:red\">Alexa</span>!!</div>\n\t<div>Pika! I'm Pikachu!!</div>\n\t<div>Hi! I'm Siri!!</div>\n\t<div>Hi! I'm Bitcoin!!</div>\n</div>\n<br><br>\nOutput: <div id=\"console\"></div>\n\n<script>\n\t// html tags are ignored when you get a text using text()\n\tlet h = '<b>' + sq('.alexa').text() + '</b>' \n\t\n\t// html tags are automatically converted to a normal text\n\tsq('#console').text( h ) \n<\/script>\n",val:"\n<input type=\"text\" value=\"Mewtwo\">\n<div id=\"console\"></div>\n<script>\n\tsq('input[type=\"text\"]').on('keyup', function(){\n\t\tconst v = sq(this).val()\n\t\tsq('#console').html( 'The strongest pokemon: ' + v )\n\t})\n\tsq('input[type=\"text\"]').trigger('keyup')\n<\/script>\n",css:"\n<div id=\"css1\">css1</div>\n<div id=\"css2\" style=\"color:red;font-size:20px\">css2</div>\n<div id=\"css3\">css3</div>\n<div id=\"css4\">css4</div>\n<div id=\"css5\">css5</div>\n<script>\n\tconst cssText = sq('#css2').css()\n\tsq('#css3').css('color', cssText.color )\n\tsq('#css4').css({\n\t\tcolor: cssText.color,\n\t\tfontSize: cssText.fontSize,\n\t\t//'font-size': cssText['font-size'] is also fine!\n\t})\n\tsq('#css5').css('font-size', sq('#css2').css('font-size') )\n<\/script>\n",attr:'\nClick the best Final Fantasy.<br><br>\n<div data-text="7">Final Fantasy Ⅶ</div>\n<div data-text="8">Final Fantasy Ⅷ</div>\n<div data-text="9">Final Fantasy Ⅸ</div>\n<div data-text="10">Final Fantasy X</div>\n<div data-text="11">Final Fantasy 11</div>\n<div data-text="12">Final Fantasy 12</div>\n<div data-text="13">Final Fantasy 13</div>\n<div data-text="14">Final Fantasy 14</div>\n<div data-text="15">Final Fantasy 15</div>\n<div data-text="16">Final Fantasy 16</div>\n\n<script>\n\tsq(\'div\').on(\'click\', function(){\n\t\tconst ff = sq(this).attr(\'data-text\')\n\t\talert( \'Your Best Final Fantasy is.. Final Fantasy \' + ff )\n\t})\n<\/script>\n',prop:"\n<input id=\"check1\" type=\"checkbox\" checked=\"checked\"> \n<button>Click me!!</button>\n\n<script>\n\tsq('button').on('click', function(){\n\t\tconst b = sq('#check1').prop( 'checked' )\n\t\tsq('#check1').prop( 'checked', !b )\n\t})\n<\/script>\n",get:'\n<ul>\n  <li id="t1">The Terminator 1</li>\n  <li id="t2">The Terminator 2</li>\n</ul>\n<script>\n\t// getting the 2nd li as a native JavaScript Object (not sQuery object)\n\tconst js_object = sq( "li" ).get( 1 )\n\t// setting the innerHTML with a native JavaScript code\n\tjs_object.innerHTML = \'The Terminator 2（master piece）\'\n<\/script>\n',show:"\n<ul>\n  <li id=\"t1\">The Terminator 1</li>\n  <li id=\"t2\">The Terminator 2</li>\n  <li id=\"t3\">The Terminator 3</li>\n  <li id=\"t4\" style=\"display:none\">The Terminator 4</li>\n</ul>\n<button>click me!</button>\n<script>\n\tsq('button').on('click', function(){\n\t\tsq('#t3').hide()\n\t\tsq('#t4').show()\n\t\talert('T3 does not exist. T4 is okay.')\n\t})\n<\/script>\n",remove:"\n<div>1 <button>x</button></div>\n<div>2 <button>x</button></div>\n<div>3 <button>x</button></div>\n<div>4 <button>x</button></div>\n<div>5 <button>x</button></div>\n<div>6 <button>x</button></div>\n<div>7 <button>x</button></div>\n<script>\n\tsq('div button').on('click', function(){\n\t\tsq(this).parent().remove()\n\t})\n<\/script>\n",before:'\n<style>\n\tdiv {\n\t\tpadding: 4px;\n\t\tmargin: 8px;\n\t}\n</style>\n<div id="area1" style="background-color: #aaa">\n\tarea1\n\t<div id="area2" style="background-color: pink">area2</div>\n\t<div id="area3" style="background-color: blue">area3</div>\n</div>\n<script>\n\tsq(\'#area2\').before(\'<div>Inserted Text!!!</div>\')\n<\/script>\n',after:'\n<style>\n\tdiv {\n\t\tpadding: 4px;\n\t\tmargin: 8px;\n\t}\n</style>\n<div id="area1" style="background-color: #aaa">\n\tarea1\n\t<div id="area2" style="background-color: pink">area2</div>\n\t<div id="area3" style="background-color: blue">area3</div>\n</div>\n<script>\n\tsq(\'#area2\').after(\'<div>Inserted Text!!!</div>\')\n<\/script>\n',prepend:'\n<style>\n\tdiv {\n\t\tpadding: 4px;\n\t\tmargin: 8px;\n\t}\n</style>\n<div id="area1" style="background-color: #aaa">\n\tarea1\n\t<div id="area2" style="background-color: pink">area2</div>\n\t<div id="area3" style="background-color: blue">area3</div>\n</div>\n<script>\n\tsq(\'#area2\').prepend(\'<div>Inserted Text!!!</div>\')\n<\/script>\n',append:'\n<style>\n\tdiv {\n\t\tpadding: 4px;\n\t\tmargin: 8px;\n\t}\n</style>\n<div id="area1" style="background-color: #aaa">\n\tarea1\n\t<div id="area2" style="background-color: pink">area2</div>\n\t<div id="area3" style="background-color: blue">area3</div>\n</div>\n<script>\n\tsq(\'#area2\').append(\'<div>Inserted Text!!!</div>\')\n<\/script>\n',replaceWith:'\n<style>\n\tdiv {\n\t\tpadding: 4px;\n\t\tmargin: 8px;\n\t}\n</style>\n<div id="area1" style="background-color: #aaa">\n\tarea1\n\t<div id="area2" style="background-color: pink">area2</div>\n\t<div id="area3" style="background-color: blue">area3</div>\n</div>\n<script>\n\tsq(\'#area2\').replaceWith(\'<div>Inserted Text!!!</div>\')\n<\/script>\n',addClass:"\n<style>\n\t.poison {\n\t\tcolor: purple;\n\t\tfont-weight: bold;\n\t}\n</style>\n<div>Your Pokemon</div>\n<button>Add poison!</button> <button>Remove poison!</button>\n\n<script>\n\tsq('button').eq(0).on('click', function(){\n\t\tsq('div').addClass('poison')\n\t})\n\tsq('button').eq(1).on('click', function(){\n\t\tsq('div').removeClass('poison')\n\t})\n<\/script>\n",toggleClass:"\n<style>\n\t.poison {\n\t\tcolor: purple;\n\t\tfont-weight: bold;\n\t}\n</style>\n<div>Your Pokemon</div>\n<button>poison!</button>\n\n<script>\n\tsq('button').on('click', function(){\n\t\tsq('div').toggleClass('poison')\n\t})\n<\/script>\n",width:"\n<style>\n#memo {\n\twidth: 300px; \n\theight: 100px;\n\tmax-width: 500px;\n\tborder: 4px solid blue;\n\tmargin: 3px;\n\tpadding: 13px;\n\tbox-sizing: content-box;\n}\n</style>\n<textarea id=\"memo\">resize this!</textarea>\n<br>\n<button>Get the width and height</button>\n<script>\n\tsq('button').on('click', function(){\n\t\tconst el = sq('#memo')\n\t\tconst w = el.width() + 'px'\n\t\tconst h = el.height() + 'px'\n\t\tel.val( \"width: \" + w + \"　height: \" + h )\n\t})\n<\/script>\n",innerWidth:"\n<style>\n#memo {\n\twidth: 300px; \n\theight: 100px;\n\tmax-width: 500px;\n\tborder: 4px solid blue;\n\tmargin: 3px;\n\tpadding: 13px;\n\tbox-sizing: content-box;\n}\n</style>\n<textarea id=\"memo\">resize this!</textarea>\n<br>\n<button>Get the innerWidth and innerHeight</button>\n<script>\n\tsq('button').on('click', function(){\n\t\tconst el = sq('#memo')\n\t\tconst w = el.innerWidth() + 'px'\n\t\tconst h = el.innerHeight() + 'px'\n\t\tel.val( \"innerWidth: \" + w + \"　innerHeight: \" + h )\n\t})\n<\/script>\n",outerWidth:"\n<style>\n#memo {\n\twidth: 300px; \n\theight: 100px;\n\tmax-width: 500px;\n\tborder: 4px solid blue;\n\tmargin: 3px;\n\tpadding: 13px;\n\tbox-sizing: content-box;\n}\n</style>\n<textarea id=\"memo\">resize this!</textarea>\n<br>\n<button>Get the outerWidth and outerHeight</button>\n<script>\n\tsq('button').on('click', function(){\n\t\tconst el = sq('#memo')\n\t\tconst w = el.outerWidth() + 'px'\n\t\tconst h = el.outerHeight() + 'px'\n\t\tel.val( \"outerWidth: \" + w + \"　outerHeight: \" + h )\n\t})\n<\/script>\n",offset:'\n<style>\np {\n\tmargin-left: 10px;\n}\n</style>\n\n<div>\n\t<p>Hello</p>\n\t<p>2nd Paragraph</p>\n</div>\n\n<script>\n\tlet p = sq( "p" ).last()\n\tlet offset = p.offset()\n\tp.html( "left: " + offset.left + ", top: " + offset.top )\n<\/script>\n',pos:'\n<style>\np {\n\tmargin-left: 10px;\n}\n</style>\n\n<div>\n\t<p>Hello</p>\n\t<p>2nd Paragraph</p>\n</div>\n\n<script>\n\tlet p = sq( "p" ).first()\n\tlet position = p.pos()\n\tsq( "p" ).last().text( "left: " + position.left + ", top: " + position.top )\n<\/script>\n',fadeIn:"\n<div>Life is Strange...</div>\n<button>FadeIn</button> <button>FadeOut</button> <button>FadeInOut</button> <button>FadeOutIn</button>\n<script>\n\tsq('button').eq(0).on('click', ()=>{\n\t\tsq('div').fadeIn(800)\n\t})\n\tsq('button').eq(1).on('click', ()=>{\n\t\tsq('div').fadeOut(800)\n\t})\n\tsq('button').eq(2).on('click', ()=>{\n\t\tsq('div').fadeIn(800, ()=>{\n\t\t\tsq('div').fadeOut(800)\n\t\t})\n\t})\n\tsq('button').eq(3).on('click', ()=>{\n\t\tsq('div').fadeOut(800, ()=>{\n\t\t\tsq('div').fadeIn(800)\n\t\t})\n\t})\n<\/script>\n",animateSimple:"\n<style>\n#container {\n\tposition: relative;\n\twidth: 100%;\n\theight: calc(100% - 24px);\n\tbackground-color: #eee;\n}\n#object {\n\tbackground-color: #f00;\n\twidth: 20px;\n\theight: 20px;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 0;\n}\n</style>\n<button>animate</button> \n<div id=\"container\">\n\t<div id=\"object\"></div>\n</div>\n<script src=\"squery.min.js\"><\/script>\n<script>\nsq('button').on('click', ()=>{\n\tsq('#object').animate({\n\t\tleft: '40%',\n\t\ttop: '20%',\n\t\ttransform: \"scale(10, 3) rotate(130deg)\"\n\t}, 900 )\n})\n<\/script>\n",animate:"\n<style>\n\t#container {\n\t\tposition: relative;\n\t\twidth: 100%;\n\t\theight: calc(100% - 24px);\n\t\tbackground-color: #eee;\n\t}\n\t#object1, #object2, #object3 {\n\t\tbackground-color: red;\n\t\twidth: 20px;\n\t\theight: 20px;\n\t\tposition: absolute;\n\t\ttop: 0;\n\t\tleft: 0;\n\t}\n\t#object2 {\n\t\tleft: 100px;\n\t\tbackground-color: blue;\n\t}\n\t#object3 {\n\t\tleft: 200px;\n\t\tbackground-color: orange;\n\t}\n</style>\n<button>animate object 1</button> \n<button>animate object 2</button> \n<button>animate object 3(Infinity)</button> \n<div id=\"container\">\n\t<div id=\"object1\"></div>\n\t<div id=\"object2\"></div>\n\t<div id=\"object3\"></div>\n</div>\n<script>\n\t// for object 1\n\tsq('button').eq(0).on('click', ()=>{\n\t\tsq('#object1').animate({\n\t\t\tleft: '40px',\n\t\t\ttop: '200px'\n\t\t}, 600 )\n\t})\n\n\t// for object 2\n\tsq('button').eq(1).on('click', ()=>{\n\t\t// reset pos\n\t\tsq('#object2').css({\n\t\t\tleft: '100px',\n\t\t\ttop: '0px'\n\t\t})\n\n\t\tsq('#object2').animate({\n\t\t\tleft: '140px',\n\t\t\ttop: '200px'\n\t\t}, 1000, function(){ //The callback when the animation finishes\n\t\t\t// saving the final state\n\t\t\tsq('#object2').css({\n\t\t\t\tleft: '140px',\n\t\t\t\ttop: '200px'\n\t\t\t})\n\t\t})\n\t})\n\n\t// for object 3\n\tsq('button').eq(2).on('click', function(){\n\t\tsq('#object3').animate({\n\t\t\tleft: '240px',\n\t\t\ttop: '250px'\n\t\t}, {iterations: Infinity}, 900 )\n\t\tsq(this).prop('disabled', true)\n\t})\n<\/script>\n",scroll:"\n<body>\n\t<button>Scroll Smoothly</button> <button>Scroll Instantly</button> <button>Scroll 300px only</button>\n\t<div style=\"height:200%; background-color: #eee;margin:10px\"></div>\n</body>\n<script>\n\tsq('button').eq(0).on('click', ()=>{\n\t\tsq('body').scroll( 10000 ) //scroll 10000px from the top\n\t})\n\tsq('button').eq(1).on('click', ()=>{\n\t\tsq('body').scroll( 10000, true ) //true is for instant scroll\n\t})\n\tsq('button').eq(2).on('click', ()=>{\n\t\tsq('body').scroll( 300 ) //scroll 300px only\n\t})\n<\/script>\n",scrollTop:"\n<body>\n\t<div style=\"width: 200%; height:200%; background-color: #eee;margin:10px; padding:40px;\">\n\t\tClick anywhere!<br>\n\t\tIf you scroll, the values will be different!\n\t</div>\n</body>\n<script>\n\tsq('div').on('click', function(){\n\t\tconst x = sq('body').scrollLeft()\n\t\tconst y = sq('body').scrollTop()\n\t\talert( 'left: ' + x + 'px  ' + 'top: ' + y + 'px' )\n\t})\n<\/script>\n",scrollToElement:"\n<button>scroll to bottom</button>\n\n<div style=\"height:200%; background-color: #eee;margin:10px\"></div>\n\n<button>scroll to top</button>\n\n<script>\n\tsq('button').eq(0).on('click', ()=>{\n\t\tsq('button').eq(1).scrollToElement()\n\t})\n\tsq('button').eq(1).on('click', ()=>{\n\t\tsq('button').eq(0).scrollToElement()\n\t})\n<\/script>\n",each:"\n<ul>\n  <li>Bulbasaur</li>\n  <li>Ivysaur</li>\n  <li>Venusaur</li>\n  <li>Charmander</li>\n  <li>Charmeleon</li>\n  <li>Charizard</li>\n</ul>\n\n<div id=\"console\"></div>\n\n<script>\n\tsq( \"li\" ).each(function( index ) {\n\t\tsq('#console').append( 'No. ' + (index+1) + ': ' + sq( this ).text() + '<br>' )\n\t})\n<\/script>\n",on:"\n<button id=\"hello\">I say hello infinitely!</button>\n<button id=\"hello2\">I say hello only one time!</button>\n<script>\n\tsq('#hello').on('click', function(){\n\t\talert('hello!')\n\t})\n\tsq('#hello2').on('click', function(){\n\t\talert('Hello! And... good-bye!')\n\t\tsq(this).off('click').css('color', '#999')\n\t})\n<\/script>\n",onf:"\n<body></body>\n<script>\n\t// This won't work!\n\tsq('#hello1').on('click', function(){\n\t\talert('hello 1!')\n\t})\n\t// This will work!\n\tsq('body').onf('click', '#hello2', function(){\n\t\talert('hello 2!')\n\t})\n\tsq('body').append('<button id=\"hello1\">hello 1</button> ')\n\tsq('body').append('<button id=\"hello2\">hello 2</button> ')\n<\/script>\n",trg:"\n<ul>\n  <li>Bulbasaur</li>\n  <li>Ivysaur</li>\n  <li>Venusaur</li>\n  <li>Charmander</li>\n  <li>Charmeleon</li>\n  <li>Charizard</li>\n</ul>\n\n<script>\n\tsq('li').on('click', function(){\n\t\tlet idx = sq(this).index()\n\t\tsq('li').css('color', 'black')\n\t\tsq('li').eq( idx ).css('color', 'red')\n\t})\n\tsq('li').eq(3).trg('click') //Triggering a Charmander click\n\t//sq('li').eq(3).trigger() //this also works!\n<\/script>\n",fetch:"\n<div id=\"console\">loading...</div>\n<script>\n\tmy_ajax('https://ptsv2.com/t/ends/post', {name: 'Steve Jobs', age: 21} )\n\t\n\n\tfunction my_ajax( url, data ){\n\t\tfetch( \n\t\t\turl, \n\t\t\t{\n\t\t\t\tmethod: 'POST',\n\t\t\t\theaders: {'Content-Type': 'application/x-www-form-urlencoded'},\n\t\t\t\tbody: \"data=\" + JSON.stringify( data )\n\t\t\t}\n\t\t).then( res => {\n\t\t\tconsole.log( res )\n\t\t\tif ( res.status == 200 )\n\t\t\t\tsq('#console').html( 'sent!' )\n\t\t}).catch( error => {\n\t\t\tconsole.log( error )\n\t\t})\n\t}\n<\/script>\n",axios:"\n<div id=\"console\">loading...</div>\n<script src=\"https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js\"><\/script>\n<script>\n\taxios({\n\t\tmethod: 'GET',\n\t\turl: 'https://api.github.com/users/shawnquinn',\n\t})\n\t.then( function( res ){\n\t\tif ( res.status == 200 )\n\t\t\tsq('#console').html( 'GET succeeded!' )\n\t\tconsole.log( res.data )\n\t})\n\t.catch( function(error){\n\t\tconsole.log(error)\n\t})\n<\/script>\n"};function kt(t){let e,s,i,a,r,l,o,c,d,u,h,g,y,w,x;return{c(){e=v("main"),s=v("link"),i=b(),a=v("link"),r=b(),l=v("link"),o=b(),c=v("link"),d=b(),u=v("link"),h=b(),g=v("section"),y=v("div"),y.innerHTML='<textarea placeholder="Enter HTML Source Code" id="editing" spellcheck="false"></textarea> \n\t\t\t<pre id="highlighting" aria-hidden="true"><code class="language-html" id="highlighting-content"></code></pre>',w=b(),x=v("iframe"),$(s,"rel","preconnect"),$(s,"href","https://fonts.googleapis.com"),$(a,"rel","preconnect"),$(a,"href","https://fonts.gstatic.com"),$(a,"crossorigin",""),$(l,"href","https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap"),$(l,"rel","stylesheet"),$(c,"rel","stylesheet"),$(c,"href","./Docs.css"),$(u,"rel","stylesheet"),$(u,"href","./Sq_editor.css"),$(y,"class","cCodeSpace svelte-6uqz72"),$(x,"id","idResult"),$(x,"title","editor"),$(x,"class","svelte-6uqz72"),$(g,"class","cCodeCont"),$(g,"data-cname",t[0]),$(g,"style",t[1])},m(t,n){m(t,e,n),p(e,s),p(e,i),p(e,a),p(e,r),p(e,l),p(e,o),p(e,c),p(e,d),p(e,u),p(e,h),p(e,g),p(g,y),p(g,w),p(g,x)},p(t,[e]){1&e&&$(g,"data-cname",t[0]),2&e&&$(g,"style",t[1])},i:n,o:n,d(t){t&&f(e)}}}function St(t,n,s){let{cname:i,mh:a=0,autoload:r=!1,bOnlyCode:l=!1}=n,o=function(t){t||(t="");let e='script src="squery.min.js"></script';return e="<"+e+">\n",t.includes("squery.min.js")||t.includes("./sq.min.js")||(t=t.replace("<script>",e+"<script>")),t.trim()}(xt[i]),c="";a&&(c=`max-height:${a}px;`);let d=function(){const t=e(`.cCodeCont[data-cname="${i}"]`);e("body").show(),setTimeout((()=>{t.find("textarea").val(o),yt(o,t),t.find("#editing").trg("change")}),100),function(t=!1,n=!1){const s=e(`.cCodeCont[data-cname="${i}"]`);"1"==n?(s.find("#idResult").hide(),s.addClass("cFloatLeft")):s.find("#editing").off("change").on("change",(function(){let n=s.find("#editing").val().replace(/'/g,"\\'").replace(/\n/g,"\\n"),i=s.find("#idResult").get(0);t?i.src=`javascript: '${n}'`:s.find("#idResult").attr("src",'javascript: \'<div style="display:flex;align-items: center; justify-content: center;height:100%"><div style="max-width:200px;color:#fff;background-color:#2196f3;padding:20px">Tap or mouseover to load!</div></div>\'').on("mouseover",(function(){const t=s.find("#editing").val().replace(/'/g,"\\'").replace(/\n/g,"\\n");e(this).attr("src",`javascript: '${t}'`),e(this).off("mouseover")}))})),s.find("#editing").off("input").on("input",(function(){yt(this.value,s),$t(this,s)})),s.find("#editing").off("keydown").on("keydown",(function(n){switch(t=!0,n.keyCode){case 9:return window.bTab=!0,n.preventDefault(),!1;case 16:return window.bShift=!0,n.preventDefault(),!1;case 17:return window.bCtrl=!0,n.preventDefault(),!1}n.key.toLowerCase().includes("arrow")||setTimeout((()=>{e(this).trg("change")}),1)})),s.find("#editing").off("keyup").on("keyup",(function(t){switch(wt(this,t,s),t.keyCode){case 9:return!1;case 16:return window.bShift=!1,!1;case 17:return window.bCtrl=!1,!1}})),s.find("#editing").off("scroll").on("scroll",(function(t){$t(this,s)}))}(r,l),t.find("#editing").val("").trg("input").trg("change"),e("#idDoc").css({width:"100%","max-width":"100%"}),t.find(".cF").contains("editor").addClass("active")};return e().isPageLoaded()&&(console.log("spa loaded"),setTimeout((()=>{d()}),1)),e((()=>{d()})),t.$$set=t=>{"cname"in t&&s(0,i=t.cname),"mh"in t&&s(2,a=t.mh),"autoload"in t&&s(3,r=t.autoload),"bOnlyCode"in t&&s(4,l=t.bOnlyCode)},[i,c,a,r,l]}class _t extends K{constructor(t){super(),G(this,t,St,kt,o,{cname:0,mh:2,autoload:3,bOnlyCode:4})}}function Tt(t){let e,s,i,a,r,l,o,c,d,h,y,x,k,S,_,T,q,j,L,F,C,D,H,M,Q,E,A,I,B,P,W,J,V,G,K,Y,Z,X,tt,et,nt,st,it,at,rt,lt,ot,ct,dt,ut,ht,pt,mt,ft,gt,bt,yt,$t,wt,xt,kt,St,Tt,qt,jt,Lt,Ft,Ct,Dt,Ht,Mt,Qt,Et,At,It,Bt,Pt,Wt,Rt,Ot,Jt,Vt,Nt,zt,Ut,Gt,Kt,Yt,Zt,Xt,te,ee,ne,se,ie,ae,re,le,oe,ce,de,ue,he,pe,me,fe,ve,ge,be,ye,$e,we,xe,ke,Se,_e,Te,qe,je,Le,Fe,Ce,De,He,Me,Qe,Ee,Ae,Ie,Be,Pe,We,Re,Oe,Je,Ve,Ne,ze,Ue,Ge,Ke,Ye,Ze,Xe,tn,en,nn,sn,an,rn,ln,on,cn,dn,un,hn,pn,mn,fn,vn,gn,bn,yn,$n,wn,xn,kn,Sn,_n,Tn,qn,jn,Ln,Fn,Cn,Dn,Hn,Mn,Qn,En,An,In,Bn,Pn,Wn,Rn,On,Jn,Vn,Nn,zn,Un,Gn,Kn,Yn,Zn,Xn,ts,es,ns,ss,is,as,rs,ls,os,cs,ds,us,hs,ps,ms,fs,vs,gs,bs,ys,$s,ws,xs,ks,Ss,_s,Ts,qs,js,Ls,Fs,Cs,Ds,Hs,Ms,Qs,Es,As,Is,Bs,Ps,Ws,Rs,Os,Js,Vs,Ns,zs,Us,Gs,Ks,Ys,Zs,Xs,ti,ei,ni,si,ii,ai,ri,li,oi,ci,di,ui,hi,pi,mi,fi,vi,gi,bi,yi,$i,wi,xi,ki,Si,_i,Ti,qi,ji,Li,Fi,Ci,Di,Hi,Mi,Qi,Ei,Ai,Ii,Bi,Pi,Wi,Ri,Oi,Ji,Vi,Ni,zi,Ui,Gi,Ki,Yi,Zi,Xi,ta,ea,na,sa,ia,aa,ra,la,oa,ca,da,ua,ha,pa,ma,fa,va,ga,ba,ya,$a,wa,xa,ka,Sa,_a,Ta,qa,ja,La,Fa,Ca,Da,Ha,Ma,Qa,Ea,Aa,Ia,Ba,Pa,Wa,Ra,Oa,Ja,Va,Na,za,Ua,Ga,Ka,Ya,Za,Xa,tr,er,nr,sr,ir,ar,rr,lr,or,cr,dr,ur,hr,pr,mr,fr,vr,gr,br,yr,$r,wr,xr,kr,Sr,_r,Tr,qr,jr,Lr,Fr,Cr,Dr,Hr,Mr,Qr,Er,Ar,Ir,Br,Pr,Wr,Rr,Or,Jr,Vr,Nr,zr,Ur,Gr,Kr,Yr,Zr,Xr,tl,el,nl,sl,il,al,rl,ll,ol,cl,dl,ul,hl,pl,ml,fl,vl,gl,bl,yl,$l,wl,xl,kl,Sl,_l,Tl,ql,jl,Ll,Fl,Cl,Dl,Hl,Ml,Ql,El,Al,Il,Bl,Pl,Wl,Rl,Ol,Jl,Vl,Nl,zl,Ul,Gl,Kl,Yl,Zl,Xl,to,eo,no,so,io,ao,ro,lo,oo,co,uo,ho,po,mo,fo,vo,go,bo,yo,$o,wo,xo,ko,So,_o,To,qo,jo,Lo,Fo,Co,Do,Ho,Mo,Qo,Eo,Ao,Io,Bo,Po,Wo,Ro,Oo,Jo,Vo,No,zo,Uo,Go,Ko,Yo,Zo,Xo,tc,ec,nc,sc,ic,ac,rc,lc,oc,cc,dc,uc,hc,pc,mc,fc,vc,gc,bc,yc,$c,wc,xc,kc,Sc,_c,Tc,qc,jc,Lc,Fc,Cc,Dc,Hc,Mc,Qc,Ec,Ac,Ic,Bc,Pc,Wc,Rc,Oc,Jc,Vc,Nc,zc,Uc,Gc,Kc,Yc,Zc,Xc,td,ed,nd,sd,id,ad;return B=new _t({props:{cname:"c1",mh:"240",autoload:"true"}}),G=new _t({props:{cname:"c1_cdn",mh:"240"}}),tt=new _t({props:{cname:"c2",mh:"240"}}),at=new _t({props:{cname:"c2_cdn",mh:"240"}}),Ht=new _t({props:{cname:"customMethods",mh:"410"}}),Ot=new _t({props:{cname:"custom",mh:"410"}}),zt=new _t({props:{cname:"custom_module",mh:"240"}}),pe=new _t({props:{cname:"filter",mh:"410"}}),$e=new _t({props:{cname:"not",mh:"410"}}),Fe=new _t({props:{cname:"eq",mh:"410"}}),Ae=new _t({props:{cname:"eq2",mh:"410"}}),ze=new _t({props:{cname:"first",mh:"410"}}),tn=new _t({props:{cname:"last",mh:"410"}}),un=new _t({props:{cname:"has",mh:"410"}}),wn=new _t({props:{cname:"contains",mh:"410"}}),Cn=new _t({props:{cname:"slice",mh:"410"}}),Wn=new _t({props:{cname:"index",mh:"410"}}),Yn=new _t({props:{cname:"is",mh:"410"}}),ls=new _t({props:{cname:"find",mh:"410"}}),gs=new _t({props:{cname:"children",mh:"410"}}),qs=new _t({props:{cname:"next",mh:"410"}}),Ms=new _t({props:{cname:"prev",mh:"410"}}),Js=new _t({props:{cname:"siblings",mh:"410"}}),ti=new _t({props:{cname:"parent",mh:"410"}}),li=new _t({props:{cname:"parents",mh:"410"}}),gi=new _t({props:{cname:"closest",mh:"410"}}),qi=new _t({props:{cname:"hasClass",mh:"410"}}),Ai=new _t({props:{cname:"html",mh:"410"}}),zi=new _t({props:{cname:"text",mh:"410"}}),sa=new _t({props:{cname:"val",mh:"410"}}),pa=new _t({props:{cname:"css",mh:"410"}}),ka=new _t({props:{cname:"attr",mh:"410"}}),Ha=new _t({props:{cname:"prop",mh:"410"}}),Oa=new _t({props:{cname:"get",mh:"410"}}),Xa=new _t({props:{cname:"show",mh:"410"}}),cr=new _t({props:{cname:"remove",mh:"410"}}),yr=new _t({props:{cname:"before",mh:"410"}}),Tr=new _t({props:{cname:"after",mh:"410"}}),Er=new _t({props:{cname:"prepend",mh:"410"}}),Or=new _t({props:{cname:"append",mh:"410"}}),Xr=new _t({props:{cname:"replaceWith",mh:"410"}}),cl=new _t({props:{cname:"addClass",mh:"410"}}),yl=new _t({props:{cname:"toggleClass",mh:"410"}}),Ll=new _t({props:{cname:"width",mh:"410"}}),Bl=new _t({props:{cname:"innerWidth",mh:"410"}}),Gl=new _t({props:{cname:"outerWidth",mh:"410"}}),ao=new _t({props:{cname:"offset",mh:"410"}}),vo=new _t({props:{cname:"pos",mh:"410"}}),To=new _t({props:{cname:"fadeIn",mh:"410"}}),Eo=new _t({props:{cname:"animateSimple",mh:"410"}}),Oo=new _t({props:{cname:"animate",mh:"410"}}),Xo=new _t({props:{cname:"scroll",mh:"410"}}),cc=new _t({props:{cname:"scrollTop",mh:"410"}}),yc=new _t({props:{cname:"scrollToElement",mh:"410"}}),Lc=new _t({props:{cname:"each",mh:"410"}}),Bc=new _t({props:{cname:"on",mh:"410"}}),Uc=new _t({props:{cname:"onf",mh:"410"}}),id=new _t({props:{cname:"trg",mh:"410"}}),{c(){e=v("main"),s=v("link"),i=b(),a=v("script"),l=b(),o=v("link"),c=b(),d=v("section"),d.innerHTML='<span id="idDocNav"></span> \n\t\t<div style="float:right;margin-right:20px"><a href="https://squery-vercel-app.translate.goog/?&amp;_x_tr_sl=auto&amp;_x_tr_tl=ja&amp;_x_tr_hl=en&amp;_x_tr_pto=wapp#/docs" style="color:#fff!important;">日本語に翻訳</a></div>',h=b(),y=v("section"),y.innerHTML='<section id="idLeftTop"><div id="idLeftLogo" class="notranslate"><a href="./" style="color:#fff">sQuery HOME</a></div> \n\t\t\n\t\t\t<div id="idLeftSearchCont"><hr/> \n\t\t\t\t<div style="position:relative"><input id="idDS" type="text" placeholder="search docs" autocorrect="off" autocapitalize="off" spellcheck="false"/> \n\t\t\t\t\t<div id="idDSC">×</div></div></div></section> \n\n\t\t<section class="cScrollable"><div style="font-weight:300"><div name="" class="cSub">Getting Started</div> \n\t\t\t\t<div name="Installation" class="cF">・Installation</div> \n\t\t\t\t<div name="Difference_between_jQuery" class="cF">・Difference between jQuery</div> \n\t\t\t\t<div name="Use_with_jQuery" class="cF">・Use like jQuery</div> \n\t\t\t\t<div name="Use_with_React" class="cF">・Use with React</div> \n\t\t\t\t<div name="Use_with_Vue" class="cF">・Use with Vue.js</div> \n\t\t\t\t<div name="Use_with_Svelte" class="cF">・Use with Svelte</div> \n\t\t\t\t<div name="Use_with_SolidJS" class="cF">・Use with SolidJS</div> \n\t\t\t\t<div name="Use_with_Angular" class="cF">・Use with Angular</div></div> \n\t\n\t\t\t<div name="" class="cSub">Self Selectors</div> \n\t\t\t<div name="filter-not" class="cF notranslate">filter / not</div> \n\t\t\t<div name="eq" class="cF notranslate">eq</div> \n\t\t\t<div name="first-last" class="cF notranslate">first / last</div> \n\t\t\t<div name="has" class="cF notranslate">has</div> \n\t\t\t<div name="contains" class="cF notranslate">contains</div> \n\t\t\t<div name="slice" class="cF notranslate">slice</div> \n\t\t\t<div name="index" class="cF notranslate">index</div> \n\t\t\t<div name="is" class="cF notranslate">is</div> \n\t\n\t\t\t<div name="" class="cSub">Child Elements</div> \n\t\t\t<div name="find" class="cF notranslate">find</div> \n\t\t\t<div name="children" class="cF notranslate">children</div> \n\t\n\t\t\t<div name="" class="cSub">Sibling Elements</div> \n\t\t\t<div name="next-prev" class="cF notranslate">next / prev</div> \n\t\t\t<div name="siblings" class="cF notranslate">siblings</div> \n\t\n\t\t\t<div class="cSub">Parent Elements</div> \n\t\t\t<div name="parent-parents" class="cF notranslate">parent / parents</div> \n\t\t\t<div name="closest" class="cF notranslate">closest</div> \n\n\t\t\t<div name="" class="cSub">Boolean Checks</div> \n\t\t\t<div name="hasClass" class="cF notranslate">hasClass</div> \n\t\t\t\n\t\t\t<div name="" class="cSub">Operations</div> \n\t\t\t<div name="html" class="cF notranslate">html</div> \n\t\t\t<div name="text" class="cF notranslate">text</div> \n\t\t\t<div name="val" class="cF notranslate">val</div> \n\t\t\t<div name="css" class="cF notranslate">css</div> \n\t\t\t<div name="attr" class="cF notranslate">attr</div> \n\t\t\t<div name="prop" class="cF notranslate">prop</div> \n\t\t\t<div name="get" class="cF notranslate">get</div> \n\t\t\t<div name="show-hide" class="cF notranslate">show / hide</div> \n\t\t\t<div name="remove" class="cF notranslate">remove</div> \n\t\t\t<div name="before-after" class="cF notranslate">before / after</div> \n\t\t\t<div name="prepend-append" class="cF notranslate">prepend / append</div> \n\t\t\t<div name="replaceWith" class="cF notranslate">replaceWith</div> \n\t\t\t<div name="addClass-removeClass" class="cF notranslate">addClass / removeClass</div> \n\t\t\t<div name="toggleClass" class="cF notranslate">toggleClass</div> \n\n\t\t\t<div name="" class="cSub">Size &amp; Position</div> \n\t\t\t<div name="width-height" class="cF notranslate">width / height</div> \n\t\t\t<div name="innerWidth-innerHeight" class="cF notranslate">innerWidth / innerHeight</div> \n\t\t\t<div name="outerWidth-outerHeight" class="cF notranslate">outerWidth / outerHeight</div> \n\t\t\t<div name="offset" class="cF notranslate">offset</div> \n\t\t\t<div name="pos-position" class="cF notranslate">pos (position)</div> \n\t\t\t\n\t\t\t<div name="" class="cSub">Animations</div> \n\t\t\t<div name="fadeIn-fadeOut" class="cF notranslate">fadeIn / fadeOut</div> \n\t\t\t<div name="animate" class="cF notranslate">animate</div> \n\t\t\t<div name="scroll" class="cF notranslate">scroll</div> \n\t\t\t<div name="scrollTop-scrollLeft" class="cF notranslate">scrollTop / scrollLeft</div> \n\t\t\t<div name="scrollToElement" class="cF notranslate">scrollToElement</div> \n\n\t\t\t<div name="" class="cSub">Loops</div> \n\t\t\t<div name="each" class="cF notranslate">each</div> \n\n\t\t\t<div name="" class="cSub">Events</div> \n\t\t\t<div name="on-off-onf" class="cF notranslate">on / off / onf</div> \n\t\t\t<div name="trg-trigger" class="cF notranslate">trg (trigger)</div> \n\n\t\t\t<br/><br/><br/><br/><br/><br/><br/><br/></section>',x=b(),k=v("div"),k.innerHTML="<span></span>",S=b(),_=v("section"),T=v("h1"),q=v("span"),j=g("sQuery Docs"),L=v("div"),L.textContent=`${vt}`,F=b(),C=v("doc"),D=v("h2"),D.textContent="Installation",H=b(),M=v("div"),M.innerHTML='Download <a href="https://github.com/exis9/sQuery/archive/refs/heads/main.zip" target="_blank" style="font-size:18px">sQuery.zip</a> or use CDN. (<a href="https://github.com/exis9/sQuery" target="_blank">Github page</a>)',Q=b(),E=v("div"),A=v("div"),A.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tTo use sQuery, put squery.min.js somewhere just like jQuery. <small>(NOTE: sq is equivalent to $ in jQuery)</small>',I=b(),N(B.$$.fragment),P=b(),W=v("div"),J=v("div"),J.innerHTML='<div class="cBack"></div>Or you can also use CDN!',V=b(),N(G.$$.fragment),K=b(),Y=v("div"),Z=v("div"),Z.innerHTML='<div class="cBack"></div>ES6 module is also supported! <small>(NOTE: () =&gt;｛ ｝ is the ES6&#39;s <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow function</a>)</small>',X=b(),N(tt.$$.fragment),et=b(),nt=v("div"),st=v("div"),st.innerHTML='<div class="cBack"></div>ES6 module CDN!',it=b(),N(at.$$.fragment),rt=b(),lt=v("doc"),ot=v("h2"),ot.textContent="Difference between jQuery",ct=b(),dt=v("div"),ut=g("sQuery is not a simple jQuery clone. It's made for using with modern frontend frameworks.\n\t\t\t\tThere are some differences between jQuery.\n\n\t\t\t\t"),ht=v("div"),pt=v("div"),pt.innerHTML='<h3>sQuery uses sq not $. But you can customize!</h3> \n\t\t\t\t\t\t<p>sQuery avoids using $ since Svelte and jQuery use $.<br/>\n\t\t\t\t\t\t\tActually, you <b>can</b> use $ in sQuery! See <a href="./?n=Use_with_jQuery#/docs" target="_blank">Use like jQuery</a></p>',mt=b(),ft=v("div"),ft.innerHTML='<h3>sQuery doesn&#39;t have $.ajax function. Use fetch or axios instead</h3> \n\t\t\t\t\t\t<p>Since this is the modern trend, sQuery also doesn&#39;t have ajax functions just as <b>React/Vue/Svelte</b> do.<br/>\n\t\t\t\t\t\t\tYou should use <a href="https://github.com/axios/axios" target="_blank">axios</a> or <a href="https://www.javascripttutorial.net/javascript-fetch-api/" target="_blank">native fetch function</a> not $.ajax.</p>',gt=b(),bt=v("div"),bt.innerHTML="<h3>Never use .click(). Stick to .on() and .trigger()</h3> \n\t\t\t\t\t\t<p>.click() and some event methods in jQuery used to be very widely used. However it&#39;s been depricated in the latest jQuery.\n\t\t\t\t\t\t\tjQuery has .on() and .trigger() methods, which are faster and better. <br/>\n\t\t\t\t\t\t\tIn sQuery, you can do something like this just like the latest jQuery:<br/> \n\t\t\t\t\t\t\t<br/> \n\t\t\t\t\t\t\t<b>sq(&#39;selector&#39;).on(&#39;click&#39;, ... //registering a click event<br/>\n\t\t\t\t\t\t\t\tsq(&#39;selector&#39;).trigger(&#39;click&#39;) //triggering a click event<br/>\n\t\t\t\t\t\t\t\tsq(&#39;selector&#39;).trg(&#39;click&#39;) //triggering a click event (shorthand)</b></p>",yt=b(),$t=v("div"),$t.innerHTML="<h3>Never use :contains / :is</h3> \n\t\t\t\t\t\t<p>:contains in jQuery used to be very widely used. However it&#39;s been depricated in the latest jQuery.\n\t\t\t\t\t\t\t<br/><br/> \n\t\t\t\t\t\t\t<b>$(&quot;:contains(&#39;selector&#39;)&quot;)</b><br/> \n\t\t\t\t\t\t\t<br/>\n\t\t\t\t\t\t\tsQuery also doesn&#39;t support them for various performance reasons. Instead, sQuery just supports performant methods to do the same things just like the latest jQuery does.<br/> \n\t\t\t\t\t\t\t<br/> \n\t\t\t\t\t\t\t<b>.contains(&#39;selector&#39;)<br/>\n\t\t\t\t\t\t\t\t.is(&#39;selector&#39;)<br/></b></p>",wt=b(),xt=v("div"),xt.innerHTML="<h3>Why sQuery doesn&#39;t support all the functions in jQuery?</h3> \n\t\t\t\t\t\t<p>sQuery has major core functions in jQuery.<br/>\n\t\t\t\t\t\t\tHowever, it&#39;s not made for supporting everything.<br/>\n\t\t\t\t\t\t\tsQuery is made for working with modern js frameworks such as <b>React/Vue/Svelte/Angular</b> with replacing lengthy vanilla JavaScript codes.<br/> \n\t\t\t\t\t\t\t<br/>\n\t\t\t\t\t\t\tAs a result, with sQuery, the total code size could be smaller than without it especially in big projects.<br/>\n\t\t\t\t\t\t\tIf sQuery supports all functions and all features in jQuery, the code size would be 3 times or something? It wouldn&#39;t be worthy at all!<br/>\n\t\t\t\t\t\t\tThat&#39;s why I cut down all the unessential functions from jQuery since the purpose of sQuery is simple, solid, and small.<br/> \n\t\t\t\t\t\t\t<br/>\n\t\t\t\t\t\t\tFor instance, let&#39;s assume the following scenario: sQuery + Vue.js:<br/>\n\t\t\t\t\t\t\tThanks to sQuery, you can code just like jQuery, and you can also use the virtual DOM and auto code optimizations Vue provides.<br/>\n\t\t\t\t\t\t\tIf you do DOM manipulations relatively a lot, sQuery doesn&#39;t increase the total code size as a result of cutting down of lengthy vanila JS codes, so you won&#39;t lose anything in this scenario.</p>",kt=b(),St=v("div"),Tt=v("h3"),Tt.textContent="Adding custom methods to sQuery (just like jQuery $.fn)",qt=b(),jt=v("p"),jt.innerHTML="<small>NOTE: This is for maniacs. You don&#39;t even need to know this if you just want to use sQuery.</small><br/>\n\t\t\t\t\t\t\tI didn&#39;t imprement unimportant methods in sQuery to keep it small and performant. \n\t\t\t\t\t\t\tHowever, if you need more methods, you can always very easily imprement on your own using _SQ.",Lt=b(),Ft=v("div"),Ct=v("div"),Ct.innerHTML='<div class="cBack"></div>\n\t\t\t\t\t\t\t\tCustom Methods',Dt=b(),N(Ht.$$.fragment),Mt=b(),Qt=v("doc"),Et=v("h2"),Et.textContent="Use like jQuery",At=b(),It=v("div"),It.innerHTML='<img class="cFWLogo" src="img/jquery.png" alt="jquery" title="jquery"/>\n\t\t\t\tsQuery might look awkward for jQuery fans since it uses sq not $.<br/>\n\t\t\t\tActually, you can use $ very easily by just declaring $.',Bt=b(),Pt=v("div"),Wt=v("div"),Wt.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tReplacing sq to $',Rt=b(),N(Ot.$$.fragment),Jt=b(),Vt=v("div"),Vt.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tReplacing sq to $ (module version)',Nt=b(),N(zt.$$.fragment),Ut=b(),Gt=v("doc"),Gt.innerHTML='<h2>Use with React</h2> \n\t\t\t<div class="cPreDesc">See <a class="cFWLink" href="/?n=Use_with_React#/install" target="_blank">the sQuery Installation Guide for React</a>!<br/> \n\t\t\t\t<img class="cFWLogo" src="img/react.png" alt="React.js" title="React.js"/> \n\t\t\t\t<div class="cFWDesc"><h4>What is React?</h4> \n\t\t\t\t\t<div class="cFWLinkCont"><a class="cFWLink cBlueBack" href="https://reactjs.org/" target="_blank">React.js Official site</a></div>\n\t\t\t\t\tA JavaScript library for building user interfaces.<br/>\n\t\t\t\t\tReact makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.\n\t\t\t\t\tDeclarative views make your code more predictable and easier to debug.<br/>\n\t\t\t\t\tPerformance-wise, many reserches indicate SolidJS or Svelte is the fastest among major js frameworks. If your project doesn&#39;t need Next.js, I personally recommend you to try SolidJS or Svelte.\n\t\t\t\t\t<br/><br/>\n\t\t\t\t\tSPA/SSR/SSG?: <a class="cFWLink cBlueBack" href="https://nextjs.org/" target="_blank">Next.js</a> is the de facto standard react framework for routing.</div></div>',Kt=b(),Yt=v("doc"),Yt.innerHTML='<h2>Use with Vue.js</h2> \n\t\t\t<div class="cPreDesc">See <a class="cFWLink" href="/?n=Use_with_Vue#/install" target="_blank">the sQuery Installation Guide for Vue.js</a>!<br/> \n\t\t\t\t<img class="cFWLogo" src="img/vuejs.png" alt="Vue.js" title="Vue.js"/> \n\t\t\t\t<div class="cFWDesc"><h4>What is Vue.js?</h4> \n\t\t\t\t\t<div class="cFWLinkCont"><a class="cFWLink cBlueBack" href="https://reactjs.org/" target="_blank">Vue.js Official site</a></div>\n\t\t\t\t\tAn approachable, performant and versatile framework for building web user interfaces. \n\t\t\t\t\tBuilds on top of standard HTML, CSS and JavaScript with intuitive API and world-class documentation. \n\t\t\t\t\tPerformant. Truly reactive, compiler-optimized rendering system that rarely requires manual optimization.\n\t\t\t\t\t<br/><br/>\n\t\t\t\t\tSPA/SSR/SSG?: <a class="cFWLink cBlueBack" href="https://nuxtjs.org/" target="_blank">Nuxt.js</a> is the most well-used vue framework for routing.</div></div>',Zt=b(),Xt=v("doc"),Xt.innerHTML='<h2>Use with Svelte</h2> \n\t\t\t<div class="cPreDesc">See <a class="cFWLink" href="/?n=Use_with_Svelte#/install" target="_blank">the sQuery Installation Guide for Svelte</a>!<br/> \n\t\t\t\t<img class="cFWLogo" src="img/svelte.png" alt="Svelte" title="Svelte"/> \n\t\t\t\t<div class="cFWDesc"><h4>What is Svelte?</h4> \n\t\t\t\t\t<div class="cFWLinkCont"><a class="cFWLink cBlueBack" href="https://reactjs.org/" target="_blank">Svelte Official site</a></div>\n\t\t\t\t\tSvelte is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.\n\t\t\t\t\tInstead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.<br/><br/>\n\t\t\t\t\tSvelte doesn&#39;t have the Virtual DOM but it&#39;s actually one of the most performant major frameworks today.<br/>\n\t\t\t\t\tBy the way, this website is made by Svelte and sQuery!\n\t\t\t\t\t<br/><br/>\n\t\t\t\t\tSPA/SSR/SSG?: Svelte has multiple good frameworks for routing. <a class="cFWLink cBlueBack" href="https://kit.svelte.dev/" target="_blank">Sveltekit</a> is the official framework and will be the de facto standard in the future.</div></div>',te=b(),ee=v("doc"),ee.innerHTML='<h2>Use with SolidJS</h2> \n\t\t\t<div class="cPreDesc">See <a class="cFWLink" href="/?n=Use_with_SolidJS#/install" target="_blank">the sQuery Installation Guide for SolidJS</a>!<br/> \n\t\t\t\t<img class="cFWLogo" src="img/solidjs.jpg" alt="SolidJS" title="SolidJS"/> \n\t\t\t\t<div class="cFWDesc"><h4>What is SolidJS?</h4> \n\t\t\t\t\t<div class="cFWLinkCont"><a class="cFWLink cBlueBack" href="https://reactjs.org/" target="_blank">SolidJS Official site</a></div>\n\t\t\t\t\tA declarative, efficient and flexible JavaScript library for building user interfaces.<br/>\n\t\t\t\t\tSolid stands on the shoulders of giants, particularly React and Knockout. If you&#39;ve developed with React Hooks before, Solid should seem very natural. In fact, more natural as Solid&#39;s model is much simpler with no Hook rules. Every Component executes once and it is the Hooks and bindings that execute many times as their dependencies update.\n\t\t\t\t\tSolid follows the same philosophy as React with unidirectional data flow, read/write segregation, and immutable interfaces. It however has a completely different implementation that forgoes using a Virtual DOM.<br/><br/>\n\t\t\t\t\tSolidJS doesn&#39;t have the Virtual DOM but it&#39;s actually the most performant framework today.\n\t\t\t\t\t<br/><br/>\n\t\t\t\t\tSPA/SSR/SSG?: Read <a class="cFWLink cBlueBack" href="https://www.solidjs.com/guides/server" target="_blank">the official documentation</a> for SSR/SSG!</div></div>',ne=b(),se=v("doc"),se.innerHTML='<h2>Use with Angular</h2> \n\t\t\t<div class="cPreDesc">See <a class="cFWLink" href="/?n=Use_with_Angular#/install" target="_blank">the sQuery Installation Guide for Angular</a>!<br/> \n\t\t\t\t<img class="cFWLogo" src="img/angular.png" alt="Angular" title="Angular"/> \n\t\t\t\t<div class="cFWDesc"><h4>What is Angular?</h4> \n\t\t\t\t\t<div class="cFWLinkCont"><a class="cFWLink cBlueBack" href="https://reactjs.org/" target="_blank">Angular Official site</a></div>\n\t\t\t\t\tAngular is a platform for building mobile and desktop web applications.<br/>\n\t\t\t\t\tAngular is a TypeScript-based free and open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.</div></div>',ie=b(),ae=v("doc"),re=v("h2"),re.textContent="filter / not",le=b(),oe=v("div"),oe.innerHTML='filter: Reduce the set of matched elements to those that match the selector or pass the function&#39;s test. \n\t\t\t\t<span class="cJQVer" v="filter"></span>',ce=b(),de=v("div"),ue=v("div"),ue.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tFilter the elements',he=b(),N(pe.$$.fragment),me=b(),fe=v("div"),fe.innerHTML='<br/>\n\t\t\t\tnot: The opposite version of filter. Remove elements from the set of matched elements. \n\t\t\t\t<span class="cJQVer" v="not"></span>',ve=b(),ge=v("div"),be=v("div"),be.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tFilter the non-matched elements',ye=b(),N($e.$$.fragment),we=b(),xe=v("doc"),ke=v("h2"),ke.textContent="eq",Se=b(),_e=v("div"),_e.innerHTML='Reduce the set of matched elements to the one at the specified index. \n\t\t\t\t<span class="cJQVer" v="eq"></span>',Te=b(),qe=v("div"),je=v("div"),je.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tReduce the set using an integer indicating the 0-based position of the element.',Le=b(),N(Fe.$$.fragment),Ce=b(),De=v("div"),De.innerHTML="<br/>\n\t\t\t\tYou can also use a minus value! (Counting backwards from the last element in the set)",He=b(),Me=v("div"),Qe=v("div"),Qe.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tReduce the set using an integer indicating the position of the element, counting backwards from the last element in the set.',Ee=b(),N(Ae.$$.fragment),Ie=b(),Be=v("doc"),Pe=v("h2"),Pe.textContent="first / last",We=b(),Re=v("div"),Re.innerHTML='first: Reduce the set of matched elements to the first in the set. \n\t\t\t\t<span class="cJQVer" v="first"></span>',Oe=b(),Je=v("div"),Ve=v("div"),Ve.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tfirst',Ne=b(),N(ze.$$.fragment),Ue=b(),Ge=v("div"),Ge.innerHTML='<br/>\n\t\t\t\tlast: Reduce the set of matched elements to the last in the set. \n\t\t\t\t<span class="cJQVer" v="last"></span>',Ke=b(),Ye=v("div"),Ze=v("div"),Ze.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tlast',Xe=b(),N(tn.$$.fragment),en=b(),nn=v("doc"),sn=v("h2"),sn.textContent="has",an=b(),rn=v("div"),rn.innerHTML='Returns boolean result of the selector argument against the collection.\n\t\t\t\t<span class="cJQVer" v="has"></span>',ln=b(),on=v("div"),cn=v("div"),cn.innerHTML='<div class="cBack"></div>\n\t\t\t\t\thas',dn=b(),N(un.$$.fragment),hn=b(),pn=v("doc"),mn=v("h2"),mn.textContent="contains",fn=b(),vn=v("div"),vn.innerHTML='Select all elements that contain the specified text.\n\t\t\t\t<span class="cJQVer" v="contains"></span>',gn=b(),bn=v("div"),yn=v("div"),yn.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tcontains',$n=b(),N(wn.$$.fragment),xn=b(),kn=v("doc"),Sn=v("h2"),Sn.textContent="slice",_n=b(),Tn=v("div"),Tn.innerHTML='Reduce the set of matched elements to a subset specified by a range of indices.\n\t\t\t\t<span class="cJQVer" v="slice"></span>',qn=b(),jn=v("div"),Ln=v("div"),Ln.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tslice',Fn=b(),N(Cn.$$.fragment),Dn=b(),Hn=v("doc"),Mn=v("h2"),Mn.textContent="index",Qn=b(),En=v("div"),En.innerHTML='Returns the index of the element in its parent\n\t\t\t\t<span class="cJQVer" v="index"></span>',An=b(),In=v("div"),Bn=v("div"),Bn.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tindex',Pn=b(),N(Wn.$$.fragment),Rn=b(),On=v("doc"),Jn=v("h2"),Jn.textContent="is",Vn=b(),Nn=v("div"),Nn.innerHTML='Returns whether the provided selector matches the first element in the collection.\n\t\t\t\t<span class="cJQVer" v="is"></span>',zn=b(),Un=v("div"),Gn=v("div"),Gn.innerHTML='<div class="cBack"></div>\n\t\t\t\t\t.is( selector )',Kn=b(),N(Yn.$$.fragment),Zn=b(),Xn=v("doc"),ts=v("h2"),ts.textContent="find",es=b(),ns=v("div"),ns.innerHTML='Returns selector match descendants from the first element in the collection.\n\t\t\t\t<span class="cJQVer" v="find"></span>',ss=b(),is=v("div"),as=v("div"),as.innerHTML='<div class="cBack"></div>\n\t\t\t\t\t.find( selector )',rs=b(),N(ls.$$.fragment),os=b(),cs=v("doc"),ds=v("h2"),ds.textContent="children",us=b(),hs=v("div"),hs.innerHTML='Returns a collection of child elements\n\t\t\t\t<span class="cJQVer" v="children"></span>',ps=b(),ms=v("div"),fs=v("div"),fs.innerHTML='<div class="cBack"></div>\n\t\t\t\t\t.children( selector )',vs=b(),N(gs.$$.fragment),bs=b(),ys=v("doc"),$s=v("h2"),$s.textContent="next / prev",ws=b(),xs=v("div"),xs.innerHTML='next: Returns next sibling\n\t\t\t\t<span class="cJQVer" v="next"></span>',ks=b(),Ss=v("div"),_s=v("div"),_s.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tnext',Ts=b(),N(qs.$$.fragment),js=b(),Ls=v("div"),Ls.innerHTML='<br/>\n\t\t\t\tprev: Returns the previous adjacent element.\n\t\t\t\t<span class="cJQVer" v="prev"></span>',Fs=b(),Cs=v("div"),Ds=v("div"),Ds.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tprev',Hs=b(),N(Ms.$$.fragment),Qs=b(),Es=v("doc"),As=v("h2"),As.textContent="siblings",Is=b(),Bs=v("div"),Bs.innerHTML='Returns a collection of sibling elements.\n\t\t\t\t<span class="cJQVer" v="siblings"></span>',Ps=b(),Ws=v("div"),Rs=v("div"),Rs.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tsiblings',Os=b(),N(Js.$$.fragment),Vs=b(),Ns=v("doc"),zs=v("h2"),zs.textContent="parent / parents",Us=b(),Gs=v("div"),Gs.innerHTML='parent: Returns parent element.\n\t\t\t\t<span class="cJQVer" v="parent"></span>',Ks=b(),Ys=v("div"),Zs=v("div"),Zs.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tparent',Xs=b(),N(ti.$$.fragment),ei=b(),ni=v("div"),ni.innerHTML='<br/>\n\t\t\t\tparents: Returns recursive parent by selector.\n\t\t\t\t<span class="cJQVer" v="parents"></span>',si=b(),ii=v("div"),ai=v("div"),ai.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tparents',ri=b(),N(li.$$.fragment),oi=b(),ci=v("doc"),di=v("h2"),di.textContent="closest",ui=b(),hi=v("div"),hi.innerHTML='Returns the closest matching selector up the DOM tree.\n\t\t\t\t<span class="cJQVer" v="closest"></span>',pi=b(),mi=v("div"),fi=v("div"),fi.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tclosest',vi=b(),N(gi.$$.fragment),bi=b(),yi=v("doc"),$i=v("h2"),$i.textContent="hasClass",wi=b(),xi=v("div"),xi.innerHTML='Returns the boolean result of checking if the first element in the collection has the className attribute.\n\t\t\t\t<span class="cJQVer" v="hasClass"></span>',ki=b(),Si=v("div"),_i=v("div"),_i.innerHTML='<div class="cBack"></div>\n\t\t\t\t\thasClass',Ti=b(),N(qi.$$.fragment),ji=b(),Li=v("doc"),Fi=v("h2"),Fi.textContent="html",Ci=b(),Di=v("div"),Di.innerHTML='Returns the HTML text of the first element in the collection, sets the HTML if provided.\n\t\t\t\t<span class="cJQVer" v="html"></span>',Hi=b(),Mi=v("div"),Qi=v("div"),Qi.innerHTML='<div class="cBack"></div>\n\t\t\t\t\thtml',Ei=b(),N(Ai.$$.fragment),Ii=b(),Bi=v("doc"),Pi=v("h2"),Pi.textContent="text",Wi=b(),Ri=v("div"),Ri.innerHTML='Returns the inner text of the first element in the collection, sets the text if textContent is provided.\n\t\t\t\t<span class="cJQVer" v="text"></span>',Oi=b(),Ji=v("div"),Vi=v("div"),Vi.innerHTML='<div class="cBack"></div>\n\t\t\t\t\ttext',Ni=b(),N(zi.$$.fragment),Ui=b(),Gi=v("doc"),Ki=v("h2"),Ki.textContent="val",Yi=b(),Zi=v("div"),Zi.innerHTML='Returns an inputs value. If value is supplied, sets all inputs in collection&#39;s value to the value argument.\n\t\t\t\t<span class="cJQVer" v="val"></span>',Xi=b(),ta=v("div"),ea=v("div"),ea.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tval',na=b(),N(sa.$$.fragment),ia=b(),aa=v("doc"),ra=v("h2"),ra.textContent="css",la=b(),oa=v("div"),oa.innerHTML='Returns a CSS property value when just property is supplied. Sets a CSS property when property and value are supplied, and set multiple properties when an object is supplied.\n\t\t\t\t<span class="cJQVer" v="css"></span>',ca=b(),da=v("div"),ua=v("div"),ua.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tcss(property) / css(property, value) / css(object)',ha=b(),N(pa.$$.fragment),ma=b(),fa=v("doc"),va=v("h2"),va.textContent="attr",ga=b(),ba=v("div"),ba.innerHTML='Without attrValue, returns the attribute value of the first element in the collection. With attrValue, sets the attribute value of each element of the collection.\n\t\t\t\t<span class="cJQVer" v="attr"></span>',ya=b(),$a=v("div"),wa=v("div"),wa.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tattr',xa=b(),N(ka.$$.fragment),Sa=b(),_a=v("doc"),Ta=v("h2"),Ta.textContent="prop",qa=b(),ja=v("div"),ja.innerHTML='Without a value, returns the prop value of the first element in the collection. With a value, sets the prop value of each element of the collection.\n\t\t\t\t<span class="cJQVer" v="prop"></span>',La=b(),Fa=v("div"),Ca=v("div"),Ca.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tprop',Da=b(),N(Ha.$$.fragment),Ma=b(),Qa=v("doc"),Ea=v("h2"),Ea.textContent="get",Aa=b(),Ia=v("div"),Ia.innerHTML='Returns the element at the index\n\t\t\t\t<span class="cJQVer" v="get"></span>',Ba=b(),Pa=v("div"),Wa=v("div"),Wa.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tget',Ra=b(),N(Oa.$$.fragment),Ja=b(),Va=v("doc"),Na=v("h2"),Na.textContent="show / hide",za=b(),Ua=v("div"),Ua.innerHTML='show: Shows the specified elements\n\t\t\t\t<span class="cJQVer" v="show"></span> \n\t\t\t\t<br/><br/>\n\t\t\t\thide: Hides the specified elements\n\t\t\t\t<span class="cJQVer" v="hide"></span>',Ga=b(),Ka=v("div"),Ya=v("div"),Ya.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tshow / hide',Za=b(),N(Xa.$$.fragment),tr=b(),er=v("doc"),nr=v("h2"),nr.textContent="remove",sr=b(),ir=v("div"),ir.innerHTML='Removes the specified elements\n\t\t\t\t<span class="cJQVer" v="remove"></span>',ar=b(),rr=v("div"),lr=v("div"),lr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tremove',or=b(),N(cr.$$.fragment),dr=b(),ur=v("doc"),hr=v("h2"),hr.textContent="before / after",pr=b(),mr=v("div"),mr.innerHTML='before: Insert content, specified by the parameter, before each element in the set of matched elements.\n\t\t\t\t<span class="cJQVer" v="before"></span>',fr=b(),vr=v("div"),gr=v("div"),gr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tbefore',br=b(),N(yr.$$.fragment),$r=b(),wr=v("div"),wr.innerHTML='<br/>\n\t\t\t\tafter: Insert content, specified by the parameter, after each element in the set of matched elements.\n\t\t\t\t<span class="cJQVer" v="after"></span>',xr=b(),kr=v("div"),Sr=v("div"),Sr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tafter',_r=b(),N(Tr.$$.fragment),qr=b(),jr=v("doc"),Lr=v("h2"),Lr.textContent="prepend / append",Fr=b(),Cr=v("div"),Cr.innerHTML='prepend: Prepends element to the first element in collection.\n\t\t\t\t<span class="cJQVer" v="prepend"></span>',Dr=b(),Hr=v("div"),Mr=v("div"),Mr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tprepend',Qr=b(),N(Er.$$.fragment),Ar=b(),Ir=v("div"),Ir.innerHTML='<br/>\n\t\t\t\tappend: Appends the target element to the first element in the collection.\n\t\t\t\t<span class="cJQVer" v="append"></span>',Br=b(),Pr=v("div"),Wr=v("div"),Wr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tappend',Rr=b(),N(Or.$$.fragment),Jr=b(),Vr=v("doc"),Nr=v("h2"),Nr.textContent="replaceWith",zr=b(),Ur=v("div"),Ur.innerHTML='Replace an element with the provided new content \n\t\t\t\t<span class="cJQVer" v="replaceWith"></span>',Gr=b(),Kr=v("div"),Yr=v("div"),Yr.innerHTML='<div class="cBack"></div>\n\t\t\t\t\treplaceWith',Zr=b(),N(Xr.$$.fragment),tl=b(),el=v("doc"),nl=v("h2"),nl.textContent="addClass / removeClass",sl=b(),il=v("div"),il.innerHTML='addClass: Adds the specified class to each element in the set of matched elements.\n\t\t\t\t<span class="cJQVer" v="addClass"></span> \n\t\t\t\t<br/>\n\t\t\t\tremoveClass: Remove a single class from each element in the set of matched elements.\n\t\t\t\t<span class="cJQVer" v="removeClass"></span>',al=b(),rl=v("div"),ll=v("div"),ll.innerHTML='<div class="cBack"></div>\n\t\t\t\t\taddClass / removeClass',ol=b(),N(cl.$$.fragment),dl=b(),ul=v("doc"),hl=v("h2"),hl.textContent="toggleClass",pl=b(),ml=v("div"),ml.innerHTML='Toggles the specified class to each element in the set of matched elements.\n\t\t\t\t<span class="cJQVer" v="toggleClass"></span>',fl=b(),vl=v("div"),gl=v("div"),gl.innerHTML='<div class="cBack"></div>\n\t\t\t\t\ttoggleClass',bl=b(),N(yl.$$.fragment),$l=b(),wl=v("doc"),xl=v("h2"),xl.textContent="width / height",kl=b(),Sl=v("div"),Sl.innerHTML='width: Get the current computed width for the first element in the set of matched elements or set the width of every matched element.\n\t\t\t\t<span class="cJQVer" v="width"></span> \n\t\t\t\t<br/>\n\t\t\t\theight: Get the current computed height for the first element in the set of matched elements or set the width of every matched element.\n\t\t\t\t<span class="cJQVer" v="height"></span>',_l=b(),Tl=v("div"),ql=v("div"),ql.innerHTML='<div class="cBack"></div>\n\t\t\t\t\twidth / height',jl=b(),N(Ll.$$.fragment),Fl=b(),Cl=v("doc"),Dl=v("h2"),Dl.textContent="innerWidth / innerHeight",Hl=b(),Ml=v("div"),Ml.innerHTML='innerWidth: Get the current computed inner width (<b>including padding but not border</b>) for the first element in the set of matched elements or set the inner width of every matched element.\n\t\t\t\t<span class="cJQVer" v="innerWidth"></span> \n\t\t\t\t<br/>\n\t\t\t\tinnerHeight: Get the current computed inner height (<b>including padding but not border</b>) for the first element in the set of matched elements or set the height width of every matched element.\n\t\t\t\t<span class="cJQVer" v="innerHeight"></span>',Ql=b(),El=v("div"),Al=v("div"),Al.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tinnerWidth / innerHeight',Il=b(),N(Bl.$$.fragment),Pl=b(),Wl=v("doc"),Rl=v("h2"),Rl.textContent="outerWidth / outerHeight",Ol=b(),Jl=v("div"),Jl.innerHTML='outerWidth: Get the current computed outer width (<b>including padding and border</b>) for the first element in the set of matched elements or set the outer width of every matched element.\n\t\t\t\t<span class="cJQVer" v="outerWidth"></span> \n\t\t\t\t<br/>\n\t\t\t\touterHeight: Get the current computed outer height (<b>including padding and border</b>) for the first element in the set of matched elements or set the outer height of every matched element.\n\t\t\t\t<span class="cJQVer" v="outerHeight"></span>',Vl=b(),Nl=v("div"),zl=v("div"),zl.innerHTML='<div class="cBack"></div>\n\t\t\t\t\touterWidth / outerHeight',Ul=b(),N(Gl.$$.fragment),Kl=b(),Yl=v("doc"),Zl=v("h2"),Zl.textContent="offset",Xl=b(),to=v("div"),to.innerHTML='Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements, relative to the document.\n\t\t\t\t<span class="cJQVer" v="offset"></span>',eo=b(),no=v("div"),so=v("div"),so.innerHTML='<div class="cBack"></div>\n\t\t\t\t\toffset',io=b(),N(ao.$$.fragment),ro=b(),lo=v("doc"),oo=v("h2"),oo.textContent="pos (position)",co=b(),uo=v("div"),uo.innerHTML='Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.\n\t\t\t\t<span class="cJQVer" v="pos"></span>',ho=b(),po=v("div"),mo=v("div"),mo.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tpos (position)',fo=b(),N(vo.$$.fragment),go=b(),bo=v("doc"),yo=v("h2"),yo.textContent="fadeIn / fadeOut",$o=b(),wo=v("div"),wo.innerHTML='Display the matched elements by fading them to opaque. \n\t\t\t\t<span class="cJQVer" v="fadeIn"></span> \n\t\t\t\t<div class="cNote">NOTE: In jQuery, you could method-chain fadeIn and fadeOut to make a blink animation, but sQuery doesn&#39;t support it for a performance reason. Just use a callback function instead if you need a blink animation.</div>',xo=b(),ko=v("div"),So=v("div"),So.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tfadeIn / fadeOut',_o=b(),N(To.$$.fragment),qo=b(),jo=v("doc"),Lo=v("h2"),Lo.textContent="animate",Fo=b(),Co=v("div"),Co.innerHTML='Perform a custom animation of a set of CSS properties.\n\t\t\t\t<div class="cNote">NOTE: There are some differences to the <a href="https://api.jquery.com/animate/" target="_blank" style="font-size:14px"><b>jQuery&#39;s animate</b></a>. sQuery uses the native <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/animate" target="_blank" style="font-size:14px"><b>ES6 native animate</b></a> method internally.</div>',Do=b(),Ho=v("div"),Mo=v("div"),Mo.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tanimate',Qo=b(),N(Eo.$$.fragment),Ao=b(),Io=v("br"),Bo=b(),Po=v("div"),Wo=v("div"),Wo.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tanimate (More advanced Example)',Ro=b(),N(Oo.$$.fragment),Jo=b(),Vo=v("doc"),No=v("h2"),No.textContent="scroll",zo=b(),Uo=v("div"),Uo.innerHTML='Scroll the elements in the current chain.\n\t\t\t\t<span class="cJQVer" v="scroll"></span>',Go=b(),Ko=v("div"),Yo=v("div"),Yo.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tscroll',Zo=b(),N(Xo.$$.fragment),tc=b(),ec=v("doc"),nc=v("h2"),nc.textContent="scrollTop / scrollLeft",sc=b(),ic=v("div"),ic.innerHTML='Get the current vertical position of the scroll bar for the first element in the set of matched elements or set the vertical position of the scroll bar for every matched element.\n\t\t\t\t<span class="cJQVer" v="scrollTop"></span>  \n\t\t\t\t<span class="cJQVer" v="scrollLeft"></span>',ac=b(),rc=v("div"),lc=v("div"),lc.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tscrollTop / scrollLeft',oc=b(),N(cc.$$.fragment),dc=b(),uc=v("doc"),hc=v("h2"),hc.textContent="scrollToElement",pc=b(),mc=v("div"),mc.innerHTML='Scroll to the first element in the set of matched elements\n\t\t\t\t<span class="cJQVer" v="scrollToElement"></span>',fc=b(),vc=v("div"),gc=v("div"),gc.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tscrollToElement',bc=b(),N(yc.$$.fragment),$c=b(),wc=v("doc"),xc=v("h2"),xc.textContent="each",kc=b(),Sc=v("div"),Sc.innerHTML='Iterate over a jQuery object, executing a function for each matched element.\n\t\t\t\t<span class="cJQVer" v="each"></span>',_c=b(),Tc=v("div"),qc=v("div"),qc.innerHTML='<div class="cBack"></div>\n\t\t\t\t\teach',jc=b(),N(Lc.$$.fragment),Fc=b(),Cc=v("doc"),Dc=v("h2"),Dc.textContent="on / off / onf",Hc=b(),Mc=v("div"),Mc.innerHTML='on: Adds event listener to collection elments.\n\t\t\t\t<span class="cJQVer" v="on"></span> \n\t\t\t\t<br/>\n\t\t\t\toff: Removes event listener from collection elments. \n\t\t\t\t<span class="cJQVer" v="off"></span> \n\t\t\t\t<br/>\n\t\t\t\tonf: Adds future event listener to collection elments.',Qc=b(),Ec=v("div"),Ac=v("div"),Ac.innerHTML='<div class="cBack"></div>\n\t\t\t\t\ton / off',Ic=b(),N(Bc.$$.fragment),Pc=b(),Wc=v("br"),Rc=b(),Oc=v("div"),Oc.textContent="NOTE: In sQuery, sq(document).onf('click', 'selector') equivalents to $(document).on('click', 'selector') in jQuery. .onf() can register future element events.",Jc=b(),Vc=v("div"),Nc=v("div"),Nc.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tonf',zc=b(),N(Uc.$$.fragment),Gc=b(),Kc=v("doc"),Yc=v("h2"),Yc.textContent="trg (trigger)",Zc=b(),Xc=v("div"),Xc.innerHTML='Triggers supplied event on elements in collection.\n\t\t\t\t<span class="cJQVer" v="trigger"></span>',td=b(),ed=v("div"),nd=v("div"),nd.innerHTML='<div class="cBack"></div>\n\t\t\t\t\ttrg (trigger)',sd=b(),N(id.$$.fragment),$(s,"rel","stylesheet"),$(s,"href","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"),u(a.src,r="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")||$(a,"src","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"),$(o,"rel","stylesheet"),$(o,"href","./Docs.css"),$(d,"id","idHead"),$(y,"id","idLeft"),$(k,"class","menu__toggler"),$(q,"onclick","location.href='./';"),w(q,"cursor","pointer"),$(M,"class","cPreDesc"),$(A,"class","cDesc"),$(J,"class","cDesc"),w(W,"margin-top","30px"),$(Z,"class","cDesc"),w(Y,"margin-top","30px"),$(st,"class","cDesc"),w(nt,"margin-top","30px"),$(C,"name","Installation"),$(pt,"class","cAccr"),$(ft,"class","cAccr"),$(bt,"class","cAccr"),$($t,"class","cAccr"),$(xt,"class","cAccr"),$(Ct,"class","cDesc"),$(St,"class","cAccr"),w(ht,"margin-top","10px"),$(dt,"class","cPreDesc"),$(lt,"name","Difference_between_jQuery"),$(It,"class","cPreDesc"),$(Wt,"class","cDesc"),$(Vt,"class","cDesc"),$(Qt,"name","Use_with_jQuery"),$(Gt,"name","Use_with_React"),$(Yt,"name","Use_with_Vue"),$(Xt,"name","Use_with_Svelte"),$(ee,"name","Use_with_SolidJS"),$(se,"name","Use_with_Angular"),$(re,"class","notranslate"),$(oe,"class","cPreDesc"),$(ue,"class","cDesc"),$(fe,"class","cPreDesc"),$(be,"class","cDesc"),$(ae,"name","filter-not"),$(ke,"class","notranslate"),$(_e,"class","cPreDesc"),$(je,"class","cDesc"),$(De,"class","cPreDesc"),$(Qe,"class","cDesc"),$(xe,"name","eq"),$(Pe,"class","notranslate");$(Re,"class","cPreDesc"),$(Ve,"class","cDesc"),$(Ge,"class","cPreDesc"),$(Ze,"class","cDesc"),$(Be,"name","first-last"),$(sn,"class","notranslate"),$(rn,"class","cPreDesc"),$(cn,"class","cDesc"),$(nn,"name","has"),$(mn,"class","notranslate"),$(vn,"class","cPreDesc"),$(yn,"class","cDesc"),$(pn,"name","contains"),$(Sn,"class","notranslate"),$(Tn,"class","cPreDesc"),$(Ln,"class","cDesc"),$(kn,"name","slice"),$(Mn,"class","notranslate"),$(En,"class","cPreDesc"),$(Bn,"class","cDesc"),$(Hn,"name","index"),$(Jn,"class","notranslate"),$(Nn,"class","cPreDesc"),$(Gn,"class","cDesc"),$(On,"name","is"),$(ts,"class","notranslate"),$(ns,"class","cPreDesc"),$(as,"class","cDesc"),$(Xn,"name","find"),$(ds,"class","notranslate"),$(hs,"class","cPreDesc"),$(fs,"class","cDesc"),$(cs,"name","children"),$($s,"class","notranslate"),$(xs,"class","cPreDesc"),$(_s,"class","cDesc"),$(Ls,"class","cPreDesc"),$(Ds,"class","cDesc"),$(ys,"name","next-prev"),$(As,"class","notranslate"),$(Bs,"class","cPreDesc"),$(Rs,"class","cDesc"),$(Es,"name","siblings"),$(zs,"class","notranslate"),$(Gs,"class","cPreDesc"),$(Zs,"class","cDesc"),$(ni,"class","cPreDesc"),$(ai,"class","cDesc"),$(Ns,"name","parent-parents"),$(di,"class","notranslate"),$(hi,"class","cPreDesc"),$(fi,"class","cDesc"),$(ci,"name","closest"),$($i,"class","notranslate"),$(xi,"class","cPreDesc"),$(_i,"class","cDesc"),$(yi,"name","hasClass"),$(Fi,"class","notranslate"),$(Di,"class","cPreDesc"),$(Qi,"class","cDesc"),$(Li,"name","html"),$(Pi,"class","notranslate"),$(Ri,"class","cPreDesc"),$(Vi,"class","cDesc"),$(Bi,"name","text"),$(Ki,"class","notranslate"),$(Zi,"class","cPreDesc"),$(ea,"class","cDesc"),$(Gi,"name","val"),$(ra,"class","notranslate"),$(oa,"class","cPreDesc"),$(ua,"class","cDesc"),$(aa,"name","css"),$(va,"class","notranslate"),$(ba,"class","cPreDesc"),$(wa,"class","cDesc"),$(fa,"name","attr"),$(Ta,"class","notranslate"),$(ja,"class","cPreDesc"),$(Ca,"class","cDesc"),$(_a,"name","prop"),$(Ea,"class","notranslate"),$(Ia,"class","cPreDesc"),$(Wa,"class","cDesc"),$(Qa,"name","get"),$(Na,"class","notranslate"),$(Ua,"class","cPreDesc"),$(Ya,"class","cDesc"),$(Va,"name","show-hide"),$(nr,"class","notranslate"),$(ir,"class","cPreDesc"),$(lr,"class","cDesc"),$(er,"name","remove"),$(hr,"class","notranslate"),$(mr,"class","cPreDesc"),$(gr,"class","cDesc"),$(wr,"class","cPreDesc"),$(Sr,"class","cDesc"),$(ur,"name","before-after"),$(Lr,"class","notranslate"),$(Cr,"class","cPreDesc"),$(Mr,"class","cDesc"),$(Ir,"class","cPreDesc"),$(Wr,"class","cDesc"),$(jr,"name","prepend-append"),$(Nr,"class","notranslate"),$(Ur,"class","cPreDesc"),$(Yr,"class","cDesc"),$(Vr,"name","replaceWith"),$(nl,"class","notranslate"),$(il,"class","cPreDesc"),$(ll,"class","cDesc"),$(el,"name","addClass-removeClass"),$(hl,"class","notranslate"),$(ml,"class","cPreDesc"),$(gl,"class","cDesc"),$(ul,"name","toggleClass"),$(xl,"class","notranslate"),$(Sl,"class","cPreDesc"),$(ql,"class","cDesc"),$(wl,"name","width-height"),$(Dl,"class","notranslate"),$(Ml,"class","cPreDesc"),$(Al,"class","cDesc"),$(Cl,"name","innerWidth-innerHeight"),$(Rl,"class","notranslate"),$(Jl,"class","cPreDesc"),$(zl,"class","cDesc"),$(Wl,"name","outerWidth-outerHeight"),$(Zl,"class","notranslate"),$(to,"class","cPreDesc"),$(so,"class","cDesc"),$(Yl,"name","offset"),$(oo,"class","notranslate"),$(uo,"class","cPreDesc"),$(mo,"class","cDesc"),$(lo,"name","pos-position"),$(yo,"class","notranslate"),$(wo,"class","cPreDesc"),$(So,"class","cDesc"),$(bo,"name","fadeIn-fadeOut"),$(Lo,"class","notranslate"),$(Co,"class","cPreDesc"),$(Mo,"class","cDesc"),$(Wo,"class","cDesc"),$(jo,"name","animate"),$(No,"class","notranslate"),$(Uo,"class","cPreDesc"),$(Yo,"class","cDesc"),$(Vo,"name","scroll"),$(nc,"class","notranslate"),$(ic,"class","cPreDesc"),$(lc,"class","cDesc"),$(ec,"name","scrollTop-scrollLeft"),$(hc,"class","notranslate"),$(mc,"class","cPreDesc"),$(gc,"class","cDesc"),$(uc,"name","scrollToElement"),$(xc,"class","notranslate"),$(Sc,"class","cPreDesc"),$(qc,"class","cDesc"),$(wc,"name","each"),$(Dc,"class","notranslate"),$(Mc,"class","cPreDesc"),$(Ac,"class","cDesc"),$(Oc,"class","cNote"),$(Nc,"class","cDesc"),$(Cc,"name","on-off-onf"),$(Yc,"class","notranslate"),$(Xc,"class","cPreDesc"),$(nd,"class","cDesc"),$(Kc,"name","trg-trigger"),$(_,"id","idDoc")},m(t,n){m(t,e,n),p(e,s),p(e,i),p(e,a),p(e,l),p(e,o),p(e,c),p(e,d),p(e,h),p(e,y),p(e,x),p(e,k),p(e,S),p(e,_),p(_,T),p(T,q),p(q,j),p(q,L),p(_,F),p(_,C),p(C,D),p(C,H),p(C,M),p(C,Q),p(C,E),p(E,A),p(E,I),z(B,E,null),p(C,P),p(C,W),p(W,J),p(W,V),z(G,W,null),p(C,K),p(C,Y),p(Y,Z),p(Y,X),z(tt,Y,null),p(C,et),p(C,nt),p(nt,st),p(nt,it),z(at,nt,null),p(_,rt),p(_,lt),p(lt,ot),p(lt,ct),p(lt,dt),p(dt,ut),p(dt,ht),p(ht,pt),p(ht,mt),p(ht,ft),p(ht,gt),p(ht,bt),p(ht,yt),p(ht,$t),p(ht,wt),p(ht,xt),p(ht,kt),p(ht,St),p(St,Tt),p(St,qt),p(St,jt),p(St,Lt),p(St,Ft),p(Ft,Ct),p(Ft,Dt),z(Ht,Ft,null),p(_,Mt),p(_,Qt),p(Qt,Et),p(Qt,At),p(Qt,It),p(Qt,Bt),p(Qt,Pt),p(Pt,Wt),p(Pt,Rt),z(Ot,Pt,null),p(Pt,Jt),p(Pt,Vt),p(Pt,Nt),z(zt,Pt,null),p(_,Ut),p(_,Gt),p(_,Kt),p(_,Yt),p(_,Zt),p(_,Xt),p(_,te),p(_,ee),p(_,ne),p(_,se),p(_,ie),p(_,ae),p(ae,re),p(ae,le),p(ae,oe),p(ae,ce),p(ae,de),p(de,ue),p(de,he),z(pe,de,null),p(ae,me),p(ae,fe),p(ae,ve),p(ae,ge),p(ge,be),p(ge,ye),z($e,ge,null),p(_,we),p(_,xe),p(xe,ke),p(xe,Se),p(xe,_e),p(xe,Te),p(xe,qe),p(qe,je),p(qe,Le),z(Fe,qe,null),p(xe,Ce),p(xe,De),p(xe,He),p(xe,Me),p(Me,Qe),p(Me,Ee),z(Ae,Me,null),p(_,Ie),p(_,Be),p(Be,Pe),p(Be,We),p(Be,Re),p(Be,Oe),p(Be,Je),p(Je,Ve),p(Je,Ne),z(ze,Je,null),p(Be,Ue),p(Be,Ge),p(Be,Ke),p(Be,Ye),p(Ye,Ze),p(Ye,Xe),z(tn,Ye,null),p(_,en),p(_,nn),p(nn,sn),p(nn,an),p(nn,rn),p(nn,ln),p(nn,on),p(on,cn),p(on,dn),z(un,on,null),p(_,hn),p(_,pn),p(pn,mn),p(pn,fn),p(pn,vn),p(pn,gn),p(pn,bn),p(bn,yn),p(bn,$n),z(wn,bn,null),p(_,xn),p(_,kn),p(kn,Sn),p(kn,_n),p(kn,Tn),p(kn,qn),p(kn,jn),p(jn,Ln),p(jn,Fn),z(Cn,jn,null),p(_,Dn),p(_,Hn),p(Hn,Mn),p(Hn,Qn),p(Hn,En),p(Hn,An),p(Hn,In),p(In,Bn),p(In,Pn),z(Wn,In,null),p(_,Rn),p(_,On),p(On,Jn),p(On,Vn),p(On,Nn),p(On,zn),p(On,Un),p(Un,Gn),p(Un,Kn),z(Yn,Un,null),p(_,Zn),p(_,Xn),p(Xn,ts),p(Xn,es),p(Xn,ns),p(Xn,ss),p(Xn,is),p(is,as),p(is,rs),z(ls,is,null),p(_,os),p(_,cs),p(cs,ds),p(cs,us),p(cs,hs),p(cs,ps),p(cs,ms),p(ms,fs),p(ms,vs),z(gs,ms,null),p(_,bs),p(_,ys),p(ys,$s),p(ys,ws),p(ys,xs),p(ys,ks),p(ys,Ss),p(Ss,_s),p(Ss,Ts),z(qs,Ss,null),p(ys,js),p(ys,Ls),p(ys,Fs),p(ys,Cs),p(Cs,Ds),p(Cs,Hs),z(Ms,Cs,null),p(_,Qs),p(_,Es),p(Es,As),p(Es,Is),p(Es,Bs),p(Es,Ps),p(Es,Ws),p(Ws,Rs),p(Ws,Os),z(Js,Ws,null),p(_,Vs),p(_,Ns),p(Ns,zs),p(Ns,Us),p(Ns,Gs),p(Ns,Ks),p(Ns,Ys),p(Ys,Zs),p(Ys,Xs),z(ti,Ys,null),p(Ns,ei),p(Ns,ni),p(Ns,si),p(Ns,ii),p(ii,ai),p(ii,ri),z(li,ii,null),p(_,oi),p(_,ci),p(ci,di),p(ci,ui),p(ci,hi),p(ci,pi),p(ci,mi),p(mi,fi),p(mi,vi),z(gi,mi,null),p(_,bi),p(_,yi),p(yi,$i),p(yi,wi),p(yi,xi),p(yi,ki),p(yi,Si),p(Si,_i),p(Si,Ti),z(qi,Si,null),p(_,ji),p(_,Li),p(Li,Fi),p(Li,Ci),p(Li,Di),p(Li,Hi),p(Li,Mi),p(Mi,Qi),p(Mi,Ei),z(Ai,Mi,null),p(_,Ii),p(_,Bi),p(Bi,Pi),p(Bi,Wi),p(Bi,Ri),p(Bi,Oi),p(Bi,Ji),p(Ji,Vi),p(Ji,Ni),z(zi,Ji,null),p(_,Ui),p(_,Gi),p(Gi,Ki),p(Gi,Yi),p(Gi,Zi),p(Gi,Xi),p(Gi,ta),p(ta,ea),p(ta,na),z(sa,ta,null),p(_,ia),p(_,aa),p(aa,ra),p(aa,la),p(aa,oa),p(aa,ca),p(aa,da),p(da,ua),p(da,ha),z(pa,da,null),p(_,ma),p(_,fa),p(fa,va),p(fa,ga),p(fa,ba),p(fa,ya),p(fa,$a),p($a,wa),p($a,xa),z(ka,$a,null),p(_,Sa),p(_,_a),p(_a,Ta),p(_a,qa),p(_a,ja),p(_a,La),p(_a,Fa),p(Fa,Ca),p(Fa,Da),z(Ha,Fa,null),p(_,Ma),p(_,Qa),p(Qa,Ea),p(Qa,Aa),p(Qa,Ia),p(Qa,Ba),p(Qa,Pa),p(Pa,Wa),p(Pa,Ra),z(Oa,Pa,null),p(_,Ja),p(_,Va),p(Va,Na),p(Va,za),p(Va,Ua),p(Va,Ga),p(Va,Ka),p(Ka,Ya),p(Ka,Za),z(Xa,Ka,null),p(_,tr),p(_,er),p(er,nr),p(er,sr),p(er,ir),p(er,ar),p(er,rr),p(rr,lr),p(rr,or),z(cr,rr,null),p(_,dr),p(_,ur),p(ur,hr),p(ur,pr),p(ur,mr),p(ur,fr),p(ur,vr),p(vr,gr),p(vr,br),z(yr,vr,null),p(ur,$r),p(ur,wr),p(ur,xr),p(ur,kr),p(kr,Sr),p(kr,_r),z(Tr,kr,null),p(_,qr),p(_,jr),p(jr,Lr),p(jr,Fr),p(jr,Cr),p(jr,Dr),p(jr,Hr),p(Hr,Mr),p(Hr,Qr),z(Er,Hr,null),p(jr,Ar),p(jr,Ir),p(jr,Br),p(jr,Pr),p(Pr,Wr),p(Pr,Rr),z(Or,Pr,null),p(_,Jr),p(_,Vr),p(Vr,Nr),p(Vr,zr),p(Vr,Ur),p(Vr,Gr),p(Vr,Kr),p(Kr,Yr),p(Kr,Zr),z(Xr,Kr,null),p(_,tl),p(_,el),p(el,nl),p(el,sl),p(el,il),p(el,al),p(el,rl),p(rl,ll),p(rl,ol),z(cl,rl,null),p(_,dl),p(_,ul),p(ul,hl),p(ul,pl),p(ul,ml),p(ul,fl),p(ul,vl),p(vl,gl),p(vl,bl),z(yl,vl,null),p(_,$l),p(_,wl),p(wl,xl),p(wl,kl),p(wl,Sl),p(wl,_l),p(wl,Tl),p(Tl,ql),p(Tl,jl),z(Ll,Tl,null),p(_,Fl),p(_,Cl),p(Cl,Dl),p(Cl,Hl),p(Cl,Ml),p(Cl,Ql),p(Cl,El),p(El,Al),p(El,Il),z(Bl,El,null),p(_,Pl),p(_,Wl),p(Wl,Rl),p(Wl,Ol),p(Wl,Jl),p(Wl,Vl),p(Wl,Nl),p(Nl,zl),p(Nl,Ul),z(Gl,Nl,null),p(_,Kl),p(_,Yl),p(Yl,Zl),p(Yl,Xl),p(Yl,to),p(Yl,eo),p(Yl,no),p(no,so),p(no,io),z(ao,no,null),p(_,ro),p(_,lo),p(lo,oo),p(lo,co),p(lo,uo),p(lo,ho),p(lo,po),p(po,mo),p(po,fo),z(vo,po,null),p(_,go),p(_,bo),p(bo,yo),p(bo,$o),p(bo,wo),p(bo,xo),p(bo,ko),p(ko,So),p(ko,_o),z(To,ko,null),p(_,qo),p(_,jo),p(jo,Lo),p(jo,Fo),p(jo,Co),p(jo,Do),p(jo,Ho),p(Ho,Mo),p(Ho,Qo),z(Eo,Ho,null),p(jo,Ao),p(jo,Io),p(jo,Bo),p(jo,Po),p(Po,Wo),p(Po,Ro),z(Oo,Po,null),p(_,Jo),p(_,Vo),p(Vo,No),p(Vo,zo),p(Vo,Uo),p(Vo,Go),p(Vo,Ko),p(Ko,Yo),p(Ko,Zo),z(Xo,Ko,null),p(_,tc),p(_,ec),p(ec,nc),p(ec,sc),p(ec,ic),p(ec,ac),p(ec,rc),p(rc,lc),p(rc,oc),z(cc,rc,null),p(_,dc),p(_,uc),p(uc,hc),p(uc,pc),p(uc,mc),p(uc,fc),p(uc,vc),p(vc,gc),p(vc,bc),z(yc,vc,null),p(_,$c),p(_,wc),p(wc,xc),p(wc,kc),p(wc,Sc),p(wc,_c),p(wc,Tc),p(Tc,qc),p(Tc,jc),z(Lc,Tc,null),p(_,Fc),p(_,Cc),p(Cc,Dc),p(Cc,Hc),p(Cc,Mc),p(Cc,Qc),p(Cc,Ec),p(Ec,Ac),p(Ec,Ic),z(Bc,Ec,null),p(Cc,Pc),p(Cc,Wc),p(Cc,Rc),p(Cc,Oc),p(Cc,Jc),p(Cc,Vc),p(Vc,Nc),p(Vc,zc),z(Uc,Vc,null),p(_,Gc),p(_,Kc),p(Kc,Yc),p(Kc,Zc),p(Kc,Xc),p(Kc,td),p(Kc,ed),p(ed,nd),p(ed,sd),z(id,ed,null),ad=!0},p:n,i(t){ad||(R(B.$$.fragment,t),R(G.$$.fragment,t),R(tt.$$.fragment,t),R(at.$$.fragment,t),R(Ht.$$.fragment,t),R(Ot.$$.fragment,t),R(zt.$$.fragment,t),R(pe.$$.fragment,t),R($e.$$.fragment,t),R(Fe.$$.fragment,t),R(Ae.$$.fragment,t),R(ze.$$.fragment,t),R(tn.$$.fragment,t),R(un.$$.fragment,t),R(wn.$$.fragment,t),R(Cn.$$.fragment,t),R(Wn.$$.fragment,t),R(Yn.$$.fragment,t),R(ls.$$.fragment,t),R(gs.$$.fragment,t),R(qs.$$.fragment,t),R(Ms.$$.fragment,t),R(Js.$$.fragment,t),R(ti.$$.fragment,t),R(li.$$.fragment,t),R(gi.$$.fragment,t),R(qi.$$.fragment,t),R(Ai.$$.fragment,t),R(zi.$$.fragment,t),R(sa.$$.fragment,t),R(pa.$$.fragment,t),R(ka.$$.fragment,t),R(Ha.$$.fragment,t),R(Oa.$$.fragment,t),R(Xa.$$.fragment,t),R(cr.$$.fragment,t),R(yr.$$.fragment,t),R(Tr.$$.fragment,t),R(Er.$$.fragment,t),R(Or.$$.fragment,t),R(Xr.$$.fragment,t),R(cl.$$.fragment,t),R(yl.$$.fragment,t),R(Ll.$$.fragment,t),R(Bl.$$.fragment,t),R(Gl.$$.fragment,t),R(ao.$$.fragment,t),R(vo.$$.fragment,t),R(To.$$.fragment,t),R(Eo.$$.fragment,t),R(Oo.$$.fragment,t),R(Xo.$$.fragment,t),R(cc.$$.fragment,t),R(yc.$$.fragment,t),R(Lc.$$.fragment,t),R(Bc.$$.fragment,t),R(Uc.$$.fragment,t),R(id.$$.fragment,t),ad=!0)},o(t){O(B.$$.fragment,t),O(G.$$.fragment,t),O(tt.$$.fragment,t),O(at.$$.fragment,t),O(Ht.$$.fragment,t),O(Ot.$$.fragment,t),O(zt.$$.fragment,t),O(pe.$$.fragment,t),O($e.$$.fragment,t),O(Fe.$$.fragment,t),O(Ae.$$.fragment,t),O(ze.$$.fragment,t),O(tn.$$.fragment,t),O(un.$$.fragment,t),O(wn.$$.fragment,t),O(Cn.$$.fragment,t),O(Wn.$$.fragment,t),O(Yn.$$.fragment,t),O(ls.$$.fragment,t),O(gs.$$.fragment,t),O(qs.$$.fragment,t),O(Ms.$$.fragment,t),O(Js.$$.fragment,t),O(ti.$$.fragment,t),O(li.$$.fragment,t),O(gi.$$.fragment,t),O(qi.$$.fragment,t),O(Ai.$$.fragment,t),O(zi.$$.fragment,t),O(sa.$$.fragment,t),O(pa.$$.fragment,t),O(ka.$$.fragment,t),O(Ha.$$.fragment,t),O(Oa.$$.fragment,t),O(Xa.$$.fragment,t),O(cr.$$.fragment,t),O(yr.$$.fragment,t),O(Tr.$$.fragment,t),O(Er.$$.fragment,t),O(Or.$$.fragment,t),O(Xr.$$.fragment,t),O(cl.$$.fragment,t),O(yl.$$.fragment,t),O(Ll.$$.fragment,t),O(Bl.$$.fragment,t),O(Gl.$$.fragment,t),O(ao.$$.fragment,t),O(vo.$$.fragment,t),O(To.$$.fragment,t),O(Eo.$$.fragment,t),O(Oo.$$.fragment,t),O(Xo.$$.fragment,t),O(cc.$$.fragment,t),O(yc.$$.fragment,t),O(Lc.$$.fragment,t),O(Bc.$$.fragment,t),O(Uc.$$.fragment,t),O(id.$$.fragment,t),ad=!1},d(t){t&&f(e),U(B),U(G),U(tt),U(at),U(Ht),U(Ot),U(zt),U(pe),U($e),U(Fe),U(Ae),U(ze),U(tn),U(un),U(wn),U(Cn),U(Wn),U(Yn),U(ls),U(gs),U(qs),U(Ms),U(Js),U(ti),U(li),U(gi),U(qi),U(Ai),U(zi),U(sa),U(pa),U(ka),U(Ha),U(Oa),U(Xa),U(cr),U(yr),U(Tr),U(Er),U(Or),U(Xr),U(cl),U(yl),U(Ll),U(Bl),U(Gl),U(ao),U(vo),U(To),U(Eo),U(Oo),U(Xo),U(cc),U(yc),U(Lc),U(Bc),U(Uc),U(id)}}}function qt(t){function n(){e(".cDesc").each((function(){e(this).append('<div class="cReload">reload</div>')})),e(".cReload").show(),e(".cReload").on("click",(function(){const t=e(this).parent().parent().find("iframe");t.attr("src",t.attr("src"))}))}return document.getElementsByTagName("body")[0].style.display="none",e().isPageLoaded()&&(console.log("spa loaded"),setTimeout((()=>{gt(),n()}),1)),e((()=>{gt(),setTimeout((()=>{e(".cJQVer").each((function(){const t=e(this).attr("v");e(this).html(`<a href="https://api.jquery.com/${t}" target=_blank class="notranslate">jQuery ${t}(doc)</a>`)})),n()}),100)})),[]}class jt extends K{constructor(t){super(),G(this,t,qt,Tt,o,{})}}function Lt(t){let e,s,i,a,r,l,o,c,d,h,y,x,k,S,_,T,q,j,L,F,C,D,H,M,Q,E,A,I,B,P,W,J,V,G,K,Y,Z,X,tt,et;return B=new _t({props:{cname:"fetch",mh:"410"}}),tt=new _t({props:{cname:"axios",mh:"410"}}),{c(){e=v("main"),s=v("link"),i=b(),a=v("script"),l=b(),o=v("link"),c=b(),d=v("section"),d.innerHTML='<span id="idDocNav"></span> \n\t\t<div style="float:right;margin-right:20px"><a href="https://squery-vercel-app.translate.goog/?&amp;_x_tr_sl=auto&amp;_x_tr_tl=ja&amp;_x_tr_hl=en&amp;_x_tr_pto=wapp#/examples" style="color:#fff!important;">日本語に翻訳</a></div>',h=b(),y=v("section"),y.innerHTML='<section id="idLeftTop"><div id="idLeftLogo" class="notranslate"><a href="./" style="color:#fff">sQuery HOME</a></div> \n\t\t\n\t\t\t<div id="idLeftSearchCont"><hr/> \n\t\t\t\t<div style="position:relative"><input id="idDS" type="text" placeholder="search docs" autocorrect="off" autocapitalize="off" spellcheck="false"/> \n\t\t\t\t\t<div id="idDSC">×</div></div></div></section> \n\n\t\t<section class="cScrollable"><div name="" class="cSub">Examples</div> \n\t\t\t<div name="fetch" class="cF notranslate">fetch (alternative $.ajax)</div> \n\t\t\t<div name="axios" class="cF notranslate">axios (alternative $.ajax)</div> \n\t\n\t\t\t<br/><br/><br/><br/><br/><br/><br/><br/></section>',x=b(),k=v("div"),k.innerHTML="<span></span>",S=b(),_=v("section"),T=v("h1"),q=v("span"),j=g("sQuery Examples"),L=v("div"),L.textContent=`${vt}`,F=b(),C=v("doc"),D=v("h2"),D.textContent="fetch",H=b(),M=v("div"),M.textContent="In this example, I'm going to show you $.ajax like example using the ES6 native fetch function.",Q=b(),E=v("div"),A=v("div"),A.innerHTML='<div class="cBack"></div>\n\t\t\t\t\tfetch',I=b(),N(B.$$.fragment),P=b(),W=v("doc"),J=v("h2"),J.textContent="axios",V=b(),G=v("div"),G.textContent="In this example, I'm going to show you $.ajax like example using axios.",K=b(),Y=v("div"),Z=v("div"),Z.innerHTML='<div class="cBack"></div>\n\t\t\t\t\taxios',X=b(),N(tt.$$.fragment),$(s,"rel","stylesheet"),$(s,"href","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"),u(a.src,r="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")||$(a,"src","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"),$(o,"rel","stylesheet"),$(o,"href","./Docs.css"),$(d,"id","idHead"),$(y,"id","idLeft"),$(k,"class","menu__toggler"),$(q,"onclick","location.href='./';"),w(q,"cursor","pointer"),$(D,"class","notranslate"),$(M,"class","cPreDesc"),$(A,"class","cDesc"),$(C,"name","fetch"),$(J,"class","notranslate"),$(G,"class","cPreDesc"),$(Z,"class","cDesc"),$(W,"name","axios"),$(_,"id","idDoc")},m(t,n){m(t,e,n),p(e,s),p(e,i),p(e,a),p(e,l),p(e,o),p(e,c),p(e,d),p(e,h),p(e,y),p(e,x),p(e,k),p(e,S),p(e,_),p(_,T),p(T,q),p(q,j),p(q,L),p(_,F),p(_,C),p(C,D),p(C,H),p(C,M),p(C,Q),p(C,E),p(E,A),p(E,I),z(B,E,null),p(_,P),p(_,W),p(W,J),p(W,V),p(W,G),p(W,K),p(W,Y),p(Y,Z),p(Y,X),z(tt,Y,null),et=!0},p:n,i(t){et||(R(B.$$.fragment,t),R(tt.$$.fragment,t),et=!0)},o(t){O(B.$$.fragment,t),O(tt.$$.fragment,t),et=!1},d(t){t&&f(e),U(B),U(tt)}}}function Ft(t){function n(){e(".cDesc").each((function(){e(this).append('<div class="cReload">reload</div>')})),e(".cReload").show(),e(".cReload").on("click",(function(){const t=e(this).parent().parent().find("iframe");t.attr("src",t.attr("src"))}))}return document.getElementsByTagName("body")[0].style.display="none",e().isPageLoaded()&&(console.log("spa loaded"),setTimeout((()=>{gt(),n()}),1)),e((()=>{gt(),n()})),[]}class Ct extends K{constructor(t){super(),G(this,t,Ft,Lt,o,{})}}function Dt(t){let e,s,i,a,r,l,o,c,d,h,y,x,k,S,_,T,q,j,L,F,C,D,H,M,Q,E,A,I,B,P,W,J,V,G,K,Y,Z,X,tt,et,nt,st,it,at,rt;return X=new _t({props:{cname:"dom1",mh:"240",bOnlyCode:"1"}}),et=new _t({props:{cname:"dom2",mh:"240",bOnlyCode:"1"}}),{c(){e=v("main"),s=v("link"),i=b(),a=v("script"),l=b(),o=v("link"),c=b(),d=v("section"),d.innerHTML='<span id="idDocNav"></span> \n\t\t<div style="float:right;margin-right:20px"><a href="https://squery-vercel-app.translate.goog/?&amp;_x_tr_sl=auto&amp;_x_tr_tl=ja&amp;_x_tr_hl=en&amp;_x_tr_pto=wapp#/docs" style="color:#fff!important;">日本語に翻訳</a></div>',h=b(),y=v("section"),y.innerHTML='<section id="idLeftTop"><div id="idLeftLogo" class="notranslate"><a href="./" style="color:#fff">sQuery HOME</a></div> \n\t\t\n\t\t\t<div id="idLeftSearchCont"><hr/> \n\t\t\t\t<div style="position:relative"><input id="idDS" type="text" placeholder="search" autocorrect="off" autocapitalize="off" spellcheck="false"/> \n\t\t\t\t\t<div id="idDSC">×</div></div></div></section> \n\n\t\t<section class="cScrollable"><div style="font-weight:300"><div name="" class="cSub">Getting Started</div> \n\t\t\t\t<div name="Use_with_React" class="cF">・Use with React</div> \n\t\t\t\t<div name="Use_with_Vue" class="cF">・Use with Vue.js</div> \n\t\t\t\t<div name="Use_with_Svelte" class="cF">・Use with Svelte</div> \n\t\t\t\t<div name="Use_with_SolidJS" class="cF">・Use with SolidJS</div> \n\t\t\t\t<div name="Use_with_Angular" class="cF">・Use with Angular</div></div> \n\t\n\t\t\t<br/><br/><br/><br/><br/><br/><br/><br/></section>',x=b(),k=v("div"),k.innerHTML="<span></span>",S=b(),_=v("section"),T=v("h1"),q=v("span"),j=g("sQuery Install"),L=v("div"),L.textContent=`${vt}`,F=b(),C=v("doc"),C.innerHTML='<h2>Use with React</h2> \n\t\t\t<div class="cPreDesc"><img class="cFWLogo" src="img/react.png" alt="React.js" title="React.js"/>\n\t\t\t\tInstall <a href="https://nodejs.org/" target="_blank">node.js</a> if you didn&#39;t install it.<br/>\n\t\t\t\tOpen the terminal, and follow the <a href="https://create-react-app.dev/docs/getting-started" target="_blank">create-react-app</a> tutorial.</div> \n\t\t\t<div><div class="cSh notranslate">npx create-react-app@latest test<br/>\n\t\t\t\t\tcd test<br/>\n\t\t\t\t\tnpm start<br/></div>\n\t\t\t\t*NOTE*: If you want to use <a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a>, try this instead.\n\t\t\t\t<div class="cSh notranslate">npx create-react-app@latest test --template typescript<br/>\n\t\t\t\t\tcd test<br/>\n\t\t\t\t\tnpm start<br/></div> \n\n\t\t\t\t<hr/>\n\n\t\t\t\tTo launch the site (development):\n\t\t\t\t<div class="cSh notranslate">npm start</div>\n\n\t\t\t\tTo build the site (production):\n\t\t\t\t<div class="cSh notranslate">npm run build</div></div>',D=b(),H=v("doc"),H.innerHTML='<h2>Use with Vue.js</h2> \n\t\t\t<div class="cPreDesc"><img class="cFWLogo" src="img/vuejs.png" alt="Vue.js" title="Vue.js"/>\n\t\t\t\tGo to see the <a href="https://vuejs.org/guide/quick-start.html" target="_blank">official installation guide</a> for now.<br/>\n\t\t\t\tI&#39;ll update this section soon!</div>',M=b(),Q=v("doc"),E=v("h2"),E.textContent="Use with Svelte",A=b(),I=v("div"),B=v("img"),W=g("\n\t\t\t\tSvelte requires node.js. Install "),J=v("a"),J.textContent="node.js",V=g(".\n\t\t\t\t"),G=v("div"),G.innerHTML="npm create svelte@latest my-app<br/>\n\t\t\t\t\tcd my-app<br/>\n\t\t\t\t\tnpm install<br/>\n\t\t\t\t\tnpm run dev -- --open",K=b(),Y=v("div"),Y.textContent="The easiest way to implement sQuery is just adding the following code to the DOM part.",Z=b(),N(X.$$.fragment),tt=g("\n\t\t\t\tor you can also do with the module version!\n\t\t\t\t"),N(et.$$.fragment),nt=b(),st=v("doc"),st.innerHTML='<h2>Use with SolidJS</h2> \n\t\t\t<div class="cPreDesc"><img class="cFWLogo" src="img/solidjs.jpg" alt="SolidJS" title="SolidJS"/>\n\t\t\t\tGo to see the <a href="https://vuejs.org/guide/quick-start.html" target="_blank">official installation guide</a> for now.<br/>\n\t\t\t\tI&#39;ll update this section soon!</div>',it=b(),at=v("doc"),at.innerHTML='<h2>Use with Angular</h2> \n\t\t\t<div class="cPreDesc"><img class="cFWLogo" src="img/angular.png" alt="Angular" title="Angular"/>\n\t\t\t\tGo to see the <a href="https://vuejs.org/guide/quick-start.html" target="_blank">official installation guide</a> for now.<br/>\n\t\t\t\tI&#39;ll update this section soon!</div>',$(s,"rel","stylesheet"),$(s,"href","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css"),u(a.src,r="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")||$(a,"src","https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"),$(o,"rel","stylesheet"),$(o,"href","./Docs.css"),$(d,"id","idHead"),$(y,"id","idLeft"),$(k,"class","menu__toggler"),$(q,"onclick","location.href='./';"),w(q,"cursor","pointer"),$(C,"name","Use_with_React"),$(H,"name","Use_with_Vue"),$(B,"class","cFWLogo"),u(B.src,P="img/svelte.png")||$(B,"src","img/svelte.png"),$(B,"alt","Svelte"),$(B,"title","Svelte"),$(J,"href","https://nodejs.org/"),$(J,"target","_blank"),$(G,"class","cSh notranslate"),$(I,"class","cPreDesc"),$(Q,"name","Use_with_Svelte"),$(st,"name","Use_with_SolidJS"),$(at,"name","Use_with_Angular"),$(_,"id","idDoc")},m(t,n){m(t,e,n),p(e,s),p(e,i),p(e,a),p(e,l),p(e,o),p(e,c),p(e,d),p(e,h),p(e,y),p(e,x),p(e,k),p(e,S),p(e,_),p(_,T),p(T,q),p(q,j),p(q,L),p(_,F),p(_,C),p(_,D),p(_,H),p(_,M),p(_,Q),p(Q,E),p(Q,A),p(Q,I),p(I,B),p(I,W),p(I,J),p(I,V),p(I,G),p(I,K),p(I,Y),p(I,Z),z(X,I,null),p(I,tt),z(et,I,null),p(_,nt),p(_,st),p(_,it),p(_,at),rt=!0},p:n,i(t){rt||(R(X.$$.fragment,t),R(et.$$.fragment,t),rt=!0)},o(t){O(X.$$.fragment,t),O(et.$$.fragment,t),rt=!1},d(t){t&&f(e),U(X),U(et)}}}function Ht(t){function n(){e(".cDesc").each((function(){e(this).append('<div class="cReload">reload</div>')})),e(".cReload").show(),e(".cReload").on("click",(function(){const t=e(this).parent().parent().find("iframe");t.attr("src",t.attr("src"))}))}return document.getElementsByTagName("body")[0].style.display="none",e().isPageLoaded()&&(console.log("spa loaded"),setTimeout((()=>{gt(!1),n()}),1)),e((()=>{gt(!1),setTimeout((()=>{e(".cJQVer").each((function(){const t=e(this).attr("v");e(this).html(`<a href="https://api.jquery.com/${t}" target=_blank class="notranslate">jQuery ${t}(doc)</a>`)})),n()}),100)})),[]}class Mt extends K{constructor(t){super(),G(this,t,Ht,Dt,o,{})}}function Qt(t){let e,n,s,i,a,r,l,o,c,d,u,h,p;return{c(){e=v("link"),n=b(),s=v("link"),i=b(),a=v("link"),r=b(),l=v("link"),o=b(),c=v("link"),d=b(),u=v("h1"),u.textContent="sQuery Online Editor",h=b(),p=v("section"),p.innerHTML='<div class="cCodeSpace svelte-1xmg9bp"><textarea placeholder="Enter HTML Source Code" id="editing" spellcheck="false"></textarea> \n\t\t\t<pre id="highlighting" aria-hidden="true"><code class="language-html" id="highlighting-content"></code></pre></div> \n\n\t\t\n\t\t<iframe id="idResult" title="editor" class="svelte-1xmg9bp"></iframe>',$(e,"rel","preconnect"),$(e,"href","https://fonts.googleapis.com"),$(s,"rel","preconnect"),$(s,"href","https://fonts.gstatic.com"),$(s,"crossorigin",""),$(a,"href","https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap"),$(a,"rel","stylesheet"),$(l,"rel","stylesheet"),$(l,"href","./Docs.css"),$(c,"rel","stylesheet"),$(c,"href","./Sq_editor.css"),$(u,"class","svelte-1xmg9bp"),$(p,"class","cCodeCont")},m(t,f){m(t,e,f),m(t,n,f),m(t,s,f),m(t,i,f),m(t,a,f),m(t,r,f),m(t,l,f),m(t,o,f),m(t,c,f),m(t,d,f),m(t,u,f),m(t,h,f),m(t,p,f)},d(t){t&&f(e),t&&f(n),t&&f(s),t&&f(i),t&&f(a),t&&f(r),t&&f(l),t&&f(o),t&&f(c),t&&f(d),t&&f(u),t&&f(h),t&&f(p)}}}function Et(t){let e,n;return e=new ut({props:{$$slots:{default:[Qt]},$$scope:{ctx:t}}}),{c(){N(e.$$.fragment)},m(t,s){z(e,t,s),n=!0},p(t,[n]){const s={};4&n&&(s.$$scope={dirty:n,ctx:t}),e.$set(s)},i(t){n||(R(e.$$.fragment,t),n=!0)},o(t){O(e.$$.fragment,t),n=!1},d(t){U(e,t)}}}function At(t){let n=function(){console.log("load 2"),e("body").hide().fadeIn(400),e("#editing").on("change",(function(){let t=e("#editing").val().replace(/'/g,"\\'").replace(/\n/g,"\\n");document.getElementById("idResult").src="javascript:'"+t+"'"})),e("#editing").on("input",(function(){yt(this.value),$t(this)})),e("#editing").on("keydown",(function(t){switch(t.keyCode){case 9:return window.bTab=!0,t.preventDefault(),!1;case 16:return window.bShift=!0,t.preventDefault(),!1;case 17:return window.bCtrl=!0,t.preventDefault(),!1}})),e("#editing").on("keyup",(function(t){switch(wt(this,t),t.keyCode){case 9:return!1;case 16:return window.bShift=!1,!1;case 17:return window.bCtrl=!1,!1}})),e("#editing").on("scroll",(function(t){$t(this)})),e("#editing").val("<p id=\"p1\">element1</p>\n<p id=\"p2\">element2</p>\n<p id=\"p3\">element3</p>\n\n<script src=\"./squery.min.js\"><\/script>\n<script>\nsq(()=>{\n\tsq('p').css('font-size', '22px')\n\tsq('p').on('click', function(){\n\t\tsq(this).css('background', 'yellow')\n\t})\n\tsq('p[id=\"p2\"]').on('mouseover', function(){\n\t\tsq(this).css({\n\t\t\tborder: '1px dotted blue',\n\t\t\ttextShadow: '2px 2px 8px #44f'\n\t\t})\n\t}).on('mouseout', function(){\n\t\tsq(this).css({\n\t\t\tborder: 'none',\n\t\t\ttextShadow: 'none'\n\t\t})\n\t})\n})\n<\/script>\n").trg("input").trg("change"),e("#idDoc").css({width:"100%","max-width":"100%"}),e(".cF").contains("editor").addClass("active")};return e().isPageLoaded()&&(console.log("spa loaded"),setTimeout((()=>{n()}),1)),e((()=>{console.log("loaded"),n()})),[]}class It extends K{constructor(t){super(),G(this,t,At,Et,o,{})}}function Bt(t){let e,s;return e=new ot({props:{routes:t[0]}}),{c(){N(e.$$.fragment)},m(t,n){z(e,t,n),s=!0},p:n,i(t){s||(R(e.$$.fragment,t),s=!0)},o(t){O(e.$$.fragment,t),s=!1},d(t){U(e,t)}}}function Pt(t){return[{"/":ft,"/docs":jt,"/examples":Ct,"/install":Mt,"/sq":It,"/sqi":_t,"*":ft}]}return new class extends K{constructor(t){super(),G(this,t,Pt,Bt,o,{})}}({target:document.body,props:{}})}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+var app = (function () {
+	'use strict';
+
+	/*eslint-disable*/
+
+	if ( typeof _JQ === 'undefined' )
+	{
+		class _JQ {
+			constructor(){this.ac=[];this.wa=[];}
+			isW(v){
+				const wStr = Object.prototype.toString.call(window);
+				function isWindow(arg){
+					let str,self,hasSelf;
+					str = Object.prototype.toString.call(arg);
+					switch (wStr){case '[object DOMWindow]':case '[object Window]':case '[object global]': return str === wStr}
+					if ('self' in arg)
+					{
+						hasSelf = arg.hasOwnProperty('self');
+						try {
+							if (hasSelf)
+								self = arg.self;
+							
+							delete arg.self;
+							if (hasSelf)
+								arg.self = self;
+						}catch (e){return true}
+					}
+					return false
+				}
+				return isWindow(v)
+			}
+			remove(el){if (el) el.remove();}
+			before( el, h ){if (el) el.insertAdjacentHTML('beforebegin', h);}
+			after( el, h ){if (el) el.insertAdjacentHTML('afterend', h);}
+			prepend( el, h ){if (el) el.insertAdjacentHTML('afterbegin', h);}
+			append( el, h ){if (el) el.insertAdjacentHTML('beforeend', h);}
+			prop(el, p, v){if (el) el.style.setProperty(p,v);}
+			addClass(el, n){if (el) el.classList.add(n);}
+			removeClass(el, n){if (el) el.classList.remove(n);}
+			toggleClass(el, n){if (el) el.classList.toggle(n);}
+			show( el, d='block' ){
+				if (!el) return
+				if (d === 'none') d = 'block';
+				el.style.visibility = 'visible';
+				el.style.display = d;
+				el.style.opacity = 1;
+			}
+			hide( el ){
+				if (!el) return
+				el.style.visibility = 'hidden';
+				el.style.display = 'none';
+				el.style.opacity = 0;
+			}
+			animate( el, kf, op, sp, cb, cb2 ){
+				if (!el) return
+				if ( typeof op === 'number' )
+					cb2 = cb, cb = sp, sp = op, op = null;
+				if ( sp === undefined )
+					sp = 500;
+				if (!op) op = {};
+				if (!op.duration) op.duration = sp;
+				//if (!op.fill) op.fill = 'both'
+				el.animate( kf, op ).onfinish = ()=>{
+					if ( cb ) cb.bind( el )();
+					if ( cb2 ) cb2.bind( el )();
+				};
+			}
+			isVisible(el){
+				if (!(el instanceof Element)) return false
+				const style = getComputedStyle(el);
+				if (style.display === 'none') return false
+				if (style.visibility !== 'visible') return false
+				if (style.opacity < 0.1) return false
+				if (el.offsetWidth + el.offsetHeight + el.getBoundingClientRect().height + el.getBoundingClientRect().width === 0)
+					return false
+
+				const elemCenter = {
+					x: el.getBoundingClientRect().left + el.offsetWidth/2,
+					y: el.getBoundingClientRect().top + el.offsetHeight/2
+				};
+				if (elemCenter.x < 0) return false
+				if (elemCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false
+				if (elemCenter.y < 0) return false
+				if (elemCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false
+				let pointContainer = document.elementFromPoint(elemCenter.x, elemCenter.y);
+				do {
+					if (pointContainer === el) return true
+				} while (pointContainer = pointContainer.parentNode)
+				return false
+			}
+			fadeIn( el, ms, cb, d='inline-block' ){
+				let o = parseFloat(el.style.opacity);
+				if ( isNaN(o) )
+					this.isVisible(el) ? o=1 : o=0;
+
+				this.animate( el, [{'opacity': o}, {'opacity': 1}], {
+					easing: 'ease-in'
+				}, ms, ()=>{
+					el.style.opacity = 1;
+				}, cb);
+				this.show(el, d);
+			}
+			fadeOut( el, ms, cb ){
+				let o = parseFloat(el.style.opacity);
+				if ( isNaN(o) )
+					o = 1;
+
+				this.animate( el, [{'opacity': o}, {'opacity': 0}], {
+					easing: 'ease-out'
+				}, ms, ()=>{
+					this.hide(el);
+				}, cb);
+			}
+			each(el, f, i){return f.apply(el, [i])}
+		}
+
+		class _SF {
+			constructor(){
+				this.b = 0;
+				this.el = [];
+				this.disp = [];
+				this.fOb = {};
+				this.v = undefined;
+			}
+			_setEl(el){
+				this.el = [];
+				if ( el ){
+					this.v = el?.value;
+					let n = el.length;
+					if ( n || el instanceof NodeList )
+						this.el = Array.from(el);
+					else if ( n !== 0 )
+						this.el = [el];
+					else if (_jq.isW(el))
+						this.el = el;
+				}
+				this.length = this.el.length;
+				if ( !this.b )
+					this.b = 1;
+				
+				this._saveDisp();
+			}
+			_th(){return this}
+			_saveDisp(){
+				this.disp = [];
+				let cnt = 0;
+				if ( _jq.isW(this.el) )
+					return
+				this.el?.forEach(el => {
+					this.disp[cnt] = 'none';
+					if ( el ){
+						let d = 'block';
+						if ( !_jq.isW(el) && el !== document )
+							d = window.getComputedStyle(el).display;
+
+						if ( d && d !== 'none' )
+							this.disp[cnt] = d;
+					}
+					cnt++;
+				});
+			}
+			setEl(el){ this._setEl(el); return this}
+			doc(){ return this.setEl( document ) }
+			win(){ return this.setEl( window ) }
+			ob(el){ return this.setEl( el ) } //this or other elements
+
+			q(s){ return this.setEl( document.querySelector(s) ) }
+			qa(s){ return this.setEl( document.querySelectorAll(s) ) }
+			id(s){ return this.setEl( document.getElementById(s) ) }
+			cl(s){ return this.setEl( document.getElementsByClassName(s) ) }
+			tg(s){ return this.setEl( document.getElementsByTagName(s) ) }
+
+			get(i=null){if ( i!==null ) return this.el[i]; return this.el}
+			_wh(n,v){
+				if (_jq.isW(this.el))
+				{
+					if (n == 'width')return window.innerWidth
+					return window.innerHeight
+				}
+				if ( v !== undefined )
+				{
+					this.el?.forEach(el => {
+						if (typeof v === 'function') v = v();
+						if (typeof v === 'string') el.style[n] = v;
+						else el.style[n] = v + 'px';
+					});
+					return this
+				}
+				return parseFloat(getComputedStyle(this.el[0], null)[n].replace('px', ''))
+			}
+			width(v){return this._wh('width',v)}
+			height(v){return this._wh('height',v)}
+			innerWidth(){return this.el[0].clientWidth}
+			innerHeight(){return this.el[0].clientHeight}
+			outerWidth(){return this.el[0].offsetWidth}
+			outerHeight(){return this.el[0].offsetHeight}
+			offset(){return this.el[0].getBoundingClientRect()}
+			pos(){return {left: this.el[0].offsetLeft, top: this.el[0].offsetTop}}
+			position(){return this.pos()}
+			_fd( fn, ...args ){
+				let i=0;
+				this.el?.forEach(el => {_jq[fn]( el, ...args, this.disp[ i++ ] );});
+				return this
+			}
+			show(){return this._fd('show')}
+			fadeIn( ms=500, cb ){return this._fd('fadeIn', ms, cb)}
+			isVisible(){return _jq.isVisible(this.el)}
+			_vs(n,v){
+				if( !this.el || !this.el[0] ) return undefined;
+				if (v !== undefined){this.el?.forEach(el=>el[n] = v);return this}
+				return this.el[0][n]
+			}
+			prop(p, v){return this._vs(p,v)}
+			scrollTop(v){return this._vs('scrollTop',v)}
+			scrollLeft(v){return this._vs('scrollLeft',v)}
+			scroll(y,b){
+				if (b) b = 'instant';
+				else b = 'smooth';
+				if (_jq.isW(this.el)) return window.scroll({top: y, behavior: b})
+				else this.el?.forEach(el=>el.scroll({top: y, behavior: b}));
+				return this
+			}
+			scrollToElement(o=50,b){
+				if( !this.el || !this.el[0] ) return this;
+				if (b) b = 'instant';
+				else b = 'smooth';
+				const br = document.body.getBoundingClientRect().top,
+				er = this.el[0].getBoundingClientRect().top, ep = er - br;
+				window.scrollTo({top: ep - o,behavior: b});
+				return this
+			}
+			animate( kf, op, sp, cb ){
+				let f=()=>{this.css(kf[1]);};
+				if ( typeof op === 'number' )cb = f;
+				this.el?.forEach(el => {_jq.animate( el, kf, op, sp, cb, f);});
+				return this
+			}
+
+			each( f ){
+				let i = 0;
+				this.el?.every(el => {
+					if ( _jq.each( el, f, i++ ) === false )
+						return false
+					return true
+				});
+				return this
+			}
+			attr(a, v){
+				if( !this.el || !this.el[0] ) return undefined;
+				if ( v === undefined )
+					return this.el[0].getAttribute(a)
+
+				this.el.forEach(el => el.setAttribute(a,v));
+				return this
+			}
+			prop(p, v){
+				if( !this.el || !this.el[0] ) return undefined;
+				if ( v === undefined )
+					return this.el[0][p]
+
+				this.el.forEach(el => el[p]=v);
+				return this
+			}
+			removeAttr(a){this.el.forEach(el => el.removeAttribute(a));return this}
+			removeProp(p){return this.removeAttr(p)}
+			_fv( n, v ){
+				let r = this.el && this.el[0];
+				if ( v !== null )
+				{
+					if( !r ) return this
+					this.el.forEach(el=>el[n] = v);
+					return this
+				}
+				if( !r ) return undefined
+				return this.el[0][n]
+			}
+			html(v=null){
+				if (typeof v === 'object' && !Array.isArray(v) && v !== null)
+				{
+					this._fv('innerHTML','').get(0).append(v);
+					return this
+				}
+				return this._fv( 'innerHTML', v )
+			}
+			text(v=null){return this._fv( 'innerText', v )}
+			val(v=null){
+				if ( v===null && typeof this.v !== 'undefined' )
+					return this.v
+				return this._fv( 'value', v )
+			}
+			css(c, v=null){
+				if( !this.el || !this.el[0] ) return undefined;
+				if ( c )
+				{
+					let set = (c, v)=>{
+						c = c.replace(/-([a-z])/g, function(g){ return g[1].toUpperCase(); }); //dash to camel case
+						if ( v !== null ){
+							this.el.forEach(el=>el.style[c] = v);
+							return this
+						}
+						return this.el[0].style[c]
+					};
+					if ( typeof c === 'object' )//object
+					{
+						Object.keys( c ).forEach(k =>set(k, c[k]));
+						return this
+					}
+					return set(c, v)
+				}
+				return this.el[0].style
+			}
+			eq(i){
+				if (i<0)i = this.el.length+i;
+				if ( this.el && this.el[i] )
+					return sq(this.el[i])._th()
+				return sq(0)._th()
+			}
+			not(s){
+				if ( this.el )
+				{
+					let a=[];
+					this.el.forEach(el=>{if ( !el.matches(s) )a.push(el);});
+					return sq(a)._th()
+				}
+				return this
+			}
+
+			filter(f){
+				if( this.el )
+				{
+					let a = [];
+					if ( typeof f === 'function')
+						this.el.forEach(el => {if ( Array.prototype.filter.call( el, f ) )a.push(el);});
+					else
+						this.el.forEach(el => {if ( el.matches(f) )a.push(el);});
+					return sq(a)._th()
+				}
+				return this
+			}
+			is(s){
+				let r=false;
+				this.el?.forEach(el=>{if ( el.matches(s) )r=true;});
+				return r
+			}
+			find(s){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						let q = el.querySelectorAll(s);
+						if ( q.length )
+							a = a.concat( Array.from(q) );
+					});
+					return sq(a)._th()
+				}
+				return this
+			}
+			has(s){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{if (el.querySelector(s))a.push( el );});
+					return sq(a)._th()
+				}
+				return this
+			}
+			contains(t,b){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						if ( (b && el?.innerHTML.includes(t)) || (!b && el?.innerText.includes(t)) )
+							a.push( el );
+					});
+					return sq(a)._th()
+				}
+				return this
+			}
+			first(){if ( this.el )return sq(this.el[0])._th();return this}
+			last(){if ( this.el )return sq(this.el[this.el.length-1])._th();return this}
+			index(){
+				if (!this.el) return -1
+				let i = 0;
+				while (this.el[0] = this.el[0].previousElementSibling)
+					i++;
+				return i
+			}
+			slice(s,e){
+				let a = [];
+				if ( this.el ){
+					let n = this.el.length;
+					if (!e)e = n;
+					if (s < 0)s = n+s;
+					if (e < 0)e = n+e;
+					for ( let i=s; i < e; i++ )
+						a.push(this.el[i]);
+				}
+				return sq(a)._th()
+			}
+			parent(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						if ( el?.parentNode)
+							a.push( el.parentNode );
+					});
+					return sq(a)._th()
+				}
+				return this
+			}
+			parents(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						let p = el.parentNode;
+						while (p !== document ){
+							let o = p;
+							a.push(o);
+							p = o?.parentNode;
+						}
+					});
+					a = [...new Set(a)];
+					return sq(a)._th()
+				}
+				return this
+			}
+			closest(s){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						let c = el.closest(s);
+						if ( c )
+							a.push(c);
+					});
+					a = [...new Set(a)];
+					return sq(a)._th()
+				}
+				return this
+			}
+			children(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{if ( el.children?.length )a = a.concat( Array.from(el.children) );});
+					return sq(a)._th()
+				}
+				return this
+			}
+			prev(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{if ( el.previousElementSibling )a.push( el.previousElementSibling );});
+					return sq(a)._th()
+				}
+				return this
+			}
+			next(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						if ( el.nextElementSibling )
+							a.push( el.nextElementSibling );
+					});
+					return sq(a)._th()
+				}
+				return this
+			}
+			siblings(){
+				if ( this.el )
+				{
+					let a = [];
+					this.el.forEach(el=>{
+						if ( el.parentNode )
+						{
+							let s = el.parentNode.firstChild;
+							while(s){
+								if (s.nodeType === 1 && s !== el)
+									a.push(s);
+								s = s.nextSibling;
+							}
+						}
+					});
+					return sq(a)._th()
+				}
+				return this
+			}
+
+
+			_setAC(ev,f){
+				let i = _jq.ac.length;
+				_jq.ac[i] = {'ev':ev, 'f':f};
+				return i
+			}
+			_setSQA(el,ev,i){
+				if (!el.getAttribute)return
+				let v = el.getAttribute('sq-'+ev);
+				if (!v)v = '';
+				v += ',' + i;
+				el.setAttribute('sq-'+ev, v);
+			}
+			_setSQW(ev,i){
+				let v = _jq.wa[ev];
+				if (!v)v = '';
+				v += ',' + i;
+				_jq.wa[ev]=v;
+			}
+			onf(ev, s, f){
+				this.el?.forEach(el=>{
+					let u = (e)=>{
+						let tg = e.target;
+						while (tg) {
+							if (tg.matches(s)){
+								if ( f.bind( /*e.target*/el.querySelectorAll(s) )(e) === false )
+								{
+									e.preventDefault();
+									e.stopImmediatePropagation();
+									return
+								}
+							}
+							tg = tg.parentElement;
+						}
+					};
+					let i = this._setAC( ev, u );
+					el.querySelectorAll(s)?.forEach(q=>this._setSQA(q,ev,i));
+					el.addEventListener( ev, u );
+				});
+				return this
+			}
+			on(ev, f){
+				let u=(e)=>{
+					//console.log('u: ', e.path, e.target)
+					if ( f.bind( e.currentTarget/*this.e.target or this.el*/ )(e) === false )
+					{
+						e.preventDefault();
+						e.stopImmediatePropagation();
+					}
+				};
+				let i = this._setAC(ev,u);
+				if (_jq.isW(this.el))
+					this._setSQW(ev,i), window.addEventListener(ev,u);
+				else
+					this.el?.forEach(el=>{this._setSQA(el,ev,i);el.addEventListener(ev,u);});
+				return this
+			}
+			off(ev){
+				if (_jq.isW(this.el)){
+					let v = _jq.wa[ev], a = v?.split(',');
+					a?.forEach(t=>{
+						if ( _jq.ac[t]?.f )
+							window.removeEventListener( ev, _jq.ac[t].f );
+					});
+				} else
+					this.el?.forEach(el=>{
+						let v = el.getAttribute('sq-'+ev), a = v?.split(',');
+						a?.forEach(t=>{
+							if ( _jq.ac[t]?.f )
+							{
+								el.removeEventListener( ev, _jq.ac[t].f );
+								document.removeEventListener( ev, _jq.ac[t].f );
+							}
+						});
+					});
+				return this
+			}
+			trg(ev,b=1,c=0){this.el?.forEach(el=>{let v = new Event(ev, {bubbles:b,composed:c});el.dispatchEvent(v);});return this}
+			trigger(ev,b=1,c=0){this.trg(ev,b,c);}
+
+			_f( funcName, ...args ){this.el?.forEach(el => {_jq[funcName]( el, ...args );});return this}
+			remove(){return this._f('remove')}
+			before( h ){return this._f('before', h)}
+			after( h ){return this._f('after', h)}
+			prepend( h ){return this._f('prepend', h)}
+			append( h ){return this._f('append', h)}
+			replaceWith( h ){this.el?.forEach(el=>el.outerHTML = h); return this}
+			addClass( n ){return this._f('addClass', n)}
+			hasClass( n ){return this.el[0]?.classList.contains(n)?true:false}
+			removeClass( n ){return this._f('removeClass', n)}
+			toggleClass( n ){return this._f('toggleClass', n)}
+
+
+			_fsd( funcName, ...args ){
+				if( !this.el ) return this
+				this._saveDisp();
+				this.el.forEach(el => {_jq[funcName]( el, ...args );});
+				return this
+			}
+			fadeOut( ms=500, cb ){return this._fsd('fadeOut', ms, cb)}
+			hide(){return this._fsd('hide')}
+			isPageLoaded(){let s=document.readyState;if(s==='complete'||s==='loaded')return true;return false}
+		}
+
+		let _jq = new _JQ();
+		var sq = function(s, t){
+			let _q = new _SF(), c = typeof s;
+			if ( c !== 'string' )
+			{
+				if ( c === 'function')
+				{
+					document.addEventListener('DOMContentLoaded',(e)=>s(e));
+					return
+				}
+				switch ( s ){
+					case document: return _q.doc(s)
+					case window: return _q.win(s)
+					default: return _q.ob(s)
+				}
+			}
+			switch (t){
+				case 'id': return _q.id(s.replace('#',''))
+				case 'class': case 'cl': return _q.cl(s.replace('.',''))
+				case 'tag': case 'tg': return _q.tg(s)
+				case 'q': return _q.q(s)
+				default: return _q.qa(s)
+			}
+		}, sQuery = sq;
+	}
+
+	function noop() { }
+	function assign(tar, src) {
+	    // @ts-ignore
+	    for (const k in src)
+	        tar[k] = src[k];
+	    return tar;
+	}
+	function add_location(element, file, line, column, char) {
+	    element.__svelte_meta = {
+	        loc: { file, line, column, char }
+	    };
+	}
+	function run(fn) {
+	    return fn();
+	}
+	function blank_object() {
+	    return Object.create(null);
+	}
+	function run_all(fns) {
+	    fns.forEach(run);
+	}
+	function is_function(thing) {
+	    return typeof thing === 'function';
+	}
+	function safe_not_equal(a, b) {
+	    return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+	}
+	let src_url_equal_anchor;
+	function src_url_equal(element_src, url) {
+	    if (!src_url_equal_anchor) {
+	        src_url_equal_anchor = document.createElement('a');
+	    }
+	    src_url_equal_anchor.href = url;
+	    return element_src === src_url_equal_anchor.href;
+	}
+	function is_empty(obj) {
+	    return Object.keys(obj).length === 0;
+	}
+	function subscribe(store, ...callbacks) {
+	    if (store == null) {
+	        return noop;
+	    }
+	    const unsub = store.subscribe(...callbacks);
+	    return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+	}
+	function create_slot(definition, ctx, $$scope, fn) {
+	    if (definition) {
+	        const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
+	        return definition[0](slot_ctx);
+	    }
+	}
+	function get_slot_context(definition, ctx, $$scope, fn) {
+	    return definition[1] && fn
+	        ? assign($$scope.ctx.slice(), definition[1](fn(ctx)))
+	        : $$scope.ctx;
+	}
+	function get_slot_changes(definition, $$scope, dirty, fn) {
+	    if (definition[2] && fn) {
+	        const lets = definition[2](fn(dirty));
+	        if ($$scope.dirty === undefined) {
+	            return lets;
+	        }
+	        if (typeof lets === 'object') {
+	            const merged = [];
+	            const len = Math.max($$scope.dirty.length, lets.length);
+	            for (let i = 0; i < len; i += 1) {
+	                merged[i] = $$scope.dirty[i] | lets[i];
+	            }
+	            return merged;
+	        }
+	        return $$scope.dirty | lets;
+	    }
+	    return $$scope.dirty;
+	}
+	function update_slot_base(slot, slot_definition, ctx, $$scope, slot_changes, get_slot_context_fn) {
+	    if (slot_changes) {
+	        const slot_context = get_slot_context(slot_definition, ctx, $$scope, get_slot_context_fn);
+	        slot.p(slot_context, slot_changes);
+	    }
+	}
+	function get_all_dirty_from_scope($$scope) {
+	    if ($$scope.ctx.length > 32) {
+	        const dirty = [];
+	        const length = $$scope.ctx.length / 32;
+	        for (let i = 0; i < length; i++) {
+	            dirty[i] = -1;
+	        }
+	        return dirty;
+	    }
+	    return -1;
+	}
+	function append(target, node) {
+	    target.appendChild(node);
+	}
+	function insert(target, node, anchor) {
+	    target.insertBefore(node, anchor || null);
+	}
+	function detach(node) {
+	    node.parentNode.removeChild(node);
+	}
+	function element(name) {
+	    return document.createElement(name);
+	}
+	function text(data) {
+	    return document.createTextNode(data);
+	}
+	function space() {
+	    return text(' ');
+	}
+	function empty() {
+	    return text('');
+	}
+	function attr(node, attribute, value) {
+	    if (value == null)
+	        node.removeAttribute(attribute);
+	    else if (node.getAttribute(attribute) !== value)
+	        node.setAttribute(attribute, value);
+	}
+	function children(element) {
+	    return Array.from(element.childNodes);
+	}
+	function set_style(node, key, value, important) {
+	    node.style.setProperty(key, value, important ? 'important' : '');
+	}
+	function custom_event(type, detail, bubbles = false) {
+	    const e = document.createEvent('CustomEvent');
+	    e.initCustomEvent(type, bubbles, false, detail);
+	    return e;
+	}
+
+	let current_component;
+	function set_current_component(component) {
+	    current_component = component;
+	}
+	function get_current_component() {
+	    if (!current_component)
+	        throw new Error('Function called outside component initialization');
+	    return current_component;
+	}
+	function afterUpdate(fn) {
+	    get_current_component().$$.after_update.push(fn);
+	}
+	function onDestroy(fn) {
+	    get_current_component().$$.on_destroy.push(fn);
+	}
+	function createEventDispatcher() {
+	    const component = get_current_component();
+	    return (type, detail) => {
+	        const callbacks = component.$$.callbacks[type];
+	        if (callbacks) {
+	            // TODO are there situations where events could be dispatched
+	            // in a server (non-DOM) environment?
+	            const event = custom_event(type, detail);
+	            callbacks.slice().forEach(fn => {
+	                fn.call(component, event);
+	            });
+	        }
+	    };
+	}
+	// TODO figure out if we still want to support
+	// shorthand events, or if we want to implement
+	// a real bubbling mechanism
+	function bubble(component, event) {
+	    const callbacks = component.$$.callbacks[event.type];
+	    if (callbacks) {
+	        // @ts-ignore
+	        callbacks.slice().forEach(fn => fn.call(this, event));
+	    }
+	}
+
+	const dirty_components = [];
+	const binding_callbacks = [];
+	const render_callbacks = [];
+	const flush_callbacks = [];
+	const resolved_promise = Promise.resolve();
+	let update_scheduled = false;
+	function schedule_update() {
+	    if (!update_scheduled) {
+	        update_scheduled = true;
+	        resolved_promise.then(flush);
+	    }
+	}
+	function tick() {
+	    schedule_update();
+	    return resolved_promise;
+	}
+	function add_render_callback(fn) {
+	    render_callbacks.push(fn);
+	}
+	let flushing = false;
+	const seen_callbacks = new Set();
+	function flush() {
+	    if (flushing)
+	        return;
+	    flushing = true;
+	    do {
+	        // first, call beforeUpdate functions
+	        // and update components
+	        for (let i = 0; i < dirty_components.length; i += 1) {
+	            const component = dirty_components[i];
+	            set_current_component(component);
+	            update$1(component.$$);
+	        }
+	        set_current_component(null);
+	        dirty_components.length = 0;
+	        while (binding_callbacks.length)
+	            binding_callbacks.pop()();
+	        // then, once components are updated, call
+	        // afterUpdate functions. This may cause
+	        // subsequent updates...
+	        for (let i = 0; i < render_callbacks.length; i += 1) {
+	            const callback = render_callbacks[i];
+	            if (!seen_callbacks.has(callback)) {
+	                // ...so guard against infinite loops
+	                seen_callbacks.add(callback);
+	                callback();
+	            }
+	        }
+	        render_callbacks.length = 0;
+	    } while (dirty_components.length);
+	    while (flush_callbacks.length) {
+	        flush_callbacks.pop()();
+	    }
+	    update_scheduled = false;
+	    flushing = false;
+	    seen_callbacks.clear();
+	}
+	function update$1($$) {
+	    if ($$.fragment !== null) {
+	        $$.update();
+	        run_all($$.before_update);
+	        const dirty = $$.dirty;
+	        $$.dirty = [-1];
+	        $$.fragment && $$.fragment.p($$.ctx, dirty);
+	        $$.after_update.forEach(add_render_callback);
+	    }
+	}
+	const outroing = new Set();
+	let outros;
+	function group_outros() {
+	    outros = {
+	        r: 0,
+	        c: [],
+	        p: outros // parent group
+	    };
+	}
+	function check_outros() {
+	    if (!outros.r) {
+	        run_all(outros.c);
+	    }
+	    outros = outros.p;
+	}
+	function transition_in(block, local) {
+	    if (block && block.i) {
+	        outroing.delete(block);
+	        block.i(local);
+	    }
+	}
+	function transition_out(block, local, detach, callback) {
+	    if (block && block.o) {
+	        if (outroing.has(block))
+	            return;
+	        outroing.add(block);
+	        outros.c.push(() => {
+	            outroing.delete(block);
+	            if (callback) {
+	                if (detach)
+	                    block.d(1);
+	                callback();
+	            }
+	        });
+	        block.o(local);
+	    }
+	}
+
+	const globals = (typeof window !== 'undefined'
+	    ? window
+	    : typeof globalThis !== 'undefined'
+	        ? globalThis
+	        : global);
+
+	function get_spread_update(levels, updates) {
+	    const update = {};
+	    const to_null_out = {};
+	    const accounted_for = { $$scope: 1 };
+	    let i = levels.length;
+	    while (i--) {
+	        const o = levels[i];
+	        const n = updates[i];
+	        if (n) {
+	            for (const key in o) {
+	                if (!(key in n))
+	                    to_null_out[key] = 1;
+	            }
+	            for (const key in n) {
+	                if (!accounted_for[key]) {
+	                    update[key] = n[key];
+	                    accounted_for[key] = 1;
+	                }
+	            }
+	            levels[i] = n;
+	        }
+	        else {
+	            for (const key in o) {
+	                accounted_for[key] = 1;
+	            }
+	        }
+	    }
+	    for (const key in to_null_out) {
+	        if (!(key in update))
+	            update[key] = undefined;
+	    }
+	    return update;
+	}
+	function get_spread_object(spread_props) {
+	    return typeof spread_props === 'object' && spread_props !== null ? spread_props : {};
+	}
+	function create_component(block) {
+	    block && block.c();
+	}
+	function mount_component(component, target, anchor, customElement) {
+	    const { fragment, on_mount, on_destroy, after_update } = component.$$;
+	    fragment && fragment.m(target, anchor);
+	    if (!customElement) {
+	        // onMount happens before the initial afterUpdate
+	        add_render_callback(() => {
+	            const new_on_destroy = on_mount.map(run).filter(is_function);
+	            if (on_destroy) {
+	                on_destroy.push(...new_on_destroy);
+	            }
+	            else {
+	                // Edge case - component was destroyed immediately,
+	                // most likely as a result of a binding initialising
+	                run_all(new_on_destroy);
+	            }
+	            component.$$.on_mount = [];
+	        });
+	    }
+	    after_update.forEach(add_render_callback);
+	}
+	function destroy_component(component, detaching) {
+	    const $$ = component.$$;
+	    if ($$.fragment !== null) {
+	        run_all($$.on_destroy);
+	        $$.fragment && $$.fragment.d(detaching);
+	        // TODO null out other refs, including component.$$ (but need to
+	        // preserve final state?)
+	        $$.on_destroy = $$.fragment = null;
+	        $$.ctx = [];
+	    }
+	}
+	function make_dirty(component, i) {
+	    if (component.$$.dirty[0] === -1) {
+	        dirty_components.push(component);
+	        schedule_update();
+	        component.$$.dirty.fill(0);
+	    }
+	    component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+	}
+	function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
+	    const parent_component = current_component;
+	    set_current_component(component);
+	    const $$ = component.$$ = {
+	        fragment: null,
+	        ctx: null,
+	        // state
+	        props,
+	        update: noop,
+	        not_equal,
+	        bound: blank_object(),
+	        // lifecycle
+	        on_mount: [],
+	        on_destroy: [],
+	        on_disconnect: [],
+	        before_update: [],
+	        after_update: [],
+	        context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+	        // everything else
+	        callbacks: blank_object(),
+	        dirty,
+	        skip_bound: false,
+	        root: options.target || parent_component.$$.root
+	    };
+	    append_styles && append_styles($$.root);
+	    let ready = false;
+	    $$.ctx = instance
+	        ? instance(component, options.props || {}, (i, ret, ...rest) => {
+	            const value = rest.length ? rest[0] : ret;
+	            if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+	                if (!$$.skip_bound && $$.bound[i])
+	                    $$.bound[i](value);
+	                if (ready)
+	                    make_dirty(component, i);
+	            }
+	            return ret;
+	        })
+	        : [];
+	    $$.update();
+	    ready = true;
+	    run_all($$.before_update);
+	    // `false` as a special case of no DOM component
+	    $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+	    if (options.target) {
+	        if (options.hydrate) {
+	            const nodes = children(options.target);
+	            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	            $$.fragment && $$.fragment.l(nodes);
+	            nodes.forEach(detach);
+	        }
+	        else {
+	            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+	            $$.fragment && $$.fragment.c();
+	        }
+	        if (options.intro)
+	            transition_in(component.$$.fragment);
+	        mount_component(component, options.target, options.anchor, options.customElement);
+	        flush();
+	    }
+	    set_current_component(parent_component);
+	}
+	/**
+	 * Base class for Svelte components. Used when dev=false.
+	 */
+	class SvelteComponent {
+	    $destroy() {
+	        destroy_component(this, 1);
+	        this.$destroy = noop;
+	    }
+	    $on(type, callback) {
+	        const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+	        callbacks.push(callback);
+	        return () => {
+	            const index = callbacks.indexOf(callback);
+	            if (index !== -1)
+	                callbacks.splice(index, 1);
+	        };
+	    }
+	    $set($$props) {
+	        if (this.$$set && !is_empty($$props)) {
+	            this.$$.skip_bound = true;
+	            this.$$set($$props);
+	            this.$$.skip_bound = false;
+	        }
+	    }
+	}
+
+	function dispatch_dev(type, detail) {
+	    document.dispatchEvent(custom_event(type, Object.assign({ version: '3.44.0' }, detail), true));
+	}
+	function append_dev(target, node) {
+	    dispatch_dev('SvelteDOMInsert', { target, node });
+	    append(target, node);
+	}
+	function insert_dev(target, node, anchor) {
+	    dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+	    insert(target, node, anchor);
+	}
+	function detach_dev(node) {
+	    dispatch_dev('SvelteDOMRemove', { node });
+	    detach(node);
+	}
+	function attr_dev(node, attribute, value) {
+	    attr(node, attribute, value);
+	    if (value == null)
+	        dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+	    else
+	        dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+	}
+	function validate_slots(name, slot, keys) {
+	    for (const slot_key of Object.keys(slot)) {
+	        if (!~keys.indexOf(slot_key)) {
+	            console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+	        }
+	    }
+	}
+	/**
+	 * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+	 */
+	class SvelteComponentDev extends SvelteComponent {
+	    constructor(options) {
+	        if (!options || (!options.target && !options.$$inline)) {
+	            throw new Error("'target' is a required option");
+	        }
+	        super();
+	    }
+	    $destroy() {
+	        super.$destroy();
+	        this.$destroy = () => {
+	            console.warn('Component was already destroyed'); // eslint-disable-line no-console
+	        };
+	    }
+	    $capture_state() { }
+	    $inject_state() { }
+	}
+
+	/**
+	 * @typedef {Object} WrappedComponent Object returned by the `wrap` method
+	 * @property {SvelteComponent} component - Component to load (this is always asynchronous)
+	 * @property {RoutePrecondition[]} [conditions] - Route pre-conditions to validate
+	 * @property {Object} [props] - Optional dictionary of static props
+	 * @property {Object} [userData] - Optional user data dictionary
+	 * @property {bool} _sveltesparouter - Internal flag; always set to true
+	 */
+
+	/**
+	 * @callback AsyncSvelteComponent
+	 * @returns {Promise<SvelteComponent>} Returns a Promise that resolves with a Svelte component
+	 */
+
+	/**
+	 * @callback RoutePrecondition
+	 * @param {RouteDetail} detail - Route detail object
+	 * @returns {boolean|Promise<boolean>} If the callback returns a false-y value, it's interpreted as the precondition failed, so it aborts loading the component (and won't process other pre-condition callbacks)
+	 */
+
+	/**
+	 * @typedef {Object} WrapOptions Options object for the call to `wrap`
+	 * @property {SvelteComponent} [component] - Svelte component to load (this is incompatible with `asyncComponent`)
+	 * @property {AsyncSvelteComponent} [asyncComponent] - Function that returns a Promise that fulfills with a Svelte component (e.g. `{asyncComponent: () => import('Foo.svelte')}`)
+	 * @property {SvelteComponent} [loadingComponent] - Svelte component to be displayed while the async route is loading (as a placeholder); when unset or false-y, no component is shown while component
+	 * @property {object} [loadingParams] - Optional dictionary passed to the `loadingComponent` component as params (for an exported prop called `params`)
+	 * @property {object} [userData] - Optional object that will be passed to events such as `routeLoading`, `routeLoaded`, `conditionsFailed`
+	 * @property {object} [props] - Optional key-value dictionary of static props that will be passed to the component. The props are expanded with {...props}, so the key in the dictionary becomes the name of the prop.
+	 * @property {RoutePrecondition[]|RoutePrecondition} [conditions] - Route pre-conditions to add, which will be executed in order
+	 */
+
+	/**
+	 * Wraps a component to enable multiple capabilities:
+	 * 1. Using dynamically-imported component, with (e.g. `{asyncComponent: () => import('Foo.svelte')}`), which also allows bundlers to do code-splitting.
+	 * 2. Adding route pre-conditions (e.g. `{conditions: [...]}`)
+	 * 3. Adding static props that are passed to the component
+	 * 4. Adding custom userData, which is passed to route events (e.g. route loaded events) or to route pre-conditions (e.g. `{userData: {foo: 'bar}}`)
+	 * 
+	 * @param {WrapOptions} args - Arguments object
+	 * @returns {WrappedComponent} Wrapped component
+	 */
+	function wrap$1(args) {
+	    if (!args) {
+	        throw Error('Parameter args is required')
+	    }
+
+	    // We need to have one and only one of component and asyncComponent
+	    // This does a "XNOR"
+	    if (!args.component == !args.asyncComponent) {
+	        throw Error('One and only one of component and asyncComponent is required')
+	    }
+
+	    // If the component is not async, wrap it into a function returning a Promise
+	    if (args.component) {
+	        args.asyncComponent = () => Promise.resolve(args.component);
+	    }
+
+	    // Parameter asyncComponent and each item of conditions must be functions
+	    if (typeof args.asyncComponent != 'function') {
+	        throw Error('Parameter asyncComponent must be a function')
+	    }
+	    if (args.conditions) {
+	        // Ensure it's an array
+	        if (!Array.isArray(args.conditions)) {
+	            args.conditions = [args.conditions];
+	        }
+	        for (let i = 0; i < args.conditions.length; i++) {
+	            if (!args.conditions[i] || typeof args.conditions[i] != 'function') {
+	                throw Error('Invalid parameter conditions[' + i + ']')
+	            }
+	        }
+	    }
+
+	    // Check if we have a placeholder component
+	    if (args.loadingComponent) {
+	        args.asyncComponent.loading = args.loadingComponent;
+	        args.asyncComponent.loadingParams = args.loadingParams || undefined;
+	    }
+
+	    // Returns an object that contains all the functions to execute too
+	    // The _sveltesparouter flag is to confirm the object was created by this router
+	    const obj = {
+	        component: args.asyncComponent,
+	        userData: args.userData,
+	        conditions: (args.conditions && args.conditions.length) ? args.conditions : undefined,
+	        props: (args.props && Object.keys(args.props).length) ? args.props : {},
+	        _sveltesparouter: true
+	    };
+
+	    return obj
+	}
+
+	const subscriber_queue = [];
+	/**
+	 * Creates a `Readable` store that allows reading by subscription.
+	 * @param value initial value
+	 * @param {StartStopNotifier}start start and stop notifications for subscriptions
+	 */
+	function readable(value, start) {
+	    return {
+	        subscribe: writable(value, start).subscribe
+	    };
+	}
+	/**
+	 * Create a `Writable` store that allows both updating and reading by subscription.
+	 * @param {*=}value initial value
+	 * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+	 */
+	function writable(value, start = noop) {
+	    let stop;
+	    const subscribers = new Set();
+	    function set(new_value) {
+	        if (safe_not_equal(value, new_value)) {
+	            value = new_value;
+	            if (stop) { // store is ready
+	                const run_queue = !subscriber_queue.length;
+	                for (const subscriber of subscribers) {
+	                    subscriber[1]();
+	                    subscriber_queue.push(subscriber, value);
+	                }
+	                if (run_queue) {
+	                    for (let i = 0; i < subscriber_queue.length; i += 2) {
+	                        subscriber_queue[i][0](subscriber_queue[i + 1]);
+	                    }
+	                    subscriber_queue.length = 0;
+	                }
+	            }
+	        }
+	    }
+	    function update(fn) {
+	        set(fn(value));
+	    }
+	    function subscribe(run, invalidate = noop) {
+	        const subscriber = [run, invalidate];
+	        subscribers.add(subscriber);
+	        if (subscribers.size === 1) {
+	            stop = start(set) || noop;
+	        }
+	        run(value);
+	        return () => {
+	            subscribers.delete(subscriber);
+	            if (subscribers.size === 0) {
+	                stop();
+	                stop = null;
+	            }
+	        };
+	    }
+	    return { set, update, subscribe };
+	}
+	function derived(stores, fn, initial_value) {
+	    const single = !Array.isArray(stores);
+	    const stores_array = single
+	        ? [stores]
+	        : stores;
+	    const auto = fn.length < 2;
+	    return readable(initial_value, (set) => {
+	        let inited = false;
+	        const values = [];
+	        let pending = 0;
+	        let cleanup = noop;
+	        const sync = () => {
+	            if (pending) {
+	                return;
+	            }
+	            cleanup();
+	            const result = fn(single ? values[0] : values, set);
+	            if (auto) {
+	                set(result);
+	            }
+	            else {
+	                cleanup = is_function(result) ? result : noop;
+	            }
+	        };
+	        const unsubscribers = stores_array.map((store, i) => subscribe(store, (value) => {
+	            values[i] = value;
+	            pending &= ~(1 << i);
+	            if (inited) {
+	                sync();
+	            }
+	        }, () => {
+	            pending |= (1 << i);
+	        }));
+	        inited = true;
+	        sync();
+	        return function stop() {
+	            run_all(unsubscribers);
+	            cleanup();
+	        };
+	    });
+	}
+
+	function parse(str, loose) {
+		if (str instanceof RegExp) return { keys:false, pattern:str };
+		var c, o, tmp, ext, keys=[], pattern='', arr = str.split('/');
+		arr[0] || arr.shift();
+
+		while (tmp = arr.shift()) {
+			c = tmp[0];
+			if (c === '*') {
+				keys.push('wild');
+				pattern += '/(.*)';
+			} else if (c === ':') {
+				o = tmp.indexOf('?', 1);
+				ext = tmp.indexOf('.', 1);
+				keys.push( tmp.substring(1, !!~o ? o : !!~ext ? ext : tmp.length) );
+				pattern += !!~o && !~ext ? '(?:/([^/]+?))?' : '/([^/]+?)';
+				if (!!~ext) pattern += (!!~o ? '?' : '') + '\\' + tmp.substring(ext);
+			} else {
+				pattern += '/' + tmp;
+			}
+		}
+
+		return {
+			keys: keys,
+			pattern: new RegExp('^' + pattern + (loose ? '(?=$|\/)' : '\/?$'), 'i')
+		};
+	}
+
+	/* node_modules/svelte-spa-router/Router.svelte generated by Svelte v3.44.0 */
+
+	const { Error: Error_1, Object: Object_1, console: console_1$6 } = globals;
+
+	// (251:0) {:else}
+	function create_else_block(ctx) {
+		let switch_instance;
+		let switch_instance_anchor;
+		let current;
+		const switch_instance_spread_levels = [/*props*/ ctx[2]];
+		var switch_value = /*component*/ ctx[0];
+
+		function switch_props(ctx) {
+			let switch_instance_props = {};
+
+			for (let i = 0; i < switch_instance_spread_levels.length; i += 1) {
+				switch_instance_props = assign(switch_instance_props, switch_instance_spread_levels[i]);
+			}
+
+			return {
+				props: switch_instance_props,
+				$$inline: true
+			};
+		}
+
+		if (switch_value) {
+			switch_instance = new switch_value(switch_props());
+			switch_instance.$on("routeEvent", /*routeEvent_handler_1*/ ctx[7]);
+		}
+
+		const block = {
+			c: function create() {
+				if (switch_instance) create_component(switch_instance.$$.fragment);
+				switch_instance_anchor = empty();
+			},
+			m: function mount(target, anchor) {
+				if (switch_instance) {
+					mount_component(switch_instance, target, anchor);
+				}
+
+				insert_dev(target, switch_instance_anchor, anchor);
+				current = true;
+			},
+			p: function update(ctx, dirty) {
+				const switch_instance_changes = (dirty & /*props*/ 4)
+				? get_spread_update(switch_instance_spread_levels, [get_spread_object(/*props*/ ctx[2])])
+				: {};
+
+				if (switch_value !== (switch_value = /*component*/ ctx[0])) {
+					if (switch_instance) {
+						group_outros();
+						const old_component = switch_instance;
+
+						transition_out(old_component.$$.fragment, 1, 0, () => {
+							destroy_component(old_component, 1);
+						});
+
+						check_outros();
+					}
+
+					if (switch_value) {
+						switch_instance = new switch_value(switch_props());
+						switch_instance.$on("routeEvent", /*routeEvent_handler_1*/ ctx[7]);
+						create_component(switch_instance.$$.fragment);
+						transition_in(switch_instance.$$.fragment, 1);
+						mount_component(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
+					} else {
+						switch_instance = null;
+					}
+				} else if (switch_value) {
+					switch_instance.$set(switch_instance_changes);
+				}
+			},
+			i: function intro(local) {
+				if (current) return;
+				if (switch_instance) transition_in(switch_instance.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				if (switch_instance) transition_out(switch_instance.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(switch_instance_anchor);
+				if (switch_instance) destroy_component(switch_instance, detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_else_block.name,
+			type: "else",
+			source: "(251:0) {:else}",
+			ctx
+		});
+
+		return block;
+	}
+
+	// (244:0) {#if componentParams}
+	function create_if_block(ctx) {
+		let switch_instance;
+		let switch_instance_anchor;
+		let current;
+		const switch_instance_spread_levels = [{ params: /*componentParams*/ ctx[1] }, /*props*/ ctx[2]];
+		var switch_value = /*component*/ ctx[0];
+
+		function switch_props(ctx) {
+			let switch_instance_props = {};
+
+			for (let i = 0; i < switch_instance_spread_levels.length; i += 1) {
+				switch_instance_props = assign(switch_instance_props, switch_instance_spread_levels[i]);
+			}
+
+			return {
+				props: switch_instance_props,
+				$$inline: true
+			};
+		}
+
+		if (switch_value) {
+			switch_instance = new switch_value(switch_props());
+			switch_instance.$on("routeEvent", /*routeEvent_handler*/ ctx[6]);
+		}
+
+		const block = {
+			c: function create() {
+				if (switch_instance) create_component(switch_instance.$$.fragment);
+				switch_instance_anchor = empty();
+			},
+			m: function mount(target, anchor) {
+				if (switch_instance) {
+					mount_component(switch_instance, target, anchor);
+				}
+
+				insert_dev(target, switch_instance_anchor, anchor);
+				current = true;
+			},
+			p: function update(ctx, dirty) {
+				const switch_instance_changes = (dirty & /*componentParams, props*/ 6)
+				? get_spread_update(switch_instance_spread_levels, [
+						dirty & /*componentParams*/ 2 && { params: /*componentParams*/ ctx[1] },
+						dirty & /*props*/ 4 && get_spread_object(/*props*/ ctx[2])
+					])
+				: {};
+
+				if (switch_value !== (switch_value = /*component*/ ctx[0])) {
+					if (switch_instance) {
+						group_outros();
+						const old_component = switch_instance;
+
+						transition_out(old_component.$$.fragment, 1, 0, () => {
+							destroy_component(old_component, 1);
+						});
+
+						check_outros();
+					}
+
+					if (switch_value) {
+						switch_instance = new switch_value(switch_props());
+						switch_instance.$on("routeEvent", /*routeEvent_handler*/ ctx[6]);
+						create_component(switch_instance.$$.fragment);
+						transition_in(switch_instance.$$.fragment, 1);
+						mount_component(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
+					} else {
+						switch_instance = null;
+					}
+				} else if (switch_value) {
+					switch_instance.$set(switch_instance_changes);
+				}
+			},
+			i: function intro(local) {
+				if (current) return;
+				if (switch_instance) transition_in(switch_instance.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				if (switch_instance) transition_out(switch_instance.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(switch_instance_anchor);
+				if (switch_instance) destroy_component(switch_instance, detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_if_block.name,
+			type: "if",
+			source: "(244:0) {#if componentParams}",
+			ctx
+		});
+
+		return block;
+	}
+
+	function create_fragment$8(ctx) {
+		let current_block_type_index;
+		let if_block;
+		let if_block_anchor;
+		let current;
+		const if_block_creators = [create_if_block, create_else_block];
+		const if_blocks = [];
+
+		function select_block_type(ctx, dirty) {
+			if (/*componentParams*/ ctx[1]) return 0;
+			return 1;
+		}
+
+		current_block_type_index = select_block_type(ctx);
+		if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+
+		const block = {
+			c: function create() {
+				if_block.c();
+				if_block_anchor = empty();
+			},
+			l: function claim(nodes) {
+				throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				if_blocks[current_block_type_index].m(target, anchor);
+				insert_dev(target, if_block_anchor, anchor);
+				current = true;
+			},
+			p: function update(ctx, [dirty]) {
+				let previous_block_index = current_block_type_index;
+				current_block_type_index = select_block_type(ctx);
+
+				if (current_block_type_index === previous_block_index) {
+					if_blocks[current_block_type_index].p(ctx, dirty);
+				} else {
+					group_outros();
+
+					transition_out(if_blocks[previous_block_index], 1, 1, () => {
+						if_blocks[previous_block_index] = null;
+					});
+
+					check_outros();
+					if_block = if_blocks[current_block_type_index];
+
+					if (!if_block) {
+						if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+						if_block.c();
+					} else {
+						if_block.p(ctx, dirty);
+					}
+
+					transition_in(if_block, 1);
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			},
+			i: function intro(local) {
+				if (current) return;
+				transition_in(if_block);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(if_block);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if_blocks[current_block_type_index].d(detaching);
+				if (detaching) detach_dev(if_block_anchor);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$8.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function wrap(component, userData, ...conditions) {
+		// Use the new wrap method and show a deprecation warning
+		// eslint-disable-next-line no-console
+		console.warn('Method `wrap` from `svelte-spa-router` is deprecated and will be removed in a future version. Please use `svelte-spa-router/wrap` instead. See http://bit.ly/svelte-spa-router-upgrading');
+
+		return wrap$1({ component, userData, conditions });
+	}
+
+	/**
+	 * @typedef {Object} Location
+	 * @property {string} location - Location (page/view), for example `/book`
+	 * @property {string} [querystring] - Querystring from the hash, as a string not parsed
+	 */
+	/**
+	 * Returns the current location from the hash.
+	 *
+	 * @returns {Location} Location object
+	 * @private
+	 */
+	function getLocation() {
+		const hashPosition = window.location.href.indexOf('#/');
+
+		let location = hashPosition > -1
+		? window.location.href.substr(hashPosition + 1)
+		: '/';
+
+		// Check if there's a querystring
+		const qsPosition = location.indexOf('?');
+
+		let querystring = '';
+
+		if (qsPosition > -1) {
+			querystring = location.substr(qsPosition + 1);
+			location = location.substr(0, qsPosition);
+		}
+
+		return { location, querystring };
+	}
+
+	const loc = readable(null, // eslint-disable-next-line prefer-arrow-callback
+	function start(set) {
+		set(getLocation());
+
+		const update = () => {
+			set(getLocation());
+		};
+
+		window.addEventListener('hashchange', update, false);
+
+		return function stop() {
+			window.removeEventListener('hashchange', update, false);
+		};
+	});
+
+	const location$1 = derived(loc, $loc => $loc.location);
+	const querystring = derived(loc, $loc => $loc.querystring);
+	const params = writable(undefined);
+
+	async function push(location) {
+		if (!location || location.length < 1 || location.charAt(0) != '/' && location.indexOf('#/') !== 0) {
+			throw Error('Invalid parameter location');
+		}
+
+		// Execute this code when the current call stack is complete
+		await tick();
+
+		// Note: this will include scroll state in history even when restoreScrollState is false
+		history.replaceState(
+			{
+				...history.state,
+				__svelte_spa_router_scrollX: window.scrollX,
+				__svelte_spa_router_scrollY: window.scrollY
+			},
+			undefined,
+			undefined
+		);
+
+		window.location.hash = (location.charAt(0) == '#' ? '' : '#') + location;
+	}
+
+	async function pop() {
+		// Execute this code when the current call stack is complete
+		await tick();
+
+		window.history.back();
+	}
+
+	async function replace(location) {
+		if (!location || location.length < 1 || location.charAt(0) != '/' && location.indexOf('#/') !== 0) {
+			throw Error('Invalid parameter location');
+		}
+
+		// Execute this code when the current call stack is complete
+		await tick();
+
+		const dest = (location.charAt(0) == '#' ? '' : '#') + location;
+
+		try {
+			const newState = { ...history.state };
+			delete newState['__svelte_spa_router_scrollX'];
+			delete newState['__svelte_spa_router_scrollY'];
+			window.history.replaceState(newState, undefined, dest);
+		} catch(e) {
+			// eslint-disable-next-line no-console
+			console.warn('Caught exception while replacing the current page. If you\'re running this in the Svelte REPL, please note that the `replace` method might not work in this environment.');
+		}
+
+		// The method above doesn't trigger the hashchange event, so let's do that manually
+		window.dispatchEvent(new Event('hashchange'));
+	}
+
+	function link(node, opts) {
+		opts = linkOpts(opts);
+
+		// Only apply to <a> tags
+		if (!node || !node.tagName || node.tagName.toLowerCase() != 'a') {
+			throw Error('Action "link" can only be used with <a> tags');
+		}
+
+		updateLink(node, opts);
+
+		return {
+			update(updated) {
+				updated = linkOpts(updated);
+				updateLink(node, updated);
+			}
+		};
+	}
+
+	// Internal function used by the link function
+	function updateLink(node, opts) {
+		let href = opts.href || node.getAttribute('href');
+
+		// Destination must start with '/' or '#/'
+		if (href && href.charAt(0) == '/') {
+			// Add # to the href attribute
+			href = '#' + href;
+		} else if (!href || href.length < 2 || href.slice(0, 2) != '#/') {
+			throw Error('Invalid value for "href" attribute: ' + href);
+		}
+
+		node.setAttribute('href', href);
+
+		node.addEventListener('click', event => {
+			// Prevent default anchor onclick behaviour
+			event.preventDefault();
+
+			if (!opts.disabled) {
+				scrollstateHistoryHandler(event.currentTarget.getAttribute('href'));
+			}
+		});
+	}
+
+	// Internal function that ensures the argument of the link action is always an object
+	function linkOpts(val) {
+		if (val && typeof val == 'string') {
+			return { href: val };
+		} else {
+			return val || {};
+		}
+	}
+
+	/**
+	 * The handler attached to an anchor tag responsible for updating the
+	 * current history state with the current scroll state
+	 *
+	 * @param {string} href - Destination
+	 */
+	function scrollstateHistoryHandler(href) {
+		// Setting the url (3rd arg) to href will break clicking for reasons, so don't try to do that
+		history.replaceState(
+			{
+				...history.state,
+				__svelte_spa_router_scrollX: window.scrollX,
+				__svelte_spa_router_scrollY: window.scrollY
+			},
+			undefined,
+			undefined
+		);
+
+		// This will force an update as desired, but this time our scroll state will be attached
+		window.location.hash = href;
+	}
+
+	function instance$8($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Router', slots, []);
+		let { routes = {} } = $$props;
+		let { prefix = '' } = $$props;
+		let { restoreScrollState = false } = $$props;
+
+		/**
+	 * Container for a route: path, component
+	 */
+		class RouteItem {
+			/**
+	 * Initializes the object and creates a regular expression from the path, using regexparam.
+	 *
+	 * @param {string} path - Path to the route (must start with '/' or '*')
+	 * @param {SvelteComponent|WrappedComponent} component - Svelte component for the route, optionally wrapped
+	 */
+			constructor(path, component) {
+				if (!component || typeof component != 'function' && (typeof component != 'object' || component._sveltesparouter !== true)) {
+					throw Error('Invalid component object');
+				}
+
+				// Path must be a regular or expression, or a string starting with '/' or '*'
+				if (!path || typeof path == 'string' && (path.length < 1 || path.charAt(0) != '/' && path.charAt(0) != '*') || typeof path == 'object' && !(path instanceof RegExp)) {
+					throw Error('Invalid value for "path" argument - strings must start with / or *');
+				}
+
+				const { pattern, keys } = parse(path);
+				this.path = path;
+
+				// Check if the component is wrapped and we have conditions
+				if (typeof component == 'object' && component._sveltesparouter === true) {
+					this.component = component.component;
+					this.conditions = component.conditions || [];
+					this.userData = component.userData;
+					this.props = component.props || {};
+				} else {
+					// Convert the component to a function that returns a Promise, to normalize it
+					this.component = () => Promise.resolve(component);
+
+					this.conditions = [];
+					this.props = {};
+				}
+
+				this._pattern = pattern;
+				this._keys = keys;
+			}
+
+			/**
+	 * Checks if `path` matches the current route.
+	 * If there's a match, will return the list of parameters from the URL (if any).
+	 * In case of no match, the method will return `null`.
+	 *
+	 * @param {string} path - Path to test
+	 * @returns {null|Object.<string, string>} List of paramters from the URL if there's a match, or `null` otherwise.
+	 */
+			match(path) {
+				// If there's a prefix, check if it matches the start of the path.
+				// If not, bail early, else remove it before we run the matching.
+				if (prefix) {
+					if (typeof prefix == 'string') {
+						if (path.startsWith(prefix)) {
+							path = path.substr(prefix.length) || '/';
+						} else {
+							return null;
+						}
+					} else if (prefix instanceof RegExp) {
+						const match = path.match(prefix);
+
+						if (match && match[0]) {
+							path = path.substr(match[0].length) || '/';
+						} else {
+							return null;
+						}
+					}
+				}
+
+				// Check if the pattern matches
+				const matches = this._pattern.exec(path);
+
+				if (matches === null) {
+					return null;
+				}
+
+				// If the input was a regular expression, this._keys would be false, so return matches as is
+				if (this._keys === false) {
+					return matches;
+				}
+
+				const out = {};
+				let i = 0;
+
+				while (i < this._keys.length) {
+					// In the match parameters, URL-decode all values
+					try {
+						out[this._keys[i]] = decodeURIComponent(matches[i + 1] || '') || null;
+					} catch(e) {
+						out[this._keys[i]] = null;
+					}
+
+					i++;
+				}
+
+				return out;
+			}
+
+			/**
+	 * Dictionary with route details passed to the pre-conditions functions, as well as the `routeLoading`, `routeLoaded` and `conditionsFailed` events
+	 * @typedef {Object} RouteDetail
+	 * @property {string|RegExp} route - Route matched as defined in the route definition (could be a string or a reguar expression object)
+	 * @property {string} location - Location path
+	 * @property {string} querystring - Querystring from the hash
+	 * @property {object} [userData] - Custom data passed by the user
+	 * @property {SvelteComponent} [component] - Svelte component (only in `routeLoaded` events)
+	 * @property {string} [name] - Name of the Svelte component (only in `routeLoaded` events)
+	 */
+			/**
+	 * Executes all conditions (if any) to control whether the route can be shown. Conditions are executed in the order they are defined, and if a condition fails, the following ones aren't executed.
+	 * 
+	 * @param {RouteDetail} detail - Route detail
+	 * @returns {boolean} Returns true if all the conditions succeeded
+	 */
+			async checkConditions(detail) {
+				for (let i = 0; i < this.conditions.length; i++) {
+					if (!await this.conditions[i](detail)) {
+						return false;
+					}
+				}
+
+				return true;
+			}
+		}
+
+		// Set up all routes
+		const routesList = [];
+
+		if (routes instanceof Map) {
+			// If it's a map, iterate on it right away
+			routes.forEach((route, path) => {
+				routesList.push(new RouteItem(path, route));
+			});
+		} else {
+			// We have an object, so iterate on its own properties
+			Object.keys(routes).forEach(path => {
+				routesList.push(new RouteItem(path, routes[path]));
+			});
+		}
+
+		// Props for the component to render
+		let component = null;
+
+		let componentParams = null;
+		let props = {};
+
+		// Event dispatcher from Svelte
+		const dispatch = createEventDispatcher();
+
+		// Just like dispatch, but executes on the next iteration of the event loop
+		async function dispatchNextTick(name, detail) {
+			// Execute this code when the current call stack is complete
+			await tick();
+
+			dispatch(name, detail);
+		}
+
+		// If this is set, then that means we have popped into this var the state of our last scroll position
+		let previousScrollState = null;
+
+		let popStateChanged = null;
+
+		if (restoreScrollState) {
+			popStateChanged = event => {
+				// If this event was from our history.replaceState, event.state will contain
+				// our scroll history. Otherwise, event.state will be null (like on forward
+				// navigation)
+				if (event.state && event.state.__svelte_spa_router_scrollY) {
+					previousScrollState = event.state;
+				} else {
+					previousScrollState = null;
+				}
+			};
+
+			// This is removed in the destroy() invocation below
+			window.addEventListener('popstate', popStateChanged);
+
+			afterUpdate(() => {
+				// If this exists, then this is a back navigation: restore the scroll position
+				if (previousScrollState) {
+					window.scrollTo(previousScrollState.__svelte_spa_router_scrollX, previousScrollState.__svelte_spa_router_scrollY);
+				} else {
+					// Otherwise this is a forward navigation: scroll to top
+					window.scrollTo(0, 0);
+				}
+			});
+		}
+
+		// Always have the latest value of loc
+		let lastLoc = null;
+
+		// Current object of the component loaded
+		let componentObj = null;
+
+		// Handle hash change events
+		// Listen to changes in the $loc store and update the page
+		// Do not use the $: syntax because it gets triggered by too many things
+		const unsubscribeLoc = loc.subscribe(async newLoc => {
+			lastLoc = newLoc;
+
+			// Find a route matching the location
+			let i = 0;
+
+			while (i < routesList.length) {
+				const match = routesList[i].match(newLoc.location);
+
+				if (!match) {
+					i++;
+					continue;
+				}
+
+				const detail = {
+					route: routesList[i].path,
+					location: newLoc.location,
+					querystring: newLoc.querystring,
+					userData: routesList[i].userData,
+					params: match && typeof match == 'object' && Object.keys(match).length
+					? match
+					: null
+				};
+
+				// Check if the route can be loaded - if all conditions succeed
+				if (!await routesList[i].checkConditions(detail)) {
+					// Don't display anything
+					$$invalidate(0, component = null);
+
+					componentObj = null;
+
+					// Trigger an event to notify the user, then exit
+					dispatchNextTick('conditionsFailed', detail);
+
+					return;
+				}
+
+				// Trigger an event to alert that we're loading the route
+				// We need to clone the object on every event invocation so we don't risk the object to be modified in the next tick
+				dispatchNextTick('routeLoading', Object.assign({}, detail));
+
+				// If there's a component to show while we're loading the route, display it
+				const obj = routesList[i].component;
+
+				// Do not replace the component if we're loading the same one as before, to avoid the route being unmounted and re-mounted
+				if (componentObj != obj) {
+					if (obj.loading) {
+						$$invalidate(0, component = obj.loading);
+						componentObj = obj;
+						$$invalidate(1, componentParams = obj.loadingParams);
+						$$invalidate(2, props = {});
+
+						// Trigger the routeLoaded event for the loading component
+						// Create a copy of detail so we don't modify the object for the dynamic route (and the dynamic route doesn't modify our object too)
+						dispatchNextTick('routeLoaded', Object.assign({}, detail, {
+							component,
+							name: component.name,
+							params: componentParams
+						}));
+					} else {
+						$$invalidate(0, component = null);
+						componentObj = null;
+					}
+
+					// Invoke the Promise
+					const loaded = await obj();
+
+					// Now that we're here, after the promise resolved, check if we still want this component, as the user might have navigated to another page in the meanwhile
+					if (newLoc != lastLoc) {
+						// Don't update the component, just exit
+						return;
+					}
+
+					// If there is a "default" property, which is used by async routes, then pick that
+					$$invalidate(0, component = loaded && loaded.default || loaded);
+
+					componentObj = obj;
+				}
+
+				// Set componentParams only if we have a match, to avoid a warning similar to `<Component> was created with unknown prop 'params'`
+				// Of course, this assumes that developers always add a "params" prop when they are expecting parameters
+				if (match && typeof match == 'object' && Object.keys(match).length) {
+					$$invalidate(1, componentParams = match);
+				} else {
+					$$invalidate(1, componentParams = null);
+				}
+
+				// Set static props, if any
+				$$invalidate(2, props = routesList[i].props);
+
+				// Dispatch the routeLoaded event then exit
+				// We need to clone the object on every event invocation so we don't risk the object to be modified in the next tick
+				dispatchNextTick('routeLoaded', Object.assign({}, detail, {
+					component,
+					name: component.name,
+					params: componentParams
+				})).then(() => {
+					params.set(componentParams);
+				});
+
+				return;
+			}
+
+			// If we're still here, there was no match, so show the empty component
+			$$invalidate(0, component = null);
+
+			componentObj = null;
+			params.set(undefined);
+		});
+
+		onDestroy(() => {
+			unsubscribeLoc();
+			popStateChanged && window.removeEventListener('popstate', popStateChanged);
+		});
+
+		const writable_props = ['routes', 'prefix', 'restoreScrollState'];
+
+		Object_1.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$6.warn(`<Router> was created with unknown prop '${key}'`);
+		});
+
+		function routeEvent_handler(event) {
+			bubble.call(this, $$self, event);
+		}
+
+		function routeEvent_handler_1(event) {
+			bubble.call(this, $$self, event);
+		}
+
+		$$self.$$set = $$props => {
+			if ('routes' in $$props) $$invalidate(3, routes = $$props.routes);
+			if ('prefix' in $$props) $$invalidate(4, prefix = $$props.prefix);
+			if ('restoreScrollState' in $$props) $$invalidate(5, restoreScrollState = $$props.restoreScrollState);
+		};
+
+		$$self.$capture_state = () => ({
+			readable,
+			writable,
+			derived,
+			tick,
+			_wrap: wrap$1,
+			wrap,
+			getLocation,
+			loc,
+			location: location$1,
+			querystring,
+			params,
+			push,
+			pop,
+			replace,
+			link,
+			updateLink,
+			linkOpts,
+			scrollstateHistoryHandler,
+			onDestroy,
+			createEventDispatcher,
+			afterUpdate,
+			parse,
+			routes,
+			prefix,
+			restoreScrollState,
+			RouteItem,
+			routesList,
+			component,
+			componentParams,
+			props,
+			dispatch,
+			dispatchNextTick,
+			previousScrollState,
+			popStateChanged,
+			lastLoc,
+			componentObj,
+			unsubscribeLoc
+		});
+
+		$$self.$inject_state = $$props => {
+			if ('routes' in $$props) $$invalidate(3, routes = $$props.routes);
+			if ('prefix' in $$props) $$invalidate(4, prefix = $$props.prefix);
+			if ('restoreScrollState' in $$props) $$invalidate(5, restoreScrollState = $$props.restoreScrollState);
+			if ('component' in $$props) $$invalidate(0, component = $$props.component);
+			if ('componentParams' in $$props) $$invalidate(1, componentParams = $$props.componentParams);
+			if ('props' in $$props) $$invalidate(2, props = $$props.props);
+			if ('previousScrollState' in $$props) previousScrollState = $$props.previousScrollState;
+			if ('popStateChanged' in $$props) popStateChanged = $$props.popStateChanged;
+			if ('lastLoc' in $$props) lastLoc = $$props.lastLoc;
+			if ('componentObj' in $$props) componentObj = $$props.componentObj;
+		};
+
+		if ($$props && "$$inject" in $$props) {
+			$$self.$inject_state($$props.$$inject);
+		}
+
+		$$self.$$.update = () => {
+			if ($$self.$$.dirty & /*restoreScrollState*/ 32) {
+				// Update history.scrollRestoration depending on restoreScrollState
+				history.scrollRestoration = restoreScrollState ? 'manual' : 'auto';
+			}
+		};
+
+		return [
+			component,
+			componentParams,
+			props,
+			routes,
+			prefix,
+			restoreScrollState,
+			routeEvent_handler,
+			routeEvent_handler_1
+		];
+	}
+
+	class Router extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+
+			init(this, options, instance$8, create_fragment$8, safe_not_equal, {
+				routes: 3,
+				prefix: 4,
+				restoreScrollState: 5
+			});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Router",
+				options,
+				id: create_fragment$8.name
+			});
+		}
+
+		get routes() {
+			throw new Error_1("<Router>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set routes(value) {
+			throw new Error_1("<Router>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get prefix() {
+			throw new Error_1("<Router>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set prefix(value) {
+			throw new Error_1("<Router>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get restoreScrollState() {
+			throw new Error_1("<Router>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set restoreScrollState(value) {
+			throw new Error_1("<Router>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/Core.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1$5 } = globals;
+	const file$6 = "src/Core.svelte";
+
+	function create_fragment$7(ctx) {
+		let main;
+		let link;
+		let t0;
+		let section0;
+		let span0;
+		let t1;
+		let div0;
+		let a0;
+		let t3;
+		let section3;
+		let section1;
+		let div1;
+		let a1;
+		let t5;
+		let section2;
+		let div6;
+		let div2;
+		let t7;
+		let div3;
+		let a2;
+		let t9;
+		let div4;
+		let a3;
+		let t11;
+		let div5;
+		let a4;
+		let t13;
+		let div7;
+		let t15;
+		let div8;
+		let a5;
+		let t17;
+		let div9;
+		let a6;
+		let t19;
+		let div10;
+		let a7;
+		let t21;
+		let div11;
+		let a8;
+		let t23;
+		let div12;
+		let a9;
+		let t25;
+		let div13;
+		let span1;
+		let t26;
+		let section4;
+		let t27;
+		let br0;
+		let br1;
+		let current;
+		const default_slot_template = /*#slots*/ ctx[1].default;
+		const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[0], null);
+
+		const block = {
+			c: function create() {
+				main = element("main");
+				link = element("link");
+				t0 = space();
+				section0 = element("section");
+				span0 = element("span");
+				t1 = space();
+				div0 = element("div");
+				a0 = element("a");
+				a0.textContent = "日本語に翻訳";
+				t3 = space();
+				section3 = element("section");
+				section1 = element("section");
+				div1 = element("div");
+				a1 = element("a");
+				a1.textContent = "sQuery v1.03";
+				t5 = space();
+				section2 = element("section");
+				div6 = element("div");
+				div2 = element("div");
+				div2.textContent = "Learn";
+				t7 = space();
+				div3 = element("div");
+				a2 = element("a");
+				a2.textContent = "documentation";
+				t9 = space();
+				div4 = element("div");
+				a3 = element("a");
+				a3.textContent = "examples";
+				t11 = space();
+				div5 = element("div");
+				a4 = element("a");
+				a4.textContent = "online editor";
+				t13 = space();
+				div7 = element("div");
+				div7.textContent = "Community";
+				t15 = space();
+				div8 = element("div");
+				a5 = element("a");
+				a5.textContent = "About me";
+				t17 = space();
+				div9 = element("div");
+				a6 = element("a");
+				a6.textContent = "github";
+				t19 = space();
+				div10 = element("div");
+				a7 = element("a");
+				a7.textContent = "twitter";
+				t21 = space();
+				div11 = element("div");
+				a8 = element("a");
+				a8.textContent = "questions";
+				t23 = space();
+				div12 = element("div");
+				a9 = element("a");
+				a9.textContent = "e-mail";
+				t25 = space();
+				div13 = element("div");
+				span1 = element("span");
+				t26 = space();
+				section4 = element("section");
+				if (default_slot) default_slot.c();
+				t27 = space();
+				br0 = element("br");
+				br1 = element("br");
+				attr_dev(link, "rel", "stylesheet");
+				attr_dev(link, "href", "./Docs.css");
+				add_location(link, file$6, 51, 1, 1128);
+				attr_dev(span0, "id", "idDocNav");
+				add_location(span0, file$6, 53, 2, 1195);
+				attr_dev(a0, "href", "https://squery-vercel-app.translate.goog/?&_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp");
+				set_style(a0, "color", "#fff", 1);
+				add_location(a0, file$6, 54, 45, 1268);
+				set_style(div0, "float", "right");
+				set_style(div0, "margin-right", "20px");
+				add_location(div0, file$6, 54, 2, 1225);
+				attr_dev(section0, "id", "idHead");
+				add_location(section0, file$6, 52, 1, 1171);
+				attr_dev(a1, "href", "./");
+				set_style(a1, "color", "#fff");
+				add_location(a1, file$6, 59, 44, 1529);
+				attr_dev(div1, "id", "idLeftLogo");
+				attr_dev(div1, "class", "notranslate");
+				add_location(div1, file$6, 59, 3, 1488);
+				attr_dev(section1, "id", "idLeftTop");
+				add_location(section1, file$6, 58, 2, 1460);
+				attr_dev(div2, "name", "");
+				attr_dev(div2, "class", "cSub");
+				add_location(div2, file$6, 63, 4, 1666);
+				attr_dev(a2, "href", "./#/docs/");
+				add_location(a2, file$6, 64, 28, 1732);
+				attr_dev(div3, "name", "");
+				attr_dev(div3, "class", "cF");
+				add_location(div3, file$6, 64, 4, 1708);
+				attr_dev(a3, "href", "./#/examples/");
+				add_location(a3, file$6, 65, 28, 1804);
+				attr_dev(div4, "name", "");
+				attr_dev(div4, "class", "cF");
+				add_location(div4, file$6, 65, 4, 1780);
+				attr_dev(a4, "href", "./#/sq/");
+				add_location(a4, file$6, 66, 28, 1875);
+				attr_dev(div5, "name", "");
+				attr_dev(div5, "class", "cF");
+				add_location(div5, file$6, 66, 4, 1851);
+				set_style(div6, "font-weight", "300");
+				add_location(div6, file$6, 62, 3, 1632);
+				attr_dev(div7, "name", "");
+				attr_dev(div7, "class", "cSub");
+				add_location(div7, file$6, 69, 3, 1932);
+				attr_dev(a5, "href", "https://beacons.ai/exis");
+				attr_dev(a5, "target", "_blank");
+				add_location(a5, file$6, 70, 27, 2001);
+				attr_dev(div8, "name", "");
+				attr_dev(div8, "class", "cF");
+				add_location(div8, file$6, 70, 3, 1977);
+				attr_dev(a6, "href", "https://github.com/exis9/sQuery");
+				attr_dev(a6, "target", "_blank");
+				add_location(a6, file$6, 71, 27, 2095);
+				attr_dev(div9, "name", "");
+				attr_dev(div9, "class", "cF");
+				add_location(div9, file$6, 71, 3, 2071);
+				attr_dev(a7, "href", "https://twitter.com/ExisVR");
+				attr_dev(a7, "target", "_blank");
+				attr_dev(a7, "class", "notranslate");
+				add_location(a7, file$6, 72, 27, 2195);
+				attr_dev(div10, "name", "");
+				attr_dev(div10, "class", "cF");
+				add_location(div10, file$6, 72, 3, 2171);
+				attr_dev(a8, "href", "https://stackoverflow.com/questions/tagged/squery");
+				attr_dev(a8, "target", "_blank");
+				add_location(a8, file$6, 73, 27, 2311);
+				attr_dev(div11, "name", "");
+				attr_dev(div11, "class", "cF");
+				add_location(div11, file$6, 73, 3, 2287);
+				attr_dev(a9, "href", "#a");
+				attr_dev(a9, "onclick", "alert('Sorry! Please contact me using twitter DM for now..!');return false");
+				add_location(a9, file$6, 74, 27, 2432);
+				attr_dev(div12, "name", "");
+				attr_dev(div12, "class", "cF");
+				add_location(div12, file$6, 74, 3, 2408);
+				attr_dev(section2, "class", "cScrollable");
+				add_location(section2, file$6, 61, 2, 1599);
+				attr_dev(section3, "id", "idLeft");
+				add_location(section3, file$6, 57, 1, 1436);
+				add_location(span1, file$6, 79, 28, 2603);
+				attr_dev(div13, "class", "menu__toggler");
+				add_location(div13, file$6, 79, 1, 2576);
+				add_location(br0, file$6, 83, 2, 2664);
+				add_location(br1, file$6, 83, 6, 2668);
+				attr_dev(section4, "id", "idDoc");
+				add_location(section4, file$6, 81, 1, 2625);
+				add_location(main, file$6, 50, 0, 1120);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, main, anchor);
+				append_dev(main, link);
+				append_dev(main, t0);
+				append_dev(main, section0);
+				append_dev(section0, span0);
+				append_dev(section0, t1);
+				append_dev(section0, div0);
+				append_dev(div0, a0);
+				append_dev(main, t3);
+				append_dev(main, section3);
+				append_dev(section3, section1);
+				append_dev(section1, div1);
+				append_dev(div1, a1);
+				append_dev(section3, t5);
+				append_dev(section3, section2);
+				append_dev(section2, div6);
+				append_dev(div6, div2);
+				append_dev(div6, t7);
+				append_dev(div6, div3);
+				append_dev(div3, a2);
+				append_dev(div6, t9);
+				append_dev(div6, div4);
+				append_dev(div4, a3);
+				append_dev(div6, t11);
+				append_dev(div6, div5);
+				append_dev(div5, a4);
+				append_dev(section2, t13);
+				append_dev(section2, div7);
+				append_dev(section2, t15);
+				append_dev(section2, div8);
+				append_dev(div8, a5);
+				append_dev(section2, t17);
+				append_dev(section2, div9);
+				append_dev(div9, a6);
+				append_dev(section2, t19);
+				append_dev(section2, div10);
+				append_dev(div10, a7);
+				append_dev(section2, t21);
+				append_dev(section2, div11);
+				append_dev(div11, a8);
+				append_dev(section2, t23);
+				append_dev(section2, div12);
+				append_dev(div12, a9);
+				append_dev(main, t25);
+				append_dev(main, div13);
+				append_dev(div13, span1);
+				append_dev(main, t26);
+				append_dev(main, section4);
+
+				if (default_slot) {
+					default_slot.m(section4, null);
+				}
+
+				append_dev(section4, t27);
+				append_dev(section4, br0);
+				append_dev(section4, br1);
+				current = true;
+			},
+			p: function update(ctx, [dirty]) {
+				if (default_slot) {
+					if (default_slot.p && (!current || dirty & /*$$scope*/ 1)) {
+						update_slot_base(
+							default_slot,
+							default_slot_template,
+							ctx,
+							/*$$scope*/ ctx[0],
+							!current
+							? get_all_dirty_from_scope(/*$$scope*/ ctx[0])
+							: get_slot_changes(default_slot_template, /*$$scope*/ ctx[0], dirty, null),
+							null
+						);
+					}
+				}
+			},
+			i: function intro(local) {
+				if (current) return;
+				transition_in(default_slot, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(default_slot, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(main);
+				if (default_slot) default_slot.d(detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$7.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$7($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Core', slots, ['default']);
+		document.getElementsByTagName('body')[0].style.display = 'none';
+
+		//import Docs from "./Docs.svelte";
+		//import Hello from "./pages/Hello.svelte";
+		//import Hello2 from "./pages/Hello2.svelte";
+		window.loadProc = function () {
+			sQuery('body').hide().fadeIn(400);
+
+			sQuery(document).onf('click', '.menu__toggler', function () {
+				let el = sQuery('.menu__toggler');
+				el.toggleClass('active');
+				if (sQuery('.menu__toggler').hasClass('active')) sQuery('#idLeft').fadeIn(500).animate([{ left: "-200px" }, { left: "0px" }], 300); else sQuery('#idLeft').fadeOut(500).animate([{ left: "0px" }, { left: "-200px" }], 300);
+				return false;
+			});
+		};
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+			window.loadProc();
+		} //setTimeout(() => {
+		//	window.loadProc()
+
+		//}, 1);
+		sQuery(() => {
+			console.log('loaded');
+			window.loadProc();
+		});
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$5.warn(`<Core> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$$set = $$props => {
+			if ('$$scope' in $$props) $$invalidate(0, $$scope = $$props.$$scope);
+		};
+
+		$$self.$capture_state = () => ({ push, sq: sQuery });
+		return [$$scope, slots];
+	}
+
+	class Core extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$7, create_fragment$7, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Core",
+				options,
+				id: create_fragment$7.name
+			});
+		}
+	}
+
+	/* src/Home.svelte generated by Svelte v3.44.0 */
+	const file$5 = "src/Home.svelte";
+
+	// (7:0) <Core>
+	function create_default_slot$1(ctx) {
+		let h1;
+		let t0;
+		let div0;
+		let t2;
+		let doc0;
+		let h20;
+		let t4;
+		let div2;
+		let b0;
+		let t6;
+		let red0;
+		let t8;
+		let b1;
+		let t10;
+		let b2;
+		let t12;
+		let br0;
+		let br1;
+		let t13;
+		let br2;
+		let br3;
+		let t14;
+		let i0;
+		let t16;
+		let br4;
+		let br5;
+		let t17;
+		let i1;
+		let t18;
+		let b3;
+		let t20;
+		let b4;
+		let t22;
+		let t23;
+		let br6;
+		let br7;
+		let t24;
+		let red1;
+		let t26;
+		let blue;
+		let t28;
+		let br8;
+		let br9;
+		let t29;
+		let red2;
+		let t31;
+		let br10;
+		let br11;
+		let t32;
+		let div1;
+		let table;
+		let thead;
+		let tr0;
+		let th0;
+		let t34;
+		let th1;
+		let t36;
+		let th2;
+		let t38;
+		let th3;
+		let t40;
+		let th4;
+		let t42;
+		let tbody;
+		let tr1;
+		let td0;
+		let t44;
+		let td1;
+		let strong0;
+		let t46;
+		let td2;
+		let t48;
+		let td3;
+		let t50;
+		let td4;
+		let strong1;
+		let t52;
+		let tr2;
+		let td5;
+		let t54;
+		let td6;
+		let strong2;
+		let t56;
+		let td7;
+		let t58;
+		let td8;
+		let t60;
+		let td9;
+		let strong3;
+		let t62;
+		let tr3;
+		let td10;
+		let t64;
+		let td11;
+		let strong4;
+		let t66;
+		let td12;
+		let t68;
+		let td13;
+		let t70;
+		let td14;
+		let strong5;
+		let t72;
+		let br12;
+		let br13;
+		let t73;
+		let br14;
+		let br15;
+		let t74;
+		let br16;
+		let br17;
+		let t75;
+		let h3;
+		let i2;
+		let t77;
+		let doc1;
+		let h21;
+		let t79;
+		let div3;
+		let t80;
+		let br18;
+		let t81;
+		let a;
+		let t83;
+
+		const block = {
+			c: function create() {
+				h1 = element("h1");
+				t0 = text("sQuery.js");
+				div0 = element("div");
+				div0.textContent = `${/*name*/ ctx[0]}`;
+				t2 = space();
+				doc0 = element("doc");
+				h20 = element("h2");
+				h20.textContent = "What is sQuery?";
+				t4 = space();
+				div2 = element("div");
+				b0 = element("b");
+				b0.textContent = "sQuery";
+				t6 = text(" is like a ");
+				red0 = element("red");
+				red0.textContent = "super minified ES6 modern jQuery";
+				t8 = text("(less than ");
+				b1 = element("b");
+				b1.textContent = "9.5KB";
+				t10 = text(") that works great with modern JS frameworks such as ");
+				b2 = element("b");
+				b2.textContent = "Svelte/SolidJS/React/Preact/Vue.js/Angular";
+				t12 = text(" without any special settings.\n\t\t\t");
+				br0 = element("br");
+				br1 = element("br");
+				t13 = text("\n\t\t\tsQuery is probably something you're looking for especially if you're a modern js framework user but still love jQuery.\n\t\t\t");
+				br2 = element("br");
+				br3 = element("br");
+				t14 = space();
+				i0 = element("i");
+				i0.textContent = "Have you ever thought the React/Vue virtual DOM is great but you still want a minimum DOM wrapper like jQuery?";
+				t16 = space();
+				br4 = element("br");
+				br5 = element("br");
+				t17 = space();
+				i1 = element("i");
+				t18 = text("Have you ever thought repeating ");
+				b3 = element("b");
+				b3.textContent = "document.getElementById";
+				t20 = text(" or ");
+				b4 = element("b");
+				b4.textContent = "document.querySelectorAll";
+				t22 = text(" is a stupid idea?");
+				t23 = space();
+				br6 = element("br");
+				br7 = element("br");
+				t24 = text("\n\t\t\tI know what you want. You want good old-fashioned simple DOM manipulation methods just like jQuery offers but you don't want to add a ");
+				red1 = element("red");
+				red1.textContent = "300KB+ jQuery file";
+				t26 = text(" in your project. And you want ");
+				blue = element("blue");
+				blue.textContent = "native JavaScript speed";
+				t28 = text(", too.\n\t\t\t");
+				br8 = element("br");
+				br9 = element("br");
+				t29 = text("\n\t\t\tWell, sQuery is just 9.5KB, and with Nginx/Apache http Gzipped compression, it would be ");
+				red2 = element("red");
+				red2.textContent = "2.5KB";
+				t31 = text("!!\n\t\t\tIt offers core jQuery-like functionality such as selector, method chain, dom/css operations, events, fadeIn, fadeOut, animation, each loop, and so on!\n\t\t\t");
+				br10 = element("br");
+				br11 = element("br");
+				t32 = space();
+				div1 = element("div");
+				table = element("table");
+				thead = element("thead");
+				tr0 = element("tr");
+				th0 = element("th");
+				th0.textContent = "Size";
+				t34 = space();
+				th1 = element("th");
+				th1.textContent = "sQuery";
+				t36 = space();
+				th2 = element("th");
+				th2.textContent = "Cash";
+				t38 = space();
+				th3 = element("th");
+				th3.textContent = "Zepto 1.2.0";
+				t40 = space();
+				th4 = element("th");
+				th4.textContent = "jQuery Slim 3.4.1";
+				t42 = space();
+				tbody = element("tbody");
+				tr1 = element("tr");
+				td0 = element("td");
+				td0.textContent = "Unminified";
+				t44 = space();
+				td1 = element("td");
+				strong0 = element("strong");
+				strong0.textContent = "13 KB";
+				t46 = space();
+				td2 = element("td");
+				td2.textContent = "36.5 KB";
+				t48 = space();
+				td3 = element("td");
+				td3.textContent = "58.7 KB";
+				t50 = space();
+				td4 = element("td");
+				strong1 = element("strong");
+				strong1.textContent = "227 KB";
+				t52 = space();
+				tr2 = element("tr");
+				td5 = element("td");
+				td5.textContent = "Minified";
+				t54 = space();
+				td6 = element("td");
+				strong2 = element("strong");
+				strong2.textContent = "9.5KB";
+				t56 = space();
+				td7 = element("td");
+				td7.textContent = "16 KB";
+				t58 = space();
+				td8 = element("td");
+				td8.textContent = "26 KB";
+				t60 = space();
+				td9 = element("td");
+				strong3 = element("strong");
+				strong3.textContent = "71 KB";
+				t62 = space();
+				tr3 = element("tr");
+				td10 = element("td");
+				td10.textContent = "Minified & Gzipped";
+				t64 = space();
+				td11 = element("td");
+				strong4 = element("strong");
+				strong4.textContent = "2.9 KB";
+				t66 = space();
+				td12 = element("td");
+				td12.textContent = "6 KB";
+				t68 = space();
+				td13 = element("td");
+				td13.textContent = "9.8 KB";
+				t70 = space();
+				td14 = element("td");
+				strong5 = element("strong");
+				strong5.textContent = "24.4 KB";
+				t72 = space();
+				br12 = element("br");
+				br13 = element("br");
+				t73 = text("\n\n\t\t\tActually, the size of your whole project could be even smaller with sQuery than without it, since you don't have to write lengthy native DOM codes over and over again. (Also, more good news: sQuery is basically the same speed as native codes!)\n\t\t\t");
+				br14 = element("br");
+				br15 = element("br");
+				t74 = text("\n\t\t\tsQuery is NOT exactly like jQuery but rather a super simple esential DOM library with near-native speed that takes your development experience to the next level.\n\t\t\t");
+				br16 = element("br");
+				br17 = element("br");
+				t75 = space();
+				h3 = element("h3");
+				i2 = element("i");
+				i2.textContent = "sQuery's 'S' is for Simple, Small, Speed, and Solid";
+				t77 = space();
+				doc1 = element("doc");
+				h21 = element("h2");
+				h21.textContent = "Read the documentation and start!";
+				t79 = space();
+				div3 = element("div");
+				t80 = text("There are CDN/zip/module/npm options for sQuery.");
+				br18 = element("br");
+				t81 = text("\n\t\t\tIf you already know jQuery, you basically don't need any additional knowledge.\n\t\t\tLet's go to the ");
+				a = element("a");
+				a.textContent = "documentation";
+				t83 = text(" page and start!");
+				add_location(div0, file$5, 7, 34, 235);
+				attr_dev(h1, "class", "notranslate");
+				add_location(h1, file$5, 7, 1, 202);
+				add_location(h20, file$5, 10, 2, 291);
+				add_location(b0, file$5, 12, 3, 327);
+				add_location(red0, file$5, 12, 27, 351);
+				add_location(b1, file$5, 12, 81, 405);
+				add_location(b2, file$5, 12, 146, 470);
+				add_location(br0, file$5, 13, 3, 553);
+				add_location(br1, file$5, 13, 7, 557);
+				add_location(br2, file$5, 15, 3, 687);
+				add_location(br3, file$5, 15, 7, 691);
+				add_location(i0, file$5, 16, 3, 699);
+				add_location(br4, file$5, 17, 3, 820);
+				add_location(br5, file$5, 17, 7, 824);
+				add_location(b3, file$5, 18, 38, 867);
+				add_location(b4, file$5, 18, 72, 901);
+				add_location(i1, file$5, 18, 3, 832);
+				add_location(br6, file$5, 19, 3, 959);
+				add_location(br7, file$5, 19, 7, 963);
+				add_location(red1, file$5, 20, 137, 1105);
+				add_location(blue, file$5, 20, 197, 1165);
+				add_location(br8, file$5, 21, 3, 1211);
+				add_location(br9, file$5, 21, 7, 1215);
+				add_location(red2, file$5, 22, 91, 1311);
+				add_location(br10, file$5, 24, 3, 1487);
+				add_location(br11, file$5, 24, 7, 1491);
+				add_location(th0, file$5, 29, 5, 1560);
+				add_location(th1, file$5, 30, 5, 1579);
+				add_location(th2, file$5, 31, 5, 1600);
+				add_location(th3, file$5, 32, 5, 1619);
+				add_location(th4, file$5, 33, 5, 1645);
+				add_location(tr0, file$5, 28, 5, 1550);
+				add_location(thead, file$5, 27, 5, 1537);
+				add_location(td0, file$5, 38, 5, 1725);
+				add_location(strong0, file$5, 39, 9, 1754);
+				add_location(td1, file$5, 39, 5, 1750);
+				add_location(td2, file$5, 40, 5, 1787);
+				add_location(td3, file$5, 41, 5, 1809);
+				add_location(strong1, file$5, 42, 9, 1835);
+				add_location(td4, file$5, 42, 5, 1831);
+				add_location(tr1, file$5, 37, 5, 1715);
+				add_location(td5, file$5, 45, 5, 1890);
+				add_location(strong2, file$5, 46, 9, 1917);
+				add_location(td6, file$5, 46, 5, 1913);
+				add_location(td7, file$5, 47, 5, 1950);
+				add_location(td8, file$5, 48, 5, 1970);
+				add_location(strong3, file$5, 49, 9, 1994);
+				add_location(td9, file$5, 49, 5, 1990);
+				add_location(tr2, file$5, 44, 5, 1880);
+				add_location(td10, file$5, 52, 5, 2048);
+				add_location(strong4, file$5, 53, 9, 2089);
+				add_location(td11, file$5, 53, 5, 2085);
+				add_location(td12, file$5, 54, 5, 2123);
+				add_location(td13, file$5, 55, 5, 2142);
+				add_location(strong5, file$5, 56, 9, 2167);
+				add_location(td14, file$5, 56, 5, 2163);
+				add_location(tr3, file$5, 51, 5, 2038);
+				add_location(tbody, file$5, 36, 5, 1702);
+				add_location(table, file$5, 26, 4, 1524);
+				attr_dev(div1, "class", "cTable");
+				add_location(div1, file$5, 25, 3, 1499);
+				add_location(br12, file$5, 61, 3, 2248);
+				add_location(br13, file$5, 61, 7, 2252);
+				add_location(br14, file$5, 64, 3, 2508);
+				add_location(br15, file$5, 64, 7, 2512);
+				add_location(br16, file$5, 66, 3, 2685);
+				add_location(br17, file$5, 66, 7, 2689);
+				add_location(i2, file$5, 67, 7, 2701);
+				add_location(h3, file$5, 67, 3, 2697);
+				add_location(div2, file$5, 11, 2, 318);
+				attr_dev(doc0, "name", "What_is_sQuery");
+				add_location(doc0, file$5, 9, 1, 261);
+				add_location(h21, file$5, 72, 2, 2812);
+				add_location(br18, file$5, 74, 51, 2914);
+				attr_dev(a, "href", "./#/docs");
+				add_location(a, file$5, 76, 19, 3020);
+				add_location(div3, file$5, 73, 2, 2857);
+				attr_dev(doc1, "name", "Installation");
+				add_location(doc1, file$5, 71, 1, 2784);
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, h1, anchor);
+				append_dev(h1, t0);
+				append_dev(h1, div0);
+				insert_dev(target, t2, anchor);
+				insert_dev(target, doc0, anchor);
+				append_dev(doc0, h20);
+				append_dev(doc0, t4);
+				append_dev(doc0, div2);
+				append_dev(div2, b0);
+				append_dev(div2, t6);
+				append_dev(div2, red0);
+				append_dev(div2, t8);
+				append_dev(div2, b1);
+				append_dev(div2, t10);
+				append_dev(div2, b2);
+				append_dev(div2, t12);
+				append_dev(div2, br0);
+				append_dev(div2, br1);
+				append_dev(div2, t13);
+				append_dev(div2, br2);
+				append_dev(div2, br3);
+				append_dev(div2, t14);
+				append_dev(div2, i0);
+				append_dev(div2, t16);
+				append_dev(div2, br4);
+				append_dev(div2, br5);
+				append_dev(div2, t17);
+				append_dev(div2, i1);
+				append_dev(i1, t18);
+				append_dev(i1, b3);
+				append_dev(i1, t20);
+				append_dev(i1, b4);
+				append_dev(i1, t22);
+				append_dev(div2, t23);
+				append_dev(div2, br6);
+				append_dev(div2, br7);
+				append_dev(div2, t24);
+				append_dev(div2, red1);
+				append_dev(div2, t26);
+				append_dev(div2, blue);
+				append_dev(div2, t28);
+				append_dev(div2, br8);
+				append_dev(div2, br9);
+				append_dev(div2, t29);
+				append_dev(div2, red2);
+				append_dev(div2, t31);
+				append_dev(div2, br10);
+				append_dev(div2, br11);
+				append_dev(div2, t32);
+				append_dev(div2, div1);
+				append_dev(div1, table);
+				append_dev(table, thead);
+				append_dev(thead, tr0);
+				append_dev(tr0, th0);
+				append_dev(tr0, t34);
+				append_dev(tr0, th1);
+				append_dev(tr0, t36);
+				append_dev(tr0, th2);
+				append_dev(tr0, t38);
+				append_dev(tr0, th3);
+				append_dev(tr0, t40);
+				append_dev(tr0, th4);
+				append_dev(table, t42);
+				append_dev(table, tbody);
+				append_dev(tbody, tr1);
+				append_dev(tr1, td0);
+				append_dev(tr1, t44);
+				append_dev(tr1, td1);
+				append_dev(td1, strong0);
+				append_dev(tr1, t46);
+				append_dev(tr1, td2);
+				append_dev(tr1, t48);
+				append_dev(tr1, td3);
+				append_dev(tr1, t50);
+				append_dev(tr1, td4);
+				append_dev(td4, strong1);
+				append_dev(tbody, t52);
+				append_dev(tbody, tr2);
+				append_dev(tr2, td5);
+				append_dev(tr2, t54);
+				append_dev(tr2, td6);
+				append_dev(td6, strong2);
+				append_dev(tr2, t56);
+				append_dev(tr2, td7);
+				append_dev(tr2, t58);
+				append_dev(tr2, td8);
+				append_dev(tr2, t60);
+				append_dev(tr2, td9);
+				append_dev(td9, strong3);
+				append_dev(tbody, t62);
+				append_dev(tbody, tr3);
+				append_dev(tr3, td10);
+				append_dev(tr3, t64);
+				append_dev(tr3, td11);
+				append_dev(td11, strong4);
+				append_dev(tr3, t66);
+				append_dev(tr3, td12);
+				append_dev(tr3, t68);
+				append_dev(tr3, td13);
+				append_dev(tr3, t70);
+				append_dev(tr3, td14);
+				append_dev(td14, strong5);
+				append_dev(div2, t72);
+				append_dev(div2, br12);
+				append_dev(div2, br13);
+				append_dev(div2, t73);
+				append_dev(div2, br14);
+				append_dev(div2, br15);
+				append_dev(div2, t74);
+				append_dev(div2, br16);
+				append_dev(div2, br17);
+				append_dev(div2, t75);
+				append_dev(div2, h3);
+				append_dev(h3, i2);
+				insert_dev(target, t77, anchor);
+				insert_dev(target, doc1, anchor);
+				append_dev(doc1, h21);
+				append_dev(doc1, t79);
+				append_dev(doc1, div3);
+				append_dev(div3, t80);
+				append_dev(div3, br18);
+				append_dev(div3, t81);
+				append_dev(div3, a);
+				append_dev(div3, t83);
+			},
+			p: noop,
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(h1);
+				if (detaching) detach_dev(t2);
+				if (detaching) detach_dev(doc0);
+				if (detaching) detach_dev(t77);
+				if (detaching) detach_dev(doc1);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_default_slot$1.name,
+			type: "slot",
+			source: "(7:0) <Core>",
+			ctx
+		});
+
+		return block;
+	}
+
+	function create_fragment$6(ctx) {
+		let core;
+		let current;
+
+		core = new Core({
+				props: {
+					$$slots: { default: [create_default_slot$1] },
+					$$scope: { ctx }
+				},
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				create_component(core.$$.fragment);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				mount_component(core, target, anchor);
+				current = true;
+			},
+			p: function update(ctx, [dirty]) {
+				const core_changes = {};
+
+				if (dirty & /*$$scope*/ 2) {
+					core_changes.$$scope = { dirty, ctx };
+				}
+
+				core.$set(core_changes);
+			},
+			i: function intro(local) {
+				if (current) return;
+				transition_in(core.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(core.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				destroy_component(core, detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$6.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$6($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Home', slots, []);
+		let name = 'sQuery - Native Speed jQuery for Svelte/SolidJS';
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Home> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({ push, sq: sQuery, Core, name });
+
+		$$self.$inject_state = $$props => {
+			if ('name' in $$props) $$invalidate(0, name = $$props.name);
+		};
+
+		if ($$props && "$$inject" in $$props) {
+			$$self.$inject_state($$props.$$inject);
+		}
+
+		return [name];
+	}
+
+	class Home extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Home",
+				options,
+				id: create_fragment$6.name
+			});
+		}
+	}
+
+	let name = 'sQuery - Native Speed jQuery for Svelte/SolidJS';
+
+	let loadProc = function( bDoc = true ){
+		sQuery('body').hide().fadeIn(400);
+
+		if ( bDoc ){
+			window.setDocTitle = (v, ot)=>{
+				let c = sQuery('.cF[name="'+v+'"]').siblings().filter('.cSub').text();
+				if ( !c )
+					return
+		
+				let title = ot + ' - sQuery Docs';
+				if (window.history.replaceState)
+					window.history.replaceState({n:v}, title, './?n='+v+'#/docs' );
+				document.title = title;
+				
+				let h = '<a class="cWhite" href="./#/docs">sQuery Docs</a> -> <a class="cWhite" href="./?n='+c.replace(/ /g,'')+'#/docs">' 
+					+ c + '</a> -> <a class="cWhite" href="./?p&n='+v+'#/docs">' + sQuery('.cF[name='+v+']').text().replace('・','') +'</a>';
+				sQuery('#idDocNav').html(h);
+				sQuery('.cF').removeClass('active');
+				sQuery('.cF[name="'+v+'"]').addClass('active');
+			};
+		} else {
+			window.setDocTitle = (v, ot)=>{
+				let c = sQuery('.cF[name="'+v+'"]').siblings().filter('.cSub').text();
+				if ( !c )
+					return
+		
+				let title = ot + ' - sQuery Install';
+				if (window.history.replaceState)
+					window.history.replaceState({n:v}, title, './?n='+v+'#/install' );
+				document.title = title;
+				
+				let h = '<a class="cWhite" href="./#/install">sQuery Install</a> -> <a class="cWhite" href="./?n='+c.replace(/ /g,'')+'#/install">' 
+					+ c + '</a> -> <a class="cWhite" href="./?p&n='+v+'#/install">' + sQuery('.cF[name='+v+']').text().replace('・','') +'</a>';
+				sQuery('#idDocNav').html(h);
+				sQuery('.cF').removeClass('active');
+				sQuery('.cF[name="'+v+'"]').addClass('active');
+			};
+		}
+
+		sQuery(document).onf('click', '.menu__toggler', function(){
+			let el = sQuery('.menu__toggler');
+			el.toggleClass('active');
+			if ( sQuery('.menu__toggler').hasClass('active') )
+				sQuery('#idLeft').fadeIn(500).animate([{left:"-200px"}, {left:"0px"}], 300);
+			else	
+				sQuery('#idLeft').fadeOut(500).animate([{left:"0px"}, {left:"-200px"}], 300);
+			
+			return false
+		});
+		sQuery('.cF').on('click', function(){
+			let t = sQuery(this).attr('name');
+			sQuery('doc[name="'+t+'"]').scrollToElement();
+		});
+		setTimeout(()=>{
+			sQuery(document).on('scroll', function(){
+				let isOnScreen = function(element){
+					let curPos = element.offset(),
+						curTop = curPos.top - sQuery('body').scrollTop(),
+						screenHeight = sQuery('body').height();
+					return (curTop > screenHeight) ? false : true;
+				};
+		
+				let el;
+				sQuery('doc').each(function(){
+					if ( isOnScreen( sQuery(this) ) )
+						el = sQuery(this);
+				});
+				if ( el )
+				{
+					let ot = sQuery('.cF[name="'+el.attr('name')+'"]').text();
+					window.setDocTitle( el.attr('name'), ot );
+				}
+			});
+		},2500);
+		
+		window.clearDS = ()=> {
+			sQuery('#idDS').val('');
+			sQuery('#idDSC').fadeOut();
+			sQuery('.cF').fadeIn();
+			sQuery('.cF').each(function(){
+				sQuery(this).html(sQuery(this).text());
+			});
+		};
+		sQuery('#idDS').on('keyup', function(){
+			let v = sQuery(this).val().trim();
+			//console.log(v)
+			sQuery('.cF').show();
+			sQuery('.cF').each(function(){
+				let t = sQuery(this).text(), lt = t.toLowerCase(), lv = v.toLowerCase();
+				if ( lt.toLowerCase().includes(lv) )
+					sQuery(this).html( t.replace(new RegExp(v, 'i'), "<b>$&</b>") );
+				else
+					sQuery(this).hide();
+			});
+			if ( sQuery(this).val() != '' )
+			sQuery('#idDSC').show();
+		}).on('blur', function(){
+			if ( sQuery(this).val() == '' )
+				window.clearDS();
+		});
+		sQuery('#idDSC').on('click',function(){
+			window.clearDS();
+		});
+		setTimeout(function(){
+			function qs(key) {
+				key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+				let match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+				return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+			}
+			const n = qs('n'); 
+			if ( n )
+				document.querySelector(`doc[name="${n}"]`).scrollIntoView();
+		}, 1000);
+	};
+
+	/* PrismJS 1.25.0
+	https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript */
+	var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(u){var c=/\blang(?:uage)?-([\w-]+)\b/i,n=0,e={},M={manual:u.Prism&&u.Prism.manual,disableWorkerMessageHandler:u.Prism&&u.Prism.disableWorkerMessageHandler,util:{encode:function e(n){return n instanceof W?new W(n.type,e(n.content),n.alias):Array.isArray(n)?n.map(e):n.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).slice(8,-1)},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++n}),e.__id},clone:function t(e,r){var a,n;switch(r=r||{},M.util.type(e)){case"Object":if(n=M.util.objId(e),r[n])return r[n];for(var i in a={},r[n]=a,e)e.hasOwnProperty(i)&&(a[i]=t(e[i],r));return a;case"Array":return n=M.util.objId(e),r[n]?r[n]:(a=[],r[n]=a,e.forEach(function(e,n){a[n]=t(e,r);}),a);default:return e}},getLanguage:function(e){for(;e&&!c.test(e.className);)e=e.parentElement;return e?(e.className.match(c)||[,"none"])[1].toLowerCase():"none"},currentScript:function(){if("undefined"==typeof document)return null;if("currentScript"in document)return document.currentScript;try{throw new Error}catch(e){var n=(/at [^(\r\n]*\((.*):[^:]+:[^:]+\)$/i.exec(e.stack)||[])[1];if(n){var t=document.getElementsByTagName("script");for(var r in t)if(t[r].src==n)return t[r]}return null}},isActive:function(e,n,t){for(var r="no-"+n;e;){var a=e.classList;if(a.contains(n))return !0;if(a.contains(r))return !1;e=e.parentElement;}return !!t}},languages:{plain:e,plaintext:e,text:e,txt:e,extend:function(e,n){var t=M.util.clone(M.languages[e]);for(var r in n)t[r]=n[r];return t},insertBefore:function(t,e,n,r){var a=(r=r||M.languages)[t],i={};for(var l in a)if(a.hasOwnProperty(l)){if(l==e)for(var o in n)n.hasOwnProperty(o)&&(i[o]=n[o]);n.hasOwnProperty(l)||(i[l]=a[l]);}var s=r[t];return r[t]=i,M.languages.DFS(M.languages,function(e,n){n===s&&e!=t&&(this[e]=i);}),i},DFS:function e(n,t,r,a){a=a||{};var i=M.util.objId;for(var l in n)if(n.hasOwnProperty(l)){t.call(n,l,n[l],r||l);var o=n[l],s=M.util.type(o);"Object"!==s||a[i(o)]?"Array"!==s||a[i(o)]||(a[i(o)]=!0,e(o,t,l,a)):(a[i(o)]=!0,e(o,t,null,a));}}},plugins:{},highlightAll:function(e,n){M.highlightAllUnder(document,e,n);},highlightAllUnder:function(e,n,t){var r={callback:t,container:e,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};M.hooks.run("before-highlightall",r),r.elements=Array.prototype.slice.apply(r.container.querySelectorAll(r.selector)),M.hooks.run("before-all-elements-highlight",r);for(var a,i=0;a=r.elements[i++];)M.highlightElement(a,!0===n,r.callback);},highlightElement:function(e,n,t){var r=M.util.getLanguage(e),a=M.languages[r];e.className=e.className.replace(c,"").replace(/\s+/g," ")+" language-"+r;var i=e.parentElement;i&&"pre"===i.nodeName.toLowerCase()&&(i.className=i.className.replace(c,"").replace(/\s+/g," ")+" language-"+r);var l={element:e,language:r,grammar:a,code:e.textContent};function o(e){l.highlightedCode=e,M.hooks.run("before-insert",l),l.element.innerHTML=l.highlightedCode,M.hooks.run("after-highlight",l),M.hooks.run("complete",l),t&&t.call(l.element);}if(M.hooks.run("before-sanity-check",l),(i=l.element.parentElement)&&"pre"===i.nodeName.toLowerCase()&&!i.hasAttribute("tabindex")&&i.setAttribute("tabindex","0"),!l.code)return M.hooks.run("complete",l),void(t&&t.call(l.element));if(M.hooks.run("before-highlight",l),l.grammar)if(n&&u.Worker){var s=new Worker(M.filename);s.onmessage=function(e){o(e.data);},s.postMessage(JSON.stringify({language:l.language,code:l.code,immediateClose:!0}));}else o(M.highlight(l.code,l.grammar,l.language));else o(M.util.encode(l.code));},highlight:function(e,n,t){var r={code:e,grammar:n,language:t};return M.hooks.run("before-tokenize",r),r.tokens=M.tokenize(r.code,r.grammar),M.hooks.run("after-tokenize",r),W.stringify(M.util.encode(r.tokens),r.language)},tokenize:function(e,n){var t=n.rest;if(t){for(var r in t)n[r]=t[r];delete n.rest;}var a=new i;return I(a,a.head,e),function e(n,t,r,a,i,l){for(var o in r)if(r.hasOwnProperty(o)&&r[o]){var s=r[o];s=Array.isArray(s)?s:[s];for(var u=0;u<s.length;++u){if(l&&l.cause==o+","+u)return;var c=s[u],g=c.inside,f=!!c.lookbehind,h=!!c.greedy,d=c.alias;if(h&&!c.pattern.global){var p=c.pattern.toString().match(/[imsuy]*$/)[0];c.pattern=RegExp(c.pattern.source,p+"g");}for(var v=c.pattern||c,m=a.next,y=i;m!==t.tail&&!(l&&y>=l.reach);y+=m.value.length,m=m.next){var b=m.value;if(t.length>n.length)return;if(!(b instanceof W)){var k,x=1;if(h){if(!(k=z(v,y,n,f))||k.index>=n.length)break;var w=k.index,A=k.index+k[0].length,P=y;for(P+=m.value.length;P<=w;)m=m.next,P+=m.value.length;if(P-=m.value.length,y=P,m.value instanceof W)continue;for(var E=m;E!==t.tail&&(P<A||"string"==typeof E.value);E=E.next)x++,P+=E.value.length;x--,b=n.slice(y,P),k.index-=y;}else if(!(k=z(v,0,b,f)))continue;var w=k.index,S=k[0],O=b.slice(0,w),L=b.slice(w+S.length),N=y+b.length;l&&N>l.reach&&(l.reach=N);var j=m.prev;O&&(j=I(t,j,O),y+=O.length),q(t,j,x);var C=new W(o,g?M.tokenize(S,g):S,d,S);if(m=I(t,j,C),L&&I(t,m,L),1<x){var _={cause:o+","+u,reach:N};e(n,t,r,m.prev,y,_),l&&_.reach>l.reach&&(l.reach=_.reach);}}}}}}(e,a,n,a.head,0),function(e){var n=[],t=e.head.next;for(;t!==e.tail;)n.push(t.value),t=t.next;return n}(a)},hooks:{all:{},add:function(e,n){var t=M.hooks.all;t[e]=t[e]||[],t[e].push(n);},run:function(e,n){var t=M.hooks.all[e];if(t&&t.length)for(var r,a=0;r=t[a++];)r(n);}},Token:W};function W(e,n,t,r){this.type=e,this.content=n,this.alias=t,this.length=0|(r||"").length;}function z(e,n,t,r){e.lastIndex=n;var a=e.exec(t);if(a&&r&&a[1]){var i=a[1].length;a.index+=i,a[0]=a[0].slice(i);}return a}function i(){var e={value:null,prev:null,next:null},n={value:null,prev:e,next:null};e.next=n,this.head=e,this.tail=n,this.length=0;}function I(e,n,t){var r=n.next,a={value:t,prev:n,next:r};return n.next=a,r.prev=a,e.length++,a}function q(e,n,t){for(var r=n.next,a=0;a<t&&r!==e.tail;a++)r=r.next;(n.next=r).prev=n,e.length-=a;}if(u.Prism=M,W.stringify=function n(e,t){if("string"==typeof e)return e;if(Array.isArray(e)){var r="";return e.forEach(function(e){r+=n(e,t);}),r}var a={type:e.type,content:n(e.content,t),tag:"span",classes:["token",e.type],attributes:{},language:t},i=e.alias;i&&(Array.isArray(i)?Array.prototype.push.apply(a.classes,i):a.classes.push(i)),M.hooks.run("wrap",a);var l="";for(var o in a.attributes)l+=" "+o+'="'+(a.attributes[o]||"").replace(/"/g,"&quot;")+'"';return "<"+a.tag+' class="'+a.classes.join(" ")+'"'+l+">"+a.content+"</"+a.tag+">"},!u.document)return u.addEventListener&&(M.disableWorkerMessageHandler||u.addEventListener("message",function(e){var n=JSON.parse(e.data),t=n.language,r=n.code,a=n.immediateClose;u.postMessage(M.highlight(r,M.languages[t],t)),a&&u.close();},!1)),M;var t=M.util.currentScript();function r(){M.manual||M.highlightAll();}if(t&&(M.filename=t.src,t.hasAttribute("data-manual")&&(M.manual=!0)),!M.manual){var a=document.readyState;"loading"===a||"interactive"===a&&t&&t.defer?document.addEventListener("DOMContentLoaded",r):window.requestAnimationFrame?window.requestAnimationFrame(r):window.setTimeout(r,16);}return M}(_self);"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+	Prism.languages.markup={comment:{pattern:/<!--(?:(?!<!--)[\s\S])*?-->/,greedy:!0},prolog:{pattern:/<\?[\s\S]+?\?>/,greedy:!0},doctype:{pattern:/<!DOCTYPE(?:[^>"'[\]]|"[^"]*"|'[^']*')+(?:\[(?:[^<"'\]]|"[^"]*"|'[^']*'|<(?!!--)|<!--(?:[^-]|-(?!->))*-->)*\]\s*)?>/i,greedy:!0,inside:{"internal-subset":{pattern:/(^[^\[]*\[)[\s\S]+(?=\]>$)/,lookbehind:!0,greedy:!0,inside:null},string:{pattern:/"[^"]*"|'[^']*'/,greedy:!0},punctuation:/^<!|>$|[[\]]/,"doctype-tag":/^DOCTYPE/i,name:/[^\s<>'"]+/}},cdata:{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,greedy:!0},tag:{pattern:/<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/,greedy:!0,inside:{tag:{pattern:/^<\/?[^\s>\/]+/,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"special-attr":[],"attr-value":{pattern:/=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/,inside:{punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:[{pattern:/&[\da-z]{1,8};/i,alias:"named-entity"},/&#x?[\da-f]{1,8};/i]},Prism.languages.markup.tag.inside["attr-value"].inside.entity=Prism.languages.markup.entity,Prism.languages.markup.doctype.inside["internal-subset"].inside=Prism.languages.markup,Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"));}),Object.defineProperty(Prism.languages.markup.tag,"addInlined",{value:function(a,e){var s={};s["language-"+e]={pattern:/(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,lookbehind:!0,inside:Prism.languages[e]},s.cdata=/^<!\[CDATA\[|\]\]>$/i;var t={"included-cdata":{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,inside:s}};t["language-"+e]={pattern:/[\s\S]+/,inside:Prism.languages[e]};var n={};n[a]={pattern:RegExp("(<__[^>]*>)(?:<!\\[CDATA\\[(?:[^\\]]|\\](?!\\]>))*\\]\\]>|(?!<!\\[CDATA\\[)[^])*?(?=</__>)".replace(/__/g,function(){return a}),"i"),lookbehind:!0,greedy:!0,inside:t},Prism.languages.insertBefore("markup","cdata",n);}}),Object.defineProperty(Prism.languages.markup.tag,"addAttribute",{value:function(a,e){Prism.languages.markup.tag.inside["special-attr"].push({pattern:RegExp("(^|[\"'\\s])(?:"+a+")\\s*=\\s*(?:\"[^\"]*\"|'[^']*'|[^\\s'\">=]+(?=[\\s>]))","i"),lookbehind:!0,inside:{"attr-name":/^[^\s=]+/,"attr-value":{pattern:/=[\s\S]+/,inside:{value:{pattern:/(^=\s*(["']|(?!["'])))\S[\s\S]*(?=\2$)/,lookbehind:!0,alias:[e,"language-"+e],inside:Prism.languages[e]},punctuation:[{pattern:/^=/,alias:"attr-equals"},/"|'/]}}}});}}),Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup,Prism.languages.xml=Prism.languages.extend("markup",{}),Prism.languages.ssml=Prism.languages.xml,Prism.languages.atom=Prism.languages.xml,Prism.languages.rss=Prism.languages.xml;
+	!function(s){var e=/(?:"(?:\\(?:\r\n|[\s\S])|[^"\\\r\n])*"|'(?:\\(?:\r\n|[\s\S])|[^'\\\r\n])*')/;s.languages.css={comment:/\/\*[\s\S]*?\*\//,atrule:{pattern:/@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,inside:{rule:/^@[\w-]+/,"selector-function-argument":{pattern:/(\bselector\s*\(\s*(?![\s)]))(?:[^()\s]|\s+(?![\s)])|\((?:[^()]|\([^()]*\))*\))+(?=\s*\))/,lookbehind:!0,alias:"selector"},keyword:{pattern:/(^|[^\w-])(?:and|not|only|or)(?![\w-])/,lookbehind:!0}}},url:{pattern:RegExp("\\burl\\((?:"+e.source+"|(?:[^\\\\\r\n()\"']|\\\\[^])*)\\)","i"),greedy:!0,inside:{function:/^url/i,punctuation:/^\(|\)$/,string:{pattern:RegExp("^"+e.source+"$"),alias:"url"}}},selector:{pattern:RegExp("(^|[{}\\s])[^{}\\s](?:[^{};\"'\\s]|\\s+(?![\\s{])|"+e.source+")*(?=\\s*\\{)"),lookbehind:!0},string:{pattern:e,greedy:!0},property:{pattern:/(^|[^-\w\xA0-\uFFFF])(?!\s)[-_a-z\xA0-\uFFFF](?:(?!\s)[-\w\xA0-\uFFFF])*(?=\s*:)/i,lookbehind:!0},important:/!important\b/i,function:{pattern:/(^|[^-a-z0-9])[-a-z0-9]+(?=\()/i,lookbehind:!0},punctuation:/[(){};:,]/},s.languages.css.atrule.inside.rest=s.languages.css;var t=s.languages.markup;t&&(t.tag.addInlined("style","css"),t.tag.addAttribute("style","css"));}(Prism);
+	Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,lookbehind:!0,greedy:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0,greedy:!0}],string:{pattern:/(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/(\b(?:class|extends|implements|instanceof|interface|new|trait)\s+|\bcatch\s+\()[\w.\\]+/i,lookbehind:!0,inside:{punctuation:/[.\\]/}},keyword:/\b(?:break|catch|continue|do|else|finally|for|function|if|in|instanceof|new|null|return|throw|try|while)\b/,boolean:/\b(?:false|true)\b/,function:/\b\w+(?=\()/,number:/\b0x[\da-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i,operator:/[<>]=?|[!=]=?=?|--?|\+\+?|&&?|\|\|?|[?*/~^%]/,punctuation:/[{}[\];(),.:]/};
+	Prism.languages.javascript=Prism.languages.extend("clike",{"class-name":[Prism.languages.clike["class-name"],{pattern:/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$A-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\.(?:constructor|prototype))/,lookbehind:!0}],keyword:[{pattern:/((?:^|\})\s*)catch\b/,lookbehind:!0},{pattern:/(^|[^.]|\.\.\.\s*)\b(?:as|assert(?=\s*\{)|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally(?=\s*(?:\{|$))|for|from(?=\s*(?:['"]|$))|function|(?:get|set)(?=\s*(?:[#\[$\w\xA0-\uFFFF]|$))|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,lookbehind:!0}],function:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,number:{pattern:RegExp("(^|[^\\w$])(?:NaN|Infinity|0[bB][01]+(?:_[01]+)*n?|0[oO][0-7]+(?:_[0-7]+)*n?|0[xX][\\dA-Fa-f]+(?:_[\\dA-Fa-f]+)*n?|\\d+(?:_\\d+)*n|(?:\\d+(?:_\\d+)*(?:\\.(?:\\d+(?:_\\d+)*)?)?|\\.\\d+(?:_\\d+)*)(?:[Ee][+-]?\\d+(?:_\\d+)*)?)(?![\\w$])"),lookbehind:!0},operator:/--|\+\+|\*\*=?|=>|&&=?|\|\|=?|[!=]==|<<=?|>>>?=?|[-+*/%&|^!=<>]=?|\.{3}|\?\?=?|\?\.?|[~:]/}),Prism.languages.javascript["class-name"][0].pattern=/(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/,Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,lookbehind:!0,greedy:!0,inside:{"regex-source":{pattern:/^(\/)[\s\S]+(?=\/[a-z]*$)/,lookbehind:!0,alias:"language-regex",inside:Prism.languages.regex},"regex-delimiter":/^\/|\/$/,"regex-flags":/^[a-z]+$/}},"function-variable":{pattern:/#?(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/,alias:"function"},parameter:[{pattern:/(function(?:\s+(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)?\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\))/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/(^|[^$\w\xA0-\uFFFF])(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=>)/i,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/(\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*=>)/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*\s*)\(\s*|\]\s*\(\s*)(?!\s)(?:[^()\s]|\s+(?![\s)])|\([^()]*\))+(?=\s*\)\s*\{)/,lookbehind:!0,inside:Prism.languages.javascript}],constant:/\b[A-Z](?:[A-Z_]|\dx?)*\b/}),Prism.languages.insertBefore("javascript","string",{hashbang:{pattern:/^#!.*/,greedy:!0,alias:"comment"},"template-string":{pattern:/`(?:\\[\s\S]|\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}|(?!\$\{)[^\\`])*`/,greedy:!0,inside:{"template-punctuation":{pattern:/^`|`$/,alias:"string"},interpolation:{pattern:/((?:^|[^\\])(?:\\{2})*)\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}/,lookbehind:!0,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}},"string-property":{pattern:/((?:^|[,{])[ \t]*)(["'])(?:\\(?:\r\n|[\s\S])|(?!\2)[^\\\r\n])*\2(?=\s*:)/m,lookbehind:!0,greedy:!0,alias:"property"}}),Prism.languages.insertBefore("javascript","operator",{"literal-property":{pattern:/((?:^|[,{])[ \t]*)(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*:)/m,lookbehind:!0,alias:"property"}}),Prism.languages.markup&&(Prism.languages.markup.tag.addInlined("script","javascript"),Prism.languages.markup.tag.addAttribute("on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)","javascript")),Prism.languages.js=Prism.languages.javascript;
+
+	function update(text, pel=sq('.cCodeCont')) {
+		let result_element = pel.find("#highlighting-content").get(0);
+		// Handle final newlines (see article)
+		if(text[text.length-1] == "\n") {
+			text += " ";
+		}
+		// Update code
+		result_element.innerHTML = text.replace(new RegExp("&", "g"), "&amp;").replace(new RegExp("<", "g"), "&lt;"); /* Global RegExp */
+		// Syntax Highlight
+		Prism.highlightElement(result_element);
+	}
+	  
+	function sync_scroll(element, pel=sq('.cCodeCont')) {
+		/* Scroll result to scroll coords of event - sync with textarea */
+		let result_element = pel.find("#highlighting").get(0);
+		// Get and set x and y
+		result_element.scrollTop = element.scrollTop;
+		result_element.scrollLeft = element.scrollLeft;
+	}
+	  
+	function check_tab(element, event, pel=sq('.cCodeCont')) {
+		let code = element.value;
+		if(event.key == "Tab") {
+			event.preventDefault(); // stop normal
+
+			if ( window.bShift ){
+				let start = element.selectionStart, end = element.selectionEnd;
+				/* Tab key pressed */
+				let before_tab = code.slice(0, element.selectionStart); // text before tab
+
+				let after_tab = code.slice(element.selectionEnd, element.value.length); // text after tab
+
+				let m_tab = code.substring(element.selectionStart, element.selectionEnd);
+				m_tab = m_tab.replace(/\n\t/g, '\n').replace(/\n  /g, '\n');
+
+				element.selectionStart + 1; // where cursor moves after tab - moving forward by 1 char to after tab
+				element.value = before_tab.replace(/\t$/,'') + m_tab + after_tab; // add tab char
+				element.setSelectionRange(start, end);
+				update(element.value, pel); // Update text to include indent
+			} else {
+				/* Tab key pressed */
+				let before_tab = code.slice(0, element.selectionStart); // text before tab
+
+				let after_tab = code.slice(element.selectionEnd, element.value.length); // text after tab
+
+				let m_tab = code.substring(element.selectionStart, element.selectionEnd);
+				m_tab = m_tab.replace(/\n/g, '\n\t');
+
+				let cursor_pos = element.selectionStart + 1; // where cursor moves after tab - moving forward by 1 char to after tab
+				element.value = before_tab + "\t" + m_tab + after_tab; // add tab char
+				// move cursor
+				element.selectionStart = cursor_pos;
+				element.selectionEnd = cursor_pos;
+				update(element.value, pel); // Update text to include indent
+			}
+			
+		}
+	}
+
+	let g_codes = {
+		custom: `
+<script src="squery.min.js"></script>
+<script>
+const $ = sq
+$(function(){
+	$('body')
+		.html('<div class="str">Am I jQuery?</div>')
+		.css('background', 'rgb(230,30,100)')
+	
+	$('.str').css({
+		color: '#fff',
+		fontSize: '20px',
+	})
+})
+</script>
+	`,
+
+		custom_module: `
+<script type="module">
+import {sq as $} from './sq.min.js'
+$(function(){
+	$('body').css('background', 'rgb(230,30,100)')
+	$('body').html('Am I jQuery?')
+})
+</script>
+	`,
+
+
+		c1: `
+<script src="squery.min.js"></script>
+<script>
+sq(function(){
+	sq('body').css('background', 'skyblue')
+	sq('body').html('<h1>Hello sQuery!</h1>')
+})
+</script>`,
+
+		c1_cdn: `
+<script src="https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js"></script>
+<script>
+sq(function(){
+	sq('body').css('background', 'skyblue')
+	sq('body').html('<h1>Hello sQuery CDN!</h1>')
+})
+</script>`,
+		
+		c2: `
+<script type="module">
+import {sq} from './sq.min.js'
+sq(()=>{
+	sq('body').css('background', 'rgb(230,30,100)')
+	sq('body').html('<h1>Hi, sQuery module!</h1>')
+})
+</script>`,
+
+	c2_cdn: `
+<script type="module">
+import {sq} from 'https://cdn.jsdelivr.net/gh/exis9/squery@latest/sq.min.js'
+sq(()=>{
+	sq('body').css('background', 'rgb(230,30,100)')
+	sq('body').html('<h1>Hi, sQuery CDN module!</h1>')
+})
+</script>`,
+
+	customMethods: `
+<span>click me!</span>
+
+<script>
+	_SQ.NewMethod = function(){ //_SQ.MethodName creates a new method!
+		alert("hello")
+		return this //if you need the method chain, don't forget this
+	}
+
+	_SQ.BgChange = function( color ){
+		let el = this.el[0] //the first element chosen by the selector
+		el.style.background = color //css styling
+		return this
+	}
+
+	sq('span').on( 'click', ()=>{
+		sq('body').BgChange('red') //changes the background
+		setTimeout(()=>{
+			sq('body').NewMethod().BgChange('skyblue') //alerts hello and then changes the background
+		}, 1000)
+	})
+</script>
+`,
+
+	reactScript: `
+<script src="https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js"></script>
+<script>
+sq(()=>{
+	sq('body').css('background', 'skyblue')
+	sq('body').prepend('<h1>Hello sQuery CDN!</h1>')
+})
+</script>
+`,
+	reactModule: `
+import { sq } from './sq.js';
+sq('body').prepend('<h1>Hello sQuery!</h1>')
+`,
+
+	nextScript: `
+<script src="https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js"></script>
+<script>
+sq(()=>{
+	sq('body').css('background', 'skyblue')
+	sq('body').prepend('<h1>Hello sQuery CDN (Next.js)!</h1>')
+})
+</script>
+`,
+	nextModule: `
+import { sq } from './sq.js';
+sq('body').prepend('<h1>Hello sQuery (Next.js)!</h1>')
+`,
+
+	svelteScript: `
+<script src="https://cdn.jsdelivr.net/gh/exis9/squery@latest/squery.min.js"></script>
+<script>
+sq(()=>{
+	sq('body').css('background', 'skyblue')
+	sq('body').prepend('<h1>Hello sQuery CDN! (Svelte)</h1>')
+})
+</script>
+`,
+	svelteModule: `
+import { sq } from './sq.js';
+sq('body').prepend('<h1>Hello sQuery! (Svelte)</h1>')
+`,
+
+	filter: `
+<div>a</div>
+<div class="middle">b</div>
+<div class="middle2">c</div>
+<div class="middle">d</div>
+<div class="middle">e</div>
+<div>f</div>
+
+<script>
+sq(()=>{
+	sq('div')
+		.css('background', '#c8ebcc')
+		.filter('.middle' )
+		.css('color', 'red');
+})
+</script>`,
+
+	not: `
+<div> a </div>
+<div id="pokemon"> b </div>
+<div> c </div>
+<div class="pikachu"> d </div>
+<div class="mew"> e </div>
+<div class="mewtwo"> f </div>
+<div> g </div>
+ 
+<script>
+	sq("div")
+		.not("#pokemon, .mewtwo")
+		.css("color", "red");
+</script>
+`,
+
+	eq: `
+<style>
+div {
+	border: 1px solid blue;
+	margin: 10px;
+	padding: 10px;
+}
+.blue {
+	color: white;
+	background: blue;
+}
+</style>
+
+<div>0</div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+
+<script>
+	sq( "body" ).find( "div" ).eq( 2 ).addClass( "blue" );
+</script>
+`,
+
+	eq2: `
+<style>
+div {
+	border: 1px solid red;
+	margin: 10px;
+	padding: 10px;
+}
+.red {
+	color: white;
+	background: red;
+}
+</style>
+
+<div>0</div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+ 
+<script>
+	sq( "body" ).find( "div" ).eq( -2 ).addClass( "red" );
+</script>
+`,
+
+	first: `
+<ul>
+  <li>first</li>
+  <li>second</li>
+  <li>third</li>
+  <li>forth(last)</li>
+</ul>
+
+<script>
+	sq('ul li').first().css('color', 'red')
+</script>
+`,
+
+	last: `
+<ul>
+	<li>first</li>
+	<li>second</li>
+	<li>third</li>
+	<li>forth(last)</li>
+</ul>
+
+<script>
+	sq('ul li').last().css('color', 'red')
+</script>
+`,
+
+	has: `
+<ul>
+  <li>list item 1</li>
+  <li>list item 2
+    <ul>
+      <li>list item 2-a</li>
+      <li>list item 2-b</li>
+    </ul>
+  </li>
+  <li>list item 3</li>
+  <li>list item 4</li>
+</ul>
+
+<script>
+	sq( "li" ).has( "ul" ).css( "background-color", "red" );
+</script>
+`,
+
+	contains: `
+<div>RX78-2 GUNDAM</div>
+<div>C3PO</div>
+<div>Megaman X</div>
+<div>Evangelion Unit-01</div>
+ 
+<script>
+	sq( "div" ).contains( "Megaman" ).css( "text-decoration", "underline" );
+</script>
+`,
+
+	slice: `
+<ul>
+  <li>list item 1</li>
+  <li>list item 2</li>
+  <li>list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+</ul>
+
+<script>
+	sq( "li" ).slice( 1 ).css( "background-color", "red" );
+	//sq( "li" ).slice( 2, 4 ).css( "background-color", "yellow" );
+</script>
+`,
+
+	index: `
+<ul>
+	<li id="jojo">JoJo's Bizarre Adventure</li>
+	<li id="dbz">Dragon Ball Z</li>
+	<li id="naruto">Naruto</li>
+</ul>
+<div id="msg"></div>
+<script>
+	sq('#msg').text( "Index of Dragn Ball Z: " + sq( "#dbz" ).index() )
+</script>
+`,
+
+	is: `
+<ul>
+	<li>list <strong>item 1</strong></li>
+	<li><span>list item 2</span></li>
+	<li>list item 3</li>
+</ul>
+<script>
+	sq( "ul" ).on('click', function( event ) {
+		var target = sq( event.target );
+		if ( target.is( "li" ) ) {
+			target.css( "background-color", "red" );
+		}
+	});
+</script>
+`,
+
+	find: `
+<ul class="level-1">
+	<li class="item-i">I</li>
+	<li class="item-ii">
+		II
+		<ul class="level-2">
+			<li class="item-a">A</li>
+			<li class="item-b">B
+			<ul class="level-3">
+				<li class="item-1">1</li>
+				<li class="item-2">2</li>
+				<li class="item-3">3</li>
+			</ul>
+			</li>
+			<li class="item-c">C</li>
+		</ul>
+	</li>
+	<li class="item-iii">III</li>
+</ul>
+<script>
+	sq( "li.item-ii" ).find( "li" ).css( "background-color", "red" );
+</script>
+`,
+
+	children: `
+<ul class="level-1">
+  <li class="item-i">I</li>
+  <li class="item-ii">II
+    <ul class="level-2">
+      <li class="item-a">A</li>
+      <li class="item-b">B
+        <ul class="level-3">
+          <li class="item-1">1</li>
+          <li class="item-2">2</li>
+          <li class="item-3">3</li>
+        </ul>
+      </li>
+      <li class="item-c">C</li>
+    </ul>
+  </li>
+  <li class="item-iii">III</li>
+</ul>
+
+<script>
+	sq( "ul.level-3" ).children().css( "background-color", "red" );
+</script>
+`,
+
+	next: `
+<ul>
+  <li>list item 1</li>
+  <li>list item 2</li>
+  <li class="third-item">list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+</ul>
+
+<script>
+	sq( "li.third-item" ).next().css( "background-color", "red" );
+</script>
+`,
+
+	prev: `
+<ul>
+  <li>list item 1</li>
+  <li>list item 2</li>
+  <li class="third-item">list item 3</li>
+  <li>list item 4</li>
+  <li>list item 5</li>
+</ul>
+
+<script>
+	sq( "li.third-item" ).prev().css( "background-color", "red" );
+</script>
+`,
+
+	siblings: `
+<ul>
+	<li>list item 1</li>
+	<li>list item 2</li>
+	<li class="third-item">list item 3</li>
+	<li>list item 4</li>
+	<li>list item 5</li>
+</ul>
+
+<script>
+	sq( "li.third-item" ).siblings().css( "background-color", "red" );
+</script>
+`,
+
+	parent:`
+<ul class="level-1">
+  <li class="item-i">I</li>
+  <li class="item-ii">II
+    <ul class="level-2">
+      <li class="item-a">A</li>
+      <li class="item-b">B
+        <ul class="level-3">
+          <li class="item-1">1</li>
+          <li class="item-2">2</li>
+          <li class="item-3">3</li>
+        </ul>
+      </li>
+      <li class="item-c">C</li>
+    </ul>
+  </li>
+  <li class="item-iii">III</li>
+</ul>
+
+<script>
+	sq( "li.item-a" ).parent().css( "background-color", "red" );
+</script>
+`,
+
+	parents:`
+<ul class="level-1">
+  <li class="item-i">I</li>
+  <li class="item-ii">II
+    <ul class="level-2">
+      <li class="item-a">A</li>
+      <li class="item-b">B
+        <ul class="level-3">
+          <li class="item-1">1</li>
+          <li class="item-2">2</li>
+          <li class="item-3">3</li>
+        </ul>
+      </li>
+      <li class="item-c">C</li>
+    </ul>
+  </li>
+  <li class="item-iii">III</li>
+</ul>
+
+<script>
+	sq( "li" ).css( "background-color", "pink" )
+	sq( "li.item-a" ).parents().css( "background-color", "red" );
+</script>
+`,
+
+	closest:`
+<ul id="one" class="level-1">
+  <li class="item-i">I</li>
+  <li id="ii" class="item-ii">II
+    <ul class="level-2">
+      <li class="item-a">A</li>
+      <li class="item-b">B
+        <ul class="level-3">
+          <li class="item-1">1</li>
+          <li class="item-2">2</li>
+          <li class="item-3">3</li>
+        </ul>
+      </li>
+      <li class="item-c">C</li>
+    </ul>
+  </li>
+  <li class="item-iii">III</li>
+</ul>
+
+<script>
+	sq( "li.item-a" )
+		.closest( "ul" )
+		.css( "background-color", "red" );
+</script>
+`,
+
+	hasClass:`
+<style>
+	.selected {
+		color: red;
+	}
+</style>
+
+<p>This paragraph is black and is the first paragraph.</p>
+<p class="selected">This paragraph is red and is the second paragraph.</p>
+
+<br><br>
+
+<div id="result1">First paragraph has selected class: </div>
+<div id="result2">Second paragraph has selected class: </div>
+<div id="result3">At least one paragraph has selected class: </div>
+
+<script>
+	sq( "#result1" ).append( sq( "p" ).first().hasClass( "selected" ).toString() );
+	sq( "#result2" ).append( sq( "p" ).last().hasClass( "selected" ).toString() );
+	sq( "#result3" ).append( sq( "p" ).hasClass( "selected" ).toString() ) ;
+</script>
+`,
+
+	isVisible:`
+<div id="a">a</div>
+<div id="b">b</div>
+<div id="c" style="display:none">c</div>
+<div id="d">d</div>
+
+<div id="console"></div>
+
+<script>
+	setTimeout(()=>{
+		const a = sq('#a').isVisible().toString()
+		const b = sq('#b').isVisible().toString()
+		const c = sq('#c').isVisible().toString()
+		const d = sq('#d').isVisible().toString()
+	
+		sq('#console').html( 'a:'+a+', ' + 'b:'+b+', ' + 'c:'+c+', ' + 'd:'+d)
+	}, 1000)
+</script>
+`,
+
+
+	html:`
+<div>
+	<div>Hello! I'm PS5!!</div>
+	<div>Hello! I'm Xbox Series X!!</div>
+	<div class="alexa">Hello! I'm Alexa!!</div>
+	<div>Konichiwa! I'm Shinzo Abe!!</div>
+	<div>Hi! I'm Yamagami!!</div>
+	<div>Ha! I'm Donald Trump!!</div>
+	<div>Ha! I'm Merkel!!</div>
+	<div>WRYYY! I'm Shi Jinping!! Fuck Taiwan!</div>
+	<div>I'm TSMC! Taiwan #1!</div>
+</div>
+<br><br>
+Output: <div id="console"></div>
+
+<script>
+	let h = '<b>' + sq('.alexa').html() + '</b>'
+	sq('#console').html( h )
+</script>
+`,
+
+	text:`
+<div>
+	<div>Hello! I'm PlayStation 5!!</div>
+	<div>Hello! I'm Xbox Series S!!</div>
+	<div class="alexa">Hello! I'm <span style="color:red">Alexa</span>!!</div>
+	<div>Pika! I'm Pikachu!!</div>
+	<div>Hi! I'm Siri!!</div>
+	<div>Hi! I'm Bitcoin!!</div>
+</div>
+<br><br>
+Output: <div id="console"></div>
+
+<script>
+	// html tags are ignored when you get a text using text()
+	let h = '<b>' + sq('.alexa').text() + '</b>' 
+	
+	// html tags are automatically converted to a normal text
+	sq('#console').text( h ) 
+</script>
+`,
+
+	val:`
+<input type="text" value="Mewtwo">
+<div id="console"></div>
+<script>
+	sq('input[type="text"]').on('keyup', function(){
+		const v = sq(this).val()
+		sq('#console').html( 'The strongest pokemon: ' + v )
+	})
+	sq('input[type="text"]').trigger('keyup')
+</script>
+`,
+
+	css:`
+<div id="css1">css1</div>
+<div id="css2" style="color:red;font-size:20px">css2</div>
+<div id="css3">css3</div>
+<div id="css4">css4</div>
+<div id="css5">css5</div>
+<script>
+	const cssText = sq('#css2').css()
+	sq('#css3').css('color', cssText.color )
+	sq('#css4').css({
+		color: cssText.color,
+		fontSize: cssText.fontSize,
+		//'font-size': cssText['font-size'] is also fine!
+	})
+	sq('#css5').css('font-size', sq('#css2').css('font-size') )
+</script>
+`,
+
+	attr:`
+Click the best Final Fantasy.<br><br>
+<div data-text="7">Final Fantasy Ⅶ</div>
+<div data-text="8">Final Fantasy Ⅷ</div>
+<div data-text="9">Final Fantasy Ⅸ</div>
+<div data-text="10">Final Fantasy X</div>
+<div data-text="11">Final Fantasy 11</div>
+<div data-text="12">Final Fantasy 12</div>
+<div data-text="13">Final Fantasy 13</div>
+<div data-text="14">Final Fantasy 14</div>
+<div data-text="15">Final Fantasy 15</div>
+<div data-text="16">Final Fantasy 16</div>
+
+<script>
+	sq('div').on('click', function(){
+		const ff = sq(this).attr('data-text')
+		alert( 'Your Best Final Fantasy is.. Final Fantasy ' + ff )
+	})
+</script>
+`,
+
+	prop:`
+<input id="check1" type="checkbox" checked="checked"> 
+<button>Click me!!</button>
+
+<script>
+	sq('button').on('click', function(){
+		const b = sq('#check1').prop( 'checked' )
+		sq('#check1').prop( 'checked', !b )
+	})
+</script>
+`,
+
+	get:`
+<ul>
+  <li id="t1">The Terminator 1</li>
+  <li id="t2">The Terminator 2</li>
+</ul>
+<script>
+	// getting the 2nd li as a native JavaScript Object (not sQuery object)
+	const js_object = sq( "li" ).get( 1 )
+	// setting the innerHTML with a native JavaScript code
+	js_object.innerHTML = 'The Terminator 2（master piece）'
+</script>
+`,
+
+	show:`
+<ul>
+  <li id="t1">The Terminator 1</li>
+  <li id="t2">The Terminator 2</li>
+  <li id="t3">The Terminator 3</li>
+  <li id="t4" style="display:none">The Terminator 4</li>
+</ul>
+<button>click me!</button>
+<script>
+	sq('button').on('click', function(){
+		sq('#t3').hide()
+		sq('#t4').show()
+		alert('T3 does not exist. T4 is okay.')
+	})
+</script>
+`,
+
+	remove:`
+<div>1 <button>x</button></div>
+<div>2 <button>x</button></div>
+<div>3 <button>x</button></div>
+<div>4 <button>x</button></div>
+<div>5 <button>x</button></div>
+<div>6 <button>x</button></div>
+<div>7 <button>x</button></div>
+<script>
+	sq('div button').on('click', function(){
+		sq(this).parent().remove()
+	})
+</script>
+`,
+
+	before:`
+<style>
+	div {
+		padding: 4px;
+		margin: 8px;
+	}
+</style>
+<div id="area1" style="background-color: #aaa">
+	area1
+	<div id="area2" style="background-color: pink">area2</div>
+	<div id="area3" style="background-color: blue">area3</div>
+</div>
+<script>
+	sq('#area2').before('<div>Inserted Text!!!</div>')
+</script>
+`,
+
+	after:`
+<style>
+	div {
+		padding: 4px;
+		margin: 8px;
+	}
+</style>
+<div id="area1" style="background-color: #aaa">
+	area1
+	<div id="area2" style="background-color: pink">area2</div>
+	<div id="area3" style="background-color: blue">area3</div>
+</div>
+<script>
+	sq('#area2').after('<div>Inserted Text!!!</div>')
+</script>
+`,
+
+	prepend:`
+<style>
+	div {
+		padding: 4px;
+		margin: 8px;
+	}
+</style>
+<div id="area1" style="background-color: #aaa">
+	area1
+	<div id="area2" style="background-color: pink">area2</div>
+	<div id="area3" style="background-color: blue">area3</div>
+</div>
+<script>
+	sq('#area2').prepend('<div>Inserted Text!!!</div>')
+</script>
+`,
+
+	append:`
+<style>
+	div {
+		padding: 4px;
+		margin: 8px;
+	}
+</style>
+<div id="area1" style="background-color: #aaa">
+	area1
+	<div id="area2" style="background-color: pink">area2</div>
+	<div id="area3" style="background-color: blue">area3</div>
+</div>
+<script>
+	sq('#area2').append('<div>Inserted Text!!!</div>')
+</script>
+`,
+
+	replaceWith:`
+<style>
+	div {
+		padding: 4px;
+		margin: 8px;
+	}
+</style>
+<div id="area1" style="background-color: #aaa">
+	area1
+	<div id="area2" style="background-color: pink">area2</div>
+	<div id="area3" style="background-color: blue">area3</div>
+</div>
+<script>
+	sq('#area2').replaceWith('<div>Inserted Text!!!</div>')
+</script>
+`,
+
+	addClass:`
+<style>
+	.poison {
+		color: purple;
+		font-weight: bold;
+	}
+</style>
+<div>Your Pokemon</div>
+<button>Add poison!</button> <button>Remove poison!</button>
+
+<script>
+	sq('button').eq(0).on('click', function(){
+		sq('div').addClass('poison')
+	})
+	sq('button').eq(1).on('click', function(){
+		sq('div').removeClass('poison')
+	})
+</script>
+`,
+
+	toggleClass:`
+<style>
+	.poison {
+		color: purple;
+		font-weight: bold;
+	}
+</style>
+<div>Your Pokemon</div>
+<button>poison!</button>
+
+<script>
+	sq('button').on('click', function(){
+		sq('div').toggleClass('poison')
+	})
+</script>
+`,
+
+	width:`
+<style>
+#memo {
+	width: 300px; 
+	height: 100px;
+	max-width: 500px;
+	border: 4px solid blue;
+	margin: 3px;
+	padding: 13px;
+	box-sizing: content-box;
+}
+</style>
+<textarea id="memo">resize this!</textarea>
+<br>
+<button>Get the width and height</button>
+<script>
+	sq('button').on('click', function(){
+		const el = sq('#memo')
+		const w = el.width() + 'px'
+		const h = el.height() + 'px'
+		el.val( "width: " + w + "　height: " + h )
+	})
+</script>
+`,
+
+
+	innerWidth:`
+<style>
+#memo {
+	width: 300px; 
+	height: 100px;
+	max-width: 500px;
+	border: 4px solid blue;
+	margin: 3px;
+	padding: 13px;
+	box-sizing: content-box;
+}
+</style>
+<textarea id="memo">resize this!</textarea>
+<br>
+<button>Get the innerWidth and innerHeight</button>
+<script>
+	sq('button').on('click', function(){
+		const el = sq('#memo')
+		const w = el.innerWidth() + 'px'
+		const h = el.innerHeight() + 'px'
+		el.val( "innerWidth: " + w + "　innerHeight: " + h )
+	})
+</script>
+`,
+
+
+	outerWidth:`
+<style>
+#memo {
+	width: 300px; 
+	height: 100px;
+	max-width: 500px;
+	border: 4px solid blue;
+	margin: 3px;
+	padding: 13px;
+	box-sizing: content-box;
+}
+</style>
+<textarea id="memo">resize this!</textarea>
+<br>
+<button>Get the outerWidth and outerHeight</button>
+<script>
+	sq('button').on('click', function(){
+		const el = sq('#memo')
+		const w = el.outerWidth() + 'px'
+		const h = el.outerHeight() + 'px'
+		el.val( "outerWidth: " + w + "　outerHeight: " + h )
+	})
+</script>
+`,
+
+	offset:`
+<style>
+p {
+	margin-left: 10px;
+}
+</style>
+
+<div>
+	<p>Hello</p>
+	<p>2nd Paragraph</p>
+</div>
+
+<script>
+	let p = sq( "p" ).last()
+	let offset = p.offset()
+	p.html( "left: " + offset.left + ", top: " + offset.top )
+</script>
+`,
+
+	pos:`
+<style>
+p {
+	margin-left: 10px;
+}
+</style>
+
+<div>
+	<p>Hello</p>
+	<p>2nd Paragraph</p>
+</div>
+
+<script>
+	let p = sq( "p" ).first()
+	let position = p.pos()
+	sq( "p" ).last().text( "left: " + position.left + ", top: " + position.top )
+</script>
+`,
+
+	fadeIn:`
+<div>Life is Strange...</div>
+<button>FadeIn</button> <button>FadeOut</button> <button>FadeInOut</button> <button>FadeOutIn</button>
+<script>
+	sq('button').eq(0).on('click', ()=>{
+		sq('div').fadeIn(800)
+	})
+	sq('button').eq(1).on('click', ()=>{
+		sq('div').fadeOut(800)
+	})
+	sq('button').eq(2).on('click', ()=>{
+		sq('div').fadeIn(800, ()=>{
+			sq('div').fadeOut(800)
+		})
+	})
+	sq('button').eq(3).on('click', ()=>{
+		sq('div').fadeOut(800, ()=>{
+			sq('div').fadeIn(800)
+		})
+	})
+</script>
+`,
+
+	animateSimple: `
+<style>
+#container {
+	position: relative;
+	width: 100%;
+	height: calc(100% - 24px);
+	background-color: #eee;
+}
+#object {
+	background-color: #f00;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+</style>
+<button>animate</button> 
+<div id="container">
+	<div id="object"></div>
+</div>
+<script src="squery.min.js"></script>
+<script>
+sq('button').on('click', ()=>{
+	sq('#object').animate({
+		left: '40%',
+		top: '20%',
+		transform: "scale(10, 3) rotate(130deg)"
+	}, 900 )
+})
+</script>
+`,
+
+	animate:`
+<style>
+	#container {
+		position: relative;
+		width: 100%;
+		height: calc(100% - 24px);
+		background-color: #eee;
+	}
+	#object1, #object2, #object3 {
+		background-color: red;
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#object2 {
+		left: 100px;
+		background-color: blue;
+	}
+	#object3 {
+		left: 200px;
+		background-color: orange;
+	}
+</style>
+<button>animate object 1</button> 
+<button>animate object 2</button> 
+<button>animate object 3(Infinity)</button> 
+<div id="container">
+	<div id="object1"></div>
+	<div id="object2"></div>
+	<div id="object3"></div>
+</div>
+<script>
+	// for object 1
+	sq('button').eq(0).on('click', ()=>{
+		sq('#object1').animate({
+			left: '40px',
+			top: '200px'
+		}, 600 )
+	})
+
+	// for object 2
+	sq('button').eq(1).on('click', ()=>{
+		// reset pos
+		sq('#object2').css({
+			left: '100px',
+			top: '0px'
+		})
+
+		sq('#object2').animate({
+			left: '140px',
+			top: '200px'
+		}, 1000, function(){ //The callback when the animation finishes
+			// saving the final state
+			sq('#object2').css({
+				left: '140px',
+				top: '200px'
+			})
+		})
+	})
+
+	// for object 3
+	sq('button').eq(2).on('click', function(){
+		sq('#object3').animate({
+			left: '240px',
+			top: '250px'
+		}, {iterations: Infinity}, 900 )
+		sq(this).prop('disabled', true)
+	})
+</script>
+`,
+
+	scroll:`
+<body>
+	<button>Scroll Smoothly</button> <button>Scroll Instantly</button> <button>Scroll 300px only</button>
+	<div style="height:200%; background-color: #eee;margin:10px"></div>
+</body>
+<script>
+	sq('button').eq(0).on('click', ()=>{
+		sq('body').scroll( 10000 ) //scroll 10000px from the top
+	})
+	sq('button').eq(1).on('click', ()=>{
+		sq('body').scroll( 10000, true ) //true is for instant scroll
+	})
+	sq('button').eq(2).on('click', ()=>{
+		sq('body').scroll( 300 ) //scroll 300px only
+	})
+</script>
+`,
+
+	scrollTop:`
+<body>
+	<div style="width: 200%; height:200%; background-color: #eee;margin:10px; padding:40px;">
+		Click anywhere!<br>
+		If you scroll, the values will be different!
+	</div>
+</body>
+<script>
+	sq('div').on('click', function(){
+		const x = sq('body').scrollLeft()
+		const y = sq('body').scrollTop()
+		alert( 'left: ' + x + 'px  ' + 'top: ' + y + 'px' )
+	})
+</script>
+`,
+
+	scrollToElement:`
+<button>scroll to bottom</button>
+
+<div style="height:200%; background-color: #eee;margin:10px"></div>
+
+<button>scroll to top</button>
+
+<script>
+	sq('button').eq(0).on('click', ()=>{
+		sq('button').eq(1).scrollToElement()
+	})
+	sq('button').eq(1).on('click', ()=>{
+		sq('button').eq(0).scrollToElement()
+	})
+</script>
+`,
+
+	each:`
+<ul>
+  <li>Bulbasaur</li>
+  <li>Ivysaur</li>
+  <li>Venusaur</li>
+  <li>Charmander</li>
+  <li>Charmeleon</li>
+  <li>Charizard</li>
+</ul>
+
+<div id="console"></div>
+
+<script>
+	sq( "li" ).each(function( index ) {
+		sq('#console').append( 'No. ' + (index+1) + ': ' + sq( this ).text() + '<br>' )
+	})
+</script>
+`,
+
+	on:`
+<button id="hello">I say hello infinitely!</button>
+<button id="hello2">I say hello only one time!</button>
+<script>
+	sq('#hello').on('click', function(){
+		alert('hello!')
+	})
+	sq('#hello2').on('click', function(){
+		alert('Hello! And... good-bye!')
+		sq(this).off('click').css('color', '#999')
+	})
+</script>
+`,
+
+	onf:`
+<body></body>
+<script>
+	// This won't work!
+	sq('#hello1').on('click', function(){
+		alert('hello 1!')
+	})
+	// This will work!
+	sq('body').onf('click', '#hello2', function(){
+		alert('hello 2!')
+	})
+	sq('body').append('<button id="hello1">hello 1</button> ')
+	sq('body').append('<button id="hello2">hello 2</button> ')
+</script>
+`,
+
+	trg:`
+<ul>
+  <li>Bulbasaur</li>
+  <li>Ivysaur</li>
+  <li>Venusaur</li>
+  <li>Charmander</li>
+  <li>Charmeleon</li>
+  <li>Charizard</li>
+</ul>
+
+<script>
+	sq('li').on('click', function(){
+		let idx = sq(this).index()
+		sq('li').css('color', 'black')
+		sq('li').eq( idx ).css('color', 'red')
+	})
+	sq('li').eq(3).trg('click') //Triggering a Charmander click
+	//sq('li').eq(3).trigger() //this also works!
+</script>
+`,
+
+	// examples
+	fetch:`
+<div id="console">loading...</div>
+<script>
+	my_ajax('https://ptsv2.com/t/ends/post', {name: 'Steve Jobs', age: 21} )
+	
+
+	function my_ajax( url, data ){
+		fetch( 
+			url, 
+			{
+				method: 'POST',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+				body: "data=" + JSON.stringify( data )
+			}
+		).then( res => {
+			console.log( res )
+			if ( res.status == 200 )
+				sq('#console').html( 'sent!' )
+		}).catch( error => {
+			console.log( error )
+		})
+	}
+</script>
+`,
+
+	axios:`
+<div id="console">loading...</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+	axios({
+		method: 'GET',
+		url: 'https://api.github.com/users/shawnquinn',
+	})
+	.then( function( res ){
+		if ( res.status == 200 )
+			sq('#console').html( 'GET succeeded!' )
+		console.log( res.data )
+	})
+	.catch( function(error){
+		console.log(error)
+	})
+</script>
+`
+
+	};
+
+	/* src/Sq_editorI.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1$4 } = globals;
+	const file$4 = "src/Sq_editorI.svelte";
+
+	function create_fragment$5(ctx) {
+		let main;
+		let link0;
+		let t0;
+		let link1;
+		let t1;
+		let link2;
+		let t2;
+		let link3;
+		let t3;
+		let link4;
+		let t4;
+		let section;
+		let div;
+		let textarea;
+		let t5;
+		let pre;
+		let code;
+		let t6;
+		let iframe;
+
+		const block = {
+			c: function create() {
+				main = element("main");
+				link0 = element("link");
+				t0 = space();
+				link1 = element("link");
+				t1 = space();
+				link2 = element("link");
+				t2 = space();
+				link3 = element("link");
+				t3 = space();
+				link4 = element("link");
+				t4 = space();
+				section = element("section");
+				div = element("div");
+				textarea = element("textarea");
+				t5 = space();
+				pre = element("pre");
+				code = element("code");
+				t6 = space();
+				iframe = element("iframe");
+				attr_dev(link0, "rel", "preconnect");
+				attr_dev(link0, "href", "https://fonts.googleapis.com");
+				add_location(link0, file$4, 133, 1, 3600);
+				attr_dev(link1, "rel", "preconnect");
+				attr_dev(link1, "href", "https://fonts.gstatic.com");
+				attr_dev(link1, "crossorigin", "");
+				add_location(link1, file$4, 134, 1, 3661);
+				attr_dev(link2, "href", "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap");
+				attr_dev(link2, "rel", "stylesheet");
+				add_location(link2, file$4, 135, 1, 3731);
+				attr_dev(link3, "rel", "stylesheet");
+				attr_dev(link3, "href", "./Docs.css");
+				add_location(link3, file$4, 137, 1, 3843);
+				attr_dev(link4, "rel", "stylesheet");
+				attr_dev(link4, "href", "./Sq_editor.css");
+				add_location(link4, file$4, 138, 1, 3886);
+				attr_dev(textarea, "placeholder", "Enter HTML Source Code");
+				attr_dev(textarea, "id", "editing");
+				attr_dev(textarea, "spellcheck", "false");
+				add_location(textarea, file$4, 141, 3, 4021);
+				attr_dev(code, "class", "language-html");
+				attr_dev(code, "id", "highlighting-content");
+				add_location(code, file$4, 143, 4, 4162);
+				attr_dev(pre, "id", "highlighting");
+				attr_dev(pre, "aria-hidden", "true");
+				add_location(pre, file$4, 142, 3, 4115);
+				attr_dev(div, "class", "cCodeSpace svelte-6uqz72");
+				add_location(div, file$4, 140, 2, 3993);
+				attr_dev(iframe, "id", "idResult");
+				attr_dev(iframe, "title", "editor");
+				attr_dev(iframe, "class", "svelte-6uqz72");
+				add_location(iframe, file$4, 147, 2, 4309);
+				attr_dev(section, "class", "cCodeCont");
+				attr_dev(section, "data-cname", /*cname*/ ctx[0]);
+				attr_dev(section, "style", /*style*/ ctx[1]);
+				add_location(section, file$4, 139, 1, 3934);
+				add_location(main, file$4, 132, 0, 3592);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, main, anchor);
+				append_dev(main, link0);
+				append_dev(main, t0);
+				append_dev(main, link1);
+				append_dev(main, t1);
+				append_dev(main, link2);
+				append_dev(main, t2);
+				append_dev(main, link3);
+				append_dev(main, t3);
+				append_dev(main, link4);
+				append_dev(main, t4);
+				append_dev(main, section);
+				append_dev(section, div);
+				append_dev(div, textarea);
+				append_dev(div, t5);
+				append_dev(div, pre);
+				append_dev(pre, code);
+				append_dev(section, t6);
+				append_dev(section, iframe);
+			},
+			p: function update(ctx, [dirty]) {
+				if (dirty & /*cname*/ 1) {
+					attr_dev(section, "data-cname", /*cname*/ ctx[0]);
+				}
+
+				if (dirty & /*style*/ 2) {
+					attr_dev(section, "style", /*style*/ ctx[1]);
+				}
+			},
+			i: noop,
+			o: noop,
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(main);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$5.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function safe_sq_code(t) {
+		if (!t) t = '';
+		let v = 'script src="squery.min.js"></script';
+		v = '<' + v + '>\n';
+		if (!t.includes('squery.min.js') && !t.includes('./sq.min.js')) t = t.replace('<script>', v + '<script>');
+		return t.trim();
+	}
+
+	function instance$5($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Sq_editorI', slots, []);
+		let { cname, mh = 0, autoload = false, bOnlyCode = false } = $$props;
+		let sq_code = safe_sq_code(g_codes[cname]);
+		let style = '';
+
+		if (mh) {
+			style = `max-height:${mh}px;`;
+		}
+
+		function registerEvents(bAutoLoad = false, bOnlyCode = false) {
+			const pel = sQuery(`.cCodeCont[data-cname="${cname}"]`);
+
+			if (bOnlyCode == '1') {
+				pel.find('#idResult').hide();
+				pel.addClass('cFloatLeft');
+			} else {
+				pel.find('#editing').off('change').on('change', function () {
+					//console.log('change')
+					let code = pel.find('#editing').val().replace(/'/g, "\\'").replace(/\n/g, "\\n");
+
+					//document.getElementById('idResult').contentWindow.document.write(code);
+					let myIFrame = pel.find('#idResult').get(0);
+
+					//console.log(bAutoLoad)
+					if (bAutoLoad) {
+						myIFrame.src = `javascript: '${code}'`;
+					} else {
+						pel.find('#idResult').//.attr('data-code', code)
+						attr('src', `javascript: '<div style="display:flex;align-items: center; justify-content: center;height:100%"><div style="max-width:200px;color:#fff;background-color:#2196f3;padding:20px">Tap or mouseover to load!</div></div>'`).on('mouseover', function () {
+							const code = pel.find('#editing').val().replace(/'/g, "\\'").replace(/\n/g, "\\n");
+
+							//console.log(code)
+							sQuery(this).attr('src', `javascript: '${code}'`);
+
+							sQuery(this).off('mouseover');
+						});
+					}
+				});
+			}
+
+			pel.find('#editing').off('input').on('input', function () {
+				//console.log('input')
+				update(this.value, pel);
+
+				sync_scroll(this, pel);
+			});
+
+			pel.find('#editing').off('keydown').on('keydown', function (e) {
+				//console.log('keydown')
+				bAutoLoad = true;
+
+				switch (e.keyCode) {
+					case 9:
+						window.bTab = true;
+						e.preventDefault();
+						return false;
+					case 16:
+						window.bShift = true;
+						e.preventDefault();
+						return false;
+					case 17:
+						window.bCtrl = true;
+						e.preventDefault();
+						return false;
+				}
+
+				if (!e.key.toLowerCase().includes('arrow')) {
+					setTimeout(
+						() => {
+							sQuery(this).trg('change');
+						},
+						1
+					);
+				}
+			});
+
+			pel.find('#editing').off('keyup').on('keyup', function (e) {
+				//console.log('keyup' )
+				check_tab(this, e, pel);
+
+				switch (e.keyCode) {
+					case 9:
+						return false;
+					case 16:
+						window.bShift = false;
+						return false;
+					case 17:
+						window.bCtrl = false;
+						return false;
+				}
+			});
+
+			pel.find('#editing').off('scroll').on('scroll', function (e) {
+				sync_scroll(this, pel);
+			});
+		}
+
+		let c = ``;
+
+		let loadProc = function () {
+			const pel = sQuery(`.cCodeCont[data-cname="${cname}"]`);
+			sQuery('body').show();
+
+			setTimeout(
+				() => {
+					pel.find('textarea').val(sq_code); //console.log(sq_code)
+					update(sq_code, pel);
+					pel.find('#editing').trg('change');
+				},
+				100
+			); //console.log(sq_code)
+
+			registerEvents(autoload, bOnlyCode);
+			pel.find('#editing').val(c).trg('input').trg('change');
+			sQuery('#idDoc').css({ 'width': '100%', 'max-width': '100%' });
+			pel.find('.cF').contains('editor').addClass('active');
+		};
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+
+			setTimeout(
+				() => {
+					loadProc();
+				},
+				1
+			);
+		}
+
+		sQuery(() => {
+			loadProc();
+		});
+
+		const writable_props = ['cname', 'mh', 'autoload', 'bOnlyCode'];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$4.warn(`<Sq_editorI> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$$set = $$props => {
+			if ('cname' in $$props) $$invalidate(0, cname = $$props.cname);
+			if ('mh' in $$props) $$invalidate(2, mh = $$props.mh);
+			if ('autoload' in $$props) $$invalidate(3, autoload = $$props.autoload);
+			if ('bOnlyCode' in $$props) $$invalidate(4, bOnlyCode = $$props.bOnlyCode);
+		};
+
+		$$self.$capture_state = () => ({
+			sq: sQuery,
+			update,
+			sync_scroll,
+			check_tab,
+			g_codes,
+			cname,
+			mh,
+			autoload,
+			bOnlyCode,
+			sq_code,
+			style,
+			safe_sq_code,
+			registerEvents,
+			c,
+			loadProc
+		});
+
+		$$self.$inject_state = $$props => {
+			if ('cname' in $$props) $$invalidate(0, cname = $$props.cname);
+			if ('mh' in $$props) $$invalidate(2, mh = $$props.mh);
+			if ('autoload' in $$props) $$invalidate(3, autoload = $$props.autoload);
+			if ('bOnlyCode' in $$props) $$invalidate(4, bOnlyCode = $$props.bOnlyCode);
+			if ('sq_code' in $$props) sq_code = $$props.sq_code;
+			if ('style' in $$props) $$invalidate(1, style = $$props.style);
+			if ('c' in $$props) c = $$props.c;
+			if ('loadProc' in $$props) loadProc = $$props.loadProc;
+		};
+
+		if ($$props && "$$inject" in $$props) {
+			$$self.$inject_state($$props.$$inject);
+		}
+
+		return [cname, style, mh, autoload, bOnlyCode];
+	}
+
+	class Sq_editorI extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+
+			init(this, options, instance$5, create_fragment$5, safe_not_equal, {
+				cname: 0,
+				mh: 2,
+				autoload: 3,
+				bOnlyCode: 4
+			});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Sq_editorI",
+				options,
+				id: create_fragment$5.name
+			});
+
+			const { ctx } = this.$$;
+			const props = options.props || {};
+
+			if (/*cname*/ ctx[0] === undefined && !('cname' in props)) {
+				console_1$4.warn("<Sq_editorI> was created without expected prop 'cname'");
+			}
+		}
+
+		get cname() {
+			throw new Error("<Sq_editorI>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set cname(value) {
+			throw new Error("<Sq_editorI>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get mh() {
+			throw new Error("<Sq_editorI>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set mh(value) {
+			throw new Error("<Sq_editorI>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get autoload() {
+			throw new Error("<Sq_editorI>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set autoload(value) {
+			throw new Error("<Sq_editorI>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		get bOnlyCode() {
+			throw new Error("<Sq_editorI>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+
+		set bOnlyCode(value) {
+			throw new Error("<Sq_editorI>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+		}
+	}
+
+	/* src/Docs.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1$3 } = globals;
+	const file$3 = "src/Docs.svelte";
+
+	function create_fragment$4(ctx) {
+		let main;
+		let link0;
+		let t0;
+		let script;
+		let script_src_value;
+		let t1;
+		let link1;
+		let t2;
+		let section0;
+		let span0;
+		let t3;
+		let div0;
+		let a0;
+		let t5;
+		let section3;
+		let section1;
+		let div1;
+		let a1;
+		let t7;
+		let div4;
+		let hr;
+		let t8;
+		let div3;
+		let input;
+		let t9;
+		let div2;
+		let t11;
+		let section2;
+		let div14;
+		let div5;
+		let t13;
+		let div6;
+		let t15;
+		let div7;
+		let t17;
+		let div8;
+		let t19;
+		let div9;
+		let t21;
+		let div10;
+		let t23;
+		let div11;
+		let t25;
+		let div12;
+		let t27;
+		let div13;
+		let t29;
+		let div15;
+		let t31;
+		let div16;
+		let t33;
+		let div17;
+		let t35;
+		let div18;
+		let t37;
+		let div19;
+		let t39;
+		let div20;
+		let t41;
+		let div21;
+		let t43;
+		let div22;
+		let t45;
+		let div23;
+		let t47;
+		let div24;
+		let t49;
+		let div25;
+		let t51;
+		let div26;
+		let t53;
+		let div27;
+		let t55;
+		let div28;
+		let t57;
+		let div29;
+		let t59;
+		let div30;
+		let t61;
+		let div31;
+		let t63;
+		let div32;
+		let t65;
+		let div33;
+		let t67;
+		let div34;
+		let t69;
+		let div35;
+		let t71;
+		let div36;
+		let t73;
+		let div37;
+		let t75;
+		let div38;
+		let t77;
+		let div39;
+		let t79;
+		let div40;
+		let t81;
+		let div41;
+		let t83;
+		let div42;
+		let t85;
+		let div43;
+		let t87;
+		let div44;
+		let t89;
+		let div45;
+		let t91;
+		let div46;
+		let t93;
+		let div47;
+		let t95;
+		let div48;
+		let t97;
+		let div49;
+		let t99;
+		let div50;
+		let t101;
+		let div51;
+		let t103;
+		let div52;
+		let t105;
+		let div53;
+		let t107;
+		let div54;
+		let t109;
+		let div55;
+		let t111;
+		let div56;
+		let t113;
+		let div57;
+		let t115;
+		let div58;
+		let t117;
+		let div59;
+		let t119;
+		let div60;
+		let t121;
+		let div61;
+		let t123;
+		let div62;
+		let t125;
+		let div63;
+		let t127;
+		let div64;
+		let t129;
+		let div65;
+		let t131;
+		let div66;
+		let t133;
+		let br0;
+		let br1;
+		let br2;
+		let br3;
+		let br4;
+		let br5;
+		let br6;
+		let br7;
+		let t134;
+		let div67;
+		let span1;
+		let t135;
+		let section4;
+		let h1;
+		let span2;
+		let t136;
+		let div68;
+		let t138;
+		let doc0;
+		let h20;
+		let t140;
+		let div69;
+		let t141;
+		let a2;
+		let t143;
+		let a3;
+		let t145;
+		let t146;
+		let div72;
+		let div71;
+		let div70;
+		let t147;
+		let small0;
+		let t149;
+		let sqi0;
+		let t150;
+		let div75;
+		let div74;
+		let div73;
+		let t151;
+		let t152;
+		let sqi1;
+		let t153;
+		let div78;
+		let div77;
+		let div76;
+		let t154;
+		let small1;
+		let t155;
+		let a4;
+		let t157;
+		let t158;
+		let sqi2;
+		let t159;
+		let div81;
+		let div80;
+		let div79;
+		let t160;
+		let t161;
+		let sqi3;
+		let t162;
+		let doc1;
+		let h21;
+		let t164;
+		let div92;
+		let t165;
+		let div91;
+		let div82;
+		let h30;
+		let t167;
+		let p0;
+		let t168;
+		let br8;
+		let t169;
+		let b0;
+		let t171;
+		let a5;
+		let t173;
+		let div83;
+		let h31;
+		let t175;
+		let p1;
+		let t176;
+		let b1;
+		let t178;
+		let br9;
+		let t179;
+		let a6;
+		let t181;
+		let a7;
+		let t183;
+		let t184;
+		let div84;
+		let h32;
+		let t186;
+		let p2;
+		let t187;
+		let br10;
+		let t188;
+		let br11;
+		let t189;
+		let br12;
+		let t190;
+		let b2;
+		let t191;
+		let br13;
+		let t192;
+		let br14;
+		let t193;
+		let t194;
+		let div85;
+		let h33;
+		let t196;
+		let p3;
+		let t197;
+		let br15;
+		let br16;
+		let t198;
+		let b3;
+		let br17;
+		let t200;
+		let br18;
+		let t201;
+		let br19;
+		let t202;
+		let br20;
+		let t203;
+		let b4;
+		let t204;
+		let br21;
+		let t205;
+		let br22;
+		let t206;
+		let div86;
+		let h34;
+		let t208;
+		let p4;
+		let t209;
+		let br23;
+		let t210;
+		let br24;
+		let t211;
+		let b5;
+		let t213;
+		let br25;
+		let t214;
+		let br26;
+		let t215;
+		let br27;
+		let t216;
+		let br28;
+		let t217;
+		let br29;
+		let t218;
+		let br30;
+		let t219;
+		let br31;
+		let t220;
+		let br32;
+		let t221;
+		let t222;
+		let div90;
+		let h35;
+		let t224;
+		let p5;
+		let small2;
+		let br33;
+		let t226;
+		let t227;
+		let div89;
+		let div88;
+		let div87;
+		let t228;
+		let t229;
+		let sqi4;
+		let t230;
+		let doc2;
+		let h22;
+		let t232;
+		let div93;
+		let img0;
+		let img0_src_value;
+		let t233;
+		let br34;
+		let t234;
+		let t235;
+		let div98;
+		let div95;
+		let div94;
+		let t236;
+		let t237;
+		let sqi5;
+		let t238;
+		let div97;
+		let div96;
+		let t239;
+		let t240;
+		let sqi6;
+		let t241;
+		let doc3;
+		let h23;
+		let t243;
+		let div101;
+		let t244;
+		let a8;
+		let t246;
+		let br35;
+		let t247;
+		let img1;
+		let img1_src_value;
+		let t248;
+		let div100;
+		let h40;
+		let t250;
+		let div99;
+		let a9;
+		let t252;
+		let br36;
+		let t253;
+		let br37;
+		let t254;
+		let br38;
+		let br39;
+		let t255;
+		let a10;
+		let t257;
+		let t258;
+		let doc4;
+		let h24;
+		let t260;
+		let div104;
+		let t261;
+		let a11;
+		let t263;
+		let br40;
+		let t264;
+		let img2;
+		let img2_src_value;
+		let t265;
+		let div103;
+		let h41;
+		let t267;
+		let div102;
+		let a12;
+		let t269;
+		let br41;
+		let br42;
+		let t270;
+		let a13;
+		let t272;
+		let t273;
+		let doc5;
+		let h25;
+		let t275;
+		let div107;
+		let t276;
+		let a14;
+		let t278;
+		let br43;
+		let t279;
+		let img3;
+		let img3_src_value;
+		let t280;
+		let div106;
+		let h42;
+		let t282;
+		let div105;
+		let a15;
+		let t284;
+		let br44;
+		let br45;
+		let t285;
+		let br46;
+		let t286;
+		let br47;
+		let br48;
+		let t287;
+		let a16;
+		let t289;
+		let t290;
+		let doc6;
+		let h26;
+		let t292;
+		let div110;
+		let t293;
+		let a17;
+		let t295;
+		let br49;
+		let t296;
+		let img4;
+		let img4_src_value;
+		let t297;
+		let div109;
+		let h43;
+		let t299;
+		let div108;
+		let a18;
+		let t301;
+		let br50;
+		let t302;
+		let br51;
+		let br52;
+		let t303;
+		let br53;
+		let br54;
+		let t304;
+		let a19;
+		let t306;
+		let t307;
+		let doc7;
+		let h27;
+		let t309;
+		let div113;
+		let t310;
+		let a20;
+		let t312;
+		let br55;
+		let t313;
+		let img5;
+		let img5_src_value;
+		let t314;
+		let div112;
+		let h44;
+		let t316;
+		let div111;
+		let a21;
+		let t318;
+		let br56;
+		let t319;
+		let t320;
+		let doc8;
+		let h28;
+		let t322;
+		let div114;
+		let t323;
+		let span3;
+		let t324;
+		let div117;
+		let div116;
+		let div115;
+		let t325;
+		let t326;
+		let sqi7;
+		let t327;
+		let div118;
+		let br57;
+		let t328;
+		let span4;
+		let t329;
+		let div121;
+		let div120;
+		let div119;
+		let t330;
+		let t331;
+		let sqi8;
+		let t332;
+		let doc9;
+		let h29;
+		let t334;
+		let div122;
+		let t335;
+		let span5;
+		let t336;
+		let div125;
+		let div124;
+		let div123;
+		let t337;
+		let t338;
+		let sqi9;
+		let t339;
+		let div126;
+		let br58;
+		let t340;
+		let t341;
+		let div129;
+		let div128;
+		let div127;
+		let t342;
+		let t343;
+		let sqi10;
+		let t344;
+		let doc10;
+		let h210;
+		let t346;
+		let div130;
+		let t347;
+		let span6;
+		let t348;
+		let div133;
+		let div132;
+		let div131;
+		let t349;
+		let t350;
+		let sqi11;
+		let t351;
+		let div134;
+		let br59;
+		let t352;
+		let span7;
+		let t353;
+		let div137;
+		let div136;
+		let div135;
+		let t354;
+		let t355;
+		let sqi12;
+		let t356;
+		let doc11;
+		let h211;
+		let t358;
+		let div138;
+		let t359;
+		let span8;
+		let t360;
+		let div141;
+		let div140;
+		let div139;
+		let t361;
+		let t362;
+		let sqi13;
+		let t363;
+		let doc12;
+		let h212;
+		let t365;
+		let div142;
+		let t366;
+		let span9;
+		let t367;
+		let div145;
+		let div144;
+		let div143;
+		let t368;
+		let t369;
+		let sqi14;
+		let t370;
+		let doc13;
+		let h213;
+		let t372;
+		let div146;
+		let t373;
+		let span10;
+		let t374;
+		let div149;
+		let div148;
+		let div147;
+		let t375;
+		let t376;
+		let sqi15;
+		let t377;
+		let doc14;
+		let h214;
+		let t379;
+		let div150;
+		let t380;
+		let span11;
+		let t381;
+		let div153;
+		let div152;
+		let div151;
+		let t382;
+		let t383;
+		let sqi16;
+		let t384;
+		let doc15;
+		let h215;
+		let t386;
+		let div154;
+		let t387;
+		let span12;
+		let t388;
+		let div157;
+		let div156;
+		let div155;
+		let t389;
+		let t390;
+		let sqi17;
+		let t391;
+		let doc16;
+		let h216;
+		let t393;
+		let div158;
+		let t394;
+		let span13;
+		let t395;
+		let div161;
+		let div160;
+		let div159;
+		let t396;
+		let t397;
+		let sqi18;
+		let t398;
+		let doc17;
+		let h217;
+		let t400;
+		let div162;
+		let t401;
+		let span14;
+		let t402;
+		let div165;
+		let div164;
+		let div163;
+		let t403;
+		let t404;
+		let sqi19;
+		let t405;
+		let doc18;
+		let h218;
+		let t407;
+		let div166;
+		let t408;
+		let span15;
+		let t409;
+		let div169;
+		let div168;
+		let div167;
+		let t410;
+		let t411;
+		let sqi20;
+		let t412;
+		let div170;
+		let br60;
+		let t413;
+		let span16;
+		let t414;
+		let div173;
+		let div172;
+		let div171;
+		let t415;
+		let t416;
+		let sqi21;
+		let t417;
+		let doc19;
+		let h219;
+		let t419;
+		let div174;
+		let t420;
+		let span17;
+		let t421;
+		let div177;
+		let div176;
+		let div175;
+		let t422;
+		let t423;
+		let sqi22;
+		let t424;
+		let doc20;
+		let h220;
+		let t426;
+		let div178;
+		let t427;
+		let span18;
+		let t428;
+		let div181;
+		let div180;
+		let div179;
+		let t429;
+		let t430;
+		let sqi23;
+		let t431;
+		let div182;
+		let br61;
+		let t432;
+		let span19;
+		let t433;
+		let div185;
+		let div184;
+		let div183;
+		let t434;
+		let t435;
+		let sqi24;
+		let t436;
+		let doc21;
+		let h221;
+		let t438;
+		let div186;
+		let t439;
+		let span20;
+		let t440;
+		let div189;
+		let div188;
+		let div187;
+		let t441;
+		let t442;
+		let sqi25;
+		let t443;
+		let doc22;
+		let h222;
+		let t445;
+		let div190;
+		let t446;
+		let span21;
+		let t447;
+		let div193;
+		let div192;
+		let div191;
+		let t448;
+		let t449;
+		let sqi26;
+		let t450;
+		let doc23;
+		let h223;
+		let t452;
+		let div194;
+		let t453;
+		let span22;
+		let t454;
+		let div197;
+		let div196;
+		let div195;
+		let t455;
+		let t456;
+		let sqi27;
+		let t457;
+		let doc24;
+		let h224;
+		let t459;
+		let div198;
+		let t460;
+		let span23;
+		let t461;
+		let div201;
+		let div200;
+		let div199;
+		let t462;
+		let t463;
+		let sqi28;
+		let t464;
+		let doc25;
+		let h225;
+		let t466;
+		let div202;
+		let t467;
+		let span24;
+		let t468;
+		let div205;
+		let div204;
+		let div203;
+		let t469;
+		let t470;
+		let sqi29;
+		let t471;
+		let doc26;
+		let h226;
+		let t473;
+		let div206;
+		let t474;
+		let span25;
+		let t475;
+		let div209;
+		let div208;
+		let div207;
+		let t476;
+		let t477;
+		let sqi30;
+		let t478;
+		let doc27;
+		let h227;
+		let t480;
+		let div210;
+		let t481;
+		let span26;
+		let t482;
+		let div213;
+		let div212;
+		let div211;
+		let t483;
+		let t484;
+		let sqi31;
+		let t485;
+		let doc28;
+		let h228;
+		let t487;
+		let div214;
+		let t488;
+		let span27;
+		let t489;
+		let div217;
+		let div216;
+		let div215;
+		let t490;
+		let t491;
+		let sqi32;
+		let t492;
+		let doc29;
+		let h229;
+		let t494;
+		let div218;
+		let t495;
+		let span28;
+		let t496;
+		let div221;
+		let div220;
+		let div219;
+		let t497;
+		let t498;
+		let sqi33;
+		let t499;
+		let doc30;
+		let h230;
+		let t501;
+		let div222;
+		let t502;
+		let span29;
+		let t503;
+		let br62;
+		let br63;
+		let t504;
+		let span30;
+		let t505;
+		let div225;
+		let div224;
+		let div223;
+		let t506;
+		let t507;
+		let sqi34;
+		let t508;
+		let doc31;
+		let h231;
+		let t510;
+		let div226;
+		let t511;
+		let span31;
+		let t512;
+		let div229;
+		let div228;
+		let div227;
+		let t513;
+		let t514;
+		let sqi35;
+		let t515;
+		let doc32;
+		let h232;
+		let t517;
+		let div230;
+		let t518;
+		let span32;
+		let t519;
+		let div233;
+		let div232;
+		let div231;
+		let t520;
+		let t521;
+		let sqi36;
+		let t522;
+		let div234;
+		let br64;
+		let t523;
+		let span33;
+		let t524;
+		let div237;
+		let div236;
+		let div235;
+		let t525;
+		let t526;
+		let sqi37;
+		let t527;
+		let doc33;
+		let h233;
+		let t529;
+		let div238;
+		let t530;
+		let span34;
+		let t531;
+		let div241;
+		let div240;
+		let div239;
+		let t532;
+		let t533;
+		let sqi38;
+		let t534;
+		let div242;
+		let br65;
+		let t535;
+		let span35;
+		let t536;
+		let div245;
+		let div244;
+		let div243;
+		let t537;
+		let t538;
+		let sqi39;
+		let t539;
+		let doc34;
+		let h234;
+		let t541;
+		let div246;
+		let t542;
+		let span36;
+		let t543;
+		let div249;
+		let div248;
+		let div247;
+		let t544;
+		let t545;
+		let sqi40;
+		let t546;
+		let doc35;
+		let h235;
+		let t548;
+		let div250;
+		let t549;
+		let span37;
+		let t550;
+		let br66;
+		let t551;
+		let span38;
+		let t552;
+		let div253;
+		let div252;
+		let div251;
+		let t553;
+		let t554;
+		let sqi41;
+		let t555;
+		let doc36;
+		let h236;
+		let t557;
+		let div254;
+		let t558;
+		let span39;
+		let t559;
+		let div257;
+		let div256;
+		let div255;
+		let t560;
+		let t561;
+		let sqi42;
+		let t562;
+		let doc37;
+		let h237;
+		let t564;
+		let div258;
+		let t565;
+		let span40;
+		let t566;
+		let br67;
+		let t567;
+		let span41;
+		let t568;
+		let div261;
+		let div260;
+		let div259;
+		let t569;
+		let t570;
+		let sqi43;
+		let t571;
+		let doc38;
+		let h238;
+		let t573;
+		let div262;
+		let t574;
+		let b6;
+		let t576;
+		let span42;
+		let t577;
+		let br68;
+		let t578;
+		let b7;
+		let t580;
+		let span43;
+		let t581;
+		let div265;
+		let div264;
+		let div263;
+		let t582;
+		let t583;
+		let sqi44;
+		let t584;
+		let doc39;
+		let h239;
+		let t586;
+		let div266;
+		let t587;
+		let b8;
+		let t589;
+		let span44;
+		let t590;
+		let br69;
+		let t591;
+		let b9;
+		let t593;
+		let span45;
+		let t594;
+		let div269;
+		let div268;
+		let div267;
+		let t595;
+		let t596;
+		let sqi45;
+		let t597;
+		let doc40;
+		let h240;
+		let t599;
+		let div270;
+		let t600;
+		let span46;
+		let t601;
+		let div273;
+		let div272;
+		let div271;
+		let t602;
+		let t603;
+		let sqi46;
+		let t604;
+		let doc41;
+		let h241;
+		let t606;
+		let div274;
+		let t607;
+		let span47;
+		let t608;
+		let div277;
+		let div276;
+		let div275;
+		let t609;
+		let t610;
+		let sqi47;
+		let t611;
+		let doc42;
+		let h242;
+		let t613;
+		let div279;
+		let t614;
+		let span48;
+		let t615;
+		let div278;
+		let t617;
+		let div282;
+		let div281;
+		let div280;
+		let t618;
+		let t619;
+		let sqi48;
+		let t620;
+		let doc43;
+		let h243;
+		let t622;
+		let div284;
+		let t623;
+		let div283;
+		let t624;
+		let a22;
+		let b10;
+		let t626;
+		let a23;
+		let b11;
+		let t628;
+		let t629;
+		let div287;
+		let div286;
+		let div285;
+		let t630;
+		let t631;
+		let sqi49;
+		let t632;
+		let br70;
+		let t633;
+		let div290;
+		let div289;
+		let div288;
+		let t634;
+		let t635;
+		let sqi50;
+		let t636;
+		let doc44;
+		let h244;
+		let t638;
+		let div291;
+		let t639;
+		let span49;
+		let t640;
+		let div294;
+		let div293;
+		let div292;
+		let t641;
+		let t642;
+		let sqi51;
+		let t643;
+		let doc45;
+		let h245;
+		let t645;
+		let div295;
+		let t646;
+		let span50;
+		let t647;
+		let span51;
+		let t648;
+		let div298;
+		let div297;
+		let div296;
+		let t649;
+		let t650;
+		let sqi52;
+		let t651;
+		let doc46;
+		let h246;
+		let t653;
+		let div299;
+		let t654;
+		let span52;
+		let t655;
+		let div302;
+		let div301;
+		let div300;
+		let t656;
+		let t657;
+		let sqi53;
+		let t658;
+		let doc47;
+		let h247;
+		let t660;
+		let div303;
+		let t661;
+		let span53;
+		let t662;
+		let div306;
+		let div305;
+		let div304;
+		let t663;
+		let t664;
+		let sqi54;
+		let t665;
+		let doc48;
+		let h248;
+		let t667;
+		let div307;
+		let t668;
+		let span54;
+		let t669;
+		let br71;
+		let t670;
+		let span55;
+		let t671;
+		let br72;
+		let t672;
+		let t673;
+		let div310;
+		let div309;
+		let div308;
+		let t674;
+		let t675;
+		let sqi55;
+		let t676;
+		let br73;
+		let t677;
+		let div311;
+		let t679;
+		let div314;
+		let div313;
+		let div312;
+		let t680;
+		let t681;
+		let sqi56;
+		let t682;
+		let doc49;
+		let h249;
+		let t684;
+		let div315;
+		let t685;
+		let span56;
+		let t686;
+		let div318;
+		let div317;
+		let div316;
+		let t687;
+		let t688;
+		let sqi57;
+		let current;
+
+		sqi0 = new Sq_editorI({
+				props: { cname: "c1", mh: "240", autoload: "true" },
+				$$inline: true
+			});
+
+		sqi1 = new Sq_editorI({
+				props: { cname: "c1_cdn", mh: "240" },
+				$$inline: true
+			});
+
+		sqi2 = new Sq_editorI({
+				props: { cname: "c2", mh: "240" },
+				$$inline: true
+			});
+
+		sqi3 = new Sq_editorI({
+				props: { cname: "c2_cdn", mh: "240" },
+				$$inline: true
+			});
+
+		sqi4 = new Sq_editorI({
+				props: { cname: "customMethods", mh: "410" },
+				$$inline: true
+			});
+
+		sqi5 = new Sq_editorI({
+				props: { cname: "custom", mh: "410" },
+				$$inline: true
+			});
+
+		sqi6 = new Sq_editorI({
+				props: { cname: "custom_module", mh: "240" },
+				$$inline: true
+			});
+
+		sqi7 = new Sq_editorI({
+				props: { cname: "filter", mh: "410" },
+				$$inline: true
+			});
+
+		sqi8 = new Sq_editorI({
+				props: { cname: "not", mh: "410" },
+				$$inline: true
+			});
+
+		sqi9 = new Sq_editorI({
+				props: { cname: "eq", mh: "410" },
+				$$inline: true
+			});
+
+		sqi10 = new Sq_editorI({
+				props: { cname: "eq2", mh: "410" },
+				$$inline: true
+			});
+
+		sqi11 = new Sq_editorI({
+				props: { cname: "first", mh: "410" },
+				$$inline: true
+			});
+
+		sqi12 = new Sq_editorI({
+				props: { cname: "last", mh: "410" },
+				$$inline: true
+			});
+
+		sqi13 = new Sq_editorI({
+				props: { cname: "has", mh: "410" },
+				$$inline: true
+			});
+
+		sqi14 = new Sq_editorI({
+				props: { cname: "contains", mh: "410" },
+				$$inline: true
+			});
+
+		sqi15 = new Sq_editorI({
+				props: { cname: "slice", mh: "410" },
+				$$inline: true
+			});
+
+		sqi16 = new Sq_editorI({
+				props: { cname: "index", mh: "410" },
+				$$inline: true
+			});
+
+		sqi17 = new Sq_editorI({
+				props: { cname: "is", mh: "410" },
+				$$inline: true
+			});
+
+		sqi18 = new Sq_editorI({
+				props: { cname: "find", mh: "410" },
+				$$inline: true
+			});
+
+		sqi19 = new Sq_editorI({
+				props: { cname: "children", mh: "410" },
+				$$inline: true
+			});
+
+		sqi20 = new Sq_editorI({
+				props: { cname: "next", mh: "410" },
+				$$inline: true
+			});
+
+		sqi21 = new Sq_editorI({
+				props: { cname: "prev", mh: "410" },
+				$$inline: true
+			});
+
+		sqi22 = new Sq_editorI({
+				props: { cname: "siblings", mh: "410" },
+				$$inline: true
+			});
+
+		sqi23 = new Sq_editorI({
+				props: { cname: "parent", mh: "410" },
+				$$inline: true
+			});
+
+		sqi24 = new Sq_editorI({
+				props: { cname: "parents", mh: "410" },
+				$$inline: true
+			});
+
+		sqi25 = new Sq_editorI({
+				props: { cname: "closest", mh: "410" },
+				$$inline: true
+			});
+
+		sqi26 = new Sq_editorI({
+				props: { cname: "hasClass", mh: "410" },
+				$$inline: true
+			});
+
+		sqi27 = new Sq_editorI({
+				props: { cname: "html", mh: "410" },
+				$$inline: true
+			});
+
+		sqi28 = new Sq_editorI({
+				props: { cname: "text", mh: "410" },
+				$$inline: true
+			});
+
+		sqi29 = new Sq_editorI({
+				props: { cname: "val", mh: "410" },
+				$$inline: true
+			});
+
+		sqi30 = new Sq_editorI({
+				props: { cname: "css", mh: "410" },
+				$$inline: true
+			});
+
+		sqi31 = new Sq_editorI({
+				props: { cname: "attr", mh: "410" },
+				$$inline: true
+			});
+
+		sqi32 = new Sq_editorI({
+				props: { cname: "prop", mh: "410" },
+				$$inline: true
+			});
+
+		sqi33 = new Sq_editorI({
+				props: { cname: "get", mh: "410" },
+				$$inline: true
+			});
+
+		sqi34 = new Sq_editorI({
+				props: { cname: "show", mh: "410" },
+				$$inline: true
+			});
+
+		sqi35 = new Sq_editorI({
+				props: { cname: "remove", mh: "410" },
+				$$inline: true
+			});
+
+		sqi36 = new Sq_editorI({
+				props: { cname: "before", mh: "410" },
+				$$inline: true
+			});
+
+		sqi37 = new Sq_editorI({
+				props: { cname: "after", mh: "410" },
+				$$inline: true
+			});
+
+		sqi38 = new Sq_editorI({
+				props: { cname: "prepend", mh: "410" },
+				$$inline: true
+			});
+
+		sqi39 = new Sq_editorI({
+				props: { cname: "append", mh: "410" },
+				$$inline: true
+			});
+
+		sqi40 = new Sq_editorI({
+				props: { cname: "replaceWith", mh: "410" },
+				$$inline: true
+			});
+
+		sqi41 = new Sq_editorI({
+				props: { cname: "addClass", mh: "410" },
+				$$inline: true
+			});
+
+		sqi42 = new Sq_editorI({
+				props: { cname: "toggleClass", mh: "410" },
+				$$inline: true
+			});
+
+		sqi43 = new Sq_editorI({
+				props: { cname: "width", mh: "410" },
+				$$inline: true
+			});
+
+		sqi44 = new Sq_editorI({
+				props: { cname: "innerWidth", mh: "410" },
+				$$inline: true
+			});
+
+		sqi45 = new Sq_editorI({
+				props: { cname: "outerWidth", mh: "410" },
+				$$inline: true
+			});
+
+		sqi46 = new Sq_editorI({
+				props: { cname: "offset", mh: "410" },
+				$$inline: true
+			});
+
+		sqi47 = new Sq_editorI({
+				props: { cname: "pos", mh: "410" },
+				$$inline: true
+			});
+
+		sqi48 = new Sq_editorI({
+				props: { cname: "fadeIn", mh: "410" },
+				$$inline: true
+			});
+
+		sqi49 = new Sq_editorI({
+				props: { cname: "animateSimple", mh: "410" },
+				$$inline: true
+			});
+
+		sqi50 = new Sq_editorI({
+				props: { cname: "animate", mh: "410" },
+				$$inline: true
+			});
+
+		sqi51 = new Sq_editorI({
+				props: { cname: "scroll", mh: "410" },
+				$$inline: true
+			});
+
+		sqi52 = new Sq_editorI({
+				props: { cname: "scrollTop", mh: "410" },
+				$$inline: true
+			});
+
+		sqi53 = new Sq_editorI({
+				props: { cname: "scrollToElement", mh: "410" },
+				$$inline: true
+			});
+
+		sqi54 = new Sq_editorI({
+				props: { cname: "each", mh: "410" },
+				$$inline: true
+			});
+
+		sqi55 = new Sq_editorI({
+				props: { cname: "on", mh: "410" },
+				$$inline: true
+			});
+
+		sqi56 = new Sq_editorI({
+				props: { cname: "onf", mh: "410" },
+				$$inline: true
+			});
+
+		sqi57 = new Sq_editorI({
+				props: { cname: "trg", mh: "410" },
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				main = element("main");
+				link0 = element("link");
+				t0 = space();
+				script = element("script");
+				t1 = space();
+				link1 = element("link");
+				t2 = space();
+				section0 = element("section");
+				span0 = element("span");
+				t3 = space();
+				div0 = element("div");
+				a0 = element("a");
+				a0.textContent = "日本語に翻訳";
+				t5 = space();
+				section3 = element("section");
+				section1 = element("section");
+				div1 = element("div");
+				a1 = element("a");
+				a1.textContent = "sQuery HOME";
+				t7 = space();
+				div4 = element("div");
+				hr = element("hr");
+				t8 = space();
+				div3 = element("div");
+				input = element("input");
+				t9 = space();
+				div2 = element("div");
+				div2.textContent = "×";
+				t11 = space();
+				section2 = element("section");
+				div14 = element("div");
+				div5 = element("div");
+				div5.textContent = "Getting Started";
+				t13 = space();
+				div6 = element("div");
+				div6.textContent = "・Installation";
+				t15 = space();
+				div7 = element("div");
+				div7.textContent = "・Difference between jQuery";
+				t17 = space();
+				div8 = element("div");
+				div8.textContent = "・Use like jQuery";
+				t19 = space();
+				div9 = element("div");
+				div9.textContent = "・Use with React";
+				t21 = space();
+				div10 = element("div");
+				div10.textContent = "・Use with Vue.js";
+				t23 = space();
+				div11 = element("div");
+				div11.textContent = "・Use with Svelte";
+				t25 = space();
+				div12 = element("div");
+				div12.textContent = "・Use with SolidJS";
+				t27 = space();
+				div13 = element("div");
+				div13.textContent = "・Use with Angular";
+				t29 = space();
+				div15 = element("div");
+				div15.textContent = "Self Selectors";
+				t31 = space();
+				div16 = element("div");
+				div16.textContent = "filter / not";
+				t33 = space();
+				div17 = element("div");
+				div17.textContent = "eq";
+				t35 = space();
+				div18 = element("div");
+				div18.textContent = "first / last";
+				t37 = space();
+				div19 = element("div");
+				div19.textContent = "has";
+				t39 = space();
+				div20 = element("div");
+				div20.textContent = "contains";
+				t41 = space();
+				div21 = element("div");
+				div21.textContent = "slice";
+				t43 = space();
+				div22 = element("div");
+				div22.textContent = "index";
+				t45 = space();
+				div23 = element("div");
+				div23.textContent = "is";
+				t47 = space();
+				div24 = element("div");
+				div24.textContent = "Child Elements";
+				t49 = space();
+				div25 = element("div");
+				div25.textContent = "find";
+				t51 = space();
+				div26 = element("div");
+				div26.textContent = "children";
+				t53 = space();
+				div27 = element("div");
+				div27.textContent = "Sibling Elements";
+				t55 = space();
+				div28 = element("div");
+				div28.textContent = "next / prev";
+				t57 = space();
+				div29 = element("div");
+				div29.textContent = "siblings";
+				t59 = space();
+				div30 = element("div");
+				div30.textContent = "Parent Elements";
+				t61 = space();
+				div31 = element("div");
+				div31.textContent = "parent / parents";
+				t63 = space();
+				div32 = element("div");
+				div32.textContent = "closest";
+				t65 = space();
+				div33 = element("div");
+				div33.textContent = "Boolean Checks";
+				t67 = space();
+				div34 = element("div");
+				div34.textContent = "hasClass";
+				t69 = space();
+				div35 = element("div");
+				div35.textContent = "Operations";
+				t71 = space();
+				div36 = element("div");
+				div36.textContent = "html";
+				t73 = space();
+				div37 = element("div");
+				div37.textContent = "text";
+				t75 = space();
+				div38 = element("div");
+				div38.textContent = "val";
+				t77 = space();
+				div39 = element("div");
+				div39.textContent = "css";
+				t79 = space();
+				div40 = element("div");
+				div40.textContent = "attr";
+				t81 = space();
+				div41 = element("div");
+				div41.textContent = "prop";
+				t83 = space();
+				div42 = element("div");
+				div42.textContent = "get";
+				t85 = space();
+				div43 = element("div");
+				div43.textContent = "show / hide";
+				t87 = space();
+				div44 = element("div");
+				div44.textContent = "remove";
+				t89 = space();
+				div45 = element("div");
+				div45.textContent = "before / after";
+				t91 = space();
+				div46 = element("div");
+				div46.textContent = "prepend / append";
+				t93 = space();
+				div47 = element("div");
+				div47.textContent = "replaceWith";
+				t95 = space();
+				div48 = element("div");
+				div48.textContent = "addClass / removeClass";
+				t97 = space();
+				div49 = element("div");
+				div49.textContent = "toggleClass";
+				t99 = space();
+				div50 = element("div");
+				div50.textContent = "Size & Position";
+				t101 = space();
+				div51 = element("div");
+				div51.textContent = "width / height";
+				t103 = space();
+				div52 = element("div");
+				div52.textContent = "innerWidth / innerHeight";
+				t105 = space();
+				div53 = element("div");
+				div53.textContent = "outerWidth / outerHeight";
+				t107 = space();
+				div54 = element("div");
+				div54.textContent = "offset";
+				t109 = space();
+				div55 = element("div");
+				div55.textContent = "pos (position)";
+				t111 = space();
+				div56 = element("div");
+				div56.textContent = "Animations";
+				t113 = space();
+				div57 = element("div");
+				div57.textContent = "fadeIn / fadeOut";
+				t115 = space();
+				div58 = element("div");
+				div58.textContent = "animate";
+				t117 = space();
+				div59 = element("div");
+				div59.textContent = "scroll";
+				t119 = space();
+				div60 = element("div");
+				div60.textContent = "scrollTop / scrollLeft";
+				t121 = space();
+				div61 = element("div");
+				div61.textContent = "scrollToElement";
+				t123 = space();
+				div62 = element("div");
+				div62.textContent = "Loops";
+				t125 = space();
+				div63 = element("div");
+				div63.textContent = "each";
+				t127 = space();
+				div64 = element("div");
+				div64.textContent = "Events";
+				t129 = space();
+				div65 = element("div");
+				div65.textContent = "on / off / onf";
+				t131 = space();
+				div66 = element("div");
+				div66.textContent = "trg (trigger)";
+				t133 = space();
+				br0 = element("br");
+				br1 = element("br");
+				br2 = element("br");
+				br3 = element("br");
+				br4 = element("br");
+				br5 = element("br");
+				br6 = element("br");
+				br7 = element("br");
+				t134 = space();
+				div67 = element("div");
+				span1 = element("span");
+				t135 = space();
+				section4 = element("section");
+				h1 = element("h1");
+				span2 = element("span");
+				t136 = text("sQuery Docs");
+				div68 = element("div");
+				div68.textContent = `${name}`;
+				t138 = space();
+				doc0 = element("doc");
+				h20 = element("h2");
+				h20.textContent = "Installation";
+				t140 = space();
+				div69 = element("div");
+				t141 = text("Download ");
+				a2 = element("a");
+				a2.textContent = "sQuery.zip";
+				t143 = text(" or use CDN. (");
+				a3 = element("a");
+				a3.textContent = "Github page";
+				t145 = text(")");
+				t146 = space();
+				div72 = element("div");
+				div71 = element("div");
+				div70 = element("div");
+				t147 = text("\n\t\t\t\t\tTo use sQuery, put squery.min.js somewhere just like jQuery. ");
+				small0 = element("small");
+				small0.textContent = "(NOTE: sq is equivalent to $ in jQuery)";
+				t149 = space();
+				create_component(sqi0.$$.fragment);
+				t150 = space();
+				div75 = element("div");
+				div74 = element("div");
+				div73 = element("div");
+				t151 = text("Or you can also use CDN!");
+				t152 = space();
+				create_component(sqi1.$$.fragment);
+				t153 = space();
+				div78 = element("div");
+				div77 = element("div");
+				div76 = element("div");
+				t154 = text("ES6 module is also supported! ");
+				small1 = element("small");
+				t155 = text("(NOTE: () =>｛ ｝ is the ES6's ");
+				a4 = element("a");
+				a4.textContent = "arrow function";
+				t157 = text(")");
+				t158 = space();
+				create_component(sqi2.$$.fragment);
+				t159 = space();
+				div81 = element("div");
+				div80 = element("div");
+				div79 = element("div");
+				t160 = text("ES6 module CDN!");
+				t161 = space();
+				create_component(sqi3.$$.fragment);
+				t162 = space();
+				doc1 = element("doc");
+				h21 = element("h2");
+				h21.textContent = "Difference between jQuery";
+				t164 = space();
+				div92 = element("div");
+				t165 = text("sQuery is not a simple jQuery clone. It's made for using with modern frontend frameworks.\n\t\t\t\tThere are some differences between jQuery.\n\n\t\t\t\t");
+				div91 = element("div");
+				div82 = element("div");
+				h30 = element("h3");
+				h30.textContent = "sQuery uses sq not $. But you can customize!";
+				t167 = space();
+				p0 = element("p");
+				t168 = text("sQuery avoids using $ since Svelte and jQuery use $.");
+				br8 = element("br");
+				t169 = text("\n\t\t\t\t\t\t\tActually, you ");
+				b0 = element("b");
+				b0.textContent = "can";
+				t171 = text(" use $ in sQuery! See ");
+				a5 = element("a");
+				a5.textContent = "Use like jQuery";
+				t173 = space();
+				div83 = element("div");
+				h31 = element("h3");
+				h31.textContent = "sQuery doesn't have $.ajax function. Use fetch or axios instead";
+				t175 = space();
+				p1 = element("p");
+				t176 = text("Since this is the modern trend, sQuery also doesn't have ajax functions just as ");
+				b1 = element("b");
+				b1.textContent = "React/Vue/Svelte";
+				t178 = text(" do.");
+				br9 = element("br");
+				t179 = text("\n\t\t\t\t\t\t\tYou should use ");
+				a6 = element("a");
+				a6.textContent = "axios";
+				t181 = text(" or ");
+				a7 = element("a");
+				a7.textContent = "native fetch function";
+				t183 = text(" not $.ajax.");
+				t184 = space();
+				div84 = element("div");
+				h32 = element("h3");
+				h32.textContent = "Never use .click(). Stick to .on() and .trigger()";
+				t186 = space();
+				p2 = element("p");
+				t187 = text(".click() and some event methods in jQuery used to be very widely used. However it's been depricated in the latest jQuery.\n\t\t\t\t\t\t\tjQuery has .on() and .trigger() methods, which are faster and better. ");
+				br10 = element("br");
+				t188 = text("\n\t\t\t\t\t\t\tIn sQuery, you can do something like this just like the latest jQuery:");
+				br11 = element("br");
+				t189 = space();
+				br12 = element("br");
+				t190 = space();
+				b2 = element("b");
+				t191 = text("sq('selector').on('click', ... //registering a click event");
+				br13 = element("br");
+				t192 = text("\n\t\t\t\t\t\t\t\tsq('selector').trigger('click') //triggering a click event");
+				br14 = element("br");
+				t193 = text("\n\t\t\t\t\t\t\t\tsq('selector').trg('click') //triggering a click event (shorthand)");
+				t194 = space();
+				div85 = element("div");
+				h33 = element("h3");
+				h33.textContent = "Never use :contains / :is";
+				t196 = space();
+				p3 = element("p");
+				t197 = text(":contains in jQuery used to be very widely used. However it's been depricated in the latest jQuery.\n\t\t\t\t\t\t\t");
+				br15 = element("br");
+				br16 = element("br");
+				t198 = space();
+				b3 = element("b");
+				b3.textContent = "$(\":contains('selector')\")";
+				br17 = element("br");
+				t200 = space();
+				br18 = element("br");
+				t201 = text("\n\t\t\t\t\t\t\tsQuery also doesn't support them for various performance reasons. Instead, sQuery just supports performant methods to do the same things just like the latest jQuery does.");
+				br19 = element("br");
+				t202 = space();
+				br20 = element("br");
+				t203 = space();
+				b4 = element("b");
+				t204 = text(".contains('selector')");
+				br21 = element("br");
+				t205 = text("\n\t\t\t\t\t\t\t\t.is('selector')");
+				br22 = element("br");
+				t206 = space();
+				div86 = element("div");
+				h34 = element("h3");
+				h34.textContent = "Why sQuery doesn't support all the functions in jQuery?";
+				t208 = space();
+				p4 = element("p");
+				t209 = text("sQuery has major core functions in jQuery.");
+				br23 = element("br");
+				t210 = text("\n\t\t\t\t\t\t\tHowever, it's not made for supporting everything.");
+				br24 = element("br");
+				t211 = text("\n\t\t\t\t\t\t\tsQuery is made for working with modern js frameworks such as ");
+				b5 = element("b");
+				b5.textContent = "React/Vue/Svelte/Angular";
+				t213 = text(" with replacing lengthy vanilla JavaScript codes.");
+				br25 = element("br");
+				t214 = space();
+				br26 = element("br");
+				t215 = text("\n\t\t\t\t\t\t\tAs a result, with sQuery, the total code size could be smaller than without it especially in big projects.");
+				br27 = element("br");
+				t216 = text("\n\t\t\t\t\t\t\tIf sQuery supports all functions and all features in jQuery, the code size would be 3 times or something? It wouldn't be worthy at all!");
+				br28 = element("br");
+				t217 = text("\n\t\t\t\t\t\t\tThat's why I cut down all the unessential functions from jQuery since the purpose of sQuery is simple, solid, and small.");
+				br29 = element("br");
+				t218 = space();
+				br30 = element("br");
+				t219 = text("\n\t\t\t\t\t\t\tFor instance, let's assume the following scenario: sQuery + Vue.js:");
+				br31 = element("br");
+				t220 = text("\n\t\t\t\t\t\t\tThanks to sQuery, you can code just like jQuery, and you can also use the virtual DOM and auto code optimizations Vue provides.");
+				br32 = element("br");
+				t221 = text("\n\t\t\t\t\t\t\tIf you do DOM manipulations relatively a lot, sQuery doesn't increase the total code size as a result of cutting down of lengthy vanila JS codes, so you won't lose anything in this scenario.");
+				t222 = space();
+				div90 = element("div");
+				h35 = element("h3");
+				h35.textContent = "Adding custom methods to sQuery (just like jQuery $.fn)";
+				t224 = space();
+				p5 = element("p");
+				small2 = element("small");
+				small2.textContent = "NOTE: This is for maniacs. You don't even need to know this if you just want to use sQuery.";
+				br33 = element("br");
+				t226 = text("\n\t\t\t\t\t\t\tI didn't imprement unimportant methods in sQuery to keep it small and performant. \n\t\t\t\t\t\t\tHowever, if you need more methods, you can always very easily imprement on your own using _SQ.");
+				t227 = space();
+				div89 = element("div");
+				div88 = element("div");
+				div87 = element("div");
+				t228 = text("\n\t\t\t\t\t\t\t\tCustom Methods");
+				t229 = space();
+				create_component(sqi4.$$.fragment);
+				t230 = space();
+				doc2 = element("doc");
+				h22 = element("h2");
+				h22.textContent = "Use like jQuery";
+				t232 = space();
+				div93 = element("div");
+				img0 = element("img");
+				t233 = text("\n\t\t\t\tsQuery might look awkward for jQuery fans since it uses sq not $.");
+				br34 = element("br");
+				t234 = text("\n\t\t\t\tActually, you can use $ very easily by just declaring $.");
+				t235 = space();
+				div98 = element("div");
+				div95 = element("div");
+				div94 = element("div");
+				t236 = text("\n\t\t\t\t\tReplacing sq to $");
+				t237 = space();
+				create_component(sqi5.$$.fragment);
+				t238 = space();
+				div97 = element("div");
+				div96 = element("div");
+				t239 = text("\n\t\t\t\t\tReplacing sq to $ (module version)");
+				t240 = space();
+				create_component(sqi6.$$.fragment);
+				t241 = space();
+				doc3 = element("doc");
+				h23 = element("h2");
+				h23.textContent = "Use with React";
+				t243 = space();
+				div101 = element("div");
+				t244 = text("See ");
+				a8 = element("a");
+				a8.textContent = "the sQuery Installation Guide for React";
+				t246 = text("!");
+				br35 = element("br");
+				t247 = space();
+				img1 = element("img");
+				t248 = space();
+				div100 = element("div");
+				h40 = element("h4");
+				h40.textContent = "What is React?";
+				t250 = space();
+				div99 = element("div");
+				a9 = element("a");
+				a9.textContent = "React.js Official site";
+				t252 = text("\n\t\t\t\t\tA JavaScript library for building user interfaces.");
+				br36 = element("br");
+				t253 = text("\n\t\t\t\t\tReact makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.\n\t\t\t\t\tDeclarative views make your code more predictable and easier to debug.");
+				br37 = element("br");
+				t254 = text("\n\t\t\t\t\tPerformance-wise, many reserches indicate SolidJS or Svelte is the fastest among major js frameworks. If your project doesn't need Next.js, I personally recommend you to try SolidJS or Svelte.\n\t\t\t\t\t");
+				br38 = element("br");
+				br39 = element("br");
+				t255 = text("\n\t\t\t\t\tSPA/SSR/SSG?: ");
+				a10 = element("a");
+				a10.textContent = "Next.js";
+				t257 = text(" is the de facto standard react framework for routing.");
+				t258 = space();
+				doc4 = element("doc");
+				h24 = element("h2");
+				h24.textContent = "Use with Vue.js";
+				t260 = space();
+				div104 = element("div");
+				t261 = text("See ");
+				a11 = element("a");
+				a11.textContent = "the sQuery Installation Guide for Vue.js";
+				t263 = text("!");
+				br40 = element("br");
+				t264 = space();
+				img2 = element("img");
+				t265 = space();
+				div103 = element("div");
+				h41 = element("h4");
+				h41.textContent = "What is Vue.js?";
+				t267 = space();
+				div102 = element("div");
+				a12 = element("a");
+				a12.textContent = "Vue.js Official site";
+				t269 = text("\n\t\t\t\t\tAn approachable, performant and versatile framework for building web user interfaces. \n\t\t\t\t\tBuilds on top of standard HTML, CSS and JavaScript with intuitive API and world-class documentation. \n\t\t\t\t\tPerformant. Truly reactive, compiler-optimized rendering system that rarely requires manual optimization.\n\t\t\t\t\t");
+				br41 = element("br");
+				br42 = element("br");
+				t270 = text("\n\t\t\t\t\tSPA/SSR/SSG?: ");
+				a13 = element("a");
+				a13.textContent = "Nuxt.js";
+				t272 = text(" is the most well-used vue framework for routing.");
+				t273 = space();
+				doc5 = element("doc");
+				h25 = element("h2");
+				h25.textContent = "Use with Svelte";
+				t275 = space();
+				div107 = element("div");
+				t276 = text("See ");
+				a14 = element("a");
+				a14.textContent = "the sQuery Installation Guide for Svelte";
+				t278 = text("!");
+				br43 = element("br");
+				t279 = space();
+				img3 = element("img");
+				t280 = space();
+				div106 = element("div");
+				h42 = element("h4");
+				h42.textContent = "What is Svelte?";
+				t282 = space();
+				div105 = element("div");
+				a15 = element("a");
+				a15.textContent = "Svelte Official site";
+				t284 = text("\n\t\t\t\t\tSvelte is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.\n\t\t\t\t\tInstead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.");
+				br44 = element("br");
+				br45 = element("br");
+				t285 = text("\n\t\t\t\t\tSvelte doesn't have the Virtual DOM but it's actually one of the most performant major frameworks today.");
+				br46 = element("br");
+				t286 = text("\n\t\t\t\t\tBy the way, this website is made by Svelte and sQuery!\n\t\t\t\t\t");
+				br47 = element("br");
+				br48 = element("br");
+				t287 = text("\n\t\t\t\t\tSPA/SSR/SSG?: Svelte has multiple good frameworks for routing. ");
+				a16 = element("a");
+				a16.textContent = "Sveltekit";
+				t289 = text(" is the official framework and will be the de facto standard in the future.");
+				t290 = space();
+				doc6 = element("doc");
+				h26 = element("h2");
+				h26.textContent = "Use with SolidJS";
+				t292 = space();
+				div110 = element("div");
+				t293 = text("See ");
+				a17 = element("a");
+				a17.textContent = "the sQuery Installation Guide for SolidJS";
+				t295 = text("!");
+				br49 = element("br");
+				t296 = space();
+				img4 = element("img");
+				t297 = space();
+				div109 = element("div");
+				h43 = element("h4");
+				h43.textContent = "What is SolidJS?";
+				t299 = space();
+				div108 = element("div");
+				a18 = element("a");
+				a18.textContent = "SolidJS Official site";
+				t301 = text("\n\t\t\t\t\tA declarative, efficient and flexible JavaScript library for building user interfaces.");
+				br50 = element("br");
+				t302 = text("\n\t\t\t\t\tSolid stands on the shoulders of giants, particularly React and Knockout. If you've developed with React Hooks before, Solid should seem very natural. In fact, more natural as Solid's model is much simpler with no Hook rules. Every Component executes once and it is the Hooks and bindings that execute many times as their dependencies update.\n\t\t\t\t\tSolid follows the same philosophy as React with unidirectional data flow, read/write segregation, and immutable interfaces. It however has a completely different implementation that forgoes using a Virtual DOM.");
+				br51 = element("br");
+				br52 = element("br");
+				t303 = text("\n\t\t\t\t\tSolidJS doesn't have the Virtual DOM but it's actually the most performant framework today.\n\t\t\t\t\t");
+				br53 = element("br");
+				br54 = element("br");
+				t304 = text("\n\t\t\t\t\tSPA/SSR/SSG?: Read ");
+				a19 = element("a");
+				a19.textContent = "the official documentation";
+				t306 = text(" for SSR/SSG!");
+				t307 = space();
+				doc7 = element("doc");
+				h27 = element("h2");
+				h27.textContent = "Use with Angular";
+				t309 = space();
+				div113 = element("div");
+				t310 = text("See ");
+				a20 = element("a");
+				a20.textContent = "the sQuery Installation Guide for Angular";
+				t312 = text("!");
+				br55 = element("br");
+				t313 = space();
+				img5 = element("img");
+				t314 = space();
+				div112 = element("div");
+				h44 = element("h4");
+				h44.textContent = "What is Angular?";
+				t316 = space();
+				div111 = element("div");
+				a21 = element("a");
+				a21.textContent = "Angular Official site";
+				t318 = text("\n\t\t\t\t\tAngular is a platform for building mobile and desktop web applications.");
+				br56 = element("br");
+				t319 = text("\n\t\t\t\t\tAngular is a TypeScript-based free and open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.");
+				t320 = space();
+				doc8 = element("doc");
+				h28 = element("h2");
+				h28.textContent = "filter / not";
+				t322 = space();
+				div114 = element("div");
+				t323 = text("filter: Reduce the set of matched elements to those that match the selector or pass the function's test. \n\t\t\t\t");
+				span3 = element("span");
+				t324 = space();
+				div117 = element("div");
+				div116 = element("div");
+				div115 = element("div");
+				t325 = text("\n\t\t\t\t\tFilter the elements");
+				t326 = space();
+				create_component(sqi7.$$.fragment);
+				t327 = space();
+				div118 = element("div");
+				br57 = element("br");
+				t328 = text("\n\t\t\t\tnot: The opposite version of filter. Remove elements from the set of matched elements. \n\t\t\t\t");
+				span4 = element("span");
+				t329 = space();
+				div121 = element("div");
+				div120 = element("div");
+				div119 = element("div");
+				t330 = text("\n\t\t\t\t\tFilter the non-matched elements");
+				t331 = space();
+				create_component(sqi8.$$.fragment);
+				t332 = space();
+				doc9 = element("doc");
+				h29 = element("h2");
+				h29.textContent = "eq";
+				t334 = space();
+				div122 = element("div");
+				t335 = text("Reduce the set of matched elements to the one at the specified index. \n\t\t\t\t");
+				span5 = element("span");
+				t336 = space();
+				div125 = element("div");
+				div124 = element("div");
+				div123 = element("div");
+				t337 = text("\n\t\t\t\t\tReduce the set using an integer indicating the 0-based position of the element.");
+				t338 = space();
+				create_component(sqi9.$$.fragment);
+				t339 = space();
+				div126 = element("div");
+				br58 = element("br");
+				t340 = text("\n\t\t\t\tYou can also use a minus value! (Counting backwards from the last element in the set)");
+				t341 = space();
+				div129 = element("div");
+				div128 = element("div");
+				div127 = element("div");
+				t342 = text("\n\t\t\t\t\tReduce the set using an integer indicating the position of the element, counting backwards from the last element in the set.");
+				t343 = space();
+				create_component(sqi10.$$.fragment);
+				t344 = space();
+				doc10 = element("doc");
+				h210 = element("h2");
+				h210.textContent = "first / last";
+				t346 = space();
+				div130 = element("div");
+				t347 = text("first: Reduce the set of matched elements to the first in the set. \n\t\t\t\t");
+				span6 = element("span");
+				t348 = space();
+				div133 = element("div");
+				div132 = element("div");
+				div131 = element("div");
+				t349 = text("\n\t\t\t\t\tfirst");
+				t350 = space();
+				create_component(sqi11.$$.fragment);
+				t351 = space();
+				div134 = element("div");
+				br59 = element("br");
+				t352 = text("\n\t\t\t\tlast: Reduce the set of matched elements to the last in the set. \n\t\t\t\t");
+				span7 = element("span");
+				t353 = space();
+				div137 = element("div");
+				div136 = element("div");
+				div135 = element("div");
+				t354 = text("\n\t\t\t\t\tlast");
+				t355 = space();
+				create_component(sqi12.$$.fragment);
+				t356 = space();
+				doc11 = element("doc");
+				h211 = element("h2");
+				h211.textContent = "has";
+				t358 = space();
+				div138 = element("div");
+				t359 = text("Returns boolean result of the selector argument against the collection.\n\t\t\t\t");
+				span8 = element("span");
+				t360 = space();
+				div141 = element("div");
+				div140 = element("div");
+				div139 = element("div");
+				t361 = text("\n\t\t\t\t\thas");
+				t362 = space();
+				create_component(sqi13.$$.fragment);
+				t363 = space();
+				doc12 = element("doc");
+				h212 = element("h2");
+				h212.textContent = "contains";
+				t365 = space();
+				div142 = element("div");
+				t366 = text("Select all elements that contain the specified text.\n\t\t\t\t");
+				span9 = element("span");
+				t367 = space();
+				div145 = element("div");
+				div144 = element("div");
+				div143 = element("div");
+				t368 = text("\n\t\t\t\t\tcontains");
+				t369 = space();
+				create_component(sqi14.$$.fragment);
+				t370 = space();
+				doc13 = element("doc");
+				h213 = element("h2");
+				h213.textContent = "slice";
+				t372 = space();
+				div146 = element("div");
+				t373 = text("Reduce the set of matched elements to a subset specified by a range of indices.\n\t\t\t\t");
+				span10 = element("span");
+				t374 = space();
+				div149 = element("div");
+				div148 = element("div");
+				div147 = element("div");
+				t375 = text("\n\t\t\t\t\tslice");
+				t376 = space();
+				create_component(sqi15.$$.fragment);
+				t377 = space();
+				doc14 = element("doc");
+				h214 = element("h2");
+				h214.textContent = "index";
+				t379 = space();
+				div150 = element("div");
+				t380 = text("Returns the index of the element in its parent\n\t\t\t\t");
+				span11 = element("span");
+				t381 = space();
+				div153 = element("div");
+				div152 = element("div");
+				div151 = element("div");
+				t382 = text("\n\t\t\t\t\tindex");
+				t383 = space();
+				create_component(sqi16.$$.fragment);
+				t384 = space();
+				doc15 = element("doc");
+				h215 = element("h2");
+				h215.textContent = "is";
+				t386 = space();
+				div154 = element("div");
+				t387 = text("Returns whether the provided selector matches the first element in the collection.\n\t\t\t\t");
+				span12 = element("span");
+				t388 = space();
+				div157 = element("div");
+				div156 = element("div");
+				div155 = element("div");
+				t389 = text("\n\t\t\t\t\t.is( selector )");
+				t390 = space();
+				create_component(sqi17.$$.fragment);
+				t391 = space();
+				doc16 = element("doc");
+				h216 = element("h2");
+				h216.textContent = "find";
+				t393 = space();
+				div158 = element("div");
+				t394 = text("Returns selector match descendants from the first element in the collection.\n\t\t\t\t");
+				span13 = element("span");
+				t395 = space();
+				div161 = element("div");
+				div160 = element("div");
+				div159 = element("div");
+				t396 = text("\n\t\t\t\t\t.find( selector )");
+				t397 = space();
+				create_component(sqi18.$$.fragment);
+				t398 = space();
+				doc17 = element("doc");
+				h217 = element("h2");
+				h217.textContent = "children";
+				t400 = space();
+				div162 = element("div");
+				t401 = text("Returns a collection of child elements\n\t\t\t\t");
+				span14 = element("span");
+				t402 = space();
+				div165 = element("div");
+				div164 = element("div");
+				div163 = element("div");
+				t403 = text("\n\t\t\t\t\t.children( selector )");
+				t404 = space();
+				create_component(sqi19.$$.fragment);
+				t405 = space();
+				doc18 = element("doc");
+				h218 = element("h2");
+				h218.textContent = "next / prev";
+				t407 = space();
+				div166 = element("div");
+				t408 = text("next: Returns next sibling\n\t\t\t\t");
+				span15 = element("span");
+				t409 = space();
+				div169 = element("div");
+				div168 = element("div");
+				div167 = element("div");
+				t410 = text("\n\t\t\t\t\tnext");
+				t411 = space();
+				create_component(sqi20.$$.fragment);
+				t412 = space();
+				div170 = element("div");
+				br60 = element("br");
+				t413 = text("\n\t\t\t\tprev: Returns the previous adjacent element.\n\t\t\t\t");
+				span16 = element("span");
+				t414 = space();
+				div173 = element("div");
+				div172 = element("div");
+				div171 = element("div");
+				t415 = text("\n\t\t\t\t\tprev");
+				t416 = space();
+				create_component(sqi21.$$.fragment);
+				t417 = space();
+				doc19 = element("doc");
+				h219 = element("h2");
+				h219.textContent = "siblings";
+				t419 = space();
+				div174 = element("div");
+				t420 = text("Returns a collection of sibling elements.\n\t\t\t\t");
+				span17 = element("span");
+				t421 = space();
+				div177 = element("div");
+				div176 = element("div");
+				div175 = element("div");
+				t422 = text("\n\t\t\t\t\tsiblings");
+				t423 = space();
+				create_component(sqi22.$$.fragment);
+				t424 = space();
+				doc20 = element("doc");
+				h220 = element("h2");
+				h220.textContent = "parent / parents";
+				t426 = space();
+				div178 = element("div");
+				t427 = text("parent: Returns parent element.\n\t\t\t\t");
+				span18 = element("span");
+				t428 = space();
+				div181 = element("div");
+				div180 = element("div");
+				div179 = element("div");
+				t429 = text("\n\t\t\t\t\tparent");
+				t430 = space();
+				create_component(sqi23.$$.fragment);
+				t431 = space();
+				div182 = element("div");
+				br61 = element("br");
+				t432 = text("\n\t\t\t\tparents: Returns recursive parent by selector.\n\t\t\t\t");
+				span19 = element("span");
+				t433 = space();
+				div185 = element("div");
+				div184 = element("div");
+				div183 = element("div");
+				t434 = text("\n\t\t\t\t\tparents");
+				t435 = space();
+				create_component(sqi24.$$.fragment);
+				t436 = space();
+				doc21 = element("doc");
+				h221 = element("h2");
+				h221.textContent = "closest";
+				t438 = space();
+				div186 = element("div");
+				t439 = text("Returns the closest matching selector up the DOM tree.\n\t\t\t\t");
+				span20 = element("span");
+				t440 = space();
+				div189 = element("div");
+				div188 = element("div");
+				div187 = element("div");
+				t441 = text("\n\t\t\t\t\tclosest");
+				t442 = space();
+				create_component(sqi25.$$.fragment);
+				t443 = space();
+				doc22 = element("doc");
+				h222 = element("h2");
+				h222.textContent = "hasClass";
+				t445 = space();
+				div190 = element("div");
+				t446 = text("Returns the boolean result of checking if the first element in the collection has the className attribute.\n\t\t\t\t");
+				span21 = element("span");
+				t447 = space();
+				div193 = element("div");
+				div192 = element("div");
+				div191 = element("div");
+				t448 = text("\n\t\t\t\t\thasClass");
+				t449 = space();
+				create_component(sqi26.$$.fragment);
+				t450 = space();
+				doc23 = element("doc");
+				h223 = element("h2");
+				h223.textContent = "html";
+				t452 = space();
+				div194 = element("div");
+				t453 = text("Returns the HTML text of the first element in the collection, sets the HTML if provided.\n\t\t\t\t");
+				span22 = element("span");
+				t454 = space();
+				div197 = element("div");
+				div196 = element("div");
+				div195 = element("div");
+				t455 = text("\n\t\t\t\t\thtml");
+				t456 = space();
+				create_component(sqi27.$$.fragment);
+				t457 = space();
+				doc24 = element("doc");
+				h224 = element("h2");
+				h224.textContent = "text";
+				t459 = space();
+				div198 = element("div");
+				t460 = text("Returns the inner text of the first element in the collection, sets the text if textContent is provided.\n\t\t\t\t");
+				span23 = element("span");
+				t461 = space();
+				div201 = element("div");
+				div200 = element("div");
+				div199 = element("div");
+				t462 = text("\n\t\t\t\t\ttext");
+				t463 = space();
+				create_component(sqi28.$$.fragment);
+				t464 = space();
+				doc25 = element("doc");
+				h225 = element("h2");
+				h225.textContent = "val";
+				t466 = space();
+				div202 = element("div");
+				t467 = text("Returns an inputs value. If value is supplied, sets all inputs in collection's value to the value argument.\n\t\t\t\t");
+				span24 = element("span");
+				t468 = space();
+				div205 = element("div");
+				div204 = element("div");
+				div203 = element("div");
+				t469 = text("\n\t\t\t\t\tval");
+				t470 = space();
+				create_component(sqi29.$$.fragment);
+				t471 = space();
+				doc26 = element("doc");
+				h226 = element("h2");
+				h226.textContent = "css";
+				t473 = space();
+				div206 = element("div");
+				t474 = text("Returns a CSS property value when just property is supplied. Sets a CSS property when property and value are supplied, and set multiple properties when an object is supplied.\n\t\t\t\t");
+				span25 = element("span");
+				t475 = space();
+				div209 = element("div");
+				div208 = element("div");
+				div207 = element("div");
+				t476 = text("\n\t\t\t\t\tcss(property) / css(property, value) / css(object)");
+				t477 = space();
+				create_component(sqi30.$$.fragment);
+				t478 = space();
+				doc27 = element("doc");
+				h227 = element("h2");
+				h227.textContent = "attr";
+				t480 = space();
+				div210 = element("div");
+				t481 = text("Without attrValue, returns the attribute value of the first element in the collection. With attrValue, sets the attribute value of each element of the collection.\n\t\t\t\t");
+				span26 = element("span");
+				t482 = space();
+				div213 = element("div");
+				div212 = element("div");
+				div211 = element("div");
+				t483 = text("\n\t\t\t\t\tattr");
+				t484 = space();
+				create_component(sqi31.$$.fragment);
+				t485 = space();
+				doc28 = element("doc");
+				h228 = element("h2");
+				h228.textContent = "prop";
+				t487 = space();
+				div214 = element("div");
+				t488 = text("Without a value, returns the prop value of the first element in the collection. With a value, sets the prop value of each element of the collection.\n\t\t\t\t");
+				span27 = element("span");
+				t489 = space();
+				div217 = element("div");
+				div216 = element("div");
+				div215 = element("div");
+				t490 = text("\n\t\t\t\t\tprop");
+				t491 = space();
+				create_component(sqi32.$$.fragment);
+				t492 = space();
+				doc29 = element("doc");
+				h229 = element("h2");
+				h229.textContent = "get";
+				t494 = space();
+				div218 = element("div");
+				t495 = text("Returns the element at the index\n\t\t\t\t");
+				span28 = element("span");
+				t496 = space();
+				div221 = element("div");
+				div220 = element("div");
+				div219 = element("div");
+				t497 = text("\n\t\t\t\t\tget");
+				t498 = space();
+				create_component(sqi33.$$.fragment);
+				t499 = space();
+				doc30 = element("doc");
+				h230 = element("h2");
+				h230.textContent = "show / hide";
+				t501 = space();
+				div222 = element("div");
+				t502 = text("show: Shows the specified elements\n\t\t\t\t");
+				span29 = element("span");
+				t503 = space();
+				br62 = element("br");
+				br63 = element("br");
+				t504 = text("\n\t\t\t\thide: Hides the specified elements\n\t\t\t\t");
+				span30 = element("span");
+				t505 = space();
+				div225 = element("div");
+				div224 = element("div");
+				div223 = element("div");
+				t506 = text("\n\t\t\t\t\tshow / hide");
+				t507 = space();
+				create_component(sqi34.$$.fragment);
+				t508 = space();
+				doc31 = element("doc");
+				h231 = element("h2");
+				h231.textContent = "remove";
+				t510 = space();
+				div226 = element("div");
+				t511 = text("Removes the specified elements\n\t\t\t\t");
+				span31 = element("span");
+				t512 = space();
+				div229 = element("div");
+				div228 = element("div");
+				div227 = element("div");
+				t513 = text("\n\t\t\t\t\tremove");
+				t514 = space();
+				create_component(sqi35.$$.fragment);
+				t515 = space();
+				doc32 = element("doc");
+				h232 = element("h2");
+				h232.textContent = "before / after";
+				t517 = space();
+				div230 = element("div");
+				t518 = text("before: Insert content, specified by the parameter, before each element in the set of matched elements.\n\t\t\t\t");
+				span32 = element("span");
+				t519 = space();
+				div233 = element("div");
+				div232 = element("div");
+				div231 = element("div");
+				t520 = text("\n\t\t\t\t\tbefore");
+				t521 = space();
+				create_component(sqi36.$$.fragment);
+				t522 = space();
+				div234 = element("div");
+				br64 = element("br");
+				t523 = text("\n\t\t\t\tafter: Insert content, specified by the parameter, after each element in the set of matched elements.\n\t\t\t\t");
+				span33 = element("span");
+				t524 = space();
+				div237 = element("div");
+				div236 = element("div");
+				div235 = element("div");
+				t525 = text("\n\t\t\t\t\tafter");
+				t526 = space();
+				create_component(sqi37.$$.fragment);
+				t527 = space();
+				doc33 = element("doc");
+				h233 = element("h2");
+				h233.textContent = "prepend / append";
+				t529 = space();
+				div238 = element("div");
+				t530 = text("prepend: Prepends element to the first element in collection.\n\t\t\t\t");
+				span34 = element("span");
+				t531 = space();
+				div241 = element("div");
+				div240 = element("div");
+				div239 = element("div");
+				t532 = text("\n\t\t\t\t\tprepend");
+				t533 = space();
+				create_component(sqi38.$$.fragment);
+				t534 = space();
+				div242 = element("div");
+				br65 = element("br");
+				t535 = text("\n\t\t\t\tappend: Appends the target element to the first element in the collection.\n\t\t\t\t");
+				span35 = element("span");
+				t536 = space();
+				div245 = element("div");
+				div244 = element("div");
+				div243 = element("div");
+				t537 = text("\n\t\t\t\t\tappend");
+				t538 = space();
+				create_component(sqi39.$$.fragment);
+				t539 = space();
+				doc34 = element("doc");
+				h234 = element("h2");
+				h234.textContent = "replaceWith";
+				t541 = space();
+				div246 = element("div");
+				t542 = text("Replace an element with the provided new content \n\t\t\t\t");
+				span36 = element("span");
+				t543 = space();
+				div249 = element("div");
+				div248 = element("div");
+				div247 = element("div");
+				t544 = text("\n\t\t\t\t\treplaceWith");
+				t545 = space();
+				create_component(sqi40.$$.fragment);
+				t546 = space();
+				doc35 = element("doc");
+				h235 = element("h2");
+				h235.textContent = "addClass / removeClass";
+				t548 = space();
+				div250 = element("div");
+				t549 = text("addClass: Adds the specified class to each element in the set of matched elements.\n\t\t\t\t");
+				span37 = element("span");
+				t550 = space();
+				br66 = element("br");
+				t551 = text("\n\t\t\t\tremoveClass: Remove a single class from each element in the set of matched elements.\n\t\t\t\t");
+				span38 = element("span");
+				t552 = space();
+				div253 = element("div");
+				div252 = element("div");
+				div251 = element("div");
+				t553 = text("\n\t\t\t\t\taddClass / removeClass");
+				t554 = space();
+				create_component(sqi41.$$.fragment);
+				t555 = space();
+				doc36 = element("doc");
+				h236 = element("h2");
+				h236.textContent = "toggleClass";
+				t557 = space();
+				div254 = element("div");
+				t558 = text("Toggles the specified class to each element in the set of matched elements.\n\t\t\t\t");
+				span39 = element("span");
+				t559 = space();
+				div257 = element("div");
+				div256 = element("div");
+				div255 = element("div");
+				t560 = text("\n\t\t\t\t\ttoggleClass");
+				t561 = space();
+				create_component(sqi42.$$.fragment);
+				t562 = space();
+				doc37 = element("doc");
+				h237 = element("h2");
+				h237.textContent = "width / height";
+				t564 = space();
+				div258 = element("div");
+				t565 = text("width: Get the current computed width for the first element in the set of matched elements or set the width of every matched element.\n\t\t\t\t");
+				span40 = element("span");
+				t566 = space();
+				br67 = element("br");
+				t567 = text("\n\t\t\t\theight: Get the current computed height for the first element in the set of matched elements or set the width of every matched element.\n\t\t\t\t");
+				span41 = element("span");
+				t568 = space();
+				div261 = element("div");
+				div260 = element("div");
+				div259 = element("div");
+				t569 = text("\n\t\t\t\t\twidth / height");
+				t570 = space();
+				create_component(sqi43.$$.fragment);
+				t571 = space();
+				doc38 = element("doc");
+				h238 = element("h2");
+				h238.textContent = "innerWidth / innerHeight";
+				t573 = space();
+				div262 = element("div");
+				t574 = text("innerWidth: Get the current computed inner width (");
+				b6 = element("b");
+				b6.textContent = "including padding but not border";
+				t576 = text(") for the first element in the set of matched elements or set the inner width of every matched element.\n\t\t\t\t");
+				span42 = element("span");
+				t577 = space();
+				br68 = element("br");
+				t578 = text("\n\t\t\t\tinnerHeight: Get the current computed inner height (");
+				b7 = element("b");
+				b7.textContent = "including padding but not border";
+				t580 = text(") for the first element in the set of matched elements or set the height width of every matched element.\n\t\t\t\t");
+				span43 = element("span");
+				t581 = space();
+				div265 = element("div");
+				div264 = element("div");
+				div263 = element("div");
+				t582 = text("\n\t\t\t\t\tinnerWidth / innerHeight");
+				t583 = space();
+				create_component(sqi44.$$.fragment);
+				t584 = space();
+				doc39 = element("doc");
+				h239 = element("h2");
+				h239.textContent = "outerWidth / outerHeight";
+				t586 = space();
+				div266 = element("div");
+				t587 = text("outerWidth: Get the current computed outer width (");
+				b8 = element("b");
+				b8.textContent = "including padding and border";
+				t589 = text(") for the first element in the set of matched elements or set the outer width of every matched element.\n\t\t\t\t");
+				span44 = element("span");
+				t590 = space();
+				br69 = element("br");
+				t591 = text("\n\t\t\t\touterHeight: Get the current computed outer height (");
+				b9 = element("b");
+				b9.textContent = "including padding and border";
+				t593 = text(") for the first element in the set of matched elements or set the outer height of every matched element.\n\t\t\t\t");
+				span45 = element("span");
+				t594 = space();
+				div269 = element("div");
+				div268 = element("div");
+				div267 = element("div");
+				t595 = text("\n\t\t\t\t\touterWidth / outerHeight");
+				t596 = space();
+				create_component(sqi45.$$.fragment);
+				t597 = space();
+				doc40 = element("doc");
+				h240 = element("h2");
+				h240.textContent = "offset";
+				t599 = space();
+				div270 = element("div");
+				t600 = text("Get the current coordinates of the first element, or set the coordinates of every element, in the set of matched elements, relative to the document.\n\t\t\t\t");
+				span46 = element("span");
+				t601 = space();
+				div273 = element("div");
+				div272 = element("div");
+				div271 = element("div");
+				t602 = text("\n\t\t\t\t\toffset");
+				t603 = space();
+				create_component(sqi46.$$.fragment);
+				t604 = space();
+				doc41 = element("doc");
+				h241 = element("h2");
+				h241.textContent = "pos (position)";
+				t606 = space();
+				div274 = element("div");
+				t607 = text("Get the current coordinates of the first element in the set of matched elements, relative to the offset parent.\n\t\t\t\t");
+				span47 = element("span");
+				t608 = space();
+				div277 = element("div");
+				div276 = element("div");
+				div275 = element("div");
+				t609 = text("\n\t\t\t\t\tpos (position)");
+				t610 = space();
+				create_component(sqi47.$$.fragment);
+				t611 = space();
+				doc42 = element("doc");
+				h242 = element("h2");
+				h242.textContent = "fadeIn / fadeOut";
+				t613 = space();
+				div279 = element("div");
+				t614 = text("Display the matched elements by fading them to opaque. \n\t\t\t\t");
+				span48 = element("span");
+				t615 = space();
+				div278 = element("div");
+				div278.textContent = "NOTE: In jQuery, you could method-chain fadeIn and fadeOut to make a blink animation, but sQuery doesn't support it for a performance reason. Just use a callback function instead if you need a blink animation.";
+				t617 = space();
+				div282 = element("div");
+				div281 = element("div");
+				div280 = element("div");
+				t618 = text("\n\t\t\t\t\tfadeIn / fadeOut");
+				t619 = space();
+				create_component(sqi48.$$.fragment);
+				t620 = space();
+				doc43 = element("doc");
+				h243 = element("h2");
+				h243.textContent = "animate";
+				t622 = space();
+				div284 = element("div");
+				t623 = text("Perform a custom animation of a set of CSS properties.\n\t\t\t\t");
+				div283 = element("div");
+				t624 = text("NOTE: There are some differences to the ");
+				a22 = element("a");
+				b10 = element("b");
+				b10.textContent = "jQuery's animate";
+				t626 = text(". sQuery uses the native ");
+				a23 = element("a");
+				b11 = element("b");
+				b11.textContent = "ES6 native animate";
+				t628 = text(" method internally.");
+				t629 = space();
+				div287 = element("div");
+				div286 = element("div");
+				div285 = element("div");
+				t630 = text("\n\t\t\t\t\tanimate");
+				t631 = space();
+				create_component(sqi49.$$.fragment);
+				t632 = space();
+				br70 = element("br");
+				t633 = space();
+				div290 = element("div");
+				div289 = element("div");
+				div288 = element("div");
+				t634 = text("\n\t\t\t\t\tanimate (More advanced Example)");
+				t635 = space();
+				create_component(sqi50.$$.fragment);
+				t636 = space();
+				doc44 = element("doc");
+				h244 = element("h2");
+				h244.textContent = "scroll";
+				t638 = space();
+				div291 = element("div");
+				t639 = text("Scroll the elements in the current chain.\n\t\t\t\t");
+				span49 = element("span");
+				t640 = space();
+				div294 = element("div");
+				div293 = element("div");
+				div292 = element("div");
+				t641 = text("\n\t\t\t\t\tscroll");
+				t642 = space();
+				create_component(sqi51.$$.fragment);
+				t643 = space();
+				doc45 = element("doc");
+				h245 = element("h2");
+				h245.textContent = "scrollTop / scrollLeft";
+				t645 = space();
+				div295 = element("div");
+				t646 = text("Get the current vertical position of the scroll bar for the first element in the set of matched elements or set the vertical position of the scroll bar for every matched element.\n\t\t\t\t");
+				span50 = element("span");
+				t647 = space();
+				span51 = element("span");
+				t648 = space();
+				div298 = element("div");
+				div297 = element("div");
+				div296 = element("div");
+				t649 = text("\n\t\t\t\t\tscrollTop / scrollLeft");
+				t650 = space();
+				create_component(sqi52.$$.fragment);
+				t651 = space();
+				doc46 = element("doc");
+				h246 = element("h2");
+				h246.textContent = "scrollToElement";
+				t653 = space();
+				div299 = element("div");
+				t654 = text("Scroll to the first element in the set of matched elements\n\t\t\t\t");
+				span52 = element("span");
+				t655 = space();
+				div302 = element("div");
+				div301 = element("div");
+				div300 = element("div");
+				t656 = text("\n\t\t\t\t\tscrollToElement");
+				t657 = space();
+				create_component(sqi53.$$.fragment);
+				t658 = space();
+				doc47 = element("doc");
+				h247 = element("h2");
+				h247.textContent = "each";
+				t660 = space();
+				div303 = element("div");
+				t661 = text("Iterate over a jQuery object, executing a function for each matched element.\n\t\t\t\t");
+				span53 = element("span");
+				t662 = space();
+				div306 = element("div");
+				div305 = element("div");
+				div304 = element("div");
+				t663 = text("\n\t\t\t\t\teach");
+				t664 = space();
+				create_component(sqi54.$$.fragment);
+				t665 = space();
+				doc48 = element("doc");
+				h248 = element("h2");
+				h248.textContent = "on / off / onf";
+				t667 = space();
+				div307 = element("div");
+				t668 = text("on: Adds event listener to collection elments.\n\t\t\t\t");
+				span54 = element("span");
+				t669 = space();
+				br71 = element("br");
+				t670 = text("\n\t\t\t\toff: Removes event listener from collection elments. \n\t\t\t\t");
+				span55 = element("span");
+				t671 = space();
+				br72 = element("br");
+				t672 = text("\n\t\t\t\tonf: Adds future event listener to collection elments.");
+				t673 = space();
+				div310 = element("div");
+				div309 = element("div");
+				div308 = element("div");
+				t674 = text("\n\t\t\t\t\ton / off");
+				t675 = space();
+				create_component(sqi55.$$.fragment);
+				t676 = space();
+				br73 = element("br");
+				t677 = space();
+				div311 = element("div");
+				div311.textContent = "NOTE: In sQuery, sq(document).onf('click', 'selector') equivalents to $(document).on('click', 'selector') in jQuery. .onf() can register future element events.";
+				t679 = space();
+				div314 = element("div");
+				div313 = element("div");
+				div312 = element("div");
+				t680 = text("\n\t\t\t\t\tonf");
+				t681 = space();
+				create_component(sqi56.$$.fragment);
+				t682 = space();
+				doc49 = element("doc");
+				h249 = element("h2");
+				h249.textContent = "trg (trigger)";
+				t684 = space();
+				div315 = element("div");
+				t685 = text("Triggers supplied event on elements in collection.\n\t\t\t\t");
+				span56 = element("span");
+				t686 = space();
+				div318 = element("div");
+				div317 = element("div");
+				div316 = element("div");
+				t687 = text("\n\t\t\t\t\ttrg (trigger)");
+				t688 = space();
+				create_component(sqi57.$$.fragment);
+				attr_dev(link0, "rel", "stylesheet");
+				attr_dev(link0, "href", "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css");
+				add_location(link0, file$3, 39, 1, 902);
+				if (!src_url_equal(script.src, script_src_value = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")) attr_dev(script, "src", script_src_value);
+				add_location(script, file$3, 40, 1, 1016);
+				attr_dev(link1, "rel", "stylesheet");
+				attr_dev(link1, "href", "./Docs.css");
+				add_location(link1, file$3, 41, 1, 1106);
+				attr_dev(span0, "id", "idDocNav");
+				add_location(span0, file$3, 43, 2, 1173);
+				attr_dev(a0, "href", "https://squery-vercel-app.translate.goog/?&_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp#/docs");
+				set_style(a0, "color", "#fff", 1);
+				add_location(a0, file$3, 44, 45, 1246);
+				set_style(div0, "float", "right");
+				set_style(div0, "margin-right", "20px");
+				add_location(div0, file$3, 44, 2, 1203);
+				attr_dev(section0, "id", "idHead");
+				add_location(section0, file$3, 42, 1, 1149);
+				attr_dev(a1, "href", "./");
+				set_style(a1, "color", "#fff");
+				add_location(a1, file$3, 49, 44, 1513);
+				attr_dev(div1, "id", "idLeftLogo");
+				attr_dev(div1, "class", "notranslate");
+				add_location(div1, file$3, 49, 3, 1472);
+				add_location(hr, file$3, 52, 4, 1605);
+				attr_dev(input, "id", "idDS");
+				attr_dev(input, "type", "text");
+				attr_dev(input, "placeholder", "search docs");
+				attr_dev(input, "autocorrect", "off");
+				attr_dev(input, "autocapitalize", "off");
+				attr_dev(input, "spellcheck", "false");
+				add_location(input, file$3, 54, 5, 1651);
+				attr_dev(div2, "id", "idDSC");
+				add_location(div2, file$3, 55, 5, 1770);
+				set_style(div3, "position", "relative");
+				add_location(div3, file$3, 53, 4, 1614);
+				attr_dev(div4, "id", "idLeftSearchCont");
+				add_location(div4, file$3, 51, 3, 1573);
+				attr_dev(section1, "id", "idLeftTop");
+				add_location(section1, file$3, 48, 2, 1444);
+				attr_dev(div5, "name", "");
+				attr_dev(div5, "class", "cSub");
+				add_location(div5, file$3, 62, 4, 1904);
+				attr_dev(div6, "name", "Installation");
+				attr_dev(div6, "class", "cF");
+				add_location(div6, file$3, 63, 4, 1956);
+				attr_dev(div7, "name", "Difference_between_jQuery");
+				attr_dev(div7, "class", "cF");
+				add_location(div7, file$3, 64, 4, 2016);
+				attr_dev(div8, "name", "Use_with_jQuery");
+				attr_dev(div8, "class", "cF");
+				add_location(div8, file$3, 65, 4, 2102);
+				attr_dev(div9, "name", "Use_with_React");
+				attr_dev(div9, "class", "cF");
+				add_location(div9, file$3, 66, 4, 2168);
+				attr_dev(div10, "name", "Use_with_Vue");
+				attr_dev(div10, "class", "cF");
+				add_location(div10, file$3, 67, 4, 2232);
+				attr_dev(div11, "name", "Use_with_Svelte");
+				attr_dev(div11, "class", "cF");
+				add_location(div11, file$3, 68, 4, 2295);
+				attr_dev(div12, "name", "Use_with_SolidJS");
+				attr_dev(div12, "class", "cF");
+				add_location(div12, file$3, 69, 4, 2361);
+				attr_dev(div13, "name", "Use_with_Angular");
+				attr_dev(div13, "class", "cF");
+				add_location(div13, file$3, 70, 4, 2429);
+				set_style(div14, "font-weight", "300");
+				add_location(div14, file$3, 61, 3, 1870);
+				attr_dev(div15, "name", "");
+				attr_dev(div15, "class", "cSub");
+				add_location(div15, file$3, 73, 3, 2508);
+				attr_dev(div16, "name", "filter-not");
+				attr_dev(div16, "class", "cF notranslate");
+				add_location(div16, file$3, 74, 3, 2558);
+				attr_dev(div17, "name", "eq");
+				attr_dev(div17, "class", "cF notranslate");
+				add_location(div17, file$3, 75, 3, 2626);
+				attr_dev(div18, "name", "first-last");
+				attr_dev(div18, "class", "cF notranslate");
+				add_location(div18, file$3, 76, 3, 2676);
+				attr_dev(div19, "name", "has");
+				attr_dev(div19, "class", "cF notranslate");
+				add_location(div19, file$3, 77, 3, 2744);
+				attr_dev(div20, "name", "contains");
+				attr_dev(div20, "class", "cF notranslate");
+				add_location(div20, file$3, 78, 3, 2796);
+				attr_dev(div21, "name", "slice");
+				attr_dev(div21, "class", "cF notranslate");
+				add_location(div21, file$3, 79, 3, 2858);
+				attr_dev(div22, "name", "index");
+				attr_dev(div22, "class", "cF notranslate");
+				add_location(div22, file$3, 80, 3, 2914);
+				attr_dev(div23, "name", "is");
+				attr_dev(div23, "class", "cF notranslate");
+				add_location(div23, file$3, 81, 3, 2970);
+				attr_dev(div24, "name", "");
+				attr_dev(div24, "class", "cSub");
+				add_location(div24, file$3, 83, 3, 3022);
+				attr_dev(div25, "name", "find");
+				attr_dev(div25, "class", "cF notranslate");
+				add_location(div25, file$3, 84, 3, 3072);
+				attr_dev(div26, "name", "children");
+				attr_dev(div26, "class", "cF notranslate");
+				add_location(div26, file$3, 85, 3, 3126);
+				attr_dev(div27, "name", "");
+				attr_dev(div27, "class", "cSub");
+				add_location(div27, file$3, 87, 3, 3190);
+				attr_dev(div28, "name", "next-prev");
+				attr_dev(div28, "class", "cF notranslate");
+				add_location(div28, file$3, 88, 3, 3242);
+				attr_dev(div29, "name", "siblings");
+				attr_dev(div29, "class", "cF notranslate");
+				add_location(div29, file$3, 89, 3, 3308);
+				attr_dev(div30, "class", "cSub");
+				add_location(div30, file$3, 91, 3, 3372);
+				attr_dev(div31, "name", "parent-parents");
+				attr_dev(div31, "class", "cF notranslate");
+				add_location(div31, file$3, 92, 3, 3415);
+				attr_dev(div32, "name", "closest");
+				attr_dev(div32, "class", "cF notranslate");
+				add_location(div32, file$3, 93, 3, 3491);
+				attr_dev(div33, "name", "");
+				attr_dev(div33, "class", "cSub");
+				add_location(div33, file$3, 95, 3, 3552);
+				attr_dev(div34, "name", "hasClass");
+				attr_dev(div34, "class", "cF notranslate");
+				add_location(div34, file$3, 96, 3, 3602);
+				attr_dev(div35, "name", "");
+				attr_dev(div35, "class", "cSub");
+				add_location(div35, file$3, 98, 3, 3668);
+				attr_dev(div36, "name", "html");
+				attr_dev(div36, "class", "cF notranslate");
+				add_location(div36, file$3, 99, 3, 3714);
+				attr_dev(div37, "name", "text");
+				attr_dev(div37, "class", "cF notranslate");
+				add_location(div37, file$3, 100, 3, 3768);
+				attr_dev(div38, "name", "val");
+				attr_dev(div38, "class", "cF notranslate");
+				add_location(div38, file$3, 101, 3, 3822);
+				attr_dev(div39, "name", "css");
+				attr_dev(div39, "class", "cF notranslate");
+				add_location(div39, file$3, 102, 3, 3874);
+				attr_dev(div40, "name", "attr");
+				attr_dev(div40, "class", "cF notranslate");
+				add_location(div40, file$3, 103, 3, 3926);
+				attr_dev(div41, "name", "prop");
+				attr_dev(div41, "class", "cF notranslate");
+				add_location(div41, file$3, 104, 3, 3980);
+				attr_dev(div42, "name", "get");
+				attr_dev(div42, "class", "cF notranslate");
+				add_location(div42, file$3, 105, 3, 4034);
+				attr_dev(div43, "name", "show-hide");
+				attr_dev(div43, "class", "cF notranslate");
+				add_location(div43, file$3, 106, 3, 4086);
+				attr_dev(div44, "name", "remove");
+				attr_dev(div44, "class", "cF notranslate");
+				add_location(div44, file$3, 107, 3, 4152);
+				attr_dev(div45, "name", "before-after");
+				attr_dev(div45, "class", "cF notranslate");
+				add_location(div45, file$3, 108, 3, 4210);
+				attr_dev(div46, "name", "prepend-append");
+				attr_dev(div46, "class", "cF notranslate");
+				add_location(div46, file$3, 109, 3, 4282);
+				attr_dev(div47, "name", "replaceWith");
+				attr_dev(div47, "class", "cF notranslate");
+				add_location(div47, file$3, 110, 3, 4358);
+				attr_dev(div48, "name", "addClass-removeClass");
+				attr_dev(div48, "class", "cF notranslate");
+				add_location(div48, file$3, 111, 3, 4426);
+				attr_dev(div49, "name", "toggleClass");
+				attr_dev(div49, "class", "cF notranslate");
+				add_location(div49, file$3, 112, 3, 4514);
+				attr_dev(div50, "name", "");
+				attr_dev(div50, "class", "cSub");
+				add_location(div50, file$3, 114, 3, 4583);
+				attr_dev(div51, "name", "width-height");
+				attr_dev(div51, "class", "cF notranslate");
+				add_location(div51, file$3, 115, 3, 4634);
+				attr_dev(div52, "name", "innerWidth-innerHeight");
+				attr_dev(div52, "class", "cF notranslate");
+				add_location(div52, file$3, 116, 3, 4706);
+				attr_dev(div53, "name", "outerWidth-outerHeight");
+				attr_dev(div53, "class", "cF notranslate");
+				add_location(div53, file$3, 117, 3, 4798);
+				attr_dev(div54, "name", "offset");
+				attr_dev(div54, "class", "cF notranslate");
+				add_location(div54, file$3, 118, 3, 4890);
+				attr_dev(div55, "name", "pos-position");
+				attr_dev(div55, "class", "cF notranslate");
+				add_location(div55, file$3, 119, 3, 4948);
+				attr_dev(div56, "name", "");
+				attr_dev(div56, "class", "cSub");
+				add_location(div56, file$3, 121, 3, 5024);
+				attr_dev(div57, "name", "fadeIn-fadeOut");
+				attr_dev(div57, "class", "cF notranslate");
+				add_location(div57, file$3, 122, 3, 5070);
+				attr_dev(div58, "name", "animate");
+				attr_dev(div58, "class", "cF notranslate");
+				add_location(div58, file$3, 123, 3, 5146);
+				attr_dev(div59, "name", "scroll");
+				attr_dev(div59, "class", "cF notranslate");
+				add_location(div59, file$3, 124, 3, 5206);
+				attr_dev(div60, "name", "scrollTop-scrollLeft");
+				attr_dev(div60, "class", "cF notranslate");
+				add_location(div60, file$3, 125, 3, 5264);
+				attr_dev(div61, "name", "scrollToElement");
+				attr_dev(div61, "class", "cF notranslate");
+				add_location(div61, file$3, 126, 3, 5352);
+				attr_dev(div62, "name", "");
+				attr_dev(div62, "class", "cSub");
+				add_location(div62, file$3, 128, 3, 5429);
+				attr_dev(div63, "name", "each");
+				attr_dev(div63, "class", "cF notranslate");
+				add_location(div63, file$3, 129, 3, 5470);
+				attr_dev(div64, "name", "");
+				attr_dev(div64, "class", "cSub");
+				add_location(div64, file$3, 131, 3, 5525);
+				attr_dev(div65, "name", "on-off-onf");
+				attr_dev(div65, "class", "cF notranslate");
+				add_location(div65, file$3, 132, 3, 5567);
+				attr_dev(div66, "name", "trg-trigger");
+				attr_dev(div66, "class", "cF notranslate");
+				add_location(div66, file$3, 133, 3, 5637);
+				add_location(br0, file$3, 135, 3, 5708);
+				add_location(br1, file$3, 135, 7, 5712);
+				add_location(br2, file$3, 135, 11, 5716);
+				add_location(br3, file$3, 135, 15, 5720);
+				add_location(br4, file$3, 135, 19, 5724);
+				add_location(br5, file$3, 135, 23, 5728);
+				add_location(br6, file$3, 135, 27, 5732);
+				add_location(br7, file$3, 135, 31, 5736);
+				attr_dev(section2, "class", "cScrollable");
+				add_location(section2, file$3, 60, 2, 1837);
+				attr_dev(section3, "id", "idLeft");
+				add_location(section3, file$3, 47, 1, 1420);
+				add_location(span1, file$3, 140, 28, 5797);
+				attr_dev(div67, "class", "menu__toggler");
+				add_location(div67, file$3, 140, 1, 5770);
+				add_location(div68, file$3, 143, 76, 5916);
+				attr_dev(span2, "onclick", "location.href='./';");
+				set_style(span2, "cursor", "pointer");
+				add_location(span2, file$3, 143, 6, 5846);
+				add_location(h1, file$3, 143, 2, 5842);
+				add_location(h20, file$3, 146, 3, 5978);
+				attr_dev(a2, "href", "https://github.com/exis9/sQuery/archive/refs/heads/main.zip");
+				attr_dev(a2, "target", "_blank");
+				set_style(a2, "font-size", "18px");
+				add_location(a2, file$3, 148, 13, 6039);
+				attr_dev(a3, "href", "https://github.com/exis9/sQuery");
+				attr_dev(a3, "target", "_blank");
+				add_location(a3, file$3, 148, 148, 6174);
+				attr_dev(div69, "class", "cPreDesc");
+				add_location(div69, file$3, 147, 3, 6003);
+				attr_dev(div70, "class", "cBack");
+				add_location(div70, file$3, 152, 5, 6297);
+				add_location(small0, file$3, 153, 66, 6389);
+				attr_dev(div71, "class", "cDesc");
+				add_location(div71, file$3, 151, 4, 6272);
+				add_location(div72, file$3, 150, 3, 6262);
+				attr_dev(div73, "class", "cBack");
+				add_location(div73, file$3, 158, 23, 6573);
+				attr_dev(div74, "class", "cDesc");
+				add_location(div74, file$3, 158, 4, 6554);
+				set_style(div75, "margin-top", "30px");
+				add_location(div75, file$3, 157, 3, 6520);
+				attr_dev(div76, "class", "cBack");
+				add_location(div76, file$3, 162, 23, 6735);
+				attr_dev(a4, "href", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions");
+				attr_dev(a4, "target", "_blank");
+				add_location(a4, file$3, 162, 114, 6826);
+				add_location(small1, file$3, 162, 78, 6790);
+				attr_dev(div77, "class", "cDesc");
+				add_location(div77, file$3, 162, 4, 6716);
+				set_style(div78, "margin-top", "30px");
+				add_location(div78, file$3, 161, 3, 6682);
+				attr_dev(div79, "class", "cBack");
+				add_location(div79, file$3, 166, 23, 7078);
+				attr_dev(div80, "class", "cDesc");
+				add_location(div80, file$3, 166, 4, 7059);
+				set_style(div81, "margin-top", "30px");
+				add_location(div81, file$3, 165, 3, 7025);
+				attr_dev(doc0, "name", "Installation");
+				add_location(doc0, file$3, 145, 2, 5949);
+				add_location(h21, file$3, 172, 3, 7229);
+				add_location(h30, file$3, 179, 6, 7498);
+				add_location(br8, file$3, 181, 59, 7621);
+				add_location(b0, file$3, 182, 21, 7647);
+				attr_dev(a5, "href", "./?n=Use_with_jQuery#/docs");
+				attr_dev(a5, "target", "_blank");
+				add_location(a5, file$3, 182, 53, 7679);
+				add_location(p0, file$3, 180, 6, 7558);
+				attr_dev(div82, "class", "cAccr");
+				add_location(div82, file$3, 178, 5, 7472);
+				add_location(h31, file$3, 187, 6, 7810);
+				add_location(b1, file$3, 189, 87, 7980);
+				add_location(br9, file$3, 189, 114, 8007);
+				attr_dev(a6, "href", "https://github.com/axios/axios");
+				attr_dev(a6, "target", "_blank");
+				add_location(a6, file$3, 190, 22, 8034);
+				attr_dev(a7, "href", "https://www.javascripttutorial.net/javascript-fetch-api/");
+				attr_dev(a7, "target", "_blank");
+				add_location(a7, file$3, 190, 90, 8102);
+				add_location(p1, file$3, 188, 6, 7889);
+				attr_dev(div83, "class", "cAccr");
+				add_location(div83, file$3, 186, 5, 7784);
+				add_location(h32, file$3, 195, 6, 8276);
+				add_location(br10, file$3, 198, 77, 8551);
+				add_location(br11, file$3, 199, 77, 8633);
+				add_location(br12, file$3, 200, 7, 8645);
+				add_location(br13, file$3, 202, 66, 8727);
+				add_location(br14, file$3, 203, 66, 8798);
+				add_location(b2, file$3, 201, 7, 8657);
+				add_location(p2, file$3, 196, 6, 8341);
+				attr_dev(div84, "class", "cAccr");
+				add_location(div84, file$3, 194, 5, 8250);
+				add_location(h33, file$3, 210, 6, 8945);
+				add_location(br15, file$3, 213, 7, 9104);
+				add_location(br16, file$3, 213, 11, 9108);
+				add_location(b3, file$3, 214, 7, 9120);
+				add_location(br17, file$3, 214, 40, 9153);
+				add_location(br18, file$3, 215, 7, 9165);
+				add_location(br19, file$3, 216, 177, 9347);
+				add_location(br20, file$3, 217, 7, 9359);
+				add_location(br21, file$3, 219, 29, 9404);
+				add_location(br22, file$3, 220, 23, 9432);
+				add_location(b4, file$3, 218, 7, 9371);
+				add_location(p3, file$3, 211, 6, 8986);
+				attr_dev(div85, "class", "cAccr");
+				add_location(div85, file$3, 209, 5, 8919);
+				add_location(h34, file$3, 226, 6, 9504);
+				add_location(br23, file$3, 228, 49, 9628);
+				add_location(br24, file$3, 229, 56, 9689);
+				add_location(b5, file$3, 230, 68, 9762);
+				add_location(br25, file$3, 230, 148, 9842);
+				add_location(br26, file$3, 231, 7, 9854);
+				add_location(br27, file$3, 232, 113, 9972);
+				add_location(br28, file$3, 233, 142, 10119);
+				add_location(br29, file$3, 234, 127, 10251);
+				add_location(br30, file$3, 235, 7, 10263);
+				add_location(br31, file$3, 236, 74, 10342);
+				add_location(br32, file$3, 237, 134, 10481);
+				add_location(p4, file$3, 227, 6, 9575);
+				attr_dev(div86, "class", "cAccr");
+				add_location(div86, file$3, 225, 5, 9478);
+				add_location(h35, file$3, 243, 6, 10739);
+				add_location(small2, file$3, 245, 7, 10821);
+				add_location(br33, file$3, 245, 113, 10927);
+				add_location(p5, file$3, 244, 6, 10810);
+				attr_dev(div87, "class", "cBack");
+				add_location(div87, file$3, 251, 8, 11182);
+				attr_dev(div88, "class", "cDesc");
+				add_location(div88, file$3, 250, 7, 11154);
+				add_location(div89, file$3, 249, 6, 11141);
+				attr_dev(div90, "class", "cAccr");
+				add_location(div90, file$3, 242, 5, 10713);
+				set_style(div91, "margin-top", "10px");
+				add_location(div91, file$3, 177, 4, 7436);
+				attr_dev(div92, "class", "cPreDesc");
+				add_location(div92, file$3, 173, 3, 7267);
+				attr_dev(doc1, "name", "Difference_between_jQuery");
+				add_location(doc1, file$3, 171, 2, 7187);
+				add_location(h22, file$3, 263, 3, 11386);
+				attr_dev(img0, "class", "cFWLogo");
+				if (!src_url_equal(img0.src, img0_src_value = "img/jquery.png")) attr_dev(img0, "src", img0_src_value);
+				attr_dev(img0, "alt", "jquery");
+				attr_dev(img0, "title", "jquery");
+				add_location(img0, file$3, 265, 4, 11441);
+				add_location(br34, file$3, 266, 69, 11581);
+				attr_dev(div93, "class", "cPreDesc");
+				add_location(div93, file$3, 264, 3, 11414);
+				attr_dev(div94, "class", "cBack");
+				add_location(div94, file$3, 271, 5, 11695);
+				attr_dev(div95, "class", "cDesc");
+				add_location(div95, file$3, 270, 4, 11670);
+				attr_dev(div96, "class", "cBack");
+				add_location(div96, file$3, 277, 5, 11825);
+				attr_dev(div97, "class", "cDesc");
+				add_location(div97, file$3, 276, 4, 11800);
+				add_location(div98, file$3, 269, 3, 11660);
+				attr_dev(doc2, "name", "Use_with_jQuery");
+				add_location(doc2, file$3, 262, 2, 11354);
+				add_location(h23, file$3, 285, 3, 12002);
+				attr_dev(a8, "class", "cFWLink");
+				attr_dev(a8, "href", "/?n=Use_with_React#/install");
+				attr_dev(a8, "target", "_blank");
+				add_location(a8, file$3, 287, 8, 12060);
+				add_location(br35, file$3, 287, 122, 12174);
+				attr_dev(img1, "class", "cFWLogo");
+				if (!src_url_equal(img1.src, img1_src_value = "img/react.png")) attr_dev(img1, "src", img1_src_value);
+				attr_dev(img1, "alt", "React.js");
+				attr_dev(img1, "title", "React.js");
+				add_location(img1, file$3, 288, 4, 12183);
+				add_location(h40, file$3, 290, 5, 12288);
+				attr_dev(a9, "class", "cFWLink cBlueBack");
+				attr_dev(a9, "href", "https://reactjs.org/");
+				attr_dev(a9, "target", "_blank");
+				add_location(a9, file$3, 291, 30, 12342);
+				attr_dev(div99, "class", "cFWLinkCont");
+				add_location(div99, file$3, 291, 5, 12317);
+				add_location(br36, file$3, 292, 55, 12501);
+				add_location(br37, file$3, 294, 75, 12788);
+				add_location(br38, file$3, 296, 5, 12996);
+				add_location(br39, file$3, 296, 9, 13000);
+				attr_dev(a10, "class", "cFWLink cBlueBack");
+				attr_dev(a10, "href", "https://nextjs.org/");
+				attr_dev(a10, "target", "_blank");
+				add_location(a10, file$3, 297, 19, 13024);
+				attr_dev(div100, "class", "cFWDesc");
+				add_location(div100, file$3, 289, 4, 12261);
+				attr_dev(div101, "class", "cPreDesc");
+				add_location(div101, file$3, 286, 3, 12029);
+				attr_dev(doc3, "name", "Use_with_React");
+				add_location(doc3, file$3, 284, 2, 11971);
+				add_location(h24, file$3, 303, 3, 13222);
+				attr_dev(a11, "class", "cFWLink");
+				attr_dev(a11, "href", "/?n=Use_with_Vue#/install");
+				attr_dev(a11, "target", "_blank");
+				add_location(a11, file$3, 305, 8, 13281);
+				add_location(br40, file$3, 305, 121, 13394);
+				attr_dev(img2, "class", "cFWLogo");
+				if (!src_url_equal(img2.src, img2_src_value = "img/vuejs.png")) attr_dev(img2, "src", img2_src_value);
+				attr_dev(img2, "alt", "Vue.js");
+				attr_dev(img2, "title", "Vue.js");
+				add_location(img2, file$3, 306, 4, 13403);
+				add_location(h41, file$3, 308, 5, 13504);
+				attr_dev(a12, "class", "cFWLink cBlueBack");
+				attr_dev(a12, "href", "https://reactjs.org/");
+				attr_dev(a12, "target", "_blank");
+				add_location(a12, file$3, 309, 30, 13559);
+				attr_dev(div102, "class", "cFWLinkCont");
+				add_location(div102, file$3, 309, 5, 13534);
+				add_location(br41, file$3, 313, 5, 13976);
+				add_location(br42, file$3, 313, 9, 13980);
+				attr_dev(a13, "class", "cFWLink cBlueBack");
+				attr_dev(a13, "href", "https://nuxtjs.org/");
+				attr_dev(a13, "target", "_blank");
+				add_location(a13, file$3, 314, 19, 14004);
+				attr_dev(div103, "class", "cFWDesc");
+				add_location(div103, file$3, 307, 4, 13477);
+				attr_dev(div104, "class", "cPreDesc");
+				add_location(div104, file$3, 304, 3, 13250);
+				attr_dev(doc4, "name", "Use_with_Vue");
+				add_location(doc4, file$3, 302, 2, 13193);
+				add_location(h25, file$3, 320, 3, 14200);
+				attr_dev(a14, "class", "cFWLink");
+				attr_dev(a14, "href", "/?n=Use_with_Svelte#/install");
+				attr_dev(a14, "target", "_blank");
+				add_location(a14, file$3, 322, 8, 14259);
+				add_location(br43, file$3, 322, 124, 14375);
+				attr_dev(img3, "class", "cFWLogo");
+				if (!src_url_equal(img3.src, img3_src_value = "img/svelte.png")) attr_dev(img3, "src", img3_src_value);
+				attr_dev(img3, "alt", "Svelte");
+				attr_dev(img3, "title", "Svelte");
+				add_location(img3, file$3, 323, 4, 14384);
+				add_location(h42, file$3, 325, 5, 14486);
+				attr_dev(a15, "class", "cFWLink cBlueBack");
+				attr_dev(a15, "href", "https://reactjs.org/");
+				attr_dev(a15, "target", "_blank");
+				add_location(a15, file$3, 326, 30, 14541);
+				attr_dev(div105, "class", "cFWLinkCont");
+				add_location(div105, file$3, 326, 5, 14516);
+				add_location(br44, file$3, 328, 145, 15029);
+				add_location(br45, file$3, 328, 149, 15033);
+				add_location(br46, file$3, 329, 109, 15147);
+				add_location(br47, file$3, 331, 5, 15217);
+				add_location(br48, file$3, 331, 9, 15221);
+				attr_dev(a16, "class", "cFWLink cBlueBack");
+				attr_dev(a16, "href", "https://kit.svelte.dev/");
+				attr_dev(a16, "target", "_blank");
+				add_location(a16, file$3, 332, 68, 15294);
+				attr_dev(div106, "class", "cFWDesc");
+				add_location(div106, file$3, 324, 4, 14459);
+				attr_dev(div107, "class", "cPreDesc");
+				add_location(div107, file$3, 321, 3, 14228);
+				attr_dev(doc5, "name", "Use_with_Svelte");
+				add_location(doc5, file$3, 319, 2, 14168);
+				add_location(h26, file$3, 338, 3, 15523);
+				attr_dev(a17, "class", "cFWLink");
+				attr_dev(a17, "href", "/?n=Use_with_SolidJS#/install");
+				attr_dev(a17, "target", "_blank");
+				add_location(a17, file$3, 340, 8, 15583);
+				add_location(br49, file$3, 340, 126, 15701);
+				attr_dev(img4, "class", "cFWLogo");
+				if (!src_url_equal(img4.src, img4_src_value = "img/solidjs.jpg")) attr_dev(img4, "src", img4_src_value);
+				attr_dev(img4, "alt", "SolidJS");
+				attr_dev(img4, "title", "SolidJS");
+				add_location(img4, file$3, 341, 4, 15710);
+				add_location(h43, file$3, 343, 5, 15815);
+				attr_dev(a18, "class", "cFWLink cBlueBack");
+				attr_dev(a18, "href", "https://reactjs.org/");
+				attr_dev(a18, "target", "_blank");
+				add_location(a18, file$3, 344, 30, 15871);
+				attr_dev(div108, "class", "cFWLinkCont");
+				add_location(div108, file$3, 344, 5, 15846);
+				add_location(br50, file$3, 345, 91, 16065);
+				add_location(br51, file$3, 347, 215, 16633);
+				add_location(br52, file$3, 347, 219, 16637);
+				add_location(br53, file$3, 349, 5, 16744);
+				add_location(br54, file$3, 349, 9, 16748);
+				attr_dev(a19, "class", "cFWLink cBlueBack");
+				attr_dev(a19, "href", "https://www.solidjs.com/guides/server");
+				attr_dev(a19, "target", "_blank");
+				add_location(a19, file$3, 350, 24, 16777);
+				attr_dev(div109, "class", "cFWDesc");
+				add_location(div109, file$3, 342, 4, 15788);
+				attr_dev(div110, "class", "cPreDesc");
+				add_location(div110, file$3, 339, 3, 15552);
+				attr_dev(doc6, "name", "Use_with_SolidJS");
+				add_location(doc6, file$3, 337, 2, 15490);
+				add_location(h27, file$3, 356, 3, 16975);
+				attr_dev(a20, "class", "cFWLink");
+				attr_dev(a20, "href", "/?n=Use_with_Angular#/install");
+				attr_dev(a20, "target", "_blank");
+				add_location(a20, file$3, 358, 8, 17035);
+				add_location(br55, file$3, 358, 126, 17153);
+				attr_dev(img5, "class", "cFWLogo");
+				if (!src_url_equal(img5.src, img5_src_value = "img/angular.png")) attr_dev(img5, "src", img5_src_value);
+				attr_dev(img5, "alt", "Angular");
+				attr_dev(img5, "title", "Angular");
+				add_location(img5, file$3, 359, 4, 17162);
+				add_location(h44, file$3, 361, 5, 17267);
+				attr_dev(a21, "class", "cFWLink cBlueBack");
+				attr_dev(a21, "href", "https://reactjs.org/");
+				attr_dev(a21, "target", "_blank");
+				add_location(a21, file$3, 362, 30, 17323);
+				attr_dev(div111, "class", "cFWLinkCont");
+				add_location(div111, file$3, 362, 5, 17298);
+				add_location(br56, file$3, 363, 76, 17502);
+				attr_dev(div112, "class", "cFWDesc");
+				add_location(div112, file$3, 360, 4, 17240);
+				attr_dev(div113, "class", "cPreDesc");
+				add_location(div113, file$3, 357, 3, 17004);
+				attr_dev(doc7, "name", "Use_with_Angular");
+				add_location(doc7, file$3, 355, 2, 16942);
+				attr_dev(h28, "class", "notranslate");
+				add_location(h28, file$3, 372, 3, 17737);
+				attr_dev(span3, "class", "cJQVer");
+				attr_dev(span3, "v", "filter");
+				add_location(span3, file$3, 375, 4, 17919);
+				attr_dev(div114, "class", "cPreDesc");
+				add_location(div114, file$3, 373, 3, 17782);
+				attr_dev(div115, "class", "cBack");
+				add_location(div115, file$3, 379, 5, 18007);
+				attr_dev(div116, "class", "cDesc");
+				add_location(div116, file$3, 378, 4, 17982);
+				add_location(div117, file$3, 377, 3, 17972);
+				add_location(br57, file$3, 386, 4, 18150);
+				attr_dev(span4, "class", "cJQVer");
+				attr_dev(span4, "v", "not");
+				add_location(span4, file$3, 388, 4, 18251);
+				attr_dev(div118, "class", "cPreDesc");
+				add_location(div118, file$3, 385, 3, 18123);
+				attr_dev(div119, "class", "cBack");
+				add_location(div119, file$3, 392, 5, 18336);
+				attr_dev(div120, "class", "cDesc");
+				add_location(div120, file$3, 391, 4, 18311);
+				add_location(div121, file$3, 390, 3, 18301);
+				attr_dev(doc8, "name", "filter-not");
+				add_location(doc8, file$3, 371, 2, 17710);
+				attr_dev(h29, "class", "notranslate");
+				add_location(h29, file$3, 400, 3, 18488);
+				attr_dev(span5, "class", "cJQVer");
+				attr_dev(span5, "v", "eq");
+				add_location(span5, file$3, 403, 4, 18625);
+				attr_dev(div122, "class", "cPreDesc");
+				add_location(div122, file$3, 401, 3, 18523);
+				attr_dev(div123, "class", "cBack");
+				add_location(div123, file$3, 407, 5, 18709);
+				attr_dev(div124, "class", "cDesc");
+				add_location(div124, file$3, 406, 4, 18684);
+				add_location(div125, file$3, 405, 3, 18674);
+				add_location(br58, file$3, 414, 4, 18908);
+				attr_dev(div126, "class", "cPreDesc");
+				add_location(div126, file$3, 413, 3, 18881);
+				attr_dev(div127, "class", "cBack");
+				add_location(div127, file$3, 419, 5, 19051);
+				attr_dev(div128, "class", "cDesc");
+				add_location(div128, file$3, 418, 4, 19026);
+				add_location(div129, file$3, 417, 3, 19016);
+				attr_dev(doc9, "name", "eq");
+				add_location(doc9, file$3, 399, 2, 18469);
+				attr_dev(h210, "class", "notranslate");
+				add_location(h210, file$3, 427, 3, 19304);
+				attr_dev(span6, "class", "cJQVer");
+				attr_dev(span6, "v", "first");
+				add_location(span6, file$3, 430, 4, 19448);
+				attr_dev(div130, "class", "cPreDesc");
+				add_location(div130, file$3, 428, 3, 19349);
+				attr_dev(div131, "class", "cBack");
+				add_location(div131, file$3, 434, 5, 19535);
+				attr_dev(div132, "class", "cDesc");
+				add_location(div132, file$3, 433, 4, 19510);
+				add_location(div133, file$3, 432, 3, 19500);
+				add_location(br59, file$3, 441, 4, 19663);
+				attr_dev(span7, "class", "cJQVer");
+				attr_dev(span7, "v", "last");
+				add_location(span7, file$3, 443, 4, 19742);
+				attr_dev(div134, "class", "cPreDesc");
+				add_location(div134, file$3, 440, 3, 19636);
+				attr_dev(div135, "class", "cBack");
+				add_location(div135, file$3, 447, 5, 19828);
+				attr_dev(div136, "class", "cDesc");
+				add_location(div136, file$3, 446, 4, 19803);
+				add_location(div137, file$3, 445, 3, 19793);
+				attr_dev(doc10, "name", "first-last");
+				add_location(doc10, file$3, 426, 2, 19277);
+				attr_dev(h211, "class", "notranslate");
+				add_location(h211, file$3, 456, 3, 19958);
+				attr_dev(span8, "class", "cJQVer");
+				attr_dev(span8, "v", "has");
+				add_location(span8, file$3, 459, 4, 20097);
+				attr_dev(div138, "class", "cPreDesc");
+				add_location(div138, file$3, 457, 3, 19994);
+				attr_dev(div139, "class", "cBack");
+				add_location(div139, file$3, 463, 5, 20182);
+				attr_dev(div140, "class", "cDesc");
+				add_location(div140, file$3, 462, 4, 20157);
+				add_location(div141, file$3, 461, 3, 20147);
+				attr_dev(doc11, "name", "has");
+				add_location(doc11, file$3, 455, 2, 19938);
+				attr_dev(h212, "class", "notranslate");
+				add_location(h212, file$3, 472, 3, 20313);
+				attr_dev(span9, "class", "cJQVer");
+				attr_dev(span9, "v", "contains");
+				add_location(span9, file$3, 475, 4, 20438);
+				attr_dev(div142, "class", "cPreDesc");
+				add_location(div142, file$3, 473, 3, 20354);
+				attr_dev(div143, "class", "cBack");
+				add_location(div143, file$3, 479, 5, 20528);
+				attr_dev(div144, "class", "cDesc");
+				add_location(div144, file$3, 478, 4, 20503);
+				add_location(div145, file$3, 477, 3, 20493);
+				attr_dev(doc12, "name", "contains");
+				add_location(doc12, file$3, 471, 2, 20288);
+				attr_dev(h213, "class", "notranslate");
+				add_location(h213, file$3, 489, 3, 20667);
+				attr_dev(span10, "class", "cJQVer");
+				attr_dev(span10, "v", "slice");
+				add_location(span10, file$3, 492, 4, 20816);
+				attr_dev(div146, "class", "cPreDesc");
+				add_location(div146, file$3, 490, 3, 20705);
+				attr_dev(div147, "class", "cBack");
+				add_location(div147, file$3, 496, 5, 20903);
+				attr_dev(div148, "class", "cDesc");
+				add_location(div148, file$3, 495, 4, 20878);
+				add_location(div149, file$3, 494, 3, 20868);
+				attr_dev(doc13, "name", "slice");
+				add_location(doc13, file$3, 488, 2, 20645);
+				attr_dev(h214, "class", "notranslate");
+				add_location(h214, file$3, 506, 3, 21036);
+				attr_dev(span11, "class", "cJQVer");
+				attr_dev(span11, "v", "index");
+				add_location(span11, file$3, 509, 4, 21152);
+				attr_dev(div150, "class", "cPreDesc");
+				add_location(div150, file$3, 507, 3, 21074);
+				attr_dev(div151, "class", "cBack");
+				add_location(div151, file$3, 513, 5, 21239);
+				attr_dev(div152, "class", "cDesc");
+				add_location(div152, file$3, 512, 4, 21214);
+				add_location(div153, file$3, 511, 3, 21204);
+				attr_dev(doc14, "name", "index");
+				add_location(doc14, file$3, 505, 2, 21014);
+				attr_dev(h215, "class", "notranslate");
+				add_location(h215, file$3, 523, 3, 21369);
+				attr_dev(span12, "class", "cJQVer");
+				attr_dev(span12, "v", "is");
+				add_location(span12, file$3, 526, 4, 21518);
+				attr_dev(div154, "class", "cPreDesc");
+				add_location(div154, file$3, 524, 3, 21404);
+				attr_dev(div155, "class", "cBack");
+				add_location(div155, file$3, 530, 5, 21602);
+				attr_dev(div156, "class", "cDesc");
+				add_location(div156, file$3, 529, 4, 21577);
+				add_location(div157, file$3, 528, 3, 21567);
+				attr_dev(doc15, "name", "is");
+				add_location(doc15, file$3, 522, 2, 21350);
+				attr_dev(h216, "class", "notranslate");
+				add_location(h216, file$3, 540, 3, 21741);
+				attr_dev(span13, "class", "cJQVer");
+				attr_dev(span13, "v", "find");
+				add_location(span13, file$3, 543, 4, 21886);
+				attr_dev(div158, "class", "cPreDesc");
+				add_location(div158, file$3, 541, 3, 21778);
+				attr_dev(div159, "class", "cBack");
+				add_location(div159, file$3, 547, 5, 21972);
+				attr_dev(div160, "class", "cDesc");
+				add_location(div160, file$3, 546, 4, 21947);
+				add_location(div161, file$3, 545, 3, 21937);
+				attr_dev(doc16, "name", "find");
+				add_location(doc16, file$3, 539, 2, 21720);
+				attr_dev(h217, "class", "notranslate");
+				add_location(h217, file$3, 557, 3, 22119);
+				attr_dev(span14, "class", "cJQVer");
+				attr_dev(span14, "v", "children");
+				add_location(span14, file$3, 560, 4, 22230);
+				attr_dev(div162, "class", "cPreDesc");
+				add_location(div162, file$3, 558, 3, 22160);
+				attr_dev(div163, "class", "cBack");
+				add_location(div163, file$3, 564, 5, 22320);
+				attr_dev(div164, "class", "cDesc");
+				add_location(div164, file$3, 563, 4, 22295);
+				add_location(div165, file$3, 562, 3, 22285);
+				attr_dev(doc17, "name", "children");
+				add_location(doc17, file$3, 556, 2, 22094);
+				attr_dev(h218, "class", "notranslate");
+				add_location(h218, file$3, 574, 3, 22476);
+				attr_dev(span15, "class", "cJQVer");
+				attr_dev(span15, "v", "next");
+				add_location(span15, file$3, 577, 4, 22578);
+				attr_dev(div166, "class", "cPreDesc");
+				add_location(div166, file$3, 575, 3, 22520);
+				attr_dev(div167, "class", "cBack");
+				add_location(div167, file$3, 581, 5, 22664);
+				attr_dev(div168, "class", "cDesc");
+				add_location(div168, file$3, 580, 4, 22639);
+				add_location(div169, file$3, 579, 3, 22629);
+				add_location(br60, file$3, 588, 4, 22790);
+				attr_dev(span16, "class", "cJQVer");
+				attr_dev(span16, "v", "prev");
+				add_location(span16, file$3, 590, 4, 22848);
+				attr_dev(div170, "class", "cPreDesc");
+				add_location(div170, file$3, 587, 3, 22763);
+				attr_dev(div171, "class", "cBack");
+				add_location(div171, file$3, 594, 5, 22934);
+				attr_dev(div172, "class", "cDesc");
+				add_location(div172, file$3, 593, 4, 22909);
+				add_location(div173, file$3, 592, 3, 22899);
+				attr_dev(doc18, "name", "next-prev");
+				add_location(doc18, file$3, 573, 2, 22450);
+				attr_dev(h219, "class", "notranslate");
+				add_location(h219, file$3, 604, 3, 23068);
+				attr_dev(span17, "class", "cJQVer");
+				attr_dev(span17, "v", "siblings");
+				add_location(span17, file$3, 607, 4, 23182);
+				attr_dev(div174, "class", "cPreDesc");
+				add_location(div174, file$3, 605, 3, 23109);
+				attr_dev(div175, "class", "cBack");
+				add_location(div175, file$3, 611, 5, 23272);
+				attr_dev(div176, "class", "cDesc");
+				add_location(div176, file$3, 610, 4, 23247);
+				add_location(div177, file$3, 609, 3, 23237);
+				attr_dev(doc19, "name", "siblings");
+				add_location(doc19, file$3, 603, 2, 23043);
+				attr_dev(h220, "class", "notranslate");
+				add_location(h220, file$3, 621, 3, 23420);
+				attr_dev(span18, "class", "cJQVer");
+				attr_dev(span18, "v", "parent");
+				add_location(span18, file$3, 624, 4, 23532);
+				attr_dev(div178, "class", "cPreDesc");
+				add_location(div178, file$3, 622, 3, 23469);
+				attr_dev(div179, "class", "cBack");
+				add_location(div179, file$3, 628, 5, 23620);
+				attr_dev(div180, "class", "cDesc");
+				add_location(div180, file$3, 627, 4, 23595);
+				add_location(div181, file$3, 626, 3, 23585);
+				add_location(br61, file$3, 635, 4, 23750);
+				attr_dev(span19, "class", "cJQVer");
+				attr_dev(span19, "v", "parents");
+				add_location(span19, file$3, 637, 4, 23810);
+				attr_dev(div182, "class", "cPreDesc");
+				add_location(div182, file$3, 634, 3, 23723);
+				attr_dev(div183, "class", "cBack");
+				add_location(div183, file$3, 641, 5, 23899);
+				attr_dev(div184, "class", "cDesc");
+				add_location(div184, file$3, 640, 4, 23874);
+				add_location(div185, file$3, 639, 3, 23864);
+				attr_dev(doc20, "name", "parent-parents");
+				add_location(doc20, file$3, 620, 2, 23389);
+				attr_dev(h221, "class", "notranslate");
+				add_location(h221, file$3, 651, 3, 24038);
+				attr_dev(span20, "class", "cJQVer");
+				attr_dev(span20, "v", "closest");
+				add_location(span20, file$3, 654, 4, 24164);
+				attr_dev(div186, "class", "cPreDesc");
+				add_location(div186, file$3, 652, 3, 24078);
+				attr_dev(div187, "class", "cBack");
+				add_location(div187, file$3, 658, 5, 24253);
+				attr_dev(div188, "class", "cDesc");
+				add_location(div188, file$3, 657, 4, 24228);
+				add_location(div189, file$3, 656, 3, 24218);
+				attr_dev(doc21, "name", "closest");
+				add_location(doc21, file$3, 650, 2, 24014);
+				attr_dev(h222, "class", "notranslate");
+				add_location(h222, file$3, 668, 3, 24393);
+				attr_dev(span21, "class", "cJQVer");
+				attr_dev(span21, "v", "hasClass");
+				add_location(span21, file$3, 671, 4, 24572);
+				attr_dev(div190, "class", "cPreDesc");
+				add_location(div190, file$3, 669, 3, 24434);
+				attr_dev(div191, "class", "cBack");
+				add_location(div191, file$3, 675, 5, 24662);
+				attr_dev(div192, "class", "cDesc");
+				add_location(div192, file$3, 674, 4, 24637);
+				add_location(div193, file$3, 673, 3, 24627);
+				attr_dev(doc22, "name", "hasClass");
+				add_location(doc22, file$3, 667, 2, 24368);
+				attr_dev(h223, "class", "notranslate");
+				add_location(h223, file$3, 700, 3, 25173);
+				attr_dev(span22, "class", "cJQVer");
+				attr_dev(span22, "v", "html");
+				add_location(span22, file$3, 703, 4, 25330);
+				attr_dev(div194, "class", "cPreDesc");
+				add_location(div194, file$3, 701, 3, 25210);
+				attr_dev(div195, "class", "cBack");
+				add_location(div195, file$3, 707, 5, 25416);
+				attr_dev(div196, "class", "cDesc");
+				add_location(div196, file$3, 706, 4, 25391);
+				add_location(div197, file$3, 705, 3, 25381);
+				attr_dev(doc23, "name", "html");
+				add_location(doc23, file$3, 699, 2, 25152);
+				attr_dev(h224, "class", "notranslate");
+				add_location(h224, file$3, 717, 3, 25546);
+				attr_dev(span23, "class", "cJQVer");
+				attr_dev(span23, "v", "text");
+				add_location(span23, file$3, 720, 4, 25719);
+				attr_dev(div198, "class", "cPreDesc");
+				add_location(div198, file$3, 718, 3, 25583);
+				attr_dev(div199, "class", "cBack");
+				add_location(div199, file$3, 724, 5, 25805);
+				attr_dev(div200, "class", "cDesc");
+				add_location(div200, file$3, 723, 4, 25780);
+				add_location(div201, file$3, 722, 3, 25770);
+				attr_dev(doc24, "name", "text");
+				add_location(doc24, file$3, 716, 2, 25525);
+				attr_dev(h225, "class", "notranslate");
+				add_location(h225, file$3, 734, 3, 25934);
+				attr_dev(span24, "class", "cJQVer");
+				attr_dev(span24, "v", "val");
+				add_location(span24, file$3, 737, 4, 26109);
+				attr_dev(div202, "class", "cPreDesc");
+				add_location(div202, file$3, 735, 3, 25970);
+				attr_dev(div203, "class", "cBack");
+				add_location(div203, file$3, 741, 5, 26194);
+				attr_dev(div204, "class", "cDesc");
+				add_location(div204, file$3, 740, 4, 26169);
+				add_location(div205, file$3, 739, 3, 26159);
+				attr_dev(doc25, "name", "val");
+				add_location(doc25, file$3, 733, 2, 25914);
+				attr_dev(h226, "class", "notranslate");
+				add_location(h226, file$3, 751, 3, 26321);
+				attr_dev(span25, "class", "cJQVer");
+				attr_dev(span25, "v", "css");
+				add_location(span25, file$3, 754, 4, 26563);
+				attr_dev(div206, "class", "cPreDesc");
+				add_location(div206, file$3, 752, 3, 26357);
+				attr_dev(div207, "class", "cBack");
+				add_location(div207, file$3, 758, 5, 26648);
+				attr_dev(div208, "class", "cDesc");
+				add_location(div208, file$3, 757, 4, 26623);
+				add_location(div209, file$3, 756, 3, 26613);
+				attr_dev(doc26, "name", "css");
+				add_location(doc26, file$3, 750, 2, 26301);
+				attr_dev(h227, "class", "notranslate");
+				add_location(h227, file$3, 768, 3, 26823);
+				attr_dev(span26, "class", "cJQVer");
+				attr_dev(span26, "v", "attr");
+				add_location(span26, file$3, 771, 4, 27054);
+				attr_dev(div210, "class", "cPreDesc");
+				add_location(div210, file$3, 769, 3, 26860);
+				attr_dev(div211, "class", "cBack");
+				add_location(div211, file$3, 775, 5, 27140);
+				attr_dev(div212, "class", "cDesc");
+				add_location(div212, file$3, 774, 4, 27115);
+				add_location(div213, file$3, 773, 3, 27105);
+				attr_dev(doc27, "name", "attr");
+				add_location(doc27, file$3, 767, 2, 26802);
+				attr_dev(h228, "class", "notranslate");
+				add_location(h228, file$3, 785, 3, 27270);
+				attr_dev(span27, "class", "cJQVer");
+				attr_dev(span27, "v", "prop");
+				add_location(span27, file$3, 788, 4, 27487);
+				attr_dev(div214, "class", "cPreDesc");
+				add_location(div214, file$3, 786, 3, 27307);
+				attr_dev(div215, "class", "cBack");
+				add_location(div215, file$3, 792, 5, 27573);
+				attr_dev(div216, "class", "cDesc");
+				add_location(div216, file$3, 791, 4, 27548);
+				add_location(div217, file$3, 790, 3, 27538);
+				attr_dev(doc28, "name", "prop");
+				add_location(doc28, file$3, 784, 2, 27249);
+				attr_dev(h229, "class", "notranslate");
+				add_location(h229, file$3, 802, 3, 27702);
+				attr_dev(span28, "class", "cJQVer");
+				attr_dev(span28, "v", "get");
+				add_location(span28, file$3, 805, 4, 27802);
+				attr_dev(div218, "class", "cPreDesc");
+				add_location(div218, file$3, 803, 3, 27738);
+				attr_dev(div219, "class", "cBack");
+				add_location(div219, file$3, 809, 5, 27887);
+				attr_dev(div220, "class", "cDesc");
+				add_location(div220, file$3, 808, 4, 27862);
+				add_location(div221, file$3, 807, 3, 27852);
+				attr_dev(doc29, "name", "get");
+				add_location(doc29, file$3, 801, 2, 27682);
+				attr_dev(h230, "class", "notranslate");
+				add_location(h230, file$3, 819, 3, 28020);
+				attr_dev(span29, "class", "cJQVer");
+				attr_dev(span29, "v", "show");
+				add_location(span29, file$3, 822, 4, 28130);
+				add_location(br62, file$3, 823, 4, 28172);
+				add_location(br63, file$3, 823, 8, 28176);
+				attr_dev(span30, "class", "cJQVer");
+				attr_dev(span30, "v", "hide");
+				add_location(span30, file$3, 825, 4, 28224);
+				attr_dev(div222, "class", "cPreDesc");
+				add_location(div222, file$3, 820, 3, 28064);
+				attr_dev(div223, "class", "cBack");
+				add_location(div223, file$3, 829, 5, 28310);
+				attr_dev(div224, "class", "cDesc");
+				add_location(div224, file$3, 828, 4, 28285);
+				add_location(div225, file$3, 827, 3, 28275);
+				attr_dev(doc30, "name", "show-hide");
+				add_location(doc30, file$3, 818, 2, 27994);
+				attr_dev(h231, "class", "notranslate");
+				add_location(h231, file$3, 839, 3, 28449);
+				attr_dev(span31, "class", "cJQVer");
+				attr_dev(span31, "v", "remove");
+				add_location(span31, file$3, 842, 4, 28550);
+				attr_dev(div226, "class", "cPreDesc");
+				add_location(div226, file$3, 840, 3, 28488);
+				attr_dev(div227, "class", "cBack");
+				add_location(div227, file$3, 846, 5, 28638);
+				attr_dev(div228, "class", "cDesc");
+				add_location(div228, file$3, 845, 4, 28613);
+				add_location(div229, file$3, 844, 3, 28603);
+				attr_dev(doc31, "name", "remove");
+				add_location(doc31, file$3, 838, 2, 28426);
+				attr_dev(h232, "class", "notranslate");
+				add_location(h232, file$3, 856, 3, 28780);
+				attr_dev(span32, "class", "cJQVer");
+				attr_dev(span32, "v", "before");
+				add_location(span32, file$3, 859, 4, 28962);
+				attr_dev(div230, "class", "cPreDesc");
+				add_location(div230, file$3, 857, 3, 28827);
+				attr_dev(div231, "class", "cBack");
+				add_location(div231, file$3, 863, 5, 29050);
+				attr_dev(div232, "class", "cDesc");
+				add_location(div232, file$3, 862, 4, 29025);
+				add_location(div233, file$3, 861, 3, 29015);
+				add_location(br64, file$3, 870, 4, 29180);
+				attr_dev(span33, "class", "cJQVer");
+				attr_dev(span33, "v", "after");
+				add_location(span33, file$3, 872, 4, 29295);
+				attr_dev(div234, "class", "cPreDesc");
+				add_location(div234, file$3, 869, 3, 29153);
+				attr_dev(div235, "class", "cBack");
+				add_location(div235, file$3, 876, 5, 29382);
+				attr_dev(div236, "class", "cDesc");
+				add_location(div236, file$3, 875, 4, 29357);
+				add_location(div237, file$3, 874, 3, 29347);
+				attr_dev(doc32, "name", "before-after");
+				add_location(doc32, file$3, 855, 2, 28751);
+				attr_dev(h233, "class", "notranslate");
+				add_location(h233, file$3, 886, 3, 29524);
+				attr_dev(span34, "class", "cJQVer");
+				attr_dev(span34, "v", "prepend");
+				add_location(span34, file$3, 889, 4, 29666);
+				attr_dev(div238, "class", "cPreDesc");
+				add_location(div238, file$3, 887, 3, 29573);
+				attr_dev(div239, "class", "cBack");
+				add_location(div239, file$3, 893, 5, 29755);
+				attr_dev(div240, "class", "cDesc");
+				add_location(div240, file$3, 892, 4, 29730);
+				add_location(div241, file$3, 891, 3, 29720);
+				add_location(br65, file$3, 900, 4, 29887);
+				attr_dev(span35, "class", "cJQVer");
+				attr_dev(span35, "v", "append");
+				add_location(span35, file$3, 902, 4, 29975);
+				attr_dev(div242, "class", "cPreDesc");
+				add_location(div242, file$3, 899, 3, 29860);
+				attr_dev(div243, "class", "cBack");
+				add_location(div243, file$3, 906, 5, 30063);
+				attr_dev(div244, "class", "cDesc");
+				add_location(div244, file$3, 905, 4, 30038);
+				add_location(div245, file$3, 904, 3, 30028);
+				attr_dev(doc33, "name", "prepend-append");
+				add_location(doc33, file$3, 885, 2, 29493);
+				attr_dev(h234, "class", "notranslate");
+				add_location(h234, file$3, 916, 3, 30204);
+				attr_dev(span36, "class", "cJQVer");
+				attr_dev(span36, "v", "replaceWith");
+				add_location(span36, file$3, 919, 4, 30329);
+				attr_dev(div246, "class", "cPreDesc");
+				add_location(div246, file$3, 917, 3, 30248);
+				attr_dev(div247, "class", "cBack");
+				add_location(div247, file$3, 923, 5, 30422);
+				attr_dev(div248, "class", "cDesc");
+				add_location(div248, file$3, 922, 4, 30397);
+				add_location(div249, file$3, 921, 3, 30387);
+				attr_dev(doc34, "name", "replaceWith");
+				add_location(doc34, file$3, 915, 2, 30176);
+				attr_dev(h235, "class", "notranslate");
+				add_location(h235, file$3, 933, 3, 30582);
+				attr_dev(span37, "class", "cJQVer");
+				attr_dev(span37, "v", "addClass");
+				add_location(span37, file$3, 936, 4, 30751);
+				add_location(br66, file$3, 937, 4, 30797);
+				attr_dev(span38, "class", "cJQVer");
+				attr_dev(span38, "v", "removeClass");
+				add_location(span38, file$3, 939, 4, 30895);
+				attr_dev(div250, "class", "cPreDesc");
+				add_location(div250, file$3, 934, 3, 30637);
+				attr_dev(div251, "class", "cBack");
+				add_location(div251, file$3, 943, 5, 30988);
+				attr_dev(div252, "class", "cDesc");
+				add_location(div252, file$3, 942, 4, 30963);
+				add_location(div253, file$3, 941, 3, 30953);
+				attr_dev(doc35, "name", "addClass-removeClass");
+				add_location(doc35, file$3, 932, 2, 30545);
+				attr_dev(h236, "class", "notranslate");
+				add_location(h236, file$3, 953, 3, 31147);
+				attr_dev(span39, "class", "cJQVer");
+				attr_dev(span39, "v", "toggleClass");
+				add_location(span39, file$3, 956, 4, 31298);
+				attr_dev(div254, "class", "cPreDesc");
+				add_location(div254, file$3, 954, 3, 31191);
+				attr_dev(div255, "class", "cBack");
+				add_location(div255, file$3, 960, 5, 31391);
+				attr_dev(div256, "class", "cDesc");
+				add_location(div256, file$3, 959, 4, 31366);
+				add_location(div257, file$3, 958, 3, 31356);
+				attr_dev(doc36, "name", "toggleClass");
+				add_location(doc36, file$3, 952, 2, 31119);
+				attr_dev(h237, "class", "notranslate");
+				add_location(h237, file$3, 970, 3, 31543);
+				attr_dev(span40, "class", "cJQVer");
+				attr_dev(span40, "v", "width");
+				add_location(span40, file$3, 973, 4, 31755);
+				add_location(br67, file$3, 974, 4, 31798);
+				attr_dev(span41, "class", "cJQVer");
+				attr_dev(span41, "v", "height");
+				add_location(span41, file$3, 976, 4, 31947);
+				attr_dev(div258, "class", "cPreDesc");
+				add_location(div258, file$3, 971, 3, 31590);
+				attr_dev(div259, "class", "cBack");
+				add_location(div259, file$3, 980, 5, 32035);
+				attr_dev(div260, "class", "cDesc");
+				add_location(div260, file$3, 979, 4, 32010);
+				add_location(div261, file$3, 978, 3, 32000);
+				attr_dev(doc37, "name", "width-height");
+				add_location(doc37, file$3, 969, 2, 31514);
+				attr_dev(h238, "class", "notranslate");
+				add_location(h238, file$3, 990, 3, 32194);
+				add_location(b6, file$3, 992, 54, 32328);
+				attr_dev(span42, "class", "cJQVer");
+				attr_dev(span42, "v", "innerWidth");
+				add_location(span42, file$3, 993, 4, 32475);
+				add_location(br68, file$3, 994, 4, 32523);
+				add_location(b7, file$3, 995, 56, 32584);
+				attr_dev(span43, "class", "cJQVer");
+				attr_dev(span43, "v", "innerHeight");
+				add_location(span43, file$3, 996, 4, 32732);
+				attr_dev(div262, "class", "cPreDesc");
+				add_location(div262, file$3, 991, 3, 32251);
+				attr_dev(div263, "class", "cBack");
+				add_location(div263, file$3, 1000, 5, 32825);
+				attr_dev(div264, "class", "cDesc");
+				add_location(div264, file$3, 999, 4, 32800);
+				add_location(div265, file$3, 998, 3, 32790);
+				attr_dev(doc38, "name", "innerWidth-innerHeight");
+				add_location(doc38, file$3, 989, 2, 32155);
+				attr_dev(h239, "class", "notranslate");
+				add_location(h239, file$3, 1010, 3, 32999);
+				add_location(b8, file$3, 1012, 54, 33133);
+				attr_dev(span44, "class", "cJQVer");
+				attr_dev(span44, "v", "outerWidth");
+				add_location(span44, file$3, 1013, 4, 33276);
+				add_location(br69, file$3, 1014, 4, 33324);
+				add_location(b9, file$3, 1015, 56, 33385);
+				attr_dev(span45, "class", "cJQVer");
+				attr_dev(span45, "v", "outerHeight");
+				add_location(span45, file$3, 1016, 4, 33529);
+				attr_dev(div266, "class", "cPreDesc");
+				add_location(div266, file$3, 1011, 3, 33056);
+				attr_dev(div267, "class", "cBack");
+				add_location(div267, file$3, 1020, 5, 33622);
+				attr_dev(div268, "class", "cDesc");
+				add_location(div268, file$3, 1019, 4, 33597);
+				add_location(div269, file$3, 1018, 3, 33587);
+				attr_dev(doc39, "name", "outerWidth-outerHeight");
+				add_location(doc39, file$3, 1009, 2, 32960);
+				attr_dev(h240, "class", "notranslate");
+				add_location(h240, file$3, 1030, 3, 33780);
+				attr_dev(span46, "class", "cJQVer");
+				attr_dev(span46, "v", "offset");
+				add_location(span46, file$3, 1033, 4, 33999);
+				attr_dev(div270, "class", "cPreDesc");
+				add_location(div270, file$3, 1031, 3, 33819);
+				attr_dev(div271, "class", "cBack");
+				add_location(div271, file$3, 1037, 5, 34087);
+				attr_dev(div272, "class", "cDesc");
+				add_location(div272, file$3, 1036, 4, 34062);
+				add_location(div273, file$3, 1035, 3, 34052);
+				attr_dev(doc40, "name", "offset");
+				add_location(doc40, file$3, 1029, 2, 33757);
+				attr_dev(h241, "class", "notranslate");
+				add_location(h241, file$3, 1047, 3, 34229);
+				attr_dev(span47, "class", "cJQVer");
+				attr_dev(span47, "v", "pos");
+				add_location(span47, file$3, 1050, 4, 34419);
+				attr_dev(div274, "class", "cPreDesc");
+				add_location(div274, file$3, 1048, 3, 34276);
+				attr_dev(div275, "class", "cBack");
+				add_location(div275, file$3, 1054, 5, 34504);
+				attr_dev(div276, "class", "cDesc");
+				add_location(div276, file$3, 1053, 4, 34479);
+				add_location(div277, file$3, 1052, 3, 34469);
+				attr_dev(doc41, "name", "pos-position");
+				add_location(doc41, file$3, 1046, 2, 34200);
+				attr_dev(h242, "class", "notranslate");
+				add_location(h242, file$3, 1064, 3, 34653);
+				attr_dev(span48, "class", "cJQVer");
+				attr_dev(span48, "v", "fadeIn");
+				add_location(span48, file$3, 1067, 4, 34789);
+				attr_dev(div278, "class", "cNote");
+				add_location(div278, file$3, 1068, 4, 34833);
+				attr_dev(div279, "class", "cPreDesc");
+				add_location(div279, file$3, 1065, 3, 34702);
+				attr_dev(div280, "class", "cBack");
+				add_location(div280, file$3, 1074, 5, 35127);
+				attr_dev(div281, "class", "cDesc");
+				add_location(div281, file$3, 1073, 4, 35102);
+				add_location(div282, file$3, 1072, 3, 35092);
+				attr_dev(doc42, "name", "fadeIn-fadeOut");
+				add_location(doc42, file$3, 1063, 2, 34622);
+				attr_dev(h243, "class", "notranslate");
+				add_location(h243, file$3, 1084, 3, 35274);
+				add_location(b10, file$3, 1088, 124, 35544);
+				attr_dev(a22, "href", "https://api.jquery.com/animate/");
+				attr_dev(a22, "target", "_blank");
+				set_style(a22, "font-size", "14px");
+				add_location(a22, file$3, 1088, 45, 35465);
+				add_location(b11, file$3, 1088, 288, 35708);
+				attr_dev(a23, "href", "https://developer.mozilla.org/en-US/docs/Web/API/Element/animate");
+				attr_dev(a23, "target", "_blank");
+				set_style(a23, "font-size", "14px");
+				add_location(a23, file$3, 1088, 176, 35596);
+				attr_dev(div283, "class", "cNote");
+				add_location(div283, file$3, 1087, 4, 35400);
+				attr_dev(div284, "class", "cPreDesc");
+				add_location(div284, file$3, 1085, 3, 35314);
+				attr_dev(div285, "class", "cBack");
+				add_location(div285, file$3, 1093, 5, 35816);
+				attr_dev(div286, "class", "cDesc");
+				add_location(div286, file$3, 1092, 4, 35791);
+				add_location(div287, file$3, 1091, 3, 35781);
+				add_location(br70, file$3, 1099, 3, 35930);
+				attr_dev(div288, "class", "cBack");
+				add_location(div288, file$3, 1103, 5, 35974);
+				attr_dev(div289, "class", "cDesc");
+				add_location(div289, file$3, 1102, 4, 35949);
+				add_location(div290, file$3, 1101, 3, 35939);
+				attr_dev(doc43, "name", "animate");
+				add_location(doc43, file$3, 1083, 2, 35250);
+				attr_dev(h244, "class", "notranslate");
+				add_location(h244, file$3, 1113, 3, 36136);
+				attr_dev(span49, "class", "cJQVer");
+				attr_dev(span49, "v", "scroll");
+				add_location(span49, file$3, 1116, 4, 36248);
+				attr_dev(div291, "class", "cPreDesc");
+				add_location(div291, file$3, 1114, 3, 36175);
+				attr_dev(div292, "class", "cBack");
+				add_location(div292, file$3, 1120, 5, 36336);
+				attr_dev(div293, "class", "cDesc");
+				add_location(div293, file$3, 1119, 4, 36311);
+				add_location(div294, file$3, 1118, 3, 36301);
+				attr_dev(doc44, "name", "scroll");
+				add_location(doc44, file$3, 1112, 2, 36113);
+				attr_dev(h245, "class", "notranslate");
+				add_location(h245, file$3, 1130, 3, 36486);
+				attr_dev(span50, "class", "cJQVer");
+				attr_dev(span50, "v", "scrollTop");
+				add_location(span50, file$3, 1133, 4, 36751);
+				attr_dev(span51, "class", "cJQVer");
+				attr_dev(span51, "v", "scrollLeft");
+				add_location(span51, file$3, 1134, 4, 36799);
+				attr_dev(div295, "class", "cPreDesc");
+				add_location(div295, file$3, 1131, 3, 36541);
+				attr_dev(div296, "class", "cBack");
+				add_location(div296, file$3, 1138, 5, 36891);
+				attr_dev(div297, "class", "cDesc");
+				add_location(div297, file$3, 1137, 4, 36866);
+				add_location(div298, file$3, 1136, 3, 36856);
+				attr_dev(doc45, "name", "scrollTop-scrollLeft");
+				add_location(doc45, file$3, 1129, 2, 36449);
+				attr_dev(h246, "class", "notranslate");
+				add_location(h246, file$3, 1148, 3, 37055);
+				attr_dev(span52, "class", "cJQVer");
+				attr_dev(span52, "v", "scrollToElement");
+				add_location(span52, file$3, 1151, 4, 37193);
+				attr_dev(div299, "class", "cPreDesc");
+				add_location(div299, file$3, 1149, 3, 37103);
+				attr_dev(div300, "class", "cBack");
+				add_location(div300, file$3, 1155, 5, 37290);
+				attr_dev(div301, "class", "cDesc");
+				add_location(div301, file$3, 1154, 4, 37265);
+				add_location(div302, file$3, 1153, 3, 37255);
+				attr_dev(doc46, "name", "scrollToElement");
+				add_location(doc46, file$3, 1147, 2, 37023);
+				attr_dev(h247, "class", "notranslate");
+				add_location(h247, file$3, 1165, 3, 37442);
+				attr_dev(span53, "class", "cJQVer");
+				attr_dev(span53, "v", "each");
+				add_location(span53, file$3, 1168, 4, 37587);
+				attr_dev(div303, "class", "cPreDesc");
+				add_location(div303, file$3, 1166, 3, 37479);
+				attr_dev(div304, "class", "cBack");
+				add_location(div304, file$3, 1172, 5, 37673);
+				attr_dev(div305, "class", "cDesc");
+				add_location(div305, file$3, 1171, 4, 37648);
+				add_location(div306, file$3, 1170, 3, 37638);
+				attr_dev(doc47, "name", "each");
+				add_location(doc47, file$3, 1164, 2, 37421);
+				attr_dev(h248, "class", "notranslate");
+				add_location(h248, file$3, 1182, 3, 37809);
+				attr_dev(span54, "class", "cJQVer");
+				attr_dev(span54, "v", "on");
+				add_location(span54, file$3, 1185, 4, 37934);
+				add_location(br71, file$3, 1186, 4, 37974);
+				attr_dev(span55, "class", "cJQVer");
+				attr_dev(span55, "v", "off");
+				add_location(span55, file$3, 1188, 4, 38041);
+				add_location(br72, file$3, 1189, 4, 38082);
+				attr_dev(div307, "class", "cPreDesc");
+				add_location(div307, file$3, 1183, 3, 37856);
+				attr_dev(div308, "class", "cBack");
+				add_location(div308, file$3, 1194, 5, 38194);
+				attr_dev(div309, "class", "cDesc");
+				add_location(div309, file$3, 1193, 4, 38169);
+				add_location(div310, file$3, 1192, 3, 38159);
+				add_location(br73, file$3, 1199, 3, 38294);
+				attr_dev(div311, "class", "cNote");
+				add_location(div311, file$3, 1201, 3, 38303);
+				attr_dev(div312, "class", "cBack");
+				add_location(div312, file$3, 1206, 5, 38535);
+				attr_dev(div313, "class", "cDesc");
+				add_location(div313, file$3, 1205, 4, 38510);
+				add_location(div314, file$3, 1204, 3, 38500);
+				attr_dev(doc48, "name", "on-off-onf");
+				add_location(doc48, file$3, 1181, 2, 37782);
+				attr_dev(h249, "class", "notranslate");
+				add_location(h249, file$3, 1216, 3, 38670);
+				attr_dev(span56, "class", "cJQVer");
+				attr_dev(span56, "v", "trigger");
+				add_location(span56, file$3, 1219, 4, 38798);
+				attr_dev(div315, "class", "cPreDesc");
+				add_location(div315, file$3, 1217, 3, 38716);
+				attr_dev(div316, "class", "cBack");
+				add_location(div316, file$3, 1223, 5, 38887);
+				attr_dev(div317, "class", "cDesc");
+				add_location(div317, file$3, 1222, 4, 38862);
+				add_location(div318, file$3, 1221, 3, 38852);
+				attr_dev(doc49, "name", "trg-trigger");
+				add_location(doc49, file$3, 1215, 2, 38642);
+				attr_dev(section4, "id", "idDoc");
+				add_location(section4, file$3, 142, 1, 5819);
+				add_location(main, file$3, 38, 0, 894);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, main, anchor);
+				append_dev(main, link0);
+				append_dev(main, t0);
+				append_dev(main, script);
+				append_dev(main, t1);
+				append_dev(main, link1);
+				append_dev(main, t2);
+				append_dev(main, section0);
+				append_dev(section0, span0);
+				append_dev(section0, t3);
+				append_dev(section0, div0);
+				append_dev(div0, a0);
+				append_dev(main, t5);
+				append_dev(main, section3);
+				append_dev(section3, section1);
+				append_dev(section1, div1);
+				append_dev(div1, a1);
+				append_dev(section1, t7);
+				append_dev(section1, div4);
+				append_dev(div4, hr);
+				append_dev(div4, t8);
+				append_dev(div4, div3);
+				append_dev(div3, input);
+				append_dev(div3, t9);
+				append_dev(div3, div2);
+				append_dev(section3, t11);
+				append_dev(section3, section2);
+				append_dev(section2, div14);
+				append_dev(div14, div5);
+				append_dev(div14, t13);
+				append_dev(div14, div6);
+				append_dev(div14, t15);
+				append_dev(div14, div7);
+				append_dev(div14, t17);
+				append_dev(div14, div8);
+				append_dev(div14, t19);
+				append_dev(div14, div9);
+				append_dev(div14, t21);
+				append_dev(div14, div10);
+				append_dev(div14, t23);
+				append_dev(div14, div11);
+				append_dev(div14, t25);
+				append_dev(div14, div12);
+				append_dev(div14, t27);
+				append_dev(div14, div13);
+				append_dev(section2, t29);
+				append_dev(section2, div15);
+				append_dev(section2, t31);
+				append_dev(section2, div16);
+				append_dev(section2, t33);
+				append_dev(section2, div17);
+				append_dev(section2, t35);
+				append_dev(section2, div18);
+				append_dev(section2, t37);
+				append_dev(section2, div19);
+				append_dev(section2, t39);
+				append_dev(section2, div20);
+				append_dev(section2, t41);
+				append_dev(section2, div21);
+				append_dev(section2, t43);
+				append_dev(section2, div22);
+				append_dev(section2, t45);
+				append_dev(section2, div23);
+				append_dev(section2, t47);
+				append_dev(section2, div24);
+				append_dev(section2, t49);
+				append_dev(section2, div25);
+				append_dev(section2, t51);
+				append_dev(section2, div26);
+				append_dev(section2, t53);
+				append_dev(section2, div27);
+				append_dev(section2, t55);
+				append_dev(section2, div28);
+				append_dev(section2, t57);
+				append_dev(section2, div29);
+				append_dev(section2, t59);
+				append_dev(section2, div30);
+				append_dev(section2, t61);
+				append_dev(section2, div31);
+				append_dev(section2, t63);
+				append_dev(section2, div32);
+				append_dev(section2, t65);
+				append_dev(section2, div33);
+				append_dev(section2, t67);
+				append_dev(section2, div34);
+				append_dev(section2, t69);
+				append_dev(section2, div35);
+				append_dev(section2, t71);
+				append_dev(section2, div36);
+				append_dev(section2, t73);
+				append_dev(section2, div37);
+				append_dev(section2, t75);
+				append_dev(section2, div38);
+				append_dev(section2, t77);
+				append_dev(section2, div39);
+				append_dev(section2, t79);
+				append_dev(section2, div40);
+				append_dev(section2, t81);
+				append_dev(section2, div41);
+				append_dev(section2, t83);
+				append_dev(section2, div42);
+				append_dev(section2, t85);
+				append_dev(section2, div43);
+				append_dev(section2, t87);
+				append_dev(section2, div44);
+				append_dev(section2, t89);
+				append_dev(section2, div45);
+				append_dev(section2, t91);
+				append_dev(section2, div46);
+				append_dev(section2, t93);
+				append_dev(section2, div47);
+				append_dev(section2, t95);
+				append_dev(section2, div48);
+				append_dev(section2, t97);
+				append_dev(section2, div49);
+				append_dev(section2, t99);
+				append_dev(section2, div50);
+				append_dev(section2, t101);
+				append_dev(section2, div51);
+				append_dev(section2, t103);
+				append_dev(section2, div52);
+				append_dev(section2, t105);
+				append_dev(section2, div53);
+				append_dev(section2, t107);
+				append_dev(section2, div54);
+				append_dev(section2, t109);
+				append_dev(section2, div55);
+				append_dev(section2, t111);
+				append_dev(section2, div56);
+				append_dev(section2, t113);
+				append_dev(section2, div57);
+				append_dev(section2, t115);
+				append_dev(section2, div58);
+				append_dev(section2, t117);
+				append_dev(section2, div59);
+				append_dev(section2, t119);
+				append_dev(section2, div60);
+				append_dev(section2, t121);
+				append_dev(section2, div61);
+				append_dev(section2, t123);
+				append_dev(section2, div62);
+				append_dev(section2, t125);
+				append_dev(section2, div63);
+				append_dev(section2, t127);
+				append_dev(section2, div64);
+				append_dev(section2, t129);
+				append_dev(section2, div65);
+				append_dev(section2, t131);
+				append_dev(section2, div66);
+				append_dev(section2, t133);
+				append_dev(section2, br0);
+				append_dev(section2, br1);
+				append_dev(section2, br2);
+				append_dev(section2, br3);
+				append_dev(section2, br4);
+				append_dev(section2, br5);
+				append_dev(section2, br6);
+				append_dev(section2, br7);
+				append_dev(main, t134);
+				append_dev(main, div67);
+				append_dev(div67, span1);
+				append_dev(main, t135);
+				append_dev(main, section4);
+				append_dev(section4, h1);
+				append_dev(h1, span2);
+				append_dev(span2, t136);
+				append_dev(span2, div68);
+				append_dev(section4, t138);
+				append_dev(section4, doc0);
+				append_dev(doc0, h20);
+				append_dev(doc0, t140);
+				append_dev(doc0, div69);
+				append_dev(div69, t141);
+				append_dev(div69, a2);
+				append_dev(div69, t143);
+				append_dev(div69, a3);
+				append_dev(div69, t145);
+				append_dev(doc0, t146);
+				append_dev(doc0, div72);
+				append_dev(div72, div71);
+				append_dev(div71, div70);
+				append_dev(div71, t147);
+				append_dev(div71, small0);
+				append_dev(div72, t149);
+				mount_component(sqi0, div72, null);
+				append_dev(doc0, t150);
+				append_dev(doc0, div75);
+				append_dev(div75, div74);
+				append_dev(div74, div73);
+				append_dev(div74, t151);
+				append_dev(div75, t152);
+				mount_component(sqi1, div75, null);
+				append_dev(doc0, t153);
+				append_dev(doc0, div78);
+				append_dev(div78, div77);
+				append_dev(div77, div76);
+				append_dev(div77, t154);
+				append_dev(div77, small1);
+				append_dev(small1, t155);
+				append_dev(small1, a4);
+				append_dev(small1, t157);
+				append_dev(div78, t158);
+				mount_component(sqi2, div78, null);
+				append_dev(doc0, t159);
+				append_dev(doc0, div81);
+				append_dev(div81, div80);
+				append_dev(div80, div79);
+				append_dev(div80, t160);
+				append_dev(div81, t161);
+				mount_component(sqi3, div81, null);
+				append_dev(section4, t162);
+				append_dev(section4, doc1);
+				append_dev(doc1, h21);
+				append_dev(doc1, t164);
+				append_dev(doc1, div92);
+				append_dev(div92, t165);
+				append_dev(div92, div91);
+				append_dev(div91, div82);
+				append_dev(div82, h30);
+				append_dev(div82, t167);
+				append_dev(div82, p0);
+				append_dev(p0, t168);
+				append_dev(p0, br8);
+				append_dev(p0, t169);
+				append_dev(p0, b0);
+				append_dev(p0, t171);
+				append_dev(p0, a5);
+				append_dev(div91, t173);
+				append_dev(div91, div83);
+				append_dev(div83, h31);
+				append_dev(div83, t175);
+				append_dev(div83, p1);
+				append_dev(p1, t176);
+				append_dev(p1, b1);
+				append_dev(p1, t178);
+				append_dev(p1, br9);
+				append_dev(p1, t179);
+				append_dev(p1, a6);
+				append_dev(p1, t181);
+				append_dev(p1, a7);
+				append_dev(p1, t183);
+				append_dev(div91, t184);
+				append_dev(div91, div84);
+				append_dev(div84, h32);
+				append_dev(div84, t186);
+				append_dev(div84, p2);
+				append_dev(p2, t187);
+				append_dev(p2, br10);
+				append_dev(p2, t188);
+				append_dev(p2, br11);
+				append_dev(p2, t189);
+				append_dev(p2, br12);
+				append_dev(p2, t190);
+				append_dev(p2, b2);
+				append_dev(b2, t191);
+				append_dev(b2, br13);
+				append_dev(b2, t192);
+				append_dev(b2, br14);
+				append_dev(b2, t193);
+				append_dev(div91, t194);
+				append_dev(div91, div85);
+				append_dev(div85, h33);
+				append_dev(div85, t196);
+				append_dev(div85, p3);
+				append_dev(p3, t197);
+				append_dev(p3, br15);
+				append_dev(p3, br16);
+				append_dev(p3, t198);
+				append_dev(p3, b3);
+				append_dev(p3, br17);
+				append_dev(p3, t200);
+				append_dev(p3, br18);
+				append_dev(p3, t201);
+				append_dev(p3, br19);
+				append_dev(p3, t202);
+				append_dev(p3, br20);
+				append_dev(p3, t203);
+				append_dev(p3, b4);
+				append_dev(b4, t204);
+				append_dev(b4, br21);
+				append_dev(b4, t205);
+				append_dev(b4, br22);
+				append_dev(div91, t206);
+				append_dev(div91, div86);
+				append_dev(div86, h34);
+				append_dev(div86, t208);
+				append_dev(div86, p4);
+				append_dev(p4, t209);
+				append_dev(p4, br23);
+				append_dev(p4, t210);
+				append_dev(p4, br24);
+				append_dev(p4, t211);
+				append_dev(p4, b5);
+				append_dev(p4, t213);
+				append_dev(p4, br25);
+				append_dev(p4, t214);
+				append_dev(p4, br26);
+				append_dev(p4, t215);
+				append_dev(p4, br27);
+				append_dev(p4, t216);
+				append_dev(p4, br28);
+				append_dev(p4, t217);
+				append_dev(p4, br29);
+				append_dev(p4, t218);
+				append_dev(p4, br30);
+				append_dev(p4, t219);
+				append_dev(p4, br31);
+				append_dev(p4, t220);
+				append_dev(p4, br32);
+				append_dev(p4, t221);
+				append_dev(div91, t222);
+				append_dev(div91, div90);
+				append_dev(div90, h35);
+				append_dev(div90, t224);
+				append_dev(div90, p5);
+				append_dev(p5, small2);
+				append_dev(p5, br33);
+				append_dev(p5, t226);
+				append_dev(div90, t227);
+				append_dev(div90, div89);
+				append_dev(div89, div88);
+				append_dev(div88, div87);
+				append_dev(div88, t228);
+				append_dev(div89, t229);
+				mount_component(sqi4, div89, null);
+				append_dev(section4, t230);
+				append_dev(section4, doc2);
+				append_dev(doc2, h22);
+				append_dev(doc2, t232);
+				append_dev(doc2, div93);
+				append_dev(div93, img0);
+				append_dev(div93, t233);
+				append_dev(div93, br34);
+				append_dev(div93, t234);
+				append_dev(doc2, t235);
+				append_dev(doc2, div98);
+				append_dev(div98, div95);
+				append_dev(div95, div94);
+				append_dev(div95, t236);
+				append_dev(div98, t237);
+				mount_component(sqi5, div98, null);
+				append_dev(div98, t238);
+				append_dev(div98, div97);
+				append_dev(div97, div96);
+				append_dev(div97, t239);
+				append_dev(div98, t240);
+				mount_component(sqi6, div98, null);
+				append_dev(section4, t241);
+				append_dev(section4, doc3);
+				append_dev(doc3, h23);
+				append_dev(doc3, t243);
+				append_dev(doc3, div101);
+				append_dev(div101, t244);
+				append_dev(div101, a8);
+				append_dev(div101, t246);
+				append_dev(div101, br35);
+				append_dev(div101, t247);
+				append_dev(div101, img1);
+				append_dev(div101, t248);
+				append_dev(div101, div100);
+				append_dev(div100, h40);
+				append_dev(div100, t250);
+				append_dev(div100, div99);
+				append_dev(div99, a9);
+				append_dev(div100, t252);
+				append_dev(div100, br36);
+				append_dev(div100, t253);
+				append_dev(div100, br37);
+				append_dev(div100, t254);
+				append_dev(div100, br38);
+				append_dev(div100, br39);
+				append_dev(div100, t255);
+				append_dev(div100, a10);
+				append_dev(div100, t257);
+				append_dev(section4, t258);
+				append_dev(section4, doc4);
+				append_dev(doc4, h24);
+				append_dev(doc4, t260);
+				append_dev(doc4, div104);
+				append_dev(div104, t261);
+				append_dev(div104, a11);
+				append_dev(div104, t263);
+				append_dev(div104, br40);
+				append_dev(div104, t264);
+				append_dev(div104, img2);
+				append_dev(div104, t265);
+				append_dev(div104, div103);
+				append_dev(div103, h41);
+				append_dev(div103, t267);
+				append_dev(div103, div102);
+				append_dev(div102, a12);
+				append_dev(div103, t269);
+				append_dev(div103, br41);
+				append_dev(div103, br42);
+				append_dev(div103, t270);
+				append_dev(div103, a13);
+				append_dev(div103, t272);
+				append_dev(section4, t273);
+				append_dev(section4, doc5);
+				append_dev(doc5, h25);
+				append_dev(doc5, t275);
+				append_dev(doc5, div107);
+				append_dev(div107, t276);
+				append_dev(div107, a14);
+				append_dev(div107, t278);
+				append_dev(div107, br43);
+				append_dev(div107, t279);
+				append_dev(div107, img3);
+				append_dev(div107, t280);
+				append_dev(div107, div106);
+				append_dev(div106, h42);
+				append_dev(div106, t282);
+				append_dev(div106, div105);
+				append_dev(div105, a15);
+				append_dev(div106, t284);
+				append_dev(div106, br44);
+				append_dev(div106, br45);
+				append_dev(div106, t285);
+				append_dev(div106, br46);
+				append_dev(div106, t286);
+				append_dev(div106, br47);
+				append_dev(div106, br48);
+				append_dev(div106, t287);
+				append_dev(div106, a16);
+				append_dev(div106, t289);
+				append_dev(section4, t290);
+				append_dev(section4, doc6);
+				append_dev(doc6, h26);
+				append_dev(doc6, t292);
+				append_dev(doc6, div110);
+				append_dev(div110, t293);
+				append_dev(div110, a17);
+				append_dev(div110, t295);
+				append_dev(div110, br49);
+				append_dev(div110, t296);
+				append_dev(div110, img4);
+				append_dev(div110, t297);
+				append_dev(div110, div109);
+				append_dev(div109, h43);
+				append_dev(div109, t299);
+				append_dev(div109, div108);
+				append_dev(div108, a18);
+				append_dev(div109, t301);
+				append_dev(div109, br50);
+				append_dev(div109, t302);
+				append_dev(div109, br51);
+				append_dev(div109, br52);
+				append_dev(div109, t303);
+				append_dev(div109, br53);
+				append_dev(div109, br54);
+				append_dev(div109, t304);
+				append_dev(div109, a19);
+				append_dev(div109, t306);
+				append_dev(section4, t307);
+				append_dev(section4, doc7);
+				append_dev(doc7, h27);
+				append_dev(doc7, t309);
+				append_dev(doc7, div113);
+				append_dev(div113, t310);
+				append_dev(div113, a20);
+				append_dev(div113, t312);
+				append_dev(div113, br55);
+				append_dev(div113, t313);
+				append_dev(div113, img5);
+				append_dev(div113, t314);
+				append_dev(div113, div112);
+				append_dev(div112, h44);
+				append_dev(div112, t316);
+				append_dev(div112, div111);
+				append_dev(div111, a21);
+				append_dev(div112, t318);
+				append_dev(div112, br56);
+				append_dev(div112, t319);
+				append_dev(section4, t320);
+				append_dev(section4, doc8);
+				append_dev(doc8, h28);
+				append_dev(doc8, t322);
+				append_dev(doc8, div114);
+				append_dev(div114, t323);
+				append_dev(div114, span3);
+				append_dev(doc8, t324);
+				append_dev(doc8, div117);
+				append_dev(div117, div116);
+				append_dev(div116, div115);
+				append_dev(div116, t325);
+				append_dev(div117, t326);
+				mount_component(sqi7, div117, null);
+				append_dev(doc8, t327);
+				append_dev(doc8, div118);
+				append_dev(div118, br57);
+				append_dev(div118, t328);
+				append_dev(div118, span4);
+				append_dev(doc8, t329);
+				append_dev(doc8, div121);
+				append_dev(div121, div120);
+				append_dev(div120, div119);
+				append_dev(div120, t330);
+				append_dev(div121, t331);
+				mount_component(sqi8, div121, null);
+				append_dev(section4, t332);
+				append_dev(section4, doc9);
+				append_dev(doc9, h29);
+				append_dev(doc9, t334);
+				append_dev(doc9, div122);
+				append_dev(div122, t335);
+				append_dev(div122, span5);
+				append_dev(doc9, t336);
+				append_dev(doc9, div125);
+				append_dev(div125, div124);
+				append_dev(div124, div123);
+				append_dev(div124, t337);
+				append_dev(div125, t338);
+				mount_component(sqi9, div125, null);
+				append_dev(doc9, t339);
+				append_dev(doc9, div126);
+				append_dev(div126, br58);
+				append_dev(div126, t340);
+				append_dev(doc9, t341);
+				append_dev(doc9, div129);
+				append_dev(div129, div128);
+				append_dev(div128, div127);
+				append_dev(div128, t342);
+				append_dev(div129, t343);
+				mount_component(sqi10, div129, null);
+				append_dev(section4, t344);
+				append_dev(section4, doc10);
+				append_dev(doc10, h210);
+				append_dev(doc10, t346);
+				append_dev(doc10, div130);
+				append_dev(div130, t347);
+				append_dev(div130, span6);
+				append_dev(doc10, t348);
+				append_dev(doc10, div133);
+				append_dev(div133, div132);
+				append_dev(div132, div131);
+				append_dev(div132, t349);
+				append_dev(div133, t350);
+				mount_component(sqi11, div133, null);
+				append_dev(doc10, t351);
+				append_dev(doc10, div134);
+				append_dev(div134, br59);
+				append_dev(div134, t352);
+				append_dev(div134, span7);
+				append_dev(doc10, t353);
+				append_dev(doc10, div137);
+				append_dev(div137, div136);
+				append_dev(div136, div135);
+				append_dev(div136, t354);
+				append_dev(div137, t355);
+				mount_component(sqi12, div137, null);
+				append_dev(section4, t356);
+				append_dev(section4, doc11);
+				append_dev(doc11, h211);
+				append_dev(doc11, t358);
+				append_dev(doc11, div138);
+				append_dev(div138, t359);
+				append_dev(div138, span8);
+				append_dev(doc11, t360);
+				append_dev(doc11, div141);
+				append_dev(div141, div140);
+				append_dev(div140, div139);
+				append_dev(div140, t361);
+				append_dev(div141, t362);
+				mount_component(sqi13, div141, null);
+				append_dev(section4, t363);
+				append_dev(section4, doc12);
+				append_dev(doc12, h212);
+				append_dev(doc12, t365);
+				append_dev(doc12, div142);
+				append_dev(div142, t366);
+				append_dev(div142, span9);
+				append_dev(doc12, t367);
+				append_dev(doc12, div145);
+				append_dev(div145, div144);
+				append_dev(div144, div143);
+				append_dev(div144, t368);
+				append_dev(div145, t369);
+				mount_component(sqi14, div145, null);
+				append_dev(section4, t370);
+				append_dev(section4, doc13);
+				append_dev(doc13, h213);
+				append_dev(doc13, t372);
+				append_dev(doc13, div146);
+				append_dev(div146, t373);
+				append_dev(div146, span10);
+				append_dev(doc13, t374);
+				append_dev(doc13, div149);
+				append_dev(div149, div148);
+				append_dev(div148, div147);
+				append_dev(div148, t375);
+				append_dev(div149, t376);
+				mount_component(sqi15, div149, null);
+				append_dev(section4, t377);
+				append_dev(section4, doc14);
+				append_dev(doc14, h214);
+				append_dev(doc14, t379);
+				append_dev(doc14, div150);
+				append_dev(div150, t380);
+				append_dev(div150, span11);
+				append_dev(doc14, t381);
+				append_dev(doc14, div153);
+				append_dev(div153, div152);
+				append_dev(div152, div151);
+				append_dev(div152, t382);
+				append_dev(div153, t383);
+				mount_component(sqi16, div153, null);
+				append_dev(section4, t384);
+				append_dev(section4, doc15);
+				append_dev(doc15, h215);
+				append_dev(doc15, t386);
+				append_dev(doc15, div154);
+				append_dev(div154, t387);
+				append_dev(div154, span12);
+				append_dev(doc15, t388);
+				append_dev(doc15, div157);
+				append_dev(div157, div156);
+				append_dev(div156, div155);
+				append_dev(div156, t389);
+				append_dev(div157, t390);
+				mount_component(sqi17, div157, null);
+				append_dev(section4, t391);
+				append_dev(section4, doc16);
+				append_dev(doc16, h216);
+				append_dev(doc16, t393);
+				append_dev(doc16, div158);
+				append_dev(div158, t394);
+				append_dev(div158, span13);
+				append_dev(doc16, t395);
+				append_dev(doc16, div161);
+				append_dev(div161, div160);
+				append_dev(div160, div159);
+				append_dev(div160, t396);
+				append_dev(div161, t397);
+				mount_component(sqi18, div161, null);
+				append_dev(section4, t398);
+				append_dev(section4, doc17);
+				append_dev(doc17, h217);
+				append_dev(doc17, t400);
+				append_dev(doc17, div162);
+				append_dev(div162, t401);
+				append_dev(div162, span14);
+				append_dev(doc17, t402);
+				append_dev(doc17, div165);
+				append_dev(div165, div164);
+				append_dev(div164, div163);
+				append_dev(div164, t403);
+				append_dev(div165, t404);
+				mount_component(sqi19, div165, null);
+				append_dev(section4, t405);
+				append_dev(section4, doc18);
+				append_dev(doc18, h218);
+				append_dev(doc18, t407);
+				append_dev(doc18, div166);
+				append_dev(div166, t408);
+				append_dev(div166, span15);
+				append_dev(doc18, t409);
+				append_dev(doc18, div169);
+				append_dev(div169, div168);
+				append_dev(div168, div167);
+				append_dev(div168, t410);
+				append_dev(div169, t411);
+				mount_component(sqi20, div169, null);
+				append_dev(doc18, t412);
+				append_dev(doc18, div170);
+				append_dev(div170, br60);
+				append_dev(div170, t413);
+				append_dev(div170, span16);
+				append_dev(doc18, t414);
+				append_dev(doc18, div173);
+				append_dev(div173, div172);
+				append_dev(div172, div171);
+				append_dev(div172, t415);
+				append_dev(div173, t416);
+				mount_component(sqi21, div173, null);
+				append_dev(section4, t417);
+				append_dev(section4, doc19);
+				append_dev(doc19, h219);
+				append_dev(doc19, t419);
+				append_dev(doc19, div174);
+				append_dev(div174, t420);
+				append_dev(div174, span17);
+				append_dev(doc19, t421);
+				append_dev(doc19, div177);
+				append_dev(div177, div176);
+				append_dev(div176, div175);
+				append_dev(div176, t422);
+				append_dev(div177, t423);
+				mount_component(sqi22, div177, null);
+				append_dev(section4, t424);
+				append_dev(section4, doc20);
+				append_dev(doc20, h220);
+				append_dev(doc20, t426);
+				append_dev(doc20, div178);
+				append_dev(div178, t427);
+				append_dev(div178, span18);
+				append_dev(doc20, t428);
+				append_dev(doc20, div181);
+				append_dev(div181, div180);
+				append_dev(div180, div179);
+				append_dev(div180, t429);
+				append_dev(div181, t430);
+				mount_component(sqi23, div181, null);
+				append_dev(doc20, t431);
+				append_dev(doc20, div182);
+				append_dev(div182, br61);
+				append_dev(div182, t432);
+				append_dev(div182, span19);
+				append_dev(doc20, t433);
+				append_dev(doc20, div185);
+				append_dev(div185, div184);
+				append_dev(div184, div183);
+				append_dev(div184, t434);
+				append_dev(div185, t435);
+				mount_component(sqi24, div185, null);
+				append_dev(section4, t436);
+				append_dev(section4, doc21);
+				append_dev(doc21, h221);
+				append_dev(doc21, t438);
+				append_dev(doc21, div186);
+				append_dev(div186, t439);
+				append_dev(div186, span20);
+				append_dev(doc21, t440);
+				append_dev(doc21, div189);
+				append_dev(div189, div188);
+				append_dev(div188, div187);
+				append_dev(div188, t441);
+				append_dev(div189, t442);
+				mount_component(sqi25, div189, null);
+				append_dev(section4, t443);
+				append_dev(section4, doc22);
+				append_dev(doc22, h222);
+				append_dev(doc22, t445);
+				append_dev(doc22, div190);
+				append_dev(div190, t446);
+				append_dev(div190, span21);
+				append_dev(doc22, t447);
+				append_dev(doc22, div193);
+				append_dev(div193, div192);
+				append_dev(div192, div191);
+				append_dev(div192, t448);
+				append_dev(div193, t449);
+				mount_component(sqi26, div193, null);
+				append_dev(section4, t450);
+				append_dev(section4, doc23);
+				append_dev(doc23, h223);
+				append_dev(doc23, t452);
+				append_dev(doc23, div194);
+				append_dev(div194, t453);
+				append_dev(div194, span22);
+				append_dev(doc23, t454);
+				append_dev(doc23, div197);
+				append_dev(div197, div196);
+				append_dev(div196, div195);
+				append_dev(div196, t455);
+				append_dev(div197, t456);
+				mount_component(sqi27, div197, null);
+				append_dev(section4, t457);
+				append_dev(section4, doc24);
+				append_dev(doc24, h224);
+				append_dev(doc24, t459);
+				append_dev(doc24, div198);
+				append_dev(div198, t460);
+				append_dev(div198, span23);
+				append_dev(doc24, t461);
+				append_dev(doc24, div201);
+				append_dev(div201, div200);
+				append_dev(div200, div199);
+				append_dev(div200, t462);
+				append_dev(div201, t463);
+				mount_component(sqi28, div201, null);
+				append_dev(section4, t464);
+				append_dev(section4, doc25);
+				append_dev(doc25, h225);
+				append_dev(doc25, t466);
+				append_dev(doc25, div202);
+				append_dev(div202, t467);
+				append_dev(div202, span24);
+				append_dev(doc25, t468);
+				append_dev(doc25, div205);
+				append_dev(div205, div204);
+				append_dev(div204, div203);
+				append_dev(div204, t469);
+				append_dev(div205, t470);
+				mount_component(sqi29, div205, null);
+				append_dev(section4, t471);
+				append_dev(section4, doc26);
+				append_dev(doc26, h226);
+				append_dev(doc26, t473);
+				append_dev(doc26, div206);
+				append_dev(div206, t474);
+				append_dev(div206, span25);
+				append_dev(doc26, t475);
+				append_dev(doc26, div209);
+				append_dev(div209, div208);
+				append_dev(div208, div207);
+				append_dev(div208, t476);
+				append_dev(div209, t477);
+				mount_component(sqi30, div209, null);
+				append_dev(section4, t478);
+				append_dev(section4, doc27);
+				append_dev(doc27, h227);
+				append_dev(doc27, t480);
+				append_dev(doc27, div210);
+				append_dev(div210, t481);
+				append_dev(div210, span26);
+				append_dev(doc27, t482);
+				append_dev(doc27, div213);
+				append_dev(div213, div212);
+				append_dev(div212, div211);
+				append_dev(div212, t483);
+				append_dev(div213, t484);
+				mount_component(sqi31, div213, null);
+				append_dev(section4, t485);
+				append_dev(section4, doc28);
+				append_dev(doc28, h228);
+				append_dev(doc28, t487);
+				append_dev(doc28, div214);
+				append_dev(div214, t488);
+				append_dev(div214, span27);
+				append_dev(doc28, t489);
+				append_dev(doc28, div217);
+				append_dev(div217, div216);
+				append_dev(div216, div215);
+				append_dev(div216, t490);
+				append_dev(div217, t491);
+				mount_component(sqi32, div217, null);
+				append_dev(section4, t492);
+				append_dev(section4, doc29);
+				append_dev(doc29, h229);
+				append_dev(doc29, t494);
+				append_dev(doc29, div218);
+				append_dev(div218, t495);
+				append_dev(div218, span28);
+				append_dev(doc29, t496);
+				append_dev(doc29, div221);
+				append_dev(div221, div220);
+				append_dev(div220, div219);
+				append_dev(div220, t497);
+				append_dev(div221, t498);
+				mount_component(sqi33, div221, null);
+				append_dev(section4, t499);
+				append_dev(section4, doc30);
+				append_dev(doc30, h230);
+				append_dev(doc30, t501);
+				append_dev(doc30, div222);
+				append_dev(div222, t502);
+				append_dev(div222, span29);
+				append_dev(div222, t503);
+				append_dev(div222, br62);
+				append_dev(div222, br63);
+				append_dev(div222, t504);
+				append_dev(div222, span30);
+				append_dev(doc30, t505);
+				append_dev(doc30, div225);
+				append_dev(div225, div224);
+				append_dev(div224, div223);
+				append_dev(div224, t506);
+				append_dev(div225, t507);
+				mount_component(sqi34, div225, null);
+				append_dev(section4, t508);
+				append_dev(section4, doc31);
+				append_dev(doc31, h231);
+				append_dev(doc31, t510);
+				append_dev(doc31, div226);
+				append_dev(div226, t511);
+				append_dev(div226, span31);
+				append_dev(doc31, t512);
+				append_dev(doc31, div229);
+				append_dev(div229, div228);
+				append_dev(div228, div227);
+				append_dev(div228, t513);
+				append_dev(div229, t514);
+				mount_component(sqi35, div229, null);
+				append_dev(section4, t515);
+				append_dev(section4, doc32);
+				append_dev(doc32, h232);
+				append_dev(doc32, t517);
+				append_dev(doc32, div230);
+				append_dev(div230, t518);
+				append_dev(div230, span32);
+				append_dev(doc32, t519);
+				append_dev(doc32, div233);
+				append_dev(div233, div232);
+				append_dev(div232, div231);
+				append_dev(div232, t520);
+				append_dev(div233, t521);
+				mount_component(sqi36, div233, null);
+				append_dev(doc32, t522);
+				append_dev(doc32, div234);
+				append_dev(div234, br64);
+				append_dev(div234, t523);
+				append_dev(div234, span33);
+				append_dev(doc32, t524);
+				append_dev(doc32, div237);
+				append_dev(div237, div236);
+				append_dev(div236, div235);
+				append_dev(div236, t525);
+				append_dev(div237, t526);
+				mount_component(sqi37, div237, null);
+				append_dev(section4, t527);
+				append_dev(section4, doc33);
+				append_dev(doc33, h233);
+				append_dev(doc33, t529);
+				append_dev(doc33, div238);
+				append_dev(div238, t530);
+				append_dev(div238, span34);
+				append_dev(doc33, t531);
+				append_dev(doc33, div241);
+				append_dev(div241, div240);
+				append_dev(div240, div239);
+				append_dev(div240, t532);
+				append_dev(div241, t533);
+				mount_component(sqi38, div241, null);
+				append_dev(doc33, t534);
+				append_dev(doc33, div242);
+				append_dev(div242, br65);
+				append_dev(div242, t535);
+				append_dev(div242, span35);
+				append_dev(doc33, t536);
+				append_dev(doc33, div245);
+				append_dev(div245, div244);
+				append_dev(div244, div243);
+				append_dev(div244, t537);
+				append_dev(div245, t538);
+				mount_component(sqi39, div245, null);
+				append_dev(section4, t539);
+				append_dev(section4, doc34);
+				append_dev(doc34, h234);
+				append_dev(doc34, t541);
+				append_dev(doc34, div246);
+				append_dev(div246, t542);
+				append_dev(div246, span36);
+				append_dev(doc34, t543);
+				append_dev(doc34, div249);
+				append_dev(div249, div248);
+				append_dev(div248, div247);
+				append_dev(div248, t544);
+				append_dev(div249, t545);
+				mount_component(sqi40, div249, null);
+				append_dev(section4, t546);
+				append_dev(section4, doc35);
+				append_dev(doc35, h235);
+				append_dev(doc35, t548);
+				append_dev(doc35, div250);
+				append_dev(div250, t549);
+				append_dev(div250, span37);
+				append_dev(div250, t550);
+				append_dev(div250, br66);
+				append_dev(div250, t551);
+				append_dev(div250, span38);
+				append_dev(doc35, t552);
+				append_dev(doc35, div253);
+				append_dev(div253, div252);
+				append_dev(div252, div251);
+				append_dev(div252, t553);
+				append_dev(div253, t554);
+				mount_component(sqi41, div253, null);
+				append_dev(section4, t555);
+				append_dev(section4, doc36);
+				append_dev(doc36, h236);
+				append_dev(doc36, t557);
+				append_dev(doc36, div254);
+				append_dev(div254, t558);
+				append_dev(div254, span39);
+				append_dev(doc36, t559);
+				append_dev(doc36, div257);
+				append_dev(div257, div256);
+				append_dev(div256, div255);
+				append_dev(div256, t560);
+				append_dev(div257, t561);
+				mount_component(sqi42, div257, null);
+				append_dev(section4, t562);
+				append_dev(section4, doc37);
+				append_dev(doc37, h237);
+				append_dev(doc37, t564);
+				append_dev(doc37, div258);
+				append_dev(div258, t565);
+				append_dev(div258, span40);
+				append_dev(div258, t566);
+				append_dev(div258, br67);
+				append_dev(div258, t567);
+				append_dev(div258, span41);
+				append_dev(doc37, t568);
+				append_dev(doc37, div261);
+				append_dev(div261, div260);
+				append_dev(div260, div259);
+				append_dev(div260, t569);
+				append_dev(div261, t570);
+				mount_component(sqi43, div261, null);
+				append_dev(section4, t571);
+				append_dev(section4, doc38);
+				append_dev(doc38, h238);
+				append_dev(doc38, t573);
+				append_dev(doc38, div262);
+				append_dev(div262, t574);
+				append_dev(div262, b6);
+				append_dev(div262, t576);
+				append_dev(div262, span42);
+				append_dev(div262, t577);
+				append_dev(div262, br68);
+				append_dev(div262, t578);
+				append_dev(div262, b7);
+				append_dev(div262, t580);
+				append_dev(div262, span43);
+				append_dev(doc38, t581);
+				append_dev(doc38, div265);
+				append_dev(div265, div264);
+				append_dev(div264, div263);
+				append_dev(div264, t582);
+				append_dev(div265, t583);
+				mount_component(sqi44, div265, null);
+				append_dev(section4, t584);
+				append_dev(section4, doc39);
+				append_dev(doc39, h239);
+				append_dev(doc39, t586);
+				append_dev(doc39, div266);
+				append_dev(div266, t587);
+				append_dev(div266, b8);
+				append_dev(div266, t589);
+				append_dev(div266, span44);
+				append_dev(div266, t590);
+				append_dev(div266, br69);
+				append_dev(div266, t591);
+				append_dev(div266, b9);
+				append_dev(div266, t593);
+				append_dev(div266, span45);
+				append_dev(doc39, t594);
+				append_dev(doc39, div269);
+				append_dev(div269, div268);
+				append_dev(div268, div267);
+				append_dev(div268, t595);
+				append_dev(div269, t596);
+				mount_component(sqi45, div269, null);
+				append_dev(section4, t597);
+				append_dev(section4, doc40);
+				append_dev(doc40, h240);
+				append_dev(doc40, t599);
+				append_dev(doc40, div270);
+				append_dev(div270, t600);
+				append_dev(div270, span46);
+				append_dev(doc40, t601);
+				append_dev(doc40, div273);
+				append_dev(div273, div272);
+				append_dev(div272, div271);
+				append_dev(div272, t602);
+				append_dev(div273, t603);
+				mount_component(sqi46, div273, null);
+				append_dev(section4, t604);
+				append_dev(section4, doc41);
+				append_dev(doc41, h241);
+				append_dev(doc41, t606);
+				append_dev(doc41, div274);
+				append_dev(div274, t607);
+				append_dev(div274, span47);
+				append_dev(doc41, t608);
+				append_dev(doc41, div277);
+				append_dev(div277, div276);
+				append_dev(div276, div275);
+				append_dev(div276, t609);
+				append_dev(div277, t610);
+				mount_component(sqi47, div277, null);
+				append_dev(section4, t611);
+				append_dev(section4, doc42);
+				append_dev(doc42, h242);
+				append_dev(doc42, t613);
+				append_dev(doc42, div279);
+				append_dev(div279, t614);
+				append_dev(div279, span48);
+				append_dev(div279, t615);
+				append_dev(div279, div278);
+				append_dev(doc42, t617);
+				append_dev(doc42, div282);
+				append_dev(div282, div281);
+				append_dev(div281, div280);
+				append_dev(div281, t618);
+				append_dev(div282, t619);
+				mount_component(sqi48, div282, null);
+				append_dev(section4, t620);
+				append_dev(section4, doc43);
+				append_dev(doc43, h243);
+				append_dev(doc43, t622);
+				append_dev(doc43, div284);
+				append_dev(div284, t623);
+				append_dev(div284, div283);
+				append_dev(div283, t624);
+				append_dev(div283, a22);
+				append_dev(a22, b10);
+				append_dev(div283, t626);
+				append_dev(div283, a23);
+				append_dev(a23, b11);
+				append_dev(div283, t628);
+				append_dev(doc43, t629);
+				append_dev(doc43, div287);
+				append_dev(div287, div286);
+				append_dev(div286, div285);
+				append_dev(div286, t630);
+				append_dev(div287, t631);
+				mount_component(sqi49, div287, null);
+				append_dev(doc43, t632);
+				append_dev(doc43, br70);
+				append_dev(doc43, t633);
+				append_dev(doc43, div290);
+				append_dev(div290, div289);
+				append_dev(div289, div288);
+				append_dev(div289, t634);
+				append_dev(div290, t635);
+				mount_component(sqi50, div290, null);
+				append_dev(section4, t636);
+				append_dev(section4, doc44);
+				append_dev(doc44, h244);
+				append_dev(doc44, t638);
+				append_dev(doc44, div291);
+				append_dev(div291, t639);
+				append_dev(div291, span49);
+				append_dev(doc44, t640);
+				append_dev(doc44, div294);
+				append_dev(div294, div293);
+				append_dev(div293, div292);
+				append_dev(div293, t641);
+				append_dev(div294, t642);
+				mount_component(sqi51, div294, null);
+				append_dev(section4, t643);
+				append_dev(section4, doc45);
+				append_dev(doc45, h245);
+				append_dev(doc45, t645);
+				append_dev(doc45, div295);
+				append_dev(div295, t646);
+				append_dev(div295, span50);
+				append_dev(div295, t647);
+				append_dev(div295, span51);
+				append_dev(doc45, t648);
+				append_dev(doc45, div298);
+				append_dev(div298, div297);
+				append_dev(div297, div296);
+				append_dev(div297, t649);
+				append_dev(div298, t650);
+				mount_component(sqi52, div298, null);
+				append_dev(section4, t651);
+				append_dev(section4, doc46);
+				append_dev(doc46, h246);
+				append_dev(doc46, t653);
+				append_dev(doc46, div299);
+				append_dev(div299, t654);
+				append_dev(div299, span52);
+				append_dev(doc46, t655);
+				append_dev(doc46, div302);
+				append_dev(div302, div301);
+				append_dev(div301, div300);
+				append_dev(div301, t656);
+				append_dev(div302, t657);
+				mount_component(sqi53, div302, null);
+				append_dev(section4, t658);
+				append_dev(section4, doc47);
+				append_dev(doc47, h247);
+				append_dev(doc47, t660);
+				append_dev(doc47, div303);
+				append_dev(div303, t661);
+				append_dev(div303, span53);
+				append_dev(doc47, t662);
+				append_dev(doc47, div306);
+				append_dev(div306, div305);
+				append_dev(div305, div304);
+				append_dev(div305, t663);
+				append_dev(div306, t664);
+				mount_component(sqi54, div306, null);
+				append_dev(section4, t665);
+				append_dev(section4, doc48);
+				append_dev(doc48, h248);
+				append_dev(doc48, t667);
+				append_dev(doc48, div307);
+				append_dev(div307, t668);
+				append_dev(div307, span54);
+				append_dev(div307, t669);
+				append_dev(div307, br71);
+				append_dev(div307, t670);
+				append_dev(div307, span55);
+				append_dev(div307, t671);
+				append_dev(div307, br72);
+				append_dev(div307, t672);
+				append_dev(doc48, t673);
+				append_dev(doc48, div310);
+				append_dev(div310, div309);
+				append_dev(div309, div308);
+				append_dev(div309, t674);
+				append_dev(div310, t675);
+				mount_component(sqi55, div310, null);
+				append_dev(doc48, t676);
+				append_dev(doc48, br73);
+				append_dev(doc48, t677);
+				append_dev(doc48, div311);
+				append_dev(doc48, t679);
+				append_dev(doc48, div314);
+				append_dev(div314, div313);
+				append_dev(div313, div312);
+				append_dev(div313, t680);
+				append_dev(div314, t681);
+				mount_component(sqi56, div314, null);
+				append_dev(section4, t682);
+				append_dev(section4, doc49);
+				append_dev(doc49, h249);
+				append_dev(doc49, t684);
+				append_dev(doc49, div315);
+				append_dev(div315, t685);
+				append_dev(div315, span56);
+				append_dev(doc49, t686);
+				append_dev(doc49, div318);
+				append_dev(div318, div317);
+				append_dev(div317, div316);
+				append_dev(div317, t687);
+				append_dev(div318, t688);
+				mount_component(sqi57, div318, null);
+				current = true;
+			},
+			p: noop,
+			i: function intro(local) {
+				if (current) return;
+				transition_in(sqi0.$$.fragment, local);
+				transition_in(sqi1.$$.fragment, local);
+				transition_in(sqi2.$$.fragment, local);
+				transition_in(sqi3.$$.fragment, local);
+				transition_in(sqi4.$$.fragment, local);
+				transition_in(sqi5.$$.fragment, local);
+				transition_in(sqi6.$$.fragment, local);
+				transition_in(sqi7.$$.fragment, local);
+				transition_in(sqi8.$$.fragment, local);
+				transition_in(sqi9.$$.fragment, local);
+				transition_in(sqi10.$$.fragment, local);
+				transition_in(sqi11.$$.fragment, local);
+				transition_in(sqi12.$$.fragment, local);
+				transition_in(sqi13.$$.fragment, local);
+				transition_in(sqi14.$$.fragment, local);
+				transition_in(sqi15.$$.fragment, local);
+				transition_in(sqi16.$$.fragment, local);
+				transition_in(sqi17.$$.fragment, local);
+				transition_in(sqi18.$$.fragment, local);
+				transition_in(sqi19.$$.fragment, local);
+				transition_in(sqi20.$$.fragment, local);
+				transition_in(sqi21.$$.fragment, local);
+				transition_in(sqi22.$$.fragment, local);
+				transition_in(sqi23.$$.fragment, local);
+				transition_in(sqi24.$$.fragment, local);
+				transition_in(sqi25.$$.fragment, local);
+				transition_in(sqi26.$$.fragment, local);
+				transition_in(sqi27.$$.fragment, local);
+				transition_in(sqi28.$$.fragment, local);
+				transition_in(sqi29.$$.fragment, local);
+				transition_in(sqi30.$$.fragment, local);
+				transition_in(sqi31.$$.fragment, local);
+				transition_in(sqi32.$$.fragment, local);
+				transition_in(sqi33.$$.fragment, local);
+				transition_in(sqi34.$$.fragment, local);
+				transition_in(sqi35.$$.fragment, local);
+				transition_in(sqi36.$$.fragment, local);
+				transition_in(sqi37.$$.fragment, local);
+				transition_in(sqi38.$$.fragment, local);
+				transition_in(sqi39.$$.fragment, local);
+				transition_in(sqi40.$$.fragment, local);
+				transition_in(sqi41.$$.fragment, local);
+				transition_in(sqi42.$$.fragment, local);
+				transition_in(sqi43.$$.fragment, local);
+				transition_in(sqi44.$$.fragment, local);
+				transition_in(sqi45.$$.fragment, local);
+				transition_in(sqi46.$$.fragment, local);
+				transition_in(sqi47.$$.fragment, local);
+				transition_in(sqi48.$$.fragment, local);
+				transition_in(sqi49.$$.fragment, local);
+				transition_in(sqi50.$$.fragment, local);
+				transition_in(sqi51.$$.fragment, local);
+				transition_in(sqi52.$$.fragment, local);
+				transition_in(sqi53.$$.fragment, local);
+				transition_in(sqi54.$$.fragment, local);
+				transition_in(sqi55.$$.fragment, local);
+				transition_in(sqi56.$$.fragment, local);
+				transition_in(sqi57.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(sqi0.$$.fragment, local);
+				transition_out(sqi1.$$.fragment, local);
+				transition_out(sqi2.$$.fragment, local);
+				transition_out(sqi3.$$.fragment, local);
+				transition_out(sqi4.$$.fragment, local);
+				transition_out(sqi5.$$.fragment, local);
+				transition_out(sqi6.$$.fragment, local);
+				transition_out(sqi7.$$.fragment, local);
+				transition_out(sqi8.$$.fragment, local);
+				transition_out(sqi9.$$.fragment, local);
+				transition_out(sqi10.$$.fragment, local);
+				transition_out(sqi11.$$.fragment, local);
+				transition_out(sqi12.$$.fragment, local);
+				transition_out(sqi13.$$.fragment, local);
+				transition_out(sqi14.$$.fragment, local);
+				transition_out(sqi15.$$.fragment, local);
+				transition_out(sqi16.$$.fragment, local);
+				transition_out(sqi17.$$.fragment, local);
+				transition_out(sqi18.$$.fragment, local);
+				transition_out(sqi19.$$.fragment, local);
+				transition_out(sqi20.$$.fragment, local);
+				transition_out(sqi21.$$.fragment, local);
+				transition_out(sqi22.$$.fragment, local);
+				transition_out(sqi23.$$.fragment, local);
+				transition_out(sqi24.$$.fragment, local);
+				transition_out(sqi25.$$.fragment, local);
+				transition_out(sqi26.$$.fragment, local);
+				transition_out(sqi27.$$.fragment, local);
+				transition_out(sqi28.$$.fragment, local);
+				transition_out(sqi29.$$.fragment, local);
+				transition_out(sqi30.$$.fragment, local);
+				transition_out(sqi31.$$.fragment, local);
+				transition_out(sqi32.$$.fragment, local);
+				transition_out(sqi33.$$.fragment, local);
+				transition_out(sqi34.$$.fragment, local);
+				transition_out(sqi35.$$.fragment, local);
+				transition_out(sqi36.$$.fragment, local);
+				transition_out(sqi37.$$.fragment, local);
+				transition_out(sqi38.$$.fragment, local);
+				transition_out(sqi39.$$.fragment, local);
+				transition_out(sqi40.$$.fragment, local);
+				transition_out(sqi41.$$.fragment, local);
+				transition_out(sqi42.$$.fragment, local);
+				transition_out(sqi43.$$.fragment, local);
+				transition_out(sqi44.$$.fragment, local);
+				transition_out(sqi45.$$.fragment, local);
+				transition_out(sqi46.$$.fragment, local);
+				transition_out(sqi47.$$.fragment, local);
+				transition_out(sqi48.$$.fragment, local);
+				transition_out(sqi49.$$.fragment, local);
+				transition_out(sqi50.$$.fragment, local);
+				transition_out(sqi51.$$.fragment, local);
+				transition_out(sqi52.$$.fragment, local);
+				transition_out(sqi53.$$.fragment, local);
+				transition_out(sqi54.$$.fragment, local);
+				transition_out(sqi55.$$.fragment, local);
+				transition_out(sqi56.$$.fragment, local);
+				transition_out(sqi57.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(main);
+				destroy_component(sqi0);
+				destroy_component(sqi1);
+				destroy_component(sqi2);
+				destroy_component(sqi3);
+				destroy_component(sqi4);
+				destroy_component(sqi5);
+				destroy_component(sqi6);
+				destroy_component(sqi7);
+				destroy_component(sqi8);
+				destroy_component(sqi9);
+				destroy_component(sqi10);
+				destroy_component(sqi11);
+				destroy_component(sqi12);
+				destroy_component(sqi13);
+				destroy_component(sqi14);
+				destroy_component(sqi15);
+				destroy_component(sqi16);
+				destroy_component(sqi17);
+				destroy_component(sqi18);
+				destroy_component(sqi19);
+				destroy_component(sqi20);
+				destroy_component(sqi21);
+				destroy_component(sqi22);
+				destroy_component(sqi23);
+				destroy_component(sqi24);
+				destroy_component(sqi25);
+				destroy_component(sqi26);
+				destroy_component(sqi27);
+				destroy_component(sqi28);
+				destroy_component(sqi29);
+				destroy_component(sqi30);
+				destroy_component(sqi31);
+				destroy_component(sqi32);
+				destroy_component(sqi33);
+				destroy_component(sqi34);
+				destroy_component(sqi35);
+				destroy_component(sqi36);
+				destroy_component(sqi37);
+				destroy_component(sqi38);
+				destroy_component(sqi39);
+				destroy_component(sqi40);
+				destroy_component(sqi41);
+				destroy_component(sqi42);
+				destroy_component(sqi43);
+				destroy_component(sqi44);
+				destroy_component(sqi45);
+				destroy_component(sqi46);
+				destroy_component(sqi47);
+				destroy_component(sqi48);
+				destroy_component(sqi49);
+				destroy_component(sqi50);
+				destroy_component(sqi51);
+				destroy_component(sqi52);
+				destroy_component(sqi53);
+				destroy_component(sqi54);
+				destroy_component(sqi55);
+				destroy_component(sqi56);
+				destroy_component(sqi57);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$4.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$4($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Docs', slots, []);
+		document.getElementsByTagName('body')[0].style.display = 'none';
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+
+			setTimeout(
+				() => {
+					loadProc();
+					appendReload();
+				},
+				1
+			);
+		}
+
+		sQuery(() => {
+			loadProc();
+
+			setTimeout(
+				() => {
+					sQuery('.cJQVer').each(function () {
+						const v = sQuery(this).attr('v');
+						sQuery(this).html(`<a href="https://api.jquery.com/${v}" target=_blank class="notranslate">jQuery ${v}(doc)</a>`);
+					});
+
+					appendReload();
+				},
+				100
+			);
+		});
+
+		function appendReload() {
+			sQuery('.cDesc').each(function () {
+				sQuery(this).append('<div class="cReload">reload</div>');
+			});
+
+			sQuery('.cReload').show();
+
+			sQuery('.cReload').on('click', function () {
+				const el = sQuery(this).parent().parent().find('iframe');
+				el.attr('src', el.attr('src'));
+			});
+		}
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$3.warn(`<Docs> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({ sq: sQuery, name, loadProc, Sqi: Sq_editorI, appendReload });
+		return [];
+	}
+
+	class Docs extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Docs",
+				options,
+				id: create_fragment$4.name
+			});
+		}
+	}
+
+	/* src/Examples.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1$2 } = globals;
+	const file$2 = "src/Examples.svelte";
+
+	function create_fragment$3(ctx) {
+		let main;
+		let link0;
+		let t0;
+		let script;
+		let script_src_value;
+		let t1;
+		let link1;
+		let t2;
+		let section0;
+		let span0;
+		let t3;
+		let div0;
+		let a0;
+		let t5;
+		let section3;
+		let section1;
+		let div1;
+		let a1;
+		let t7;
+		let div4;
+		let hr;
+		let t8;
+		let div3;
+		let input;
+		let t9;
+		let div2;
+		let t11;
+		let section2;
+		let div5;
+		let t13;
+		let div6;
+		let t15;
+		let div7;
+		let t17;
+		let br0;
+		let br1;
+		let br2;
+		let br3;
+		let br4;
+		let br5;
+		let br6;
+		let br7;
+		let t18;
+		let div8;
+		let span1;
+		let t19;
+		let section4;
+		let h1;
+		let span2;
+		let t20;
+		let div9;
+		let t22;
+		let doc0;
+		let h20;
+		let t24;
+		let div10;
+		let t26;
+		let div13;
+		let div12;
+		let div11;
+		let t27;
+		let t28;
+		let sqi0;
+		let t29;
+		let doc1;
+		let h21;
+		let t31;
+		let div14;
+		let t33;
+		let div17;
+		let div16;
+		let div15;
+		let t34;
+		let t35;
+		let sqi1;
+		let current;
+
+		sqi0 = new Sq_editorI({
+				props: { cname: "fetch", mh: "410" },
+				$$inline: true
+			});
+
+		sqi1 = new Sq_editorI({
+				props: { cname: "axios", mh: "410" },
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				main = element("main");
+				link0 = element("link");
+				t0 = space();
+				script = element("script");
+				t1 = space();
+				link1 = element("link");
+				t2 = space();
+				section0 = element("section");
+				span0 = element("span");
+				t3 = space();
+				div0 = element("div");
+				a0 = element("a");
+				a0.textContent = "日本語に翻訳";
+				t5 = space();
+				section3 = element("section");
+				section1 = element("section");
+				div1 = element("div");
+				a1 = element("a");
+				a1.textContent = "sQuery HOME";
+				t7 = space();
+				div4 = element("div");
+				hr = element("hr");
+				t8 = space();
+				div3 = element("div");
+				input = element("input");
+				t9 = space();
+				div2 = element("div");
+				div2.textContent = "×";
+				t11 = space();
+				section2 = element("section");
+				div5 = element("div");
+				div5.textContent = "Examples";
+				t13 = space();
+				div6 = element("div");
+				div6.textContent = "fetch (alternative $.ajax)";
+				t15 = space();
+				div7 = element("div");
+				div7.textContent = "axios (alternative $.ajax)";
+				t17 = space();
+				br0 = element("br");
+				br1 = element("br");
+				br2 = element("br");
+				br3 = element("br");
+				br4 = element("br");
+				br5 = element("br");
+				br6 = element("br");
+				br7 = element("br");
+				t18 = space();
+				div8 = element("div");
+				span1 = element("span");
+				t19 = space();
+				section4 = element("section");
+				h1 = element("h1");
+				span2 = element("span");
+				t20 = text("sQuery Examples");
+				div9 = element("div");
+				div9.textContent = `${name}`;
+				t22 = space();
+				doc0 = element("doc");
+				h20 = element("h2");
+				h20.textContent = "fetch";
+				t24 = space();
+				div10 = element("div");
+				div10.textContent = "In this example, I'm going to show you $.ajax like example using the ES6 native fetch function.";
+				t26 = space();
+				div13 = element("div");
+				div12 = element("div");
+				div11 = element("div");
+				t27 = text("\n\t\t\t\t\tfetch");
+				t28 = space();
+				create_component(sqi0.$$.fragment);
+				t29 = space();
+				doc1 = element("doc");
+				h21 = element("h2");
+				h21.textContent = "axios";
+				t31 = space();
+				div14 = element("div");
+				div14.textContent = "In this example, I'm going to show you $.ajax like example using axios.";
+				t33 = space();
+				div17 = element("div");
+				div16 = element("div");
+				div15 = element("div");
+				t34 = text("\n\t\t\t\t\taxios");
+				t35 = space();
+				create_component(sqi1.$$.fragment);
+				attr_dev(link0, "rel", "stylesheet");
+				attr_dev(link0, "href", "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css");
+				add_location(link0, file$2, 33, 1, 685);
+				if (!src_url_equal(script.src, script_src_value = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")) attr_dev(script, "src", script_src_value);
+				add_location(script, file$2, 34, 1, 799);
+				attr_dev(link1, "rel", "stylesheet");
+				attr_dev(link1, "href", "./Docs.css");
+				add_location(link1, file$2, 35, 1, 889);
+				attr_dev(span0, "id", "idDocNav");
+				add_location(span0, file$2, 37, 2, 956);
+				attr_dev(a0, "href", "https://squery-vercel-app.translate.goog/?&_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp#/examples");
+				set_style(a0, "color", "#fff", 1);
+				add_location(a0, file$2, 38, 45, 1029);
+				set_style(div0, "float", "right");
+				set_style(div0, "margin-right", "20px");
+				add_location(div0, file$2, 38, 2, 986);
+				attr_dev(section0, "id", "idHead");
+				add_location(section0, file$2, 36, 1, 932);
+				attr_dev(a1, "href", "./");
+				set_style(a1, "color", "#fff");
+				add_location(a1, file$2, 43, 44, 1300);
+				attr_dev(div1, "id", "idLeftLogo");
+				attr_dev(div1, "class", "notranslate");
+				add_location(div1, file$2, 43, 3, 1259);
+				add_location(hr, file$2, 46, 4, 1392);
+				attr_dev(input, "id", "idDS");
+				attr_dev(input, "type", "text");
+				attr_dev(input, "placeholder", "search docs");
+				attr_dev(input, "autocorrect", "off");
+				attr_dev(input, "autocapitalize", "off");
+				attr_dev(input, "spellcheck", "false");
+				add_location(input, file$2, 48, 5, 1438);
+				attr_dev(div2, "id", "idDSC");
+				add_location(div2, file$2, 49, 5, 1557);
+				set_style(div3, "position", "relative");
+				add_location(div3, file$2, 47, 4, 1401);
+				attr_dev(div4, "id", "idLeftSearchCont");
+				add_location(div4, file$2, 45, 3, 1360);
+				attr_dev(section1, "id", "idLeftTop");
+				add_location(section1, file$2, 42, 2, 1231);
+				attr_dev(div5, "name", "");
+				attr_dev(div5, "class", "cSub");
+				add_location(div5, file$2, 55, 3, 1657);
+				attr_dev(div6, "name", "fetch");
+				attr_dev(div6, "class", "cF notranslate");
+				add_location(div6, file$2, 56, 3, 1701);
+				attr_dev(div7, "name", "axios");
+				attr_dev(div7, "class", "cF notranslate");
+				add_location(div7, file$2, 57, 3, 1778);
+				add_location(br0, file$2, 59, 3, 1857);
+				add_location(br1, file$2, 59, 7, 1861);
+				add_location(br2, file$2, 59, 11, 1865);
+				add_location(br3, file$2, 59, 15, 1869);
+				add_location(br4, file$2, 59, 19, 1873);
+				add_location(br5, file$2, 59, 23, 1877);
+				add_location(br6, file$2, 59, 27, 1881);
+				add_location(br7, file$2, 59, 31, 1885);
+				attr_dev(section2, "class", "cScrollable");
+				add_location(section2, file$2, 54, 2, 1624);
+				attr_dev(section3, "id", "idLeft");
+				add_location(section3, file$2, 41, 1, 1207);
+				add_location(span1, file$2, 64, 28, 1946);
+				attr_dev(div8, "class", "menu__toggler");
+				add_location(div8, file$2, 64, 1, 1919);
+				add_location(div9, file$2, 67, 80, 2069);
+				attr_dev(span2, "onclick", "location.href='./';");
+				set_style(span2, "cursor", "pointer");
+				add_location(span2, file$2, 67, 6, 1995);
+				add_location(h1, file$2, 67, 2, 1991);
+				attr_dev(h20, "class", "notranslate");
+				add_location(h20, file$2, 70, 3, 2124);
+				attr_dev(div10, "class", "cPreDesc");
+				add_location(div10, file$2, 71, 3, 2162);
+				attr_dev(div11, "class", "cBack");
+				add_location(div11, file$2, 76, 5, 2334);
+				attr_dev(div12, "class", "cDesc");
+				add_location(div12, file$2, 75, 4, 2309);
+				add_location(div13, file$2, 74, 3, 2299);
+				attr_dev(doc0, "name", "fetch");
+				add_location(doc0, file$2, 69, 2, 2102);
+				attr_dev(h21, "class", "notranslate");
+				add_location(h21, file$2, 85, 3, 2466);
+				attr_dev(div14, "class", "cPreDesc");
+				add_location(div14, file$2, 86, 3, 2504);
+				attr_dev(div15, "class", "cBack");
+				add_location(div15, file$2, 91, 5, 2652);
+				attr_dev(div16, "class", "cDesc");
+				add_location(div16, file$2, 90, 4, 2627);
+				add_location(div17, file$2, 89, 3, 2617);
+				attr_dev(doc1, "name", "axios");
+				add_location(doc1, file$2, 84, 2, 2444);
+				attr_dev(section4, "id", "idDoc");
+				add_location(section4, file$2, 66, 1, 1968);
+				add_location(main, file$2, 32, 0, 677);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, main, anchor);
+				append_dev(main, link0);
+				append_dev(main, t0);
+				append_dev(main, script);
+				append_dev(main, t1);
+				append_dev(main, link1);
+				append_dev(main, t2);
+				append_dev(main, section0);
+				append_dev(section0, span0);
+				append_dev(section0, t3);
+				append_dev(section0, div0);
+				append_dev(div0, a0);
+				append_dev(main, t5);
+				append_dev(main, section3);
+				append_dev(section3, section1);
+				append_dev(section1, div1);
+				append_dev(div1, a1);
+				append_dev(section1, t7);
+				append_dev(section1, div4);
+				append_dev(div4, hr);
+				append_dev(div4, t8);
+				append_dev(div4, div3);
+				append_dev(div3, input);
+				append_dev(div3, t9);
+				append_dev(div3, div2);
+				append_dev(section3, t11);
+				append_dev(section3, section2);
+				append_dev(section2, div5);
+				append_dev(section2, t13);
+				append_dev(section2, div6);
+				append_dev(section2, t15);
+				append_dev(section2, div7);
+				append_dev(section2, t17);
+				append_dev(section2, br0);
+				append_dev(section2, br1);
+				append_dev(section2, br2);
+				append_dev(section2, br3);
+				append_dev(section2, br4);
+				append_dev(section2, br5);
+				append_dev(section2, br6);
+				append_dev(section2, br7);
+				append_dev(main, t18);
+				append_dev(main, div8);
+				append_dev(div8, span1);
+				append_dev(main, t19);
+				append_dev(main, section4);
+				append_dev(section4, h1);
+				append_dev(h1, span2);
+				append_dev(span2, t20);
+				append_dev(span2, div9);
+				append_dev(section4, t22);
+				append_dev(section4, doc0);
+				append_dev(doc0, h20);
+				append_dev(doc0, t24);
+				append_dev(doc0, div10);
+				append_dev(doc0, t26);
+				append_dev(doc0, div13);
+				append_dev(div13, div12);
+				append_dev(div12, div11);
+				append_dev(div12, t27);
+				append_dev(div13, t28);
+				mount_component(sqi0, div13, null);
+				append_dev(section4, t29);
+				append_dev(section4, doc1);
+				append_dev(doc1, h21);
+				append_dev(doc1, t31);
+				append_dev(doc1, div14);
+				append_dev(doc1, t33);
+				append_dev(doc1, div17);
+				append_dev(div17, div16);
+				append_dev(div16, div15);
+				append_dev(div16, t34);
+				append_dev(div17, t35);
+				mount_component(sqi1, div17, null);
+				current = true;
+			},
+			p: noop,
+			i: function intro(local) {
+				if (current) return;
+				transition_in(sqi0.$$.fragment, local);
+				transition_in(sqi1.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(sqi0.$$.fragment, local);
+				transition_out(sqi1.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(main);
+				destroy_component(sqi0);
+				destroy_component(sqi1);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$3.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$3($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Examples', slots, []);
+		document.getElementsByTagName('body')[0].style.display = 'none';
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+
+			setTimeout(
+				() => {
+					loadProc();
+					appendReload();
+				},
+				1
+			);
+		}
+
+		sQuery(() => {
+			loadProc();
+			appendReload();
+		});
+
+		function appendReload() {
+			sQuery('.cDesc').each(function () {
+				sQuery(this).append('<div class="cReload">reload</div>');
+			});
+
+			sQuery('.cReload').show();
+
+			sQuery('.cReload').on('click', function () {
+				const el = sQuery(this).parent().parent().find('iframe');
+				el.attr('src', el.attr('src'));
+			});
+		}
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$2.warn(`<Examples> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({ sq: sQuery, name, loadProc, Sqi: Sq_editorI, appendReload });
+		return [];
+	}
+
+	class Examples extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$3, create_fragment$3, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Examples",
+				options,
+				id: create_fragment$3.name
+			});
+		}
+	}
+
+	/* src/Install.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1$1 } = globals;
+	const file$1 = "src/Install.svelte";
+
+	function create_fragment$2(ctx) {
+		let main;
+		let link0;
+		let t0;
+		let script;
+		let script_src_value;
+		let t1;
+		let link1;
+		let t2;
+		let section0;
+		let span0;
+		let t3;
+		let div0;
+		let a0;
+		let t5;
+		let section3;
+		let section1;
+		let div1;
+		let a1;
+		let t7;
+		let div4;
+		let hr0;
+		let t8;
+		let div3;
+		let input;
+		let t9;
+		let div2;
+		let t11;
+		let section2;
+		let div14;
+		let div5;
+		let t13;
+		let div6;
+		let t15;
+		let div7;
+		let t17;
+		let div8;
+		let t19;
+		let div9;
+		let t21;
+		let div10;
+		let t23;
+		let div11;
+		let t25;
+		let div12;
+		let t27;
+		let div13;
+		let t29;
+		let br0;
+		let br1;
+		let br2;
+		let br3;
+		let br4;
+		let br5;
+		let br6;
+		let br7;
+		let t30;
+		let div15;
+		let span1;
+		let t31;
+		let section4;
+		let h1;
+		let span2;
+		let t32;
+		let div16;
+		let t34;
+		let doc0;
+		let h20;
+		let t36;
+		let div17;
+		let img0;
+		let img0_src_value;
+		let t37;
+		let ul0;
+		let li0;
+		let t38;
+		let a2;
+		let t40;
+		let t41;
+		let li1;
+		let t43;
+		let li2;
+		let t44;
+		let a3;
+		let t46;
+		let t47;
+		let div22;
+		let div18;
+		let t48;
+		let br8;
+		let br9;
+		let t49;
+		let br10;
+		let br11;
+		let t50;
+		let t51;
+		let a4;
+		let t53;
+		let div19;
+		let t54;
+		let br12;
+		let br13;
+		let t55;
+		let br14;
+		let br15;
+		let t56;
+		let t57;
+		let hr1;
+		let t58;
+		let div20;
+		let t60;
+		let div21;
+		let t62;
+		let br16;
+		let t63;
+		let div23;
+		let t64;
+		let b0;
+		let t66;
+		let br17;
+		let t67;
+		let img1;
+		let img1_src_value;
+		let t68;
+		let br18;
+		let br19;
+		let t69;
+		let br20;
+		let t70;
+		let sqi0;
+		let t71;
+		let br21;
+		let t72;
+		let b1;
+		let t74;
+		let img2;
+		let img2_src_value;
+		let t75;
+		let img3;
+		let img3_src_value;
+		let t76;
+		let hr2;
+		let t77;
+		let b2;
+		let t79;
+		let b3;
+		let t81;
+		let br22;
+		let br23;
+		let t82;
+		let sqi1;
+		let t83;
+		let img4;
+		let img4_src_value;
+		let t84;
+		let img5;
+		let img5_src_value;
+		let t85;
+		let doc1;
+		let h21;
+		let t87;
+		let div24;
+		let img6;
+		let img6_src_value;
+		let t88;
+		let ul1;
+		let li3;
+		let t89;
+		let a5;
+		let t91;
+		let t92;
+		let li4;
+		let t94;
+		let li5;
+		let t95;
+		let a6;
+		let t97;
+		let t98;
+		let div29;
+		let div25;
+		let t99;
+		let br24;
+		let br25;
+		let t100;
+		let br26;
+		let br27;
+		let t101;
+		let br28;
+		let t102;
+		let hr3;
+		let t103;
+		let div26;
+		let t105;
+		let div27;
+		let t107;
+		let div28;
+		let t109;
+		let br29;
+		let t110;
+		let div30;
+		let t111;
+		let b4;
+		let t113;
+		let br30;
+		let t114;
+		let img7;
+		let img7_src_value;
+		let t115;
+		let br31;
+		let br32;
+		let t116;
+		let br33;
+		let t117;
+		let sqi2;
+		let t118;
+		let br34;
+		let t119;
+		let b5;
+		let t121;
+		let img8;
+		let img8_src_value;
+		let t122;
+		let img9;
+		let img9_src_value;
+		let t123;
+		let hr4;
+		let t124;
+		let b6;
+		let t126;
+		let b7;
+		let t128;
+		let br35;
+		let br36;
+		let t129;
+		let sqi3;
+		let t130;
+		let img10;
+		let img10_src_value;
+		let t131;
+		let img11;
+		let img11_src_value;
+		let t132;
+		let doc2;
+		let h22;
+		let t134;
+		let div31;
+		let img12;
+		let img12_src_value;
+		let t135;
+		let a7;
+		let t137;
+		let br37;
+		let t138;
+		let t139;
+		let doc3;
+		let h23;
+		let t141;
+		let div34;
+		let img13;
+		let img13_src_value;
+		let t142;
+		let a8;
+		let t144;
+		let div32;
+		let t145;
+		let br38;
+		let t146;
+		let br39;
+		let t147;
+		let br40;
+		let t148;
+		let t149;
+		let div33;
+		let t151;
+		let sqi4;
+		let t152;
+		let sqi5;
+		let t153;
+		let doc4;
+		let h24;
+		let t155;
+		let div35;
+		let img14;
+		let img14_src_value;
+		let t156;
+		let a9;
+		let t158;
+		let br41;
+		let t159;
+		let t160;
+		let doc5;
+		let h25;
+		let t162;
+		let div36;
+		let img15;
+		let img15_src_value;
+		let t163;
+		let a10;
+		let t165;
+		let br42;
+		let t166;
+		let current;
+
+		sqi0 = new Sq_editorI({
+				props: {
+					cname: "reactScript",
+					mh: "240",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		sqi1 = new Sq_editorI({
+				props: {
+					cname: "reactModule",
+					mh: "100",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		sqi2 = new Sq_editorI({
+				props: {
+					cname: "nextScript",
+					mh: "240",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		sqi3 = new Sq_editorI({
+				props: {
+					cname: "nextModule",
+					mh: "100",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		sqi4 = new Sq_editorI({
+				props: {
+					cname: "svelteScript",
+					mh: "240",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		sqi5 = new Sq_editorI({
+				props: {
+					cname: "svelteModule",
+					mh: "100",
+					bOnlyCode: "1"
+				},
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				main = element("main");
+				link0 = element("link");
+				t0 = space();
+				script = element("script");
+				t1 = space();
+				link1 = element("link");
+				t2 = space();
+				section0 = element("section");
+				span0 = element("span");
+				t3 = space();
+				div0 = element("div");
+				a0 = element("a");
+				a0.textContent = "日本語に翻訳";
+				t5 = space();
+				section3 = element("section");
+				section1 = element("section");
+				div1 = element("div");
+				a1 = element("a");
+				a1.textContent = "sQuery HOME";
+				t7 = space();
+				div4 = element("div");
+				hr0 = element("hr");
+				t8 = space();
+				div3 = element("div");
+				input = element("input");
+				t9 = space();
+				div2 = element("div");
+				div2.textContent = "×";
+				t11 = space();
+				section2 = element("section");
+				div14 = element("div");
+				div5 = element("div");
+				div5.textContent = "Getting Started";
+				t13 = space();
+				div6 = element("div");
+				div6.textContent = "・Use with React";
+				t15 = space();
+				div7 = element("div");
+				div7.textContent = "・Use with Next.js";
+				t17 = space();
+				div8 = element("div");
+				div8.textContent = "・Use with Vue.js";
+				t19 = space();
+				div9 = element("div");
+				div9.textContent = "・Use with Nuxt.js";
+				t21 = space();
+				div10 = element("div");
+				div10.textContent = "・Use with Svelte";
+				t23 = space();
+				div11 = element("div");
+				div11.textContent = "・Use with SvelteKit";
+				t25 = space();
+				div12 = element("div");
+				div12.textContent = "・Use with SolidJS";
+				t27 = space();
+				div13 = element("div");
+				div13.textContent = "・Use with Angular";
+				t29 = space();
+				br0 = element("br");
+				br1 = element("br");
+				br2 = element("br");
+				br3 = element("br");
+				br4 = element("br");
+				br5 = element("br");
+				br6 = element("br");
+				br7 = element("br");
+				t30 = space();
+				div15 = element("div");
+				span1 = element("span");
+				t31 = space();
+				section4 = element("section");
+				h1 = element("h1");
+				span2 = element("span");
+				t32 = text("sQuery Install");
+				div16 = element("div");
+				div16.textContent = `${name}`;
+				t34 = space();
+				doc0 = element("doc");
+				h20 = element("h2");
+				h20.textContent = "Use with React";
+				t36 = space();
+				div17 = element("div");
+				img0 = element("img");
+				t37 = space();
+				ul0 = element("ul");
+				li0 = element("li");
+				t38 = text("Download & install the latest ");
+				a2 = element("a");
+				a2.textContent = "node.js";
+				t40 = text(" if you didn't install it yet.");
+				t41 = space();
+				li1 = element("li");
+				li1.textContent = "Open the terminal (or Command Prompt if you use Windows), move to the directory anywhere you want to download a new react project using \"cd\" command or something";
+				t43 = space();
+				li2 = element("li");
+				t44 = text("Follow the ");
+				a3 = element("a");
+				a3.textContent = "create-react-app";
+				t46 = text(" tutorial or just try the following commands.");
+				t47 = space();
+				div22 = element("div");
+				div18 = element("div");
+				t48 = text("npx create-react-app@latest test");
+				br8 = element("br");
+				br9 = element("br");
+				t49 = text("\n\t\t\t\t\tcd test");
+				br10 = element("br");
+				br11 = element("br");
+				t50 = text("\n\t\t\t\t\tnpm start");
+				t51 = text("\n\t\t\t\t*NOTE*: If you want to use ");
+				a4 = element("a");
+				a4.textContent = "TypeScript";
+				t53 = text(", try this instead.\n\t\t\t\t");
+				div19 = element("div");
+				t54 = text("npx create-react-app@latest test --template typescript");
+				br12 = element("br");
+				br13 = element("br");
+				t55 = text("\n\t\t\t\t\tcd test");
+				br14 = element("br");
+				br15 = element("br");
+				t56 = text("\n\t\t\t\t\tnpm start");
+				t57 = space();
+				hr1 = element("hr");
+				t58 = text("\n\n\t\t\t\tTo launch the site (development):\n\t\t\t\t");
+				div20 = element("div");
+				div20.textContent = "npm start";
+				t60 = text("\n\n\t\t\t\tTo build the site (production):\n\t\t\t\t");
+				div21 = element("div");
+				div21.textContent = "npm run build";
+				t62 = space();
+				br16 = element("br");
+				t63 = space();
+				div23 = element("div");
+				t64 = text("Now, you have a react project folder. Let's launch a local React server. You can launch and open the react site locally by just typing ");
+				b0 = element("b");
+				b0.textContent = "npm start";
+				t66 = text(" in the terminal.");
+				br17 = element("br");
+				t67 = space();
+				img1 = element("img");
+				t68 = space();
+				br18 = element("br");
+				br19 = element("br");
+				t69 = text("\n\t\t\t\tThe easiest way to implement sQuery in your React project is just directly adding your sQuery code to a .html file.");
+				br20 = element("br");
+				t70 = text("\n\t\t\t\tThis is just a sample sQuery code to try! (If you prefer the ES6's module style, it's also supported! Use sq.min.js instead!)\n\t\t\t\t");
+				create_component(sqi0.$$.fragment);
+				t71 = space();
+				br21 = element("br");
+				t72 = text("\n\t\t\t\tIn this case, I added the above code in index.html in ");
+				b1 = element("b");
+				b1.textContent = "public folder";
+				t74 = text(".\n\t\t\t\t");
+				img2 = element("img");
+				t75 = text("\n\n\t\t\t\tIt works perfectly if you write all your sQuery codes only in the .html part.\n\t\t\t\t");
+				img3 = element("img");
+				t76 = space();
+				hr2 = element("hr");
+				t77 = text("\n\t\t\t\tIf you want to use sQuery in other parts such as inside React modules, I recommend the other way.\n\t\t\t\tYou need to add ");
+				b2 = element("b");
+				b2.textContent = "sq.js and sq.d.ts";
+				t79 = text(" to your project folder. (In this case, ");
+				b3 = element("b");
+				b3.textContent = "src folder";
+				t81 = text(")");
+				br22 = element("br");
+				br23 = element("br");
+				t82 = text("\n\t\t\t\tThis is just a sample sQuery code to try!\n\t\t\t\t");
+				create_component(sqi1.$$.fragment);
+				t83 = space();
+				img4 = element("img");
+				t84 = space();
+				img5 = element("img");
+				t85 = space();
+				doc1 = element("doc");
+				h21 = element("h2");
+				h21.textContent = "Use with Next.js";
+				t87 = space();
+				div24 = element("div");
+				img6 = element("img");
+				t88 = space();
+				ul1 = element("ul");
+				li3 = element("li");
+				t89 = text("Download & install the latest ");
+				a5 = element("a");
+				a5.textContent = "node.js";
+				t91 = text(" if you didn't install it yet.");
+				t92 = space();
+				li4 = element("li");
+				li4.textContent = "Open the terminal (or Command Prompt if you use Windows), move to the directory anywhere you want to download a new react project using \"cd\" command or something";
+				t94 = space();
+				li5 = element("li");
+				t95 = text("Follow the ");
+				a6 = element("a");
+				a6.textContent = "Create a Next.js App";
+				t97 = text(" tutorial or just try the following commands.");
+				t98 = space();
+				div29 = element("div");
+				div25 = element("div");
+				t99 = text("npx create-next-app nextjs-blog --use-npm --example \"https://github.com/vercel/next-learn/tree/master/basics/learn-starter\"");
+				br24 = element("br");
+				br25 = element("br");
+				t100 = text("\n\t\t\t\t\tcd nextjs-blog");
+				br26 = element("br");
+				br27 = element("br");
+				t101 = text("\n\t\t\t\t\tnpm start");
+				br28 = element("br");
+				t102 = space();
+				hr3 = element("hr");
+				t103 = text("\n\n\t\t\t\tStarts the development server:\n\t\t\t\t");
+				div26 = element("div");
+				div26.textContent = "npm run dev";
+				t105 = text("\n\t\t\t\t\n\t\t\t\tBuilds the app for production:\n\t\t\t\t");
+				div27 = element("div");
+				div27.textContent = "npm run build";
+				t107 = text("\n\n\t\t\t\tRuns the built app in production mode:\n\t\t\t\t");
+				div28 = element("div");
+				div28.textContent = "npm start";
+				t109 = space();
+				br29 = element("br");
+				t110 = space();
+				div30 = element("div");
+				t111 = text("Now, you have a Next.js project folder. Let's launch a local Next.js server. You can launch and open the Next.js site locally by just typing ");
+				b4 = element("b");
+				b4.textContent = "npm run dev";
+				t113 = text(" in the terminal.");
+				br30 = element("br");
+				t114 = space();
+				img7 = element("img");
+				t115 = space();
+				br31 = element("br");
+				br32 = element("br");
+				t116 = text("\n\t\t\t\tThe easiest way to implement sQuery in your Next.js project is just directly adding your sQuery code to a .html file.");
+				br33 = element("br");
+				t117 = text("\n\t\t\t\tThis is just a sample sQuery code to try! (If you prefer the ES6's module style, it's also supported! Use sq.min.js instead!)\n\t\t\t\t");
+				create_component(sqi2.$$.fragment);
+				t118 = space();
+				br34 = element("br");
+				t119 = text("\n\t\t\t\tIn this case, I added the above code in index.html in ");
+				b5 = element("b");
+				b5.textContent = "public folder";
+				t121 = text(".\n\t\t\t\t");
+				img8 = element("img");
+				t122 = text("\n\n\t\t\t\tIt works perfectly if you write all your sQuery codes only in the .html part.\n\t\t\t\t");
+				img9 = element("img");
+				t123 = space();
+				hr4 = element("hr");
+				t124 = text("\n\t\t\t\tIf you want to use sQuery in other parts such as inside React modules, I recommend the other way.\n\t\t\t\tYou need to add ");
+				b6 = element("b");
+				b6.textContent = "sq.js and sq.d.ts";
+				t126 = text(" to your project folder. (In this case, ");
+				b7 = element("b");
+				b7.textContent = "src folder";
+				t128 = text(")");
+				br35 = element("br");
+				br36 = element("br");
+				t129 = text("\n\t\t\t\tThis is just a sample sQuery code to try!\n\t\t\t\t");
+				create_component(sqi3.$$.fragment);
+				t130 = space();
+				img10 = element("img");
+				t131 = space();
+				img11 = element("img");
+				t132 = space();
+				doc2 = element("doc");
+				h22 = element("h2");
+				h22.textContent = "Use with Vue.js";
+				t134 = space();
+				div31 = element("div");
+				img12 = element("img");
+				t135 = text("\n\t\t\t\tGo to see the ");
+				a7 = element("a");
+				a7.textContent = "official installation guide";
+				t137 = text(" for now.");
+				br37 = element("br");
+				t138 = text("\n\t\t\t\tI'll update this section soon!");
+				t139 = space();
+				doc3 = element("doc");
+				h23 = element("h2");
+				h23.textContent = "Use with Svelte";
+				t141 = space();
+				div34 = element("div");
+				img13 = element("img");
+				t142 = text("\n\t\t\t\tSvelte requires node.js. Install ");
+				a8 = element("a");
+				a8.textContent = "node.js";
+				t144 = text(".\n\t\t\t\t");
+				div32 = element("div");
+				t145 = text("npm create svelte@latest my-app");
+				br38 = element("br");
+				t146 = text("\n\t\t\t\t\tcd my-app");
+				br39 = element("br");
+				t147 = text("\n\t\t\t\t\tnpm install");
+				br40 = element("br");
+				t148 = text("\n\t\t\t\t\tnpm run dev -- --open");
+				t149 = space();
+				div33 = element("div");
+				div33.textContent = "The easiest way to implement sQuery is just adding the following code to the DOM part.";
+				t151 = space();
+				create_component(sqi4.$$.fragment);
+				t152 = text("\n\t\t\t\tor you can also do with the module version!\n\t\t\t\t");
+				create_component(sqi5.$$.fragment);
+				t153 = space();
+				doc4 = element("doc");
+				h24 = element("h2");
+				h24.textContent = "Use with SolidJS";
+				t155 = space();
+				div35 = element("div");
+				img14 = element("img");
+				t156 = text("\n\t\t\t\tGo to see the ");
+				a9 = element("a");
+				a9.textContent = "official installation guide";
+				t158 = text(" for now.");
+				br41 = element("br");
+				t159 = text("\n\t\t\t\tI'll update this section soon!");
+				t160 = space();
+				doc5 = element("doc");
+				h25 = element("h2");
+				h25.textContent = "Use with Angular";
+				t162 = space();
+				div36 = element("div");
+				img15 = element("img");
+				t163 = text("\n\t\t\t\tGo to see the ");
+				a10 = element("a");
+				a10.textContent = "official installation guide";
+				t165 = text(" for now.");
+				br42 = element("br");
+				t166 = text("\n\t\t\t\tI'll update this section soon!");
+				attr_dev(link0, "rel", "stylesheet");
+				attr_dev(link0, "href", "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css");
+				add_location(link0, file$1, 39, 1, 916);
+				if (!src_url_equal(script.src, script_src_value = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js")) attr_dev(script, "src", script_src_value);
+				add_location(script, file$1, 40, 1, 1030);
+				attr_dev(link1, "rel", "stylesheet");
+				attr_dev(link1, "href", "./Docs.css");
+				add_location(link1, file$1, 41, 1, 1120);
+				attr_dev(span0, "id", "idDocNav");
+				add_location(span0, file$1, 43, 2, 1187);
+				attr_dev(a0, "href", "https://squery-vercel-app.translate.goog/?&_x_tr_sl=auto&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp#/docs");
+				set_style(a0, "color", "#fff", 1);
+				add_location(a0, file$1, 44, 45, 1260);
+				set_style(div0, "float", "right");
+				set_style(div0, "margin-right", "20px");
+				add_location(div0, file$1, 44, 2, 1217);
+				attr_dev(section0, "id", "idHead");
+				add_location(section0, file$1, 42, 1, 1163);
+				attr_dev(a1, "href", "./");
+				set_style(a1, "color", "#fff");
+				add_location(a1, file$1, 49, 44, 1527);
+				attr_dev(div1, "id", "idLeftLogo");
+				attr_dev(div1, "class", "notranslate");
+				add_location(div1, file$1, 49, 3, 1486);
+				add_location(hr0, file$1, 52, 4, 1619);
+				attr_dev(input, "id", "idDS");
+				attr_dev(input, "type", "text");
+				attr_dev(input, "placeholder", "search");
+				attr_dev(input, "autocorrect", "off");
+				attr_dev(input, "autocapitalize", "off");
+				attr_dev(input, "spellcheck", "false");
+				add_location(input, file$1, 54, 5, 1665);
+				attr_dev(div2, "id", "idDSC");
+				add_location(div2, file$1, 55, 5, 1779);
+				set_style(div3, "position", "relative");
+				add_location(div3, file$1, 53, 4, 1628);
+				attr_dev(div4, "id", "idLeftSearchCont");
+				add_location(div4, file$1, 51, 3, 1587);
+				attr_dev(section1, "id", "idLeftTop");
+				add_location(section1, file$1, 48, 2, 1458);
+				attr_dev(div5, "name", "");
+				attr_dev(div5, "class", "cSub");
+				add_location(div5, file$1, 62, 4, 1913);
+				attr_dev(div6, "name", "Use_with_React");
+				attr_dev(div6, "class", "cF");
+				add_location(div6, file$1, 63, 4, 1965);
+				attr_dev(div7, "name", "Use_with_Next");
+				attr_dev(div7, "class", "cF");
+				add_location(div7, file$1, 64, 4, 2029);
+				attr_dev(div8, "name", "Use_with_Vue");
+				attr_dev(div8, "class", "cF");
+				add_location(div8, file$1, 65, 4, 2094);
+				attr_dev(div9, "name", "Use_with_Nuxt.js");
+				attr_dev(div9, "class", "cF");
+				add_location(div9, file$1, 66, 4, 2157);
+				attr_dev(div10, "name", "Use_with_Svelte");
+				attr_dev(div10, "class", "cF");
+				add_location(div10, file$1, 67, 4, 2225);
+				attr_dev(div11, "name", "Use_with_SveltekitKit");
+				attr_dev(div11, "class", "cF");
+				add_location(div11, file$1, 68, 4, 2291);
+				attr_dev(div12, "name", "Use_with_SolidJS");
+				attr_dev(div12, "class", "cF");
+				add_location(div12, file$1, 69, 4, 2366);
+				attr_dev(div13, "name", "Use_with_Angular");
+				attr_dev(div13, "class", "cF");
+				add_location(div13, file$1, 70, 4, 2434);
+				set_style(div14, "font-weight", "300");
+				add_location(div14, file$1, 61, 3, 1879);
+				add_location(br0, file$1, 73, 3, 2513);
+				add_location(br1, file$1, 73, 7, 2517);
+				add_location(br2, file$1, 73, 11, 2521);
+				add_location(br3, file$1, 73, 15, 2525);
+				add_location(br4, file$1, 73, 19, 2529);
+				add_location(br5, file$1, 73, 23, 2533);
+				add_location(br6, file$1, 73, 27, 2537);
+				add_location(br7, file$1, 73, 31, 2541);
+				attr_dev(section2, "class", "cScrollable");
+				add_location(section2, file$1, 60, 2, 1846);
+				attr_dev(section3, "id", "idLeft");
+				add_location(section3, file$1, 47, 1, 1434);
+				add_location(span1, file$1, 78, 28, 2602);
+				attr_dev(div15, "class", "menu__toggler");
+				add_location(div15, file$1, 78, 1, 2575);
+				add_location(div16, file$1, 81, 79, 2724);
+				attr_dev(span2, "onclick", "location.href='./';");
+				set_style(span2, "cursor", "pointer");
+				add_location(span2, file$1, 81, 6, 2651);
+				add_location(h1, file$1, 81, 2, 2647);
+				add_location(h20, file$1, 84, 3, 2788);
+				attr_dev(img0, "class", "cFWLogo");
+				if (!src_url_equal(img0.src, img0_src_value = "img/react.png")) attr_dev(img0, "src", img0_src_value);
+				attr_dev(img0, "alt", "React.js");
+				attr_dev(img0, "title", "React.js");
+				add_location(img0, file$1, 87, 4, 2843);
+				attr_dev(a2, "href", "https://nodejs.org/");
+				attr_dev(a2, "target", "_blank");
+				add_location(a2, file$1, 89, 39, 3044);
+				add_location(li0, file$1, 89, 5, 3010);
+				add_location(li1, file$1, 90, 5, 3142);
+				attr_dev(a3, "href", "https://create-react-app.dev/docs/getting-started");
+				attr_dev(a3, "target", "_blank");
+				add_location(a3, file$1, 91, 20, 3333);
+				add_location(li2, file$1, 91, 5, 3318);
+				set_style(ul0, "list-style-type", "decimal");
+				set_style(ul0, "margin-left", "30px");
+				set_style(ul0, "line-height", "2");
+				set_style(ul0, "font-size", "13px");
+				add_location(ul0, file$1, 88, 4, 2921);
+				attr_dev(div17, "class", "cPreDesc");
+				add_location(div17, file$1, 86, 3, 2816);
+				add_location(br8, file$1, 97, 37, 3585);
+				add_location(br9, file$1, 97, 41, 3589);
+				add_location(br10, file$1, 98, 12, 3606);
+				add_location(br11, file$1, 98, 16, 3610);
+				attr_dev(div18, "class", "cSh notranslate");
+				add_location(div18, file$1, 96, 4, 3518);
+				attr_dev(a4, "href", "https://www.typescriptlang.org/");
+				attr_dev(a4, "target", "_blank");
+				add_location(a4, file$1, 101, 31, 3672);
+				add_location(br12, file$1, 103, 59, 3855);
+				add_location(br13, file$1, 103, 63, 3859);
+				add_location(br14, file$1, 104, 12, 3876);
+				add_location(br15, file$1, 104, 16, 3880);
+				attr_dev(div19, "class", "cSh notranslate");
+				add_location(div19, file$1, 102, 4, 3766);
+				add_location(hr1, file$1, 108, 4, 3916);
+				attr_dev(div20, "class", "cSh notranslate");
+				add_location(div20, file$1, 111, 4, 3964);
+				attr_dev(div21, "class", "cSh notranslate");
+				add_location(div21, file$1, 116, 4, 4061);
+				add_location(div22, file$1, 95, 3, 3508);
+				add_location(br16, file$1, 120, 3, 4134);
+				add_location(b0, file$1, 122, 139, 4287);
+				add_location(br17, file$1, 122, 172, 4320);
+				attr_dev(img1, "class", "cImg");
+				attr_dev(img1, "alt", "react install");
+				if (!src_url_equal(img1.src, img1_src_value = "img/tutorial/react/1.png")) attr_dev(img1, "src", img1_src_value);
+				add_location(img1, file$1, 123, 4, 4329);
+				add_location(br18, file$1, 124, 4, 4403);
+				add_location(br19, file$1, 124, 8, 4407);
+				add_location(br20, file$1, 125, 119, 4531);
+				add_location(br21, file$1, 129, 4, 4730);
+				add_location(b1, file$1, 130, 58, 4793);
+				attr_dev(img2, "class", "cImg");
+				attr_dev(img2, "alt", "react install");
+				if (!src_url_equal(img2.src, img2_src_value = "img/tutorial/react/script/1.png")) attr_dev(img2, "src", img2_src_value);
+				add_location(img2, file$1, 131, 4, 4819);
+				attr_dev(img3, "class", "cImg");
+				attr_dev(img3, "alt", "react install");
+				if (!src_url_equal(img3.src, img3_src_value = "img/tutorial/react/script/2.png")) attr_dev(img3, "src", img3_src_value);
+				add_location(img3, file$1, 134, 4, 4983);
+				add_location(hr2, file$1, 135, 4, 5064);
+				add_location(b2, file$1, 137, 20, 5191);
+				add_location(b3, file$1, 137, 84, 5255);
+				add_location(br22, file$1, 137, 102, 5273);
+				add_location(br23, file$1, 137, 106, 5277);
+				attr_dev(img4, "class", "cImg");
+				attr_dev(img4, "alt", "react install");
+				if (!src_url_equal(img4.src, img4_src_value = "img/tutorial/react/module/1.png")) attr_dev(img4, "src", img4_src_value);
+				add_location(img4, file$1, 140, 4, 5391);
+				attr_dev(img5, "class", "cImg");
+				attr_dev(img5, "alt", "react install");
+				if (!src_url_equal(img5.src, img5_src_value = "img/tutorial/react/module/2.png")) attr_dev(img5, "src", img5_src_value);
+				add_location(img5, file$1, 141, 4, 5472);
+				add_location(div23, file$1, 121, 3, 4142);
+				attr_dev(doc0, "name", "Use_with_React");
+				add_location(doc0, file$1, 83, 2, 2757);
+				add_location(h21, file$1, 146, 3, 5601);
+				attr_dev(img6, "class", "cFWLogo");
+				if (!src_url_equal(img6.src, img6_src_value = "img/react.png")) attr_dev(img6, "src", img6_src_value);
+				attr_dev(img6, "alt", "React.js");
+				attr_dev(img6, "title", "React.js");
+				add_location(img6, file$1, 149, 4, 5658);
+				attr_dev(a5, "href", "https://nodejs.org/");
+				attr_dev(a5, "target", "_blank");
+				add_location(a5, file$1, 151, 39, 5859);
+				add_location(li3, file$1, 151, 5, 5825);
+				add_location(li4, file$1, 152, 5, 5957);
+				attr_dev(a6, "href", "https://nextjs.org/learn/basics/create-nextjs-app/setup");
+				attr_dev(a6, "target", "_blank");
+				add_location(a6, file$1, 153, 20, 6148);
+				add_location(li5, file$1, 153, 5, 6133);
+				set_style(ul1, "list-style-type", "decimal");
+				set_style(ul1, "margin-left", "30px");
+				set_style(ul1, "line-height", "2");
+				set_style(ul1, "font-size", "13px");
+				add_location(ul1, file$1, 150, 4, 5736);
+				attr_dev(div24, "class", "cPreDesc");
+				add_location(div24, file$1, 148, 3, 5631);
+				add_location(br24, file$1, 159, 128, 6501);
+				add_location(br25, file$1, 159, 132, 6505);
+				add_location(br26, file$1, 160, 19, 6529);
+				add_location(br27, file$1, 160, 23, 6533);
+				add_location(br28, file$1, 161, 14, 6552);
+				attr_dev(div25, "class", "cSh notranslate");
+				add_location(div25, file$1, 158, 4, 6343);
+				add_location(hr3, file$1, 164, 4, 6573);
+				attr_dev(div26, "class", "cSh notranslate");
+				add_location(div26, file$1, 167, 4, 6618);
+				attr_dev(div27, "class", "cSh notranslate");
+				add_location(div27, file$1, 170, 4, 6709);
+				attr_dev(div28, "class", "cSh notranslate");
+				add_location(div28, file$1, 173, 4, 6806);
+				add_location(div29, file$1, 157, 3, 6333);
+				add_location(br29, file$1, 175, 3, 6864);
+				add_location(b4, file$1, 177, 145, 7023);
+				add_location(br30, file$1, 177, 180, 7058);
+				attr_dev(img7, "class", "cImg");
+				attr_dev(img7, "alt", "install");
+				if (!src_url_equal(img7.src, img7_src_value = "img/tutorial/next/1.png")) attr_dev(img7, "src", img7_src_value);
+				add_location(img7, file$1, 178, 4, 7067);
+				add_location(br31, file$1, 179, 4, 7134);
+				add_location(br32, file$1, 179, 8, 7138);
+				add_location(br33, file$1, 180, 121, 7264);
+				add_location(br34, file$1, 184, 4, 7462);
+				add_location(b5, file$1, 185, 58, 7525);
+				attr_dev(img8, "class", "cImg");
+				attr_dev(img8, "alt", "Next.js install");
+				if (!src_url_equal(img8.src, img8_src_value = "img/tutorial/next/script/1.png")) attr_dev(img8, "src", img8_src_value);
+				add_location(img8, file$1, 186, 4, 7551);
+				attr_dev(img9, "class", "cImg");
+				attr_dev(img9, "alt", "Next.js install");
+				if (!src_url_equal(img9.src, img9_src_value = "img/tutorial/next/script/2.png")) attr_dev(img9, "src", img9_src_value);
+				add_location(img9, file$1, 189, 4, 7716);
+				add_location(hr4, file$1, 190, 4, 7798);
+				add_location(b6, file$1, 192, 20, 7925);
+				add_location(b7, file$1, 192, 84, 7989);
+				add_location(br35, file$1, 192, 102, 8007);
+				add_location(br36, file$1, 192, 106, 8011);
+				attr_dev(img10, "class", "cImg");
+				attr_dev(img10, "alt", "Next.js install");
+				if (!src_url_equal(img10.src, img10_src_value = "img/tutorial/next/module/1.png")) attr_dev(img10, "src", img10_src_value);
+				add_location(img10, file$1, 195, 4, 8124);
+				attr_dev(img11, "class", "cImg");
+				attr_dev(img11, "alt", "Next.js install");
+				if (!src_url_equal(img11.src, img11_src_value = "img/tutorial/next/module/2.png")) attr_dev(img11, "src", img11_src_value);
+				add_location(img11, file$1, 196, 4, 8206);
+				add_location(div30, file$1, 176, 3, 6872);
+				attr_dev(doc1, "name", "Use_with_Next");
+				add_location(doc1, file$1, 145, 2, 5571);
+				add_location(h22, file$1, 201, 3, 8335);
+				attr_dev(img12, "class", "cFWLogo");
+				if (!src_url_equal(img12.src, img12_src_value = "img/vuejs.png")) attr_dev(img12, "src", img12_src_value);
+				attr_dev(img12, "alt", "Vue.js");
+				attr_dev(img12, "title", "Vue.js");
+				add_location(img12, file$1, 203, 4, 8390);
+				attr_dev(a7, "href", "https://vuejs.org/guide/quick-start.html");
+				attr_dev(a7, "target", "_blank");
+				add_location(a7, file$1, 204, 18, 8478);
+				add_location(br37, file$1, 204, 125, 8585);
+				attr_dev(div31, "class", "cPreDesc");
+				add_location(div31, file$1, 202, 3, 8363);
+				attr_dev(doc2, "name", "Use_with_Vue");
+				add_location(doc2, file$1, 200, 2, 8306);
+				add_location(h23, file$1, 210, 3, 8679);
+				attr_dev(img13, "class", "cFWLogo");
+				if (!src_url_equal(img13.src, img13_src_value = "img/svelte.png")) attr_dev(img13, "src", img13_src_value);
+				attr_dev(img13, "alt", "Svelte");
+				attr_dev(img13, "title", "Svelte");
+				add_location(img13, file$1, 212, 4, 8734);
+				attr_dev(a8, "href", "https://nodejs.org/");
+				attr_dev(a8, "target", "_blank");
+				add_location(a8, file$1, 213, 37, 8842);
+				add_location(br38, file$1, 215, 36, 8969);
+				add_location(br39, file$1, 216, 14, 8988);
+				add_location(br40, file$1, 217, 16, 9009);
+				attr_dev(div32, "class", "cSh notranslate");
+				add_location(div32, file$1, 214, 4, 8903);
+				add_location(div33, file$1, 221, 4, 9057);
+				attr_dev(div34, "class", "cPreDesc");
+				add_location(div34, file$1, 211, 3, 8707);
+				attr_dev(doc3, "name", "Use_with_Svelte");
+				add_location(doc3, file$1, 209, 2, 8647);
+				add_location(h24, file$1, 233, 3, 9397);
+				attr_dev(img14, "class", "cFWLogo");
+				if (!src_url_equal(img14.src, img14_src_value = "img/solidjs.jpg")) attr_dev(img14, "src", img14_src_value);
+				attr_dev(img14, "alt", "SolidJS");
+				attr_dev(img14, "title", "SolidJS");
+				add_location(img14, file$1, 235, 4, 9453);
+				attr_dev(a9, "href", "https://vuejs.org/guide/quick-start.html");
+				attr_dev(a9, "target", "_blank");
+				add_location(a9, file$1, 236, 18, 9545);
+				add_location(br41, file$1, 236, 125, 9652);
+				attr_dev(div35, "class", "cPreDesc");
+				add_location(div35, file$1, 234, 3, 9426);
+				attr_dev(doc4, "name", "Use_with_SolidJS");
+				add_location(doc4, file$1, 232, 2, 9364);
+				add_location(h25, file$1, 242, 3, 9747);
+				attr_dev(img15, "class", "cFWLogo");
+				if (!src_url_equal(img15.src, img15_src_value = "img/angular.png")) attr_dev(img15, "src", img15_src_value);
+				attr_dev(img15, "alt", "Angular");
+				attr_dev(img15, "title", "Angular");
+				add_location(img15, file$1, 244, 4, 9803);
+				attr_dev(a10, "href", "https://vuejs.org/guide/quick-start.html");
+				attr_dev(a10, "target", "_blank");
+				add_location(a10, file$1, 245, 18, 9895);
+				add_location(br42, file$1, 245, 125, 10002);
+				attr_dev(div36, "class", "cPreDesc");
+				add_location(div36, file$1, 243, 3, 9776);
+				attr_dev(doc5, "name", "Use_with_Angular");
+				add_location(doc5, file$1, 241, 2, 9714);
+				attr_dev(section4, "id", "idDoc");
+				add_location(section4, file$1, 80, 1, 2624);
+				add_location(main, file$1, 38, 0, 908);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, main, anchor);
+				append_dev(main, link0);
+				append_dev(main, t0);
+				append_dev(main, script);
+				append_dev(main, t1);
+				append_dev(main, link1);
+				append_dev(main, t2);
+				append_dev(main, section0);
+				append_dev(section0, span0);
+				append_dev(section0, t3);
+				append_dev(section0, div0);
+				append_dev(div0, a0);
+				append_dev(main, t5);
+				append_dev(main, section3);
+				append_dev(section3, section1);
+				append_dev(section1, div1);
+				append_dev(div1, a1);
+				append_dev(section1, t7);
+				append_dev(section1, div4);
+				append_dev(div4, hr0);
+				append_dev(div4, t8);
+				append_dev(div4, div3);
+				append_dev(div3, input);
+				append_dev(div3, t9);
+				append_dev(div3, div2);
+				append_dev(section3, t11);
+				append_dev(section3, section2);
+				append_dev(section2, div14);
+				append_dev(div14, div5);
+				append_dev(div14, t13);
+				append_dev(div14, div6);
+				append_dev(div14, t15);
+				append_dev(div14, div7);
+				append_dev(div14, t17);
+				append_dev(div14, div8);
+				append_dev(div14, t19);
+				append_dev(div14, div9);
+				append_dev(div14, t21);
+				append_dev(div14, div10);
+				append_dev(div14, t23);
+				append_dev(div14, div11);
+				append_dev(div14, t25);
+				append_dev(div14, div12);
+				append_dev(div14, t27);
+				append_dev(div14, div13);
+				append_dev(section2, t29);
+				append_dev(section2, br0);
+				append_dev(section2, br1);
+				append_dev(section2, br2);
+				append_dev(section2, br3);
+				append_dev(section2, br4);
+				append_dev(section2, br5);
+				append_dev(section2, br6);
+				append_dev(section2, br7);
+				append_dev(main, t30);
+				append_dev(main, div15);
+				append_dev(div15, span1);
+				append_dev(main, t31);
+				append_dev(main, section4);
+				append_dev(section4, h1);
+				append_dev(h1, span2);
+				append_dev(span2, t32);
+				append_dev(span2, div16);
+				append_dev(section4, t34);
+				append_dev(section4, doc0);
+				append_dev(doc0, h20);
+				append_dev(doc0, t36);
+				append_dev(doc0, div17);
+				append_dev(div17, img0);
+				append_dev(div17, t37);
+				append_dev(div17, ul0);
+				append_dev(ul0, li0);
+				append_dev(li0, t38);
+				append_dev(li0, a2);
+				append_dev(li0, t40);
+				append_dev(ul0, t41);
+				append_dev(ul0, li1);
+				append_dev(ul0, t43);
+				append_dev(ul0, li2);
+				append_dev(li2, t44);
+				append_dev(li2, a3);
+				append_dev(li2, t46);
+				append_dev(doc0, t47);
+				append_dev(doc0, div22);
+				append_dev(div22, div18);
+				append_dev(div18, t48);
+				append_dev(div18, br8);
+				append_dev(div18, br9);
+				append_dev(div18, t49);
+				append_dev(div18, br10);
+				append_dev(div18, br11);
+				append_dev(div18, t50);
+				append_dev(div22, t51);
+				append_dev(div22, a4);
+				append_dev(div22, t53);
+				append_dev(div22, div19);
+				append_dev(div19, t54);
+				append_dev(div19, br12);
+				append_dev(div19, br13);
+				append_dev(div19, t55);
+				append_dev(div19, br14);
+				append_dev(div19, br15);
+				append_dev(div19, t56);
+				append_dev(div22, t57);
+				append_dev(div22, hr1);
+				append_dev(div22, t58);
+				append_dev(div22, div20);
+				append_dev(div22, t60);
+				append_dev(div22, div21);
+				append_dev(doc0, t62);
+				append_dev(doc0, br16);
+				append_dev(doc0, t63);
+				append_dev(doc0, div23);
+				append_dev(div23, t64);
+				append_dev(div23, b0);
+				append_dev(div23, t66);
+				append_dev(div23, br17);
+				append_dev(div23, t67);
+				append_dev(div23, img1);
+				append_dev(div23, t68);
+				append_dev(div23, br18);
+				append_dev(div23, br19);
+				append_dev(div23, t69);
+				append_dev(div23, br20);
+				append_dev(div23, t70);
+				mount_component(sqi0, div23, null);
+				append_dev(div23, t71);
+				append_dev(div23, br21);
+				append_dev(div23, t72);
+				append_dev(div23, b1);
+				append_dev(div23, t74);
+				append_dev(div23, img2);
+				append_dev(div23, t75);
+				append_dev(div23, img3);
+				append_dev(div23, t76);
+				append_dev(div23, hr2);
+				append_dev(div23, t77);
+				append_dev(div23, b2);
+				append_dev(div23, t79);
+				append_dev(div23, b3);
+				append_dev(div23, t81);
+				append_dev(div23, br22);
+				append_dev(div23, br23);
+				append_dev(div23, t82);
+				mount_component(sqi1, div23, null);
+				append_dev(div23, t83);
+				append_dev(div23, img4);
+				append_dev(div23, t84);
+				append_dev(div23, img5);
+				append_dev(section4, t85);
+				append_dev(section4, doc1);
+				append_dev(doc1, h21);
+				append_dev(doc1, t87);
+				append_dev(doc1, div24);
+				append_dev(div24, img6);
+				append_dev(div24, t88);
+				append_dev(div24, ul1);
+				append_dev(ul1, li3);
+				append_dev(li3, t89);
+				append_dev(li3, a5);
+				append_dev(li3, t91);
+				append_dev(ul1, t92);
+				append_dev(ul1, li4);
+				append_dev(ul1, t94);
+				append_dev(ul1, li5);
+				append_dev(li5, t95);
+				append_dev(li5, a6);
+				append_dev(li5, t97);
+				append_dev(doc1, t98);
+				append_dev(doc1, div29);
+				append_dev(div29, div25);
+				append_dev(div25, t99);
+				append_dev(div25, br24);
+				append_dev(div25, br25);
+				append_dev(div25, t100);
+				append_dev(div25, br26);
+				append_dev(div25, br27);
+				append_dev(div25, t101);
+				append_dev(div25, br28);
+				append_dev(div29, t102);
+				append_dev(div29, hr3);
+				append_dev(div29, t103);
+				append_dev(div29, div26);
+				append_dev(div29, t105);
+				append_dev(div29, div27);
+				append_dev(div29, t107);
+				append_dev(div29, div28);
+				append_dev(doc1, t109);
+				append_dev(doc1, br29);
+				append_dev(doc1, t110);
+				append_dev(doc1, div30);
+				append_dev(div30, t111);
+				append_dev(div30, b4);
+				append_dev(div30, t113);
+				append_dev(div30, br30);
+				append_dev(div30, t114);
+				append_dev(div30, img7);
+				append_dev(div30, t115);
+				append_dev(div30, br31);
+				append_dev(div30, br32);
+				append_dev(div30, t116);
+				append_dev(div30, br33);
+				append_dev(div30, t117);
+				mount_component(sqi2, div30, null);
+				append_dev(div30, t118);
+				append_dev(div30, br34);
+				append_dev(div30, t119);
+				append_dev(div30, b5);
+				append_dev(div30, t121);
+				append_dev(div30, img8);
+				append_dev(div30, t122);
+				append_dev(div30, img9);
+				append_dev(div30, t123);
+				append_dev(div30, hr4);
+				append_dev(div30, t124);
+				append_dev(div30, b6);
+				append_dev(div30, t126);
+				append_dev(div30, b7);
+				append_dev(div30, t128);
+				append_dev(div30, br35);
+				append_dev(div30, br36);
+				append_dev(div30, t129);
+				mount_component(sqi3, div30, null);
+				append_dev(div30, t130);
+				append_dev(div30, img10);
+				append_dev(div30, t131);
+				append_dev(div30, img11);
+				append_dev(section4, t132);
+				append_dev(section4, doc2);
+				append_dev(doc2, h22);
+				append_dev(doc2, t134);
+				append_dev(doc2, div31);
+				append_dev(div31, img12);
+				append_dev(div31, t135);
+				append_dev(div31, a7);
+				append_dev(div31, t137);
+				append_dev(div31, br37);
+				append_dev(div31, t138);
+				append_dev(section4, t139);
+				append_dev(section4, doc3);
+				append_dev(doc3, h23);
+				append_dev(doc3, t141);
+				append_dev(doc3, div34);
+				append_dev(div34, img13);
+				append_dev(div34, t142);
+				append_dev(div34, a8);
+				append_dev(div34, t144);
+				append_dev(div34, div32);
+				append_dev(div32, t145);
+				append_dev(div32, br38);
+				append_dev(div32, t146);
+				append_dev(div32, br39);
+				append_dev(div32, t147);
+				append_dev(div32, br40);
+				append_dev(div32, t148);
+				append_dev(div34, t149);
+				append_dev(div34, div33);
+				append_dev(div34, t151);
+				mount_component(sqi4, div34, null);
+				append_dev(div34, t152);
+				mount_component(sqi5, div34, null);
+				append_dev(section4, t153);
+				append_dev(section4, doc4);
+				append_dev(doc4, h24);
+				append_dev(doc4, t155);
+				append_dev(doc4, div35);
+				append_dev(div35, img14);
+				append_dev(div35, t156);
+				append_dev(div35, a9);
+				append_dev(div35, t158);
+				append_dev(div35, br41);
+				append_dev(div35, t159);
+				append_dev(section4, t160);
+				append_dev(section4, doc5);
+				append_dev(doc5, h25);
+				append_dev(doc5, t162);
+				append_dev(doc5, div36);
+				append_dev(div36, img15);
+				append_dev(div36, t163);
+				append_dev(div36, a10);
+				append_dev(div36, t165);
+				append_dev(div36, br42);
+				append_dev(div36, t166);
+				current = true;
+			},
+			p: noop,
+			i: function intro(local) {
+				if (current) return;
+				transition_in(sqi0.$$.fragment, local);
+				transition_in(sqi1.$$.fragment, local);
+				transition_in(sqi2.$$.fragment, local);
+				transition_in(sqi3.$$.fragment, local);
+				transition_in(sqi4.$$.fragment, local);
+				transition_in(sqi5.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(sqi0.$$.fragment, local);
+				transition_out(sqi1.$$.fragment, local);
+				transition_out(sqi2.$$.fragment, local);
+				transition_out(sqi3.$$.fragment, local);
+				transition_out(sqi4.$$.fragment, local);
+				transition_out(sqi5.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(main);
+				destroy_component(sqi0);
+				destroy_component(sqi1);
+				destroy_component(sqi2);
+				destroy_component(sqi3);
+				destroy_component(sqi4);
+				destroy_component(sqi5);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$2.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$2($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Install', slots, []);
+		document.getElementsByTagName('body')[0].style.display = 'none';
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+
+			setTimeout(
+				() => {
+					loadProc(false);
+					appendReload();
+				},
+				1
+			);
+		}
+
+		sQuery(() => {
+			loadProc(false);
+
+			setTimeout(
+				() => {
+					sQuery('.cJQVer').each(function () {
+						const v = sQuery(this).attr('v');
+						sQuery(this).html(`<a href="https://api.jquery.com/${v}" target=_blank class="notranslate">jQuery ${v}(doc)</a>`);
+					});
+
+					appendReload();
+				},
+				100
+			);
+		});
+
+		function appendReload() {
+			sQuery('.cDesc').each(function () {
+				sQuery(this).append('<div class="cReload">reload</div>');
+			});
+
+			sQuery('.cReload').show();
+
+			sQuery('.cReload').on('click', function () {
+				const el = sQuery(this).parent().parent().find('iframe');
+				el.attr('src', el.attr('src'));
+			});
+		}
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<Install> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({ sq: sQuery, name, loadProc, Sqi: Sq_editorI, appendReload });
+		return [];
+	}
+
+	class Install extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$2, create_fragment$2, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Install",
+				options,
+				id: create_fragment$2.name
+			});
+		}
+	}
+
+	/* src/Sq_editor.svelte generated by Svelte v3.44.0 */
+
+	const { console: console_1 } = globals;
+	const file = "src/Sq_editor.svelte";
+
+	// (104:0) <Core>
+	function create_default_slot(ctx) {
+		let link0;
+		let t0;
+		let link1;
+		let t1;
+		let link2;
+		let t2;
+		let link3;
+		let t3;
+		let link4;
+		let t4;
+		let h1;
+		let t6;
+		let section;
+		let div;
+		let textarea;
+		let t7;
+		let pre;
+		let code;
+		let t8;
+		let iframe;
+
+		const block = {
+			c: function create() {
+				link0 = element("link");
+				t0 = space();
+				link1 = element("link");
+				t1 = space();
+				link2 = element("link");
+				t2 = space();
+				link3 = element("link");
+				t3 = space();
+				link4 = element("link");
+				t4 = space();
+				h1 = element("h1");
+				h1.textContent = "sQuery Online Editor";
+				t6 = space();
+				section = element("section");
+				div = element("div");
+				textarea = element("textarea");
+				t7 = space();
+				pre = element("pre");
+				code = element("code");
+				t8 = space();
+				iframe = element("iframe");
+				attr_dev(link0, "rel", "preconnect");
+				attr_dev(link0, "href", "https://fonts.googleapis.com");
+				add_location(link0, file, 104, 0, 2349);
+				attr_dev(link1, "rel", "preconnect");
+				attr_dev(link1, "href", "https://fonts.gstatic.com");
+				attr_dev(link1, "crossorigin", "");
+				add_location(link1, file, 105, 0, 2409);
+				attr_dev(link2, "href", "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap");
+				attr_dev(link2, "rel", "stylesheet");
+				add_location(link2, file, 106, 0, 2478);
+				attr_dev(link3, "rel", "stylesheet");
+				attr_dev(link3, "href", "./Docs.css");
+				add_location(link3, file, 108, 1, 2590);
+				attr_dev(link4, "rel", "stylesheet");
+				attr_dev(link4, "href", "./Sq_editor.css");
+				add_location(link4, file, 109, 1, 2633);
+				attr_dev(h1, "class", "svelte-1xmg9bp");
+				add_location(h1, file, 110, 1, 2681);
+				attr_dev(textarea, "placeholder", "Enter HTML Source Code");
+				attr_dev(textarea, "id", "editing");
+				attr_dev(textarea, "spellcheck", "false");
+				add_location(textarea, file, 113, 3, 2770);
+				attr_dev(code, "class", "language-html");
+				attr_dev(code, "id", "highlighting-content");
+				add_location(code, file, 115, 4, 2911);
+				attr_dev(pre, "id", "highlighting");
+				attr_dev(pre, "aria-hidden", "true");
+				add_location(pre, file, 114, 3, 2864);
+				attr_dev(div, "class", "cCodeSpace svelte-1xmg9bp");
+				add_location(div, file, 112, 2, 2742);
+				attr_dev(iframe, "id", "idResult");
+				attr_dev(iframe, "title", "editor");
+				attr_dev(iframe, "class", "svelte-1xmg9bp");
+				add_location(iframe, file, 120, 2, 3059);
+				attr_dev(section, "class", "cCodeCont");
+				add_location(section, file, 111, 1, 2712);
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, link0, anchor);
+				insert_dev(target, t0, anchor);
+				insert_dev(target, link1, anchor);
+				insert_dev(target, t1, anchor);
+				insert_dev(target, link2, anchor);
+				insert_dev(target, t2, anchor);
+				insert_dev(target, link3, anchor);
+				insert_dev(target, t3, anchor);
+				insert_dev(target, link4, anchor);
+				insert_dev(target, t4, anchor);
+				insert_dev(target, h1, anchor);
+				insert_dev(target, t6, anchor);
+				insert_dev(target, section, anchor);
+				append_dev(section, div);
+				append_dev(div, textarea);
+				append_dev(div, t7);
+				append_dev(div, pre);
+				append_dev(pre, code);
+				append_dev(section, t8);
+				append_dev(section, iframe);
+			},
+			d: function destroy(detaching) {
+				if (detaching) detach_dev(link0);
+				if (detaching) detach_dev(t0);
+				if (detaching) detach_dev(link1);
+				if (detaching) detach_dev(t1);
+				if (detaching) detach_dev(link2);
+				if (detaching) detach_dev(t2);
+				if (detaching) detach_dev(link3);
+				if (detaching) detach_dev(t3);
+				if (detaching) detach_dev(link4);
+				if (detaching) detach_dev(t4);
+				if (detaching) detach_dev(h1);
+				if (detaching) detach_dev(t6);
+				if (detaching) detach_dev(section);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_default_slot.name,
+			type: "slot",
+			source: "(104:0) <Core>",
+			ctx
+		});
+
+		return block;
+	}
+
+	function create_fragment$1(ctx) {
+		let core;
+		let current;
+
+		core = new Core({
+				props: {
+					$$slots: { default: [create_default_slot] },
+					$$scope: { ctx }
+				},
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				create_component(core.$$.fragment);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				mount_component(core, target, anchor);
+				current = true;
+			},
+			p: function update(ctx, [dirty]) {
+				const core_changes = {};
+
+				if (dirty & /*$$scope*/ 4) {
+					core_changes.$$scope = { dirty, ctx };
+				}
+
+				core.$set(core_changes);
+			},
+			i: function intro(local) {
+				if (current) return;
+				transition_in(core.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(core.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				destroy_component(core, detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment$1.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance$1($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('Sq_editor', slots, []);
+
+		let c = `<p id="p1">element1<\/p>
+<p id="p2">element2<\/p>
+<p id="p3">element3<\/p>
+
+<script src="./squery.min.js"><\/script>
+<script>
+sq(()=>{
+	sq('p').css('font-size', '22px')
+	sq('p').on('click', function(){
+		sq(this).css('background', 'yellow')
+	})
+	sq('p[id="p2"]').on('mouseover', function(){
+		sq(this).css({
+			border: '1px dotted blue',
+			textShadow: '2px 2px 8px #44f'
+		})
+	}).on('mouseout', function(){
+		sq(this).css({
+			border: 'none',
+			textShadow: 'none'
+		})
+	})
+})
+<\/script>
+`;
+
+		let loadProc = function () {
+			console.log('load 2');
+			sQuery('body').hide().fadeIn(400);
+
+			sQuery('#editing').on('change', function () {
+				//console.log('change')
+				let code = sQuery('#editing').val().replace(/'/g, "\\'").replace(/\n/g, "\\n");
+
+				//document.getElementById('idResult').contentWindow.document.write(code);
+				var myIFrame = document.getElementById('idResult');
+
+				myIFrame.src = "javascript:'" + code + "'";
+			});
+
+			sQuery('#editing').on('input', function () {
+				//console.log('input')
+				update(this.value);
+
+				sync_scroll(this);
+			});
+
+			sQuery('#editing').on('keydown', function (e) {
+				//console.log('keydown')
+				switch (e.keyCode) {
+					case 9:
+						window.bTab = true;
+						e.preventDefault();
+						return false;
+					case 16:
+						window.bShift = true;
+						e.preventDefault();
+						return false;
+					case 17:
+						window.bCtrl = true;
+						e.preventDefault();
+						return false;
+				}
+			}); //
+
+			sQuery('#editing').on('keyup', function (e) {
+				//console.log('keyup' )
+				check_tab(this, e);
+
+				switch (e.keyCode) {
+					case 9:
+						return false;
+					case 16:
+						window.bShift = false;
+						return false;
+					case 17:
+						window.bCtrl = false;
+						return false;
+				}
+			});
+
+			sQuery('#editing').on('scroll', function (e) {
+				sync_scroll(this);
+			});
+
+			sQuery('#editing').val(c).trg('input').trg('change');
+			sQuery('#idDoc').css({ 'width': '100%', 'max-width': '100%' });
+			sQuery('.cF').contains('editor').addClass('active');
+		};
+
+		if (sQuery().isPageLoaded()) {
+			console.log('spa loaded');
+
+			setTimeout(
+				() => {
+					loadProc();
+				},
+				1
+			);
+		}
+
+		sQuery(() => {
+			console.log('loaded');
+			loadProc();
+		});
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<Sq_editor> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({
+			sq: sQuery,
+			update,
+			sync_scroll,
+			check_tab,
+			Core,
+			c,
+			loadProc
+		});
+
+		$$self.$inject_state = $$props => {
+			if ('c' in $$props) c = $$props.c;
+			if ('loadProc' in $$props) loadProc = $$props.loadProc;
+		};
+
+		if ($$props && "$$inject" in $$props) {
+			$$self.$inject_state($$props.$$inject);
+		}
+
+		return [];
+	}
+
+	class Sq_editor extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "Sq_editor",
+				options,
+				id: create_fragment$1.name
+			});
+		}
+	}
+
+	/* src/App.svelte generated by Svelte v3.44.0 */
+
+	function create_fragment(ctx) {
+		let router;
+		let current;
+
+		router = new Router({
+				props: { routes: /*routes*/ ctx[0] },
+				$$inline: true
+			});
+
+		const block = {
+			c: function create() {
+				create_component(router.$$.fragment);
+			},
+			l: function claim(nodes) {
+				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+			},
+			m: function mount(target, anchor) {
+				mount_component(router, target, anchor);
+				current = true;
+			},
+			p: noop,
+			i: function intro(local) {
+				if (current) return;
+				transition_in(router.$$.fragment, local);
+				current = true;
+			},
+			o: function outro(local) {
+				transition_out(router.$$.fragment, local);
+				current = false;
+			},
+			d: function destroy(detaching) {
+				destroy_component(router, detaching);
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_fragment.name,
+			type: "component",
+			source: "",
+			ctx
+		});
+
+		return block;
+	}
+
+	function instance($$self, $$props, $$invalidate) {
+		let { $$slots: slots = {}, $$scope } = $$props;
+		validate_slots('App', slots, []);
+
+		const routes = {
+			'/': Home,
+			'/docs': Docs,
+			'/examples': Examples,
+			'/install': Install,
+			'/sq': Sq_editor,
+			'/sqi': Sq_editorI,
+			'*': Home
+		};
+
+		const writable_props = [];
+
+		Object.keys($$props).forEach(key => {
+			if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
+		});
+
+		$$self.$capture_state = () => ({
+			Router,
+			Home,
+			Docs,
+			Examples,
+			Install,
+			Sq: Sq_editor,
+			Sqi: Sq_editorI,
+			routes
+		});
+
+		return [routes];
+	}
+
+	class App extends SvelteComponentDev {
+		constructor(options) {
+			super(options);
+			init(this, options, instance, create_fragment, safe_not_equal, {});
+
+			dispatch_dev("SvelteRegisterComponent", {
+				component: this,
+				tagName: "App",
+				options,
+				id: create_fragment.name
+			});
+		}
+	}
+
+	const app = new App({
+		target: document.body,
+		props: {
+			//name: 'sQuery - Native speed jQuery for Svelte'
+		}
+	});
+
+	return app;
+
+})();
 //# sourceMappingURL=bundle.js.map

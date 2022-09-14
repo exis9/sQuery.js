@@ -167,6 +167,14 @@ doc .cNote {
   padding: 4px 8px;
 }
 
+.cImg {
+  display: block;
+  margin: 4px 4px 14px 4px;
+  border: 1px solid #000;
+  width: 90%;
+  max-width: 700px;
+}
+
 .cFWLogo {
   display: block;
   margin: 12px 4px 4px 4px;
