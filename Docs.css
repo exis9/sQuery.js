@@ -418,6 +418,15 @@ doc .cNote {
   text-align: left;
 }
 
+.cBtnTrans {
+  float: right;
+  margin-right: 20px;
+}
+
+.cBtnTrans a {
+  color: #fff !important;
+}
+
 .menu__toggler {
   display: none;
   position: fixed;
@@ -510,5 +519,8 @@ doc .cNote {
     width: 100%;
     margin: 20px auto;
     padding: 0px 8px;
+  }
+  .cBtnTrans {
+    display: none;
   }
 }
